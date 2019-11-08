@@ -1,0 +1,20 @@
+{
+  "name": "codename_yey",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bufferutil": "^4.0.1",
+    "discord.js": "^11.5.1",
+    "erlpack": "github:hammerandchisel/erlpack",
+    "gettext-parser": "^4.0.2",
+    "node-gettext": "^2.0.0",
+    "sql-template-strings": "^2.2.2",
+    "sqlite3": "^4.1.0"
+  }
+}
