@@ -3,6 +3,7 @@ const Discord = require("discord.js");
 module.exports = {
 	name: "help",
 	description: "Показывает справку по командам бота или по одной команде.",
+	usage: "[команда]",
 	async run(client, msg, args, prefix) {
 		let embed = new Discord.RichEmbed()
 			.setColor("RANDOM")
