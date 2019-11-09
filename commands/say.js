@@ -17,7 +17,7 @@ module.exports = {
 		if (msg.guild.me.hasPermission("MANAGE_MESSAGES"))
 			msg.delete();
 		else
-			msg.channel.send("Пожалуйста, выдайте мне разрешение \"Управлять сообщениями\" для корректной работы этой команды ")
+			msg.channel.send("Пожалуйста, выдайте мне разрешение \"Управлять сообщениями\" для корректной работы этой команды.")
 		await msg.channel.send(embed);
 	}
 }
