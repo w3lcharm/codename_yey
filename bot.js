@@ -9,6 +9,27 @@ const client = new Discord.Client();
 client.commands = new Discord.Collection();
 client.db = new sqlite3.Database("./bot.db");
 
+function parseArgs(str) {
+	let args = [];
+
+	while (str.length) {
+		let arg;
+		if (str.startsWith('"') && str.indexOf('"', 1) > 0) {
+			arg = str.slice(1, str.indexOf('"', 1));
+			str = str.slice(str.indexOf('"', 1) + 1);
+		} else {
+			arg = str.split(/\s+/g)[0].trim();
+			str = str.slice(arg.length);
+		}
+		args.push(arg.trim())
+		str = str.trim()
+	}
+
+	return args;
+}
+
+
+
 fs.readdirSync("./commands").filter(file => file.endsWith(".js")).forEach(file => {
 	try {
 		const command = require(`./commands/${file}`);
@@ -29,8 +50,10 @@ client.on("message", async msg => {
 	if (msg.author.id == client.user.id) return;
 	if (msg.author.bot) return;
 
-	const args = msg.content.slice(prefix.length).split(/ +/);
+	let args = msg.content.slice(prefix.length).split(/ +/);
 	const commandName = args.shift();
+
+	args = parseArgs(args.join(" "));
 
 	if (!client.commands.has(commandName)) return;
 	
