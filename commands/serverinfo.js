@@ -12,7 +12,7 @@ module.exports = {
 			.addField("Владелец сервера:", msg.guild.owner)
 			.addField("ID:", msg.guild.id)
 			.addField("Регион:", msg.guild.region)
-			.addField("Всего пользователей:", msg.guild.memberCount)
+			.addField("Всего участников:", msg.guild.memberCount)
 			.addField("Всего каналов:", msg.guild.channels.size)
 			.addField("Всего ролей:", msg.guild.roles.size)
 			.addField("Дата создания:", msg.guild.createdAt);
