@@ -28,8 +28,6 @@ function parseArgs(str) {
 	return args;
 }
 
-
-
 fs.readdirSync("./commands").filter(file => file.endsWith(".js")).forEach(file => {
 	try {
 		const command = require(`./commands/${file}`);
@@ -50,10 +48,8 @@ client.on("message", async msg => {
 	if (msg.author.id == client.user.id) return;
 	if (msg.author.bot) return;
 
-	let args = msg.content.slice(prefix.length).split(/ +/);
+	const args = parseArgs(msg.content.slice(prefix.length));
 	const commandName = args.shift();
-
-	args = parseArgs(args.join(" "));
 
 	if (!client.commands.has(commandName)) return;
 	
