@@ -40,7 +40,7 @@ fs.readdirSync("./commands").filter(file => file.endsWith(".js")).forEach(file =
 
 function onReady() {
 	console.log(`${client.user.username} online!`);
-	client.user.setActivity("в разработке", { type: "PLAYING" });
+	client.user.setActivity(`${prefix}help`, { type: "PLAYING" });
 }
 
 async function onMessage(msg) {
