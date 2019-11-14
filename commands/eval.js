@@ -14,7 +14,9 @@ module.exports = {
 	ownerOnly: true,
 	hidden: true,
 	async run(client, msg, args, prefix) {
-		args.forEach(i => i.trim());
+		args = msg.content.slice(prefix.length).split(/ +/)
+		args.shift();
+		for (let arg of args) arg.trim();
 		const code = args.join(" ");
 		let evaled = eval(code);
 		if (typeof evaled != "string")
