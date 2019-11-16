@@ -27,7 +27,7 @@ module.exports = {
 				.setAuthor(`${member.user.tag} был кикнут`, member.user.avatarURL || member.user.defaultAvatarURL)
 				.setTitle("Причина:")
 				.setDescription(reason || "отсутствует")
-				.setColor("RANDOM")
+				.setColor("GREEN")
 				.setTimestamp();
 			
 			await msg.channel.send(embed);
