@@ -18,8 +18,9 @@ module.exports = {
 			.setColor("RANDOM")
 			.addField("Аптайм:", parseUptime(client.uptime))
 			.addField("Серверов:", client.guilds.size)
+			.addField("Платформа:", process.platform)
 			.addField("Пользователей:", client.users.size)
-			.addField("Версии:", `**бота**: 0.1.0-alpha\n**discord.js**: ${Discord.version}\n**Node.js**: ${process.version}`)
+			.addField("Версии:", `**discord.js**: ${Discord.version}\n**Node.js**: ${process.version}`)
 			.setFooter("codename_yey (c) GDRadio, 2019", client.user.avatarURL || client.user.defaultAvatarURL);
 		await msg.channel.send(embed);
 	}

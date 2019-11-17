@@ -16,10 +16,11 @@ module.exports = {
 
 		if (msg.guild.member(msg.author).hasPermission("KICK_MEMBERS")) {
 			if (member.user.id == msg.author.id)
-				return msg.channel.send("Кикнуть себя? Вы серьёзно?");
-
+				return msg.channel.send(":x: Кикнуть себя? Вы серьёзно?");
+			if (member.user.id == client.user.id)
+				return msg.channel.send(":x: Вы не можете кикнуть бота.");
 			if (member.hasPermission("ADMINISTRATOR"))
-				return msg.channel.send("Я не смогу кикнуть этого пользователя, так как он является администратором на этом сервере.");
+				return msg.channel.send(":x: Я не смогу кикнуть этого пользователя, так как он является администратором на этом сервере.");
 
 			await member.kick(reason);
 
