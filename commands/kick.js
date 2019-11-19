@@ -2,12 +2,12 @@ const Discord = require("discord.js");
 
 module.exports = {
 	name: "kick",
-	description: "Кикает пользователя с сервера.\nВы должны иметь разрешение \"Кикать участников\" для того, чтобы воспользоваться этой командой.",
+	description: "Kicks the mentioned user.\nYou must have the \"Kick members\" permission to use this command.",
 	guildOnly: true,
-	usage: "<пользователь> [причина]",
+	usage: "<user> [reason]",
 	async run(client, msg, args, prefix) {
 		if (!args.length)
-			return msg.channel.send(`Использование: \`${prefix}${this.name} ${this.usage}\``);
+			return msg.channel.send(`Usage: \`${prefix}${this.name} ${this.usage}\``);
 
 		const userID = args.shift();
 		const reason = args.join(" ");
@@ -15,25 +15,27 @@ module.exports = {
 		if (!member) return;
 
 		if (msg.guild.member(msg.author).hasPermission("KICK_MEMBERS")) {
+			if (!msg.guild.me.hasPermission("KICK_MEMBERS"))
+				return msg.channel.send(":x: I don't have the permissions to do this. Please give me the \"Kick members\" permission and try again.");
 			if (member.user.id == msg.author.id)
-				return msg.channel.send(":x: Кикнуть себя? Вы серьёзно?");
+				return msg.channel.send(":x: You can't kick yourself.");
 			if (member.user.id == client.user.id)
-				return msg.channel.send(":x: Вы не можете кикнуть бота.");
+				return msg.channel.send(":x: You can't kick a bot.");
 			if (member.hasPermission("ADMINISTRATOR"))
-				return msg.channel.send(":x: Я не смогу кикнуть этого пользователя, так как он является администратором на этом сервере.");
+				return msg.channel.send(":x: I can't kick this user because this user have the administrator permission.");
 
 			await member.kick(reason);
 
 			const embed = new Discord.RichEmbed()
-				.setAuthor(`${member.user.tag} был кикнут`, member.user.avatarURL || member.user.defaultAvatarURL)
-				.setTitle("Причина:")
-				.setDescription(reason || "отсутствует")
+				.setAuthor(`${member.user.tag} was got kicked`, member.user.avatarURL || member.user.defaultAvatarURL)
+				.setTitle("Reason:")
+				.setDescription(reason || "not provided")
 				.setColor("GREEN")
 				.setTimestamp();
 			
 			await msg.channel.send(embed);
 		} else {
-			return msg.reply("вы должны иметь разрешения на использование этой команды.");
+			return msg.reply("you must have the permissions to do this.");
 		}
 	}
 }

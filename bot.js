@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 const Discord = require("discord.js");
 const sqlite3 = require("sqlite3");
-const gettext = require("node-gettext");
 const fs = require("fs");
 const { token, prefix, owners } = require("./config.json");
 
@@ -57,16 +56,16 @@ async function onMessage(msg) {
 	const command = client.commands.get(commandName);
 	
 	if (command.guildOnly && !msg.guild)
-		return msg.channel.send("Эта команда может быть использована только на сервере.");
+		return msg.channel.send(":x: This command can only be used in the server.");
 
 	if (command.ownerOnly && owners.indexOf(msg.author.id) == -1)
-		return msg.reply("вы не являетесь моим владельцем.");
+		return;
 
 	try {
 		await command.run(client, msg, args, prefix);
 	} catch (err) {
 		const embed = new Discord.RichEmbed()
-			.setTitle(`:x: Ошибка при выполнении команды ${commandName}:`)
+			.setTitle(`:x: There is an error in ${commandName}:`)
 			.setDescription("```\n" + err + "\n```")
 			.setColor("RED");
 		await msg.channel.send(embed);

@@ -11,16 +11,16 @@ function parseUptime(time) {
 
 module.exports = {
 	name: "status",
-	description: "Показывает статус бота.",
+	description: "Shows the bot's status.",
 	async run(client, msg, args, prefix) {
 		const embed = new Discord.RichEmbed()
-			.setTitle("Статус")
+			.setTitle("Status:")
 			.setColor("RANDOM")
-			.addField("Аптайм:", parseUptime(client.uptime))
-			.addField("Серверов:", client.guilds.size)
-			.addField("Платформа:", process.platform)
-			.addField("Пользователей:", client.users.size)
-			.addField("Версии:", `**discord.js**: ${Discord.version}\n**Node.js**: ${process.version}`)
+			.addField("Uptime:", parseUptime(client.uptime))
+			.addField("Total servers:", client.guilds.size)
+			.addField("Platform:", process.platform)
+			.addField("Total users:", client.users.size)
+			.addField("Versions:", `**discord.js**: ${Discord.version}\n**Node.js**: ${process.version}`)
 			.setFooter("codename_yey (c) GDRadio, 2019", client.user.avatarURL || client.user.defaultAvatarURL);
 		await msg.channel.send(embed);
 	}

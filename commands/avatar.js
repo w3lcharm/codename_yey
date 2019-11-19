@@ -2,8 +2,8 @@ const Discord = require("discord.js");
 
 module.exports = {
 	name: "avatar",
-	description: "Показывает ваш аватар или аватар упомянктого пользователя.",
-	usage: "[пользователь]",
+	description: "Shows your avatar or the mentioned user's avatar.",
+	usage: "[user]",
 	async run(client, msg, args, prefix) {
 		let member;
 		if (!args.length)
@@ -14,7 +14,7 @@ module.exports = {
 		if (member == undefined) return;
 
 		const embed = new Discord.RichEmbed()
-			.setTitle(`Аватар ${member.user.tag}:`)
+			.setTitle(`${member.user.tag}'s avatar:`)
 			.setColor("RANDOM")
 			.setImage(member.user.avatarURL || member.user.defaultAvatarURL);
 		

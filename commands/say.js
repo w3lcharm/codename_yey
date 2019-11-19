@@ -2,12 +2,11 @@ const Discord = require("discord.js");
 
 module.exports = {
 	name: "say",
-	description: "Посылает ваш текст.",
-	usage: "<текст>",
+	description: "Says your text.",
+	usage: "<text>",
 	async run(client, msg, args, prefix) {
 		const text = args.join(" ");
-		if (!text.length)
-			return msg.reply("я не смогу сказать пустой текст");
+		if (!text.length) return;
 
 		const embed = new Discord.RichEmbed()
 			.setDescription(text)
@@ -16,8 +15,7 @@ module.exports = {
 		
 		if (msg.guild.me.hasPermission("MANAGE_MESSAGES"))
 			msg.delete();
-		else
-			msg.channel.send("Пожалуйста, выдайте мне разрешение \"Управлять сообщениями\" для корректной работы этой команды.")
+		else {}
 		await msg.channel.send(embed);
 	}
 }

@@ -9,8 +9,8 @@ function clean(text) {
 
 module.exports = {
 	name: "eval",
-	description: "Выполняет код JS.\nЭта команда может быть использована только владельцем бота.",
-	usage: "<код>",
+	description: "Evaluates the JavaScript code.\nThis command can only be used by the bot owner.",
+	usage: "<code>",
 	ownerOnly: true,
 	hidden: true,
 	async run(client, msg, args, prefix) {

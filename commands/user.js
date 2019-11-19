@@ -1,27 +1,27 @@
 const Discord = require("discord.js")
 
 function isUserBot(user) {
-	if (user.bot) return "Да";
-	else return "Нет";
+	if (user.bot) return "Yes";
+	else return "No";
 }
 
 function userGame(member) {
 	if (member.presence.game) return member.presence.game.toString();
-	else return "ничего";
+	else return "nothing";
 }
 
 function userStatus(member) {
-	if (member.presence.status == "online") return "Онлайн";
-	else if (member.presence.status == "idle") return "Не активен";
-	else if (member.presence.status == "dnd") return "Не беспокоить";
-	else if (member.presence.status == "offline") return "Офлайн/невидимый";
+	if (member.presence.status == "online") return "Online";
+	else if (member.presence.status == "idle") return "Idle";
+	else if (member.presence.status == "dnd") return "Do not disturb";
+	else if (member.presence.status == "offline") return "Offline/invisible";
 }
 
 module.exports = {
 	name: "user",
-	description: "Показывает информацию о вас или о упомянутом пользователе.",
+	description: "Shows info about you or the mentioned user.",
 	guildOnly: true,
-	usage: "[пользователь]",
+	usage: "[user]",
 	async run(client, msg, args, prefix) {
 		let member, user;
 		if (!args.length) {
@@ -38,15 +38,15 @@ module.exports = {
 			.setAuthor(user.tag, user.avatarURL || user.defaultAvatarURL)
 			.setColor("RANDOM");
 		if (member.nickname)
-			embed.addField("Имя на этом сервере:", member.nickname)
+			embed.addField("Name on this server:", member.nickname)
 		embed
-			.addField("Статус:", userStatus(member))
-			.addField("Играет в:", userGame(member))
+			.addField("Status:", userStatus(member))
+			.addField("Playing:", userGame(member))
 			.addField("ID:", user.id)
-			.addField("Роли на этом сервере:", Array.from(member.roles.values()).join(", "))
-			.addField("Зарегистрировался:", user.createdAt)
-			.addField("Вошел на этот сервер:", member.joinedAt)
-			.addField("Бот?", isUserBot(user));
+			.addField("Roles:", Array.from(member.roles.values()).join(", "))
+			.addField("Registered at:", user.createdAt)
+			.addField("Joined this server at:", member.joinedAt)
+			.addField("Bot?", isUserBot(user));
 	
 		await msg.channel.send(embed);
 	}

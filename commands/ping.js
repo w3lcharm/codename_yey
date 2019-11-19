@@ -2,14 +2,14 @@ const Discord = require("discord.js");
 
 module.exports = {
 	name: "ping",
-	description: "Измеряет задержку бота до API.",
+	description: "Measures the bot latency and shows the API latency.",
 	async run(client, msg, args, prefix) {
 		startTime = Date.now();
-		m = await msg.channel.send("Измеряется...");
+		m = await msg.channel.send("Measuring...");
 		const embed = new Discord.RichEmbed()
-			.setTitle(`Задержка бота ${Date.now() - startTime} мс.`)
-			.setDescription(`Задержка до API ${client.ping} мс.`)
-			.setFooter("codename_yey", client.user.avatarURL)
+			.setTitle(`Bot latency is ${Date.now() - startTime} ms.`)
+			.setDescription(`API latency is ${client.ping} ms.`)
+			.setFooter("codename_yey", client.user.avatarURL || client.user.defaultAvatarURL)
 			.setColor("RANDOM");
 		await m.edit("", embed)
 	}
