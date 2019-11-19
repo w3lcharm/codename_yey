@@ -18,7 +18,7 @@ module.exports = {
 				.setAuthor(member.user.tag, member.user.avatarURL || member.user.defaultAvatarURL);
 			client.db.all("select * from warns where user = ? and server = ?", member.user.id, msg.guild.id, async (err, rows) => {
 				for (let row of rows)
-					embed.addField(`ID: ${row.id}`, `Причина: ${row.reason}`);
+					embed.addField(`ID: ${row.id}`, `Reason: ${row.reason}`);
 				embed.setFooter(`Total warns: ${rows.length}`)
 				await msg.channel.send(embed);
 			});
