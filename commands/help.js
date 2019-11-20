@@ -36,7 +36,7 @@ module.exports = {
 			}
 
 			embed.setTitle("Bot commands");
-			embed.setDescription(`You can type ${prefix}help [command] to get more info about an command.\n\`\`\`\n${description.join("\n")}\n\`\`\``);
+			embed.setDescription(`You can type ${prefix}help [command] to get more info about a command.\n\`\`\`\n${description.join("\n")}\n\`\`\``);
 			
 			await msg.channel.send(embed);
 		}
