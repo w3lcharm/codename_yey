@@ -35,7 +35,7 @@ module.exports = {
 		if (member == undefined || user == undefined) return;
 
 		const embed = new Discord.RichEmbed()
-			.setAuthor(user.tag, user.avatarURL || user.defaultAvatarURL)
+			.setAuthor(user.tag, user.displayAvatarURL)
 			.setColor("RANDOM");
 		if (member.nickname)
 			embed.addField("Name on this server:", member.nickname)

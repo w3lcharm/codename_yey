@@ -16,7 +16,7 @@ module.exports = {
 		const embed = new Discord.RichEmbed()
 			.setTitle(`${member.user.tag}'s avatar:`)
 			.setColor("RANDOM")
-			.setImage(member.user.avatarURL || member.user.defaultAvatarURL);
+			.setImage(member.user.displayAvatarURL);
 		
 		await msg.channel.send(embed);
 	}

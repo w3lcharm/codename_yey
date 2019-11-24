@@ -7,7 +7,7 @@ module.exports = {
 	async run(client, msg, args, prefix) {
 		let embed = new Discord.RichEmbed()
 			.setColor("RANDOM")
-			.setFooter("codename_yey", client.user.avatarURL || client.user.defaultAvatarURL);
+			.setFooter("codename_yey", client.user.displayAvatarURL);
 		
 		const command = args[0];
 

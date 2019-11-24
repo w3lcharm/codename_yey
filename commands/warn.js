@@ -53,7 +53,7 @@ module.exports = {
 			await client.db.run(`insert into warns values (NULL, ?, ?, ?, ?)`, msg.guild.id, member.user.id, msg.author.id, reason);
 
 			const embed = new Discord.RichEmbed()
-				.setAuthor(`${member.user.tag} was warned`, member.user.avatarURL || member.user.defaultAvatarURL)
+				.setAuthor(`${member.user.tag} was warned`, member.user.displayAvatarURL)
 				.setTimestamp()
 				.setColor("GREEN")
 				.addField("Reason:", reason || "not provided");
