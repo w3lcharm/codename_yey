@@ -8,8 +8,8 @@ module.exports = {
 		m = await msg.channel.send("Measuring...");
 		const embed = new Discord.RichEmbed()
 			.setTitle(`Bot latency is ${Date.now() - startTime} ms.`)
-			.setDescription(`API latency is ${client.ping} ms.`)
-			.setFooter("codename_yey", client.user.avatarURL || client.user.defaultAvatarURL)
+			.setDescription(`API latency is ${Math.floor(client.ping)} ms.`)
+			.setFooter("codename_yey", client.user.displayAvatarURL)
 			.setColor("RANDOM");
 		await m.edit("", embed)
 	}
