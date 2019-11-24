@@ -16,6 +16,7 @@ module.exports = {
 		let embed = new Discord.RichEmbed()
 			.setTitle(question)
 			.setColor("RANDOM")
+			.setFooter(`Started by ${msg.author.tag}`, msg.author.displayAvatarURL)
 			.setTimestamp();
 
 		let description = `🇦 - ${answer1}`;
