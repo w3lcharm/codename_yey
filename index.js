@@ -8,6 +8,8 @@ const client = new Discord.Client();
 client.commands = new Discord.Collection();
 client.db = new sqlite3.Database("./bot.db");
 
+const autorole = require("./modules/autorole");
+
 function parseArgs(str) {
 	let args = [];
 
@@ -40,7 +42,9 @@ fs.readdirSync("./commands").filter(file => file.endsWith(".js")).forEach(file =
 function onReady() {
 	console.log(`${client.user.username} online!`);
 	client.user.setActivity(`${prefix}help`, { type: "PLAYING" });
-	client.db.run("create table if not exists warns('id' integer primary key autoincrement not null, server, user, moderator, reason)");
+	client.db
+		.run("create table if not exists warns('id' integer primary key autoincrement not null, server, user, moderator, reason)")
+		.run("create table if not exists autorole(server, user)");
 }
 
 async function onMessage(msg) {
@@ -72,8 +76,10 @@ async function onMessage(msg) {
 	}
 }
 
-client.on("ready", onReady);
-client.on("message", onMessage);
+client
+	.on("ready", onReady)
+	.on("message", onMessage)
+	.on("guildMemberAdd", member => autorole(client, member));
 
 client.login(token);
 
