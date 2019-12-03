@@ -72,6 +72,7 @@ async function onMessage(msg) {
 			.setTitle(`:x: There is an error in ${commandName}:`)
 			.setDescription("```\n" + err + "\n```")
 			.setColor("RED");
+		console.log(err.stack);
 		await msg.channel.send(embed);
 	}
 }
