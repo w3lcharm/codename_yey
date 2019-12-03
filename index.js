@@ -44,7 +44,7 @@ function onReady() {
 	client.user.setActivity(`${prefix}help`, { type: "PLAYING" });
 	client.db
 		.run("create table if not exists warns('id' integer primary key autoincrement not null, server, user, moderator, reason)")
-		.run("create table if not exists autorole(server, user)");
+		.run("create table if not exists settings(server, autorole)");
 }
 
 async function onMessage(msg) {
