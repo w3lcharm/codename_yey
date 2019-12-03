@@ -4,7 +4,7 @@ module.exports = {
 	name: "purge",
 	description: "Deletes the specified amount of messages (from 1 to 100) in the channel.\nYou must have the \"Manage messages\" permission to use this command.",
 	guildOnly: true,
-	usage: "<кол-во>",
+	usage: "<amount>",
 	async run(client, msg, args, prefix) {
 		if (!args.length)
 			return msg.channel.send(`Usage: \`${prefix}${this.name} ${this.usage}\``);
