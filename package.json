@@ -12,6 +12,7 @@
     "bufferutil": "^4.0.1",
     "discord.js": "^11.5.1",
     "erlpack": "github:hammerandchisel/erlpack",
+    "qrcode": "^1.4.4",
     "sqlite3": "^4.1.0"
   }
 }
