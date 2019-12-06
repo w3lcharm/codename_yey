@@ -6,7 +6,7 @@ module.exports = {
 	usage: "[settingName] [value]",
 	guildOnly: true,
 	async run(client, msg, args, prefix) {
-		const [ settingName, value ] = args;
+		var [ settingName, value ] = args;
 
 		if (msg.member.hasPermission("MANAGE_GUILD")) {
 			client.db.get("select * from settings where server = ?", msg.guild.id, async (err, row) => {
@@ -27,6 +27,8 @@ module.exports = {
 								.setColor("GREEN");
 							return msg.channel.send(embed);
 						}
+						if (value.startsWith("<@&") && value.endsWith(">"))
+							value = value.replace("<@&", "").replace(">", "");
 						const role = msg.guild.roles.find(r => r.name == value || r.id == value);
 						if (!role)
 							return msg.channel.send(":x: Invalid role name or ID provided.");
