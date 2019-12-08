@@ -12,7 +12,7 @@ module.exports = {
 		if (args[0] == "--list") {
 			let member;
 			if (!args[1]) member = msg.member;
-			else member = msg.mentions.members.first() || msg.guild.member(client.users.get(args[1]));
+			else member = msg.mentions.members.first() || msg.guild.member(client.users.find(u => u.id == args[1] || u.tag == args[1]));
 			let embed = new Discord.RichEmbed()
 				.setColor("RANDOM")
 				.setAuthor(member.user.tag, member.user.avatarURL || member.user.defaultAvatarURL);
@@ -41,7 +41,7 @@ module.exports = {
 			}
 			const userID = args.shift();
 			const reason = args.join(" ");
-			const member = msg.mentions.members.first() || msg.guild.member(client.users.get(userID));
+			const member = msg.mentions.members.first() || msg.guild.member(client.users.find(u => u.id == userID || u.tag == userID));
 			if (!member) return;
 			if (member.user.id == msg.author.id)
 				return msg.channel.send(":x: You can't warn yourself.");
