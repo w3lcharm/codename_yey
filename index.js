@@ -29,6 +29,7 @@ function parseArgs(str) {
 	return args;
 }
 
+console.log("Loading the commands...")
 fs.readdirSync("./commands").filter(file => file.endsWith(".js")).forEach(file => {
 	try {
 		const command = require(`./commands/${file}`);
@@ -67,12 +68,13 @@ async function onMessage(msg) {
 
 	try {
 		await command.run(client, msg, args, prefix);
+		console.log(`${msg.author.tag} used the ${commandName} command in ${msg.guild.name}`);
 	} catch (err) {
 		const embed = new Discord.RichEmbed()
-			.setTitle(`:x: There is an error in ${commandName}:`)
+			.setTitle(`:x: Error in command ${commandName}:`)
 			.setDescription("```\n" + err + "\n```")
 			.setColor("RED");
-		console.log(err.stack);
+		console.log(`Error in command ${commandName}:\n${err.stack}`);
 		await msg.channel.send(embed);
 	}
 }
@@ -83,4 +85,4 @@ client
 	.on("guildMemberAdd", member => autorole(client, member));
 
 client.login(token);
-
+ 
