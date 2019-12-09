@@ -68,7 +68,7 @@ async function onMessage(msg) {
 
 	try {
 		await command.run(client, msg, args, prefix);
-		console.log(`${msg.author.tag} used the ${commandName} command in ${msg.guild.name}`);
+		console.log(`${msg.author.tag} used the ${commandName} command in ${msg.guild ? msg.guild.name : "bot DM"}`);
 	} catch (err) {
 		const embed = new Discord.RichEmbed()
 			.setTitle(`:x: Error in command ${commandName}:`)
