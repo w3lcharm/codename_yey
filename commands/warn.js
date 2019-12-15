@@ -7,7 +7,7 @@ module.exports = {
 	usage: "[--delete <id>] [--list <user>] <user> [reason]",
 	async run(client, msg, args, prefix) {
 		if (!args.length)
-			return msg.channel.send(`Usage: \`${prefix}${this.name} ${this.usage}\``);
+			return msg.channel.send(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
 
 		if (args[0] == "--list") {
 			let member;
@@ -29,11 +29,11 @@ module.exports = {
 			if (args[0] == "--delete") {
 				let id = args[1];
 				client.db.get("select * from warns where id = ?", parseInt(id), function (err, row) {
-					if (!row) msg.channel.send(":x: Invalid ID.");
-					else if (row.server != msg.guild.id) msg.channel.send(":x: This warn is located on the another server.");
+					if (!row) msg.channel.send("> :x: Invalid ID.");
+					else if (row.server != msg.guild.id) msg.channel.send("> :x: This warn is located on the another server.");
 					else {
 						client.db.run("delete from warns where id = ?", row.id);
-						msg.channel.send(`:white_check_mark: Deleted warn with ID ${row.id}`);
+						msg.channel.send(`> :white_check_mark: Deleted warn with ID ${row.id}`);
 					}
 				});
 				return;
@@ -44,11 +44,11 @@ module.exports = {
 			const member = msg.mentions.members.first() || msg.guild.member(client.users.find(u => u.id == userID || u.tag == userID));
 			if (!member) return;
 			if (member.user.id == msg.author.id)
-				return msg.channel.send(":x: You can't warn yourself.");
+				return msg.channel.send("> :x: You can't warn yourself.");
 			if (member.user.id == client.user.id)
-				return msg.channel.send(":x: You can't warn a bot.");
+				return msg.channel.send("> :x: You can't warn a bot.");
 			if (member.hasPermission("ADMINISTRATOR"))
-				return msg.channel.send(":x: You can't warn the administrator.");
+				return msg.channel.send("> :x: You can't warn the administrator.");
 
 			await client.db.run(`insert into warns values (NULL, ?, ?, ?, ?)`, msg.guild.id, member.user.id, msg.author.id, reason);
 

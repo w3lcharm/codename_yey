@@ -7,7 +7,7 @@ module.exports = {
 	usage: "<user> [reason]",
 	async run(client, msg, args, prefix) {
 		if (!args.length)
-			return msg.channel.send(`Usage: \`${prefix}${this.name} ${this.usage}\``);
+			return msg.channel.send(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
 
 		const userID = args.shift();
 		const reason = args.join(" ");
@@ -18,13 +18,13 @@ module.exports = {
 		
 		if (msg.guild.member(msg.author).hasPermission("BAN_MEMBERS")) {
 			if (!msg.guild.me.hasPermission("BAN_MEMBERS"))
-				return msg.channel.send(":x: I don't have the permissions to do this. Please give me the \"Ban members\" permissions and try again.");
+				return msg.channel.send("> :x: I don't have the permissions to do this. Please give me the \"Ban members\" permissions and try again.");
 			if (member.user.id == msg.author.id)
-				return msg.channel.send(":x: You can't ban yourself.");
+				return msg.channel.send("> :x: You can't ban yourself.");
 			if (member.user.id == client.user.id)
-				return msg.channel.send(":x: You can't ban a bot.");
+				return msg.channel.send("> :x: You can't ban a bot.");
 			if (member.hasPermission("ADMINISTRATOR"))
-				return msg.channel.send(":x: I can't ban this user because this user have the administator permissions on this server.");
+				return msg.channel.send("> :x: I can't ban this user because this user have the administator permissions on this server.");
 			
 			await member.ban(reason);
 

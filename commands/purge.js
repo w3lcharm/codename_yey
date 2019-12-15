@@ -7,14 +7,14 @@ module.exports = {
 	usage: "<amount>",
 	async run(client, msg, args, prefix) {
 		if (!args.length)
-			return msg.channel.send(`Usage: \`${prefix}${this.name} ${this.usage}\``);
+			return msg.channel.send(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
 
 		if (msg.member.hasPermission("MANAGE_MESSAGES")) {
 			const amount = parseInt(args[0]);
 			if (amount > 100)
-				return msg.channel.send(":x: Not more than 100 message at a time.")
+				return msg.channel.send("> :x: Not more than 100 message at a time.")
 			else if (amount < 1)
-				return msg.channel.send(":x: Not less than 1 message at a time.");
+				return msg.channel.send("> :x: Not less than 1 message at a time.");
 			else {
 				if (msg.guild.me.hasPermission("MANAGE_MESSAGES")) {
 					await msg.channel.bulkDelete(amount);
@@ -25,7 +25,7 @@ module.exports = {
 					let message = await msg.channel.send(embed);
 					setTimeout(async () => await message.delete(), 5000);
 				} else
-					return msg.channel.send(":x: I can't delete messages in this channel. Please give me the \"Manage messages\" permission and try again.");
+					return msg.channel.send("> :x: I can't delete messages in this channel. Please give me the \"Manage messages\" permission and try again.");
 			}
 		} else
 			return msg.reply("you must have the permissions to do this.");

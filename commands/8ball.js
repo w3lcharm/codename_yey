@@ -29,7 +29,7 @@ module.exports = {
 	usage: "<question>",
 	async run(client, msg, args, prefix) {
 		if (!args.length)
-			return msg.channel.send(`Usage: \`${prefix}${this.name} ${this.usage}\``);
+			return msg.channel.send(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
 		const question = args.join(" ");
 		const answer = answers[Math.floor(Math.random() * Math.floor(answers.length))];
 

@@ -77,7 +77,7 @@ async function onMessage(msg) {
 	const command = client.commands.get(commandName);
 	
 	if (command.guildOnly && !msg.guild)
-		return msg.channel.send(":x: This command can only be used in the server.");
+		return msg.channel.send("> :x: This command can only be used in the server.");
 
 	if (command.ownerOnly && config.owners.indexOf(msg.author.id) == -1)
 		return;
@@ -101,4 +101,3 @@ client
 	.on("guildMemberAdd", member => autorole(client, member));
 
 client.login(config.token);
- 

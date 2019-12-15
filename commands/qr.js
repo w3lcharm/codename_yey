@@ -7,7 +7,7 @@ module.exports = {
 	usage: "<text>",
 	async run(client, msg, args, prefix) {
 		if (!args.length)
-			return msg.channel.send(`Usage: \`${prefix}${this.name} ${this.usage}\``);
+			return msg.channel.send(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
 
 		args = msg.content.slice(prefix.length).split(/ +/);
 		args.shift();
