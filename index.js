@@ -35,7 +35,7 @@ function sleep(duration) {
 
 async function chp() {
 	while (true) {
-		await client.user.setActivity(`${prefix}help`, { type: "WATCHING" });
+		await client.user.setActivity(`${config.prefix}help`, { type: "WATCHING" });
 		await sleep(20000);
 		await client.user.setActivity(`${client.users.size} users`, { type: "LISTENING" });
 		await sleep(20000);
@@ -69,7 +69,7 @@ async function onMessage(msg) {
 	if (msg.author.id == client.user.id) return;
 	if (msg.author.bot) return;
 
-	const args = parseArgs(msg.content.slice(prefix.length));
+	const args = parseArgs(msg.content.slice(config.prefix.length));
 	const commandName = args.shift();
 
 	if (!client.commands.has(commandName)) return;
@@ -83,7 +83,7 @@ async function onMessage(msg) {
 		return;
 
 	try {
-		await command.run(client, msg, args, prefix);
+		await command.run(client, msg, args, config.prefix);
 		console.log(`${msg.author.tag} used the ${commandName} command in ${msg.guild ? msg.guild.name : "bot DM"}`);
 	} catch (err) {
 		const embed = new Discord.RichEmbed()
