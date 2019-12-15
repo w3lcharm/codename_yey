@@ -1,15 +1,5 @@
 const Discord = require("discord.js")
 
-function isUserBot(user) {
-	if (user.bot) return "Yes";
-	else return "No";
-}
-
-function userGame(member) {
-	if (member.presence.game) return member.presence.game.toString();
-	else return "nothing";
-}
-
 function userStatus(member) {
 	if (member.presence.status == "online") return "Online";
 	else if (member.presence.status == "idle") return "Idle";
@@ -41,12 +31,12 @@ module.exports = {
 			embed.addField("Name on this server:", member.nickname)
 		embed
 			.addField("Status:", userStatus(member))
-			.addField("Playing:", userGame(member))
+			.addField("Playing:", member.presence.game ? member.presence.game.toString() : "nothing")
 			.addField("ID:", user.id)
 			.addField("Roles:", Array.from(member.roles.values()).join(", "))
 			.addField("Registered at:", user.createdAt)
 			.addField("Joined this server at:", member.joinedAt)
-			.addField("Bot?", isUserBot(user));
+			.addField("Bot?", user.bot ? "Yes" : "No");
 	
 		await msg.channel.send(embed);
 	}

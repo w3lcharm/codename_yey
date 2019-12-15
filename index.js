@@ -2,7 +2,7 @@
 const Discord = require("discord.js");
 const sqlite3 = require("sqlite3");
 const fs = require("fs");
-const { token, prefix, owners } = require("./config.json");
+const config = require("./config.json");
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -65,7 +65,7 @@ function onReady() {
 }
 
 async function onMessage(msg) {
-	if (!msg.content.startsWith(prefix)) return;
+	if (!msg.content.startsWith(config.prefix)) return;
 	if (msg.author.id == client.user.id) return;
 	if (msg.author.bot) return;
 
@@ -79,7 +79,7 @@ async function onMessage(msg) {
 	if (command.guildOnly && !msg.guild)
 		return msg.channel.send(":x: This command can only be used in the server.");
 
-	if (command.ownerOnly && owners.indexOf(msg.author.id) == -1)
+	if (command.ownerOnly && config.owners.indexOf(msg.author.id) == -1)
 		return;
 
 	try {
@@ -100,5 +100,5 @@ client
 	.on("message", onMessage)
 	.on("guildMemberAdd", member => autorole(client, member));
 
-client.login(token);
+client.login(config.token);
  
