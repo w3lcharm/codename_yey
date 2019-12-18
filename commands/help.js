@@ -29,14 +29,11 @@ module.exports = {
 			embed.addField("Usage:", "```\n" + usage + "\n```");
 			await msg.channel.send(embed);
 		} else {
-			let description = [];
-			for (let c of Array.from(client.commands)) {
-				if (!c[1].hidden)
-					description.push(`${c[1].name}`);
-			}
-
-			embed.setTitle("Bot commands");
-			embed.setDescription(`You can type ${prefix}help [command] to get more info about a command.\n\`\`\`\n${description.join("\n")}\n\`\`\``);
+			embed.setTitle("Bot commands")
+				.addField("Basic:", "`help`, `ping`, `avatar`, `user`, `links`, `serverinfo`, `status`")
+				.addField("Utility:", "`say`, `qr`, `poll`")
+				.addField("Moderation:", "`ban`, `kick`, `warn`, `purge`")
+				.addField("Other:", "`8ball`, `settings`");
 			
 			await msg.channel.send(embed);
 		}
