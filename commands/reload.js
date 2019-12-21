@@ -10,9 +10,11 @@ module.exports = {
 			return msg.channel.send(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
 		
 		const command = args[0];
-		const pathToCommand = require.resolve(`../commands/${command}`);
-		if (!client.commands.has(command))
+		try {
+			const pathToCommand = require.resolve(`../commands/${command}`);
+		} catch (err) {
 			return msg.channel.send("> :x: This command doesn't exist.");
+		}
 		
 		delete require.cache[pathToCommand];
 		client.commands.delete(command);
