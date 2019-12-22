@@ -29,7 +29,7 @@ module.exports = {
 			await member.ban(reason);
 
 			const embed = new Discord.RichEmbed()
-				.setAuthor(`${member.user.tag} was got banned`, member.user.displayAvatarURL)
+				.setAuthor(`${member.user.tag} was banned`, member.user.displayAvatarURL)
 				.setTitle("Reason:")
 				.setDescription(reason || 'not provided')
 				.setColor("GREEN")
