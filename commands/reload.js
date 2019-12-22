@@ -11,7 +11,7 @@ module.exports = {
 		
 		const command = args[0];
 		try {
-			const pathToCommand = require.resolve(`../commands/${command}`);
+			var pathToCommand = require.resolve(`../commands/${command}`);
 		} catch (err) {
 			return msg.channel.send("> :x: This command doesn't exist.");
 		}
