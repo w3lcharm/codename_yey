@@ -57,6 +57,8 @@ module.exports = {
 					await msg.channel.send(embed);
 				}
 			});
+		} else {
+			await msg.channel.send("> :x: You don't have permissions to use this command.");
 		}
 	}
 }
