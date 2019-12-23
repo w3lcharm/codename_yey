@@ -32,7 +32,7 @@ module.exports = {
 			embed.setTitle("Bot commands")
 				.addField("Basic:", "`help`, `ping`, `avatar`, `user`, `links`, `serverinfo`, `status`")
 				.addField("Utility:", "`say`, `qr`, `poll`")
-				.addField("Moderation:", "`ban`, `kick`, `warn`, `purge`")
+				.addField("Moderation:", "`ban`, `kick`, `warn`, `purge`, `hackban`")
 				.addField("Other:", "`8ball`, `settings`");
 			
 			await msg.channel.send(embed);
