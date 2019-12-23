@@ -30,8 +30,7 @@ module.exports = {
 
 			const embed = new Discord.RichEmbed()
 				.setAuthor(`${member.user.tag} was banned`, member.user.displayAvatarURL)
-				.setTitle("Reason:")
-				.setDescription(reason || 'not provided')
+				.addField("Reason:", reason || 'not provided')
 				.setColor("GREEN")
 				.setTimestamp();
 			
