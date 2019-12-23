@@ -35,7 +35,7 @@ module.exports = {
 			
 			await msg.channel.send(embed);
 		} else {
-			return msg.reply("you must have the permissions to do this.");
+			await msg.channel.send("> :x: You don't have permissions to use this command.");
 		}
 	}
 }

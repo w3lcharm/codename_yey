@@ -59,6 +59,6 @@ module.exports = {
 				.addField("Reason:", reason || "not provided");
 			await msg.channel.send(embed);
 		} else
-			return msg.reply("you must have the permission to do this.");
+			await msg.channel.send("> :x: You don't have the permissions to use this command.");
 	}
 };

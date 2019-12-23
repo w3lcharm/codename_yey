@@ -28,6 +28,6 @@ module.exports = {
 					return msg.channel.send("> :x: I can't delete messages in this channel. Please give me the \"Manage messages\" permission and try again.");
 			}
 		} else
-			return msg.reply("you must have the permissions to do this.");
+			await msg.channel.send("> :x: You don't have permissions to use this command.");
 	}
 };
