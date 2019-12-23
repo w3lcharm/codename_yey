@@ -13,11 +13,11 @@ module.exports = {
 
 		if (command) {
 			if (!client.commands.has(command))
-				return msg.reply("this command doesn't exists.");
+				return msg.reply("this command doesn't exist.");
 
 			const commandObject = client.commands.get(command);
 			if (commandObject.hidden)
-				return msg.reply("this command doesn't exists.");
+				return msg.reply("this command doesn't exist.");
 
 			embed.setTitle(`Help for command \`${command}\`:`);
 			embed.setDescription(commandObject.description);
