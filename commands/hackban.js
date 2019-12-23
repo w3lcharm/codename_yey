@@ -29,8 +29,8 @@ module.exports = {
 				.setColor("GREEN")
 				.setTimestamp();
 			await msg.channel.send(embed);
-		}
-	} else {
+		} else {
 		await msg.channel.send("> :x: You don't have permissions to use this command.");
+		}
 	}
 };
