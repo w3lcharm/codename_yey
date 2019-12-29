@@ -1,27 +1,5 @@
 const Discord = require("discord.js");
-
-const answers = [
-	"It is certain",
-	"Without a doubt",
-	"Yes",
-	"Yes — definitely",
-	"It is decidedly so",
-	"You may rely on it",
-	"As I see it, yes",
-	"Most likely",
-	"Outlook good",
-	"Signs point to yes",
-	"Reply hazy, try again",
-	"Ask again later",
-	"Better not tell you now",
-	"Cannot predict now",
-	"Concentrate and ask again",
-	"Don’t count on it",
-	"No",
-	"Outlook not so good",
-	"Very doubtful",
-	"My sources say no"
-];
+const magicball = require("../modules/8ball");
 
 module.exports = {
 	name: "8ball",
@@ -31,7 +9,7 @@ module.exports = {
 		if (!args.length)
 			return msg.channel.send(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
 		const question = args.join(" ");
-		const answer = answers[Math.floor(Math.random() * Math.floor(answers.length))];
+		const answer = magicball.predict(question, 0.25, msg.author.id);
 
 		const embed = new Discord.RichEmbed()
 			.setTitle(":8ball: The magic ball's answer is:")
