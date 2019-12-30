@@ -8,7 +8,7 @@ module.exports = {
 	async run(client, msg, args, prefix) {
 		if (!args.length)
 			return msg.channel.send(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
-		const question = args.join(" ");
+		const question = msg.content.slice(prefix.length + this.name.length + 1);
 		const answer = magicball.predict(question, 0.25, msg.author.id);
 
 		const embed = new Discord.RichEmbed()
