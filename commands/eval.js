@@ -7,15 +7,17 @@ module.exports = {
 	ownerOnly: true,
 	hidden: true,
 	async run(client, msg, args, prefix) {
-		args = msg.content.slice(prefix.length).split(/ +/)
-		args.shift();
+		const code = msg.content.slice(prefix.length + this.name.length + 1);
 
-		const code = args.join(" ");
-		let evaled = eval(code);
+		try {
+			let evaled = eval(code);
 
-		if (typeof evaled != "string")
-			evaled = require("util").inspect(evaled);
+			if (typeof evaled != "string")
+				evaled = require("util").inspect(evaled);
 
-		await msg.channel.send(evaled, { code: "js" })
+			await msg.channel.send(evaled, { code: "js" });
+		} catch (err) {
+			await msg.channel.send(err.stack, { code: "js"});
+		}
 	}
 };
