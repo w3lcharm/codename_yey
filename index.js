@@ -65,9 +65,7 @@ function onReady() {
 }
 
 async function onMessage(msg) {
-	if (!msg.content.startsWith(config.prefix)) return;
-	if (msg.author.id == client.user.id) return;
-	if (msg.author.bot) return;
+	if (!msg.content.startsWith(config.prefix) || msg.author.bot) return;
 
 	const args = parseArgs(msg.content.slice(config.prefix.length));
 	const commandName = args.shift();
