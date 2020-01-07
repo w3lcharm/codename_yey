@@ -21,19 +21,20 @@ module.exports = {
 				return msg.channel.send("> :x: You can't kick yourself.");
 			if (member.user.id == client.user.id)
 				return msg.channel.send("> :x: You can't kick a bot.");
-			if (member.hasPermission("ADMINISTRATOR"))
-				return msg.channel.send("> :x: I can't kick this user because this user have the administrator permission.");
+			if (member.kickable) {
+				await member.kick(reason);
 
-			await member.kick(reason);
-
-			const embed = new Discord.RichEmbed()
-				.setAuthor(`${member.user.tag} was kicked`, member.user.displayAvatarURL)
-				.setTitle("Reason:")
-				.setDescription(reason || "not provided")
-				.setColor("GREEN")
-				.setTimestamp();
+				const embed = new Discord.RichEmbed()
+					.setAuthor(`${member.user.tag} was kicked`, member.user.displayAvatarURL)
+					.setTitle("Reason:")
+					.setDescription(reason || "not provided")
+					.setColor("GREEN")
+					.setTimestamp();
 			
-			await msg.channel.send(embed);
+				await msg.channel.send(embed);
+			} else {
+				return msg.channel.send("> :x: I can't kick this user.");
+			}
 		} else {
 			await msg.channel.send("> :x: You don't have permissions to use this command.");
 		}
