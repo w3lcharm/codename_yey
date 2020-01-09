@@ -9,18 +9,19 @@ module.exports = {
 		if (!args.length)
 			return msg.channel.send(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
 
-		args = msg.content.slice(prefix.length).split(/ +/);
-		args.shift();
-		const text = args.join(" ");
-
+		const text = msg.content.slice(prefix.length + this.name.length + 1);
+		
+		const startTime = Date.now();
 		let qr = await QRCode.toDataURL(text);
 		qr = qr.replace("data:image/png;base64,", "");
+		const finishTime = Date.now() - startTime;
 
 		const embed = new Discord.RichEmbed()
 			.setTitle(":white_check_mark: Generated!")
 			.setColor("GREEN")
 			.attachFile(new Discord.Attachment(Buffer.from(qr, "base64"), "file.png"))
-			.setImage("attachment://file.png");
+			.setImage("attachment://file.png")
+			.setFooter(`Took ${finishTime} ms.`);
 		await msg.channel.send(embed);
 	}
 }
