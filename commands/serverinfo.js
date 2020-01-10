@@ -5,10 +5,14 @@ module.exports = {
 	description: "Shows the info about a server",
 	guildOnly: true,
 	async run(client, msg, args, prefix) {
+		let iconURL = msg.guild.iconURL;
+		if (msg.guild.icon.startsWith("a_"))
+			iconURL = iconURL.replace("jpg", "gif");
+
 		const embed = new Discord.RichEmbed()
 			.setTitle(msg.guild.name)
 			.setColor("RANDOM")
-			.setThumbnail(msg.guild.iconURL)
+			.setThumbnail(iconURL)
 			.addField("Owner:", msg.guild.owner)
 			.addField("ID:", msg.guild.id)
 			.addField("Voice region:", msg.guild.region)
