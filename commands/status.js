@@ -1,11 +1,17 @@
 const Discord = require("discord.js");
 
 function parseUptime(time) {
-	obj = new Date(time);
-	days = obj.getUTCDate() - 1;
-	hours = obj.getUTCHours();
-	minutes = obj.getUTCMinutes();
-	seconds = obj.getUTCSeconds();
+	const obj = new Date(time);
+
+	let days = obj.getUTCDate() - 1;
+	let hours = obj.getUTCHours();
+	let minutes = obj.getUTCMinutes();
+	let seconds = obj.getUTCSeconds();
+
+	if (hours < 10) hours = "0" + hours;
+	if (minutes < 10) minutes = "0" + minutes;
+	if (seconds < 10) seconds = "0" + seconds;
+
 	return `${days}:${hours}:${minutes}:${seconds}`;
 }
 
