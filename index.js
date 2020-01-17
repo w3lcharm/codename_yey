@@ -7,6 +7,7 @@ const config = require("./config.json");
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 client.db = new sqlite3.Database("./bot.db");
+client.musicQueue = new Map();
 
 const autorole = require("./modules/autorole");
 
