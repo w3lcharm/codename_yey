@@ -9,10 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@discordjs/opus": "^0.1.0",
     "bufferutil": "^4.0.1",
-    "discord.js": "^11.5.1",
+    "discord.js": "github:discordjs/discord.js",
     "erlpack": "github:hammerandchisel/erlpack",
-    "node-opus": "^0.3.3",
+    "ffmpeg-static": "^3.0.0",
     "qrcode": "^1.4.4",
     "sqlite3": "^4.1.0",
     "ytdl-core": "^1.0.6"

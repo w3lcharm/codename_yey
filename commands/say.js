@@ -8,14 +8,14 @@ module.exports = {
 		const text = args.join(" ");
 		if (!text.length) return;
 
-		const embed = new Discord.RichEmbed()
+		const embed = new Discord.MessageEmbed()
 			.setDescription(text)
 			.setColor("RANDOM")
 			.setFooter(msg.author.tag, msg.author.avatarURL || msg.author.defaultAvatarURL);
 		
 		if (msg.guild.me.hasPermission("MANAGE_MESSAGES"))
 			msg.delete();
-		else {}
+
 		await msg.channel.send(embed);
 	}
 }

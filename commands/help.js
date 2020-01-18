@@ -5,7 +5,7 @@ module.exports = {
 	description: "Shows the information about bot's commands.",
 	usage: "[command]",
 	async run(client, msg, args, prefix) {
-		let embed = new Discord.RichEmbed()
+		let embed = new Discord.MessageEmbed()
 			.setColor("RANDOM")
 			.setFooter("codename_yey", client.user.displayAvatarURL);
 		

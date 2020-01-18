@@ -19,7 +19,7 @@ module.exports = {
 		const cmdObject = require(`../commands/${command}`);
 		client.commands.set(cmdObject.name, cmdObject);
 
-		const embed = new Discord.RichEmbed()
+		const embed = new Discord.MessageEmbed()
 			.setTitle(`:white_check_mark: Reloaded the \`${command}\` command.`)
 			.setColor("GREEN")
 			.setTimestamp()

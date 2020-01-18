@@ -24,7 +24,7 @@ module.exports = {
 			if (member.kickable) {
 				await member.kick(reason);
 
-				const embed = new Discord.RichEmbed()
+				const embed = new Discord.MessageEmbed()
 					.setAuthor(`${member.user.tag} was kicked`, member.user.displayAvatarURL)
 					.setTitle("Reason:")
 					.setDescription(reason || "not provided")

@@ -6,9 +6,9 @@ module.exports = {
 	async run(client, msg, args, prefix) {
 		startTime = Date.now();
 		m = await msg.channel.send("Measuring...");
-		const embed = new Discord.RichEmbed()
+		const embed = new Discord.MessageEmbed()
 			.setTitle(`Bot latency is ${Date.now() - startTime} ms.`)
-			.setDescription(`API latency is ${Math.floor(client.ping)} ms.`)
+			.setDescription(`API latency is ${Math.floor(client.ws.ping)} ms.`)
 			.setFooter("codename_yey", client.user.displayAvatarURL)
 			.setColor("RANDOM");
 		await m.edit("", embed)

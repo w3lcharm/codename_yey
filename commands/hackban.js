@@ -23,7 +23,7 @@ module.exports = {
 
 			await msg.guild.ban(user, reason);
 
-			const embed = new Discord.RichEmbed()
+			const embed = new Discord.MessageEmbed()
 				.setTitle(`:white_check_mark: User with ID \`${userID}\` was successfully banned.`)
 				.addField("Reason:", reason || "not provided")
 				.setColor("GREEN")

@@ -17,8 +17,8 @@ module.exports = {
 				return msg.channel.send("> :x: Not less than 1 message at a time.");
 			else {
 				if (msg.guild.me.hasPermission("MANAGE_MESSAGES")) {
-					await msg.channel.bulkDelete(amount);
-					let embed = new Discord.RichEmbed()
+					await msg.channel.bulkDelete(amount + 1);
+					let embed = new Discord.MessageEmbed()
 						.setTitle(`:white_check_mark: Successfully deleted ${amount} messages.`)
 						.setColor("GREEN")
 						.setTimestamp();

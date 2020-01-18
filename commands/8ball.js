@@ -11,7 +11,7 @@ module.exports = {
 		const question = msg.content.slice(prefix.length + this.name.length + 1);
 		const answer = magicball.predict(question, 0.25, msg.author.id);
 
-		const embed = new Discord.RichEmbed()
+		const embed = new Discord.MessageEmbed()
 			.setTitle(":8ball: The magic ball's answer is:")
 			.setDescription(answer)
 			.addField("Your question:", question)

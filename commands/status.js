@@ -19,7 +19,7 @@ module.exports = {
 	name: "status",
 	description: "Shows the bot's status.",
 	async run(client, msg, args, prefix) {
-		const embed = new Discord.RichEmbed()
+		const embed = new Discord.MessageEmbed()
 			.setTitle("Status:")
 			.setColor("RANDOM")
 			.addField("Uptime:", parseUptime(client.uptime))

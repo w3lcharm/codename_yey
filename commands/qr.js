@@ -16,7 +16,7 @@ module.exports = {
 		qr = qr.replace("data:image/png;base64,", "");
 		const finishTime = Date.now() - startTime;
 
-		const embed = new Discord.RichEmbed()
+		const embed = new Discord.MessageEmbed()
 			.setTitle(":white_check_mark: Generated!")
 			.setColor("GREEN")
 			.attachFile(new Discord.Attachment(Buffer.from(qr, "base64"), "file.png"))

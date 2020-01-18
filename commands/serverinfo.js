@@ -9,7 +9,7 @@ module.exports = {
 		if (msg.guild.icon != null && msg.guild.icon.startsWith("a_"))
 			iconURL = iconURL.replace("jpg", "gif");
 
-		const embed = new Discord.RichEmbed()
+		const embed = new Discord.MessageEmbed()
 			.setTitle(msg.guild.name)
 			.setColor("RANDOM")
 			.setThumbnail(iconURL)

@@ -13,7 +13,7 @@ module.exports = {
 			let member;
 			if (!args[1]) member = msg.member;
 			else member = msg.mentions.members.first() || msg.guild.member(client.users.find(u => u.id == args[1] || u.tag == args[1]));
-			let embed = new Discord.RichEmbed()
+			let embed = new Discord.MessageEmbed()
 				.setColor("RANDOM")
 				.setAuthor(member.user.tag, member.user.avatarURL || member.user.defaultAvatarURL);
 			client.db.all("select * from warns where user = ? and server = ?", member.user.id, msg.guild.id, async (err, rows) => {

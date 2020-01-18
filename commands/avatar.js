@@ -13,7 +13,7 @@ module.exports = {
 
 		if (!member) return;
 
-		const embed = new Discord.RichEmbed()
+		const embed = new Discord.MessageEmbed()
 			.setTitle(`${member.user.tag}'s avatar:`)
 			.setColor("RANDOM")
 			.setImage(member.user.displayAvatarURL);
