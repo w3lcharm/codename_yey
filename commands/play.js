@@ -12,7 +12,7 @@ function playMusic(client, guild, song, msg) {
 		msg.channel.send(embed);
 		return;
 	}
-	const dispatcher = queue.connection.play(song.stream)
+	const dispatcher = queue.connection.play(song.stream, { volume: false })
 		.on("end", async () => {
 			queue.songs.shift();
 			playMusic(client, guild, queue.songs[0], msg);
@@ -29,6 +29,9 @@ module.exports = {
 	usage: "<URL or search string>",
 	guildOnly: true,
 	async run(client, msg, args, prefix) {
+		if (!args.length)
+			return msg.channel.send(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
+
 		const embed = new Discord.MessageEmbed();
 
 		const voiceChannel = msg.member.voice.channel;
@@ -50,6 +53,7 @@ module.exports = {
 				connection: null,
 				songs: [],
 				volume: 100,
+				playing: true,
 			};
 
 			client.musicQueue.set(msg.guild.id, queueStruct);

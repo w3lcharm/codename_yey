@@ -5,7 +5,7 @@ module.exports = {
 	description: "Shows the info about a server",
 	guildOnly: true,
 	async run(client, msg, args, prefix) {
-		let iconURL = msg.guild.iconURL;
+		let iconURL = msg.guild.iconURL();
 		if (msg.guild.icon != null && msg.guild.icon.startsWith("a_"))
 			iconURL = iconURL.replace("jpg", "gif");
 
