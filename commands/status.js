@@ -27,7 +27,7 @@ module.exports = {
 			.addField("Platform:", process.platform)
 			.addField("Total users:", client.users.size)
 			.addField("Versions:", `**discord.js**: ${Discord.version}\n**Node.js**: ${process.version}`)
-			.setFooter("codename_yey (c) GDRadio, 2020", client.user.displayAvatarURL);
+			.setFooter("codename_yey (c) GDRadio, 2020", client.user.displayAvatarURL());
 		await msg.channel.send(embed);
 	}
 };

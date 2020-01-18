@@ -85,7 +85,7 @@ async function onMessage(msg) {
 		await command.run(client, msg, args, config.prefix);
 		console.log(`${msg.author.tag} used the ${commandName} command in ${msg.guild ? msg.guild.name : "bot DM"}`);
 	} catch (err) {
-		const embed = new Discord.RichEmbed()
+		const embed = new Discord.MessageEmbed()
 			.setTitle(`:x: Error in command ${commandName}:`)
 			.setDescription("```\n" + err + "\n```")
 			.setColor("RED");

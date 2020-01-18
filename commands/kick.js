@@ -25,7 +25,7 @@ module.exports = {
 				await member.kick(reason);
 
 				const embed = new Discord.MessageEmbed()
-					.setAuthor(`${member.user.tag} was kicked`, member.user.displayAvatarURL)
+					.setAuthor(`${member.user.tag} was kicked`, member.user.displayAvatarURL())
 					.setTitle("Reason:")
 					.setDescription(reason || "not provided")
 					.setColor("GREEN")

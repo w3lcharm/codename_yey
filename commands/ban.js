@@ -27,7 +27,7 @@ module.exports = {
 				await member.ban(reason);
 
 				const embed = new Discord.MessageEmbed()
-					.setAuthor(`${member.user.tag} was banned`, member.user.displayAvatarURL)
+					.setAuthor(`${member.user.tag} was banned`, member.user.displayAvatarURL())
 					.addField("Reason:", reason || 'not provided')
 					.setColor("GREEN")
 					.setTimestamp();

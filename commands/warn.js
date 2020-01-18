@@ -15,7 +15,7 @@ module.exports = {
 			else member = msg.mentions.members.first() || msg.guild.member(client.users.find(u => u.id == args[1] || u.tag == args[1]));
 			let embed = new Discord.MessageEmbed()
 				.setColor("RANDOM")
-				.setAuthor(member.user.tag, member.user.avatarURL || member.user.defaultAvatarURL);
+				.setAuthor(member.user.tag, member.user.displayAvatarURL());
 			client.db.all("select * from warns where user = ? and server = ?", member.user.id, msg.guild.id, async (err, rows) => {
 				for (let row of rows)
 					embed.addField(`ID: ${row.id}`, `Reason: ${row.reason}`);
@@ -53,7 +53,7 @@ module.exports = {
 			await client.db.run(`insert into warns values (NULL, ?, ?, ?, ?)`, msg.guild.id, member.user.id, msg.author.id, reason);
 
 			const embed = new Discord.RichEmbed()
-				.setAuthor(`${member.user.tag} was warned`, member.user.displayAvatarURL)
+				.setAuthor(`${member.user.tag} was warned`, member.user.displayAvatarURL())
 				.setTimestamp()
 				.setColor("GREEN")
 				.addField("Reason:", reason || "not provided");

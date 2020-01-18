@@ -25,7 +25,7 @@ module.exports = {
 		if (member == undefined || user == undefined) return;
 
 		const embed = new Discord.MessageEmbed()
-			.setAuthor(user.tag, user.displayAvatarURL)
+			.setAuthor(user.tag, user.displayAvatarURL())
 			.setColor("RANDOM");
 		if (member.nickname)
 			embed.addField("Name on this server:", member.nickname)

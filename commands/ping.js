@@ -9,7 +9,7 @@ module.exports = {
 		const embed = new Discord.MessageEmbed()
 			.setTitle(`Bot latency is ${Date.now() - startTime} ms.`)
 			.setDescription(`API latency is ${Math.floor(client.ws.ping)} ms.`)
-			.setFooter("codename_yey", client.user.displayAvatarURL)
+			.setFooter("codename_yey", client.user.displayAvatarURL())
 			.setColor("RANDOM");
 		await m.edit("", embed)
 	}

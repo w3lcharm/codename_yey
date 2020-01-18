@@ -7,7 +7,7 @@ module.exports = {
 	async run(client, msg, args, prefix) {
 		let embed = new Discord.MessageEmbed()
 			.setColor("RANDOM")
-			.setFooter("codename_yey", client.user.displayAvatarURL);
+			.setFooter("codename_yey", client.user.displayAvatarURL());
 		
 		const command = args[0];
 
