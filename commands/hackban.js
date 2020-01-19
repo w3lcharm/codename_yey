@@ -13,7 +13,7 @@ module.exports = {
 			if (!msg.guild.me.hasPermission("BAN_MEMBERS"))
                                 return msg.channel.send("> :x: I don't have the permissions to do this. Please give me the \"Ban members\" permission and try again.");
 			const userID = args.shift();
-			const user = await client.fetchUser(userID);
+			const user = await client.users.fetch(userID);
 			const reason = args.join(" ");
 
 			if (userID == msg.author.id) return;
@@ -21,7 +21,7 @@ module.exports = {
 
 			if (!user) return;
 
-			await msg.guild.ban(user, reason);
+			await msg.guild.members.ban(user, reason);
 
 			const embed = new Discord.MessageEmbed()
 				.setTitle(`:white_check_mark: User with ID \`${userID}\` was successfully banned.`)
