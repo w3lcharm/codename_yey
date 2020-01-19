@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const ytdl = require("ytdl-core");
+const ytsr = require("ytsr");
 
 function playMusic(client, guild, song, msg) {
 	const queue = client.musicQueue.get(guild.id);
@@ -44,7 +45,8 @@ module.exports = {
 			return msg.reply("you need to connect to voice channel before using this command.");
 		
 		const searchString = msg.content.slice(this.name.length + prefix.length + 1);
-		const song = await ytdl.getInfo(searchString);
+		const searchResult = await ytsr(searchString);
+		const song = await ytdl.getInfo(searchResult.items[0].link);
 		const songStruct = {
 			title: song.title,
 			url: song.video_url,
