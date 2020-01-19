@@ -33,6 +33,7 @@ module.exports = {
 				.addField("Basic:", "`help`, `ping`, `avatar`, `user`, `links`, `serverinfo`, `status`")
 				.addField("Utility:", "`say`, `qr`, `poll`")
 				.addField("Moderation:", "`ban`, `kick`, `warn`, `purge`, `hackban`")
+				.addField("Music", "`play`, `pause`, `resume`, `queue`, `skip`, `stop`")
 				.addField("Other:", "`8ball`, `settings`");
 			
 			await msg.channel.send(embed);
