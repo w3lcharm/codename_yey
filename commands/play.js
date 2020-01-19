@@ -12,15 +12,20 @@ function playMusic(client, guild, song, msg) {
 		msg.channel.send(embed);
 		return;
 	}
-	const dispatcher = queue.connection.play(song.stream, { volume: false })
-		.on("end", async () => {
-			queue.songs.shift();
-			playMusic(client, guild, queue.songs[0], msg);
-		});
+
+	try {
+		const dispatcher = queue.connection.play(song.stream, { volume: false })
+			.on("end", async () => {
+				queue.songs.shift();
+				playMusic(client, guild, queue.songs[0], msg);
+			});
 	
-	embed.setTitle(`:arrow_forward: Playing **${song.title}**`)
-		.setFooter("codename_yey", client.user.displayAvatarURL());
-	msg.channel.send(embed);
+		embed.setTitle(`:arrow_forward: Playing **${song.title}**`)
+			.setFooter("codename_yey", client.user.displayAvatarURL());
+		msg.channel.send(embed);
+	} catch (err) {
+		console.error(err.stack);
+	}
 }
 
 module.exports = {
@@ -58,7 +63,7 @@ module.exports = {
 
 			client.musicQueue.set(msg.guild.id, queueStruct);
 			queueStruct.songs.push(songStruct);
-
+			
 			const connection = await voiceChannel.join();
 			queueStruct.connection = connection;
 
@@ -68,7 +73,7 @@ module.exports = {
 
 			embed.setTitle(`Added **${songStruct.title}** to queue.`)
 				.setFooter("codename_yey", client.user.displayAvatarURL());
-				await msg.channel.send(embed);
+			await msg.channel.send(embed);
 		}
 	}
 }
