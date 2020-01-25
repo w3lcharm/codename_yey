@@ -19,7 +19,7 @@ module.exports = {
 		const embed = new Discord.MessageEmbed()
 			.setTitle(":white_check_mark: Generated!")
 			.setColor("GREEN")
-			.attachFile(new Discord.MessageAttachment(Buffer.from(qr, "base64"), "file.png"))
+			.attachFiles([new Discord.MessageAttachment(Buffer.from(qr, "base64"), "file.png")])
 			.setImage("attachment://file.png")
 			.setFooter(`Took ${finishTime} ms.`);
 		await msg.channel.send(embed);
