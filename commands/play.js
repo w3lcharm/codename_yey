@@ -15,7 +15,7 @@ function playMusic(client, guild, song, msg) {
 	}
 
 	try {
-		const dispatcher = queue.connection.play(song.stream, { volume: false })
+		const dispatcher = queue.connection.play(ytdl(song.url, { filter: "audioonly" }), { volume: false })
 			.on("end", async () => {
 				queue.songs.shift();
 				playMusic(client, guild, queue.songs[0], msg);
@@ -50,7 +50,7 @@ module.exports = {
 		const songStruct = {
 			title: song.title,
 			url: song.video_url,
-			stream: ytdl(song.video_url, { filter: "audioonly" })
+			toString() { return `[${this.title}](${this.url})` },
 		};
 		
 		const serverQueue = client.musicQueue.get(msg.guild.id);
