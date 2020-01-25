@@ -22,7 +22,7 @@ function playMusic(client, guild, song, msg) {
 			});
 	
 		embed.setTitle(`:arrow_forward: Playing **${song.title}**`)
-			.setDescription(`[Link to this song](${songStruct.url})`)
+			.setDescription(`[Link to this song](${song.url})`)
 			.setFooter("codename_yey", client.user.displayAvatarURL());
 		msg.channel.send(embed);
 	} catch (err) {
