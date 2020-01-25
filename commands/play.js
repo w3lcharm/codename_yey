@@ -21,7 +21,7 @@ function playMusic(client, guild, song, msg) {
 				playMusic(client, guild, queue.songs[0], msg);
 			});
 	
-		embed.setTitle(`:arrow_forward: Playing **${song.title}**`)
+		embed.setTitle(`:arrow_forward: Playing ${song}`)
 			.setFooter("codename_yey", client.user.displayAvatarURL());
 		msg.channel.send(embed);
 	} catch (err) {
@@ -73,7 +73,7 @@ module.exports = {
 		} else {
 			serverQueue.songs.push(songStruct);
 
-			embed.setTitle(`Added **${songStruct.title}** to queue.`)
+			embed.setTitle(`Added ${songStruct} to queue.`)
 				.setFooter("codename_yey", client.user.displayAvatarURL());
 			await msg.channel.send(embed);
 		}
