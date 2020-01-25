@@ -7,7 +7,7 @@ module.exports = {
 	async run(client, msg, args, prefix) {
 		const queue = client.musicQueue.get(msg.guild.id);
 		if (queue) {
-			const description = queue.songs.map((song, number) => `${number + 1}: **${song.title}**`).join("\n");
+			const description = queue.songs.map((song, number) => `${number + 1}: **${song}**`).join("\n");
 
 			const embed = new Discord.MessageEmbed()
 				.setTitle("Queue")
