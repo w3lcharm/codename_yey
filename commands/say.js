@@ -11,7 +11,7 @@ module.exports = {
 		const embed = new Discord.MessageEmbed()
 			.setDescription(text)
 			.setColor("RANDOM")
-			.setFooter(msg.author.tag, msg.author.avatarURL || msg.author.defaultAvatarURL);
+			.setFooter(msg.author.tag, msg.author.displayAvatarURL(128));
 		
 		if (msg.guild.me.hasPermission("MANAGE_MESSAGES"))
 			msg.delete();
