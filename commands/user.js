@@ -31,7 +31,7 @@ module.exports = {
 			embed.addField("Name on this server:", member.nickname)
 		embed
 			.addField("Status:", userStatus(member))
-			.addField("Playing:", member.presence.game ? member.presence.game.toString() : "nothing")
+			.addField("Playing:", member.presence.activities.length ? member.presence.activities[0].name : "nothing")
 			.addField("ID:", user.id)
 			.addField("Roles:", Array.from(member.roles.values()).join(", "))
 			.addField("Registered at:", user.createdAt)
