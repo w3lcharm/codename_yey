@@ -34,18 +34,6 @@ function sleep(duration) {
 	return new Promise(resolve => setTimeout(resolve, duration));
 }
 
-async function chp() {
-	while (true) {
-		await client.user.setActivity(`${config.prefix}help`, { type: "WATCHING" });
-		await sleep(20000);
-		await client.user.setActivity(`${client.users.size} users`, { type: "LISTENING" });
-		await sleep(20000);
-		await client.user.setActivity(`in ${client.guilds.size} servers`, { type: "PLAYING" });
-		await sleep(20000);
-	}
-}
-
-
 console.log("Loading the commands...")
 fs.readdirSync("./commands").filter(file => file.endsWith(".js")).forEach(file => {
 	try {
@@ -62,7 +50,7 @@ function onReady() {
 	client.db
 		.run("create table if not exists warns('id' integer primary key autoincrement not null, server, user, moderator, reason)")
 		.run("create table if not exists settings(server, autorole)");
-	chp();
+	client.user.setActivity(`${config.prefix}help`, { type: "WATCHING" });
 }
 
 async function onMessage(msg) {
