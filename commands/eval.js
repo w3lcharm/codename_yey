@@ -10,7 +10,9 @@ module.exports = {
 		const code = msg.content.slice(prefix.length + this.name.length + 1);
 
 		try {
-			let evaled = eval(code);
+			const asyncifiedCode = `(async () => {\n${code}\n})()`;
+
+			let evaled = await eval(asyncifiedCode);
 
 			if (typeof evaled != "string")
 				evaled = require("util").inspect(evaled);
