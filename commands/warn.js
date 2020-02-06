@@ -16,26 +16,36 @@ module.exports = {
 			let embed = new Discord.MessageEmbed()
 				.setColor("RANDOM")
 				.setAuthor(member.user.tag, member.user.displayAvatarURL());
-			client.db.all("select * from warns where user = ? and server = ?", member.user.id, msg.guild.id, async (err, rows) => {
-				for (let row of rows)
-					embed.addField(`ID: ${row.id}`, `Reason: ${row.reason}`);
-				embed.setFooter(`Total warns: ${rows.length}`)
-				await msg.channel.send(embed);
+				
+			const warnList = await warns.findAll({
+				where: {
+					server: msg.guild.id,
+					user: member.user.id,
+				},
 			});
+			for(let warn of warnList)
+				embed.addField(`ID: ${warn.id}`, `Reason: ${warn.reason}`);
+			embed.setFooter(`Total warns: ${warnList.length}`);
+			await msg.channel.send(embed);
 			return;
 		}
 
 		if (msg.member.hasPermission("KICK_MEMBERS")) {
 			if (args[0] == "--delete") {
 				let id = args[1];
-				client.db.get("select * from warns where id = ?", parseInt(id), function (err, row) {
-					if (!row) msg.channel.send("> :x: Invalid ID.");
-					else if (row.server != msg.guild.id) msg.channel.send("> :x: This warn is located on the another server.");
-					else {
-						client.db.run("delete from warns where id = ?", row.id);
-						msg.channel.send(`> :white_check_mark: Deleted warn with ID ${row.id}`);
-					}
+				const warn = await warns.findOne({
+					where: {
+						server: msg.guild.id,
+						id: id,
+					},
 				});
+				if (!warn) msg.channel.send("> :x: Invalid ID.");
+				else if (warn.server != msg.guild.id)
+					msg.channel.send("> :x: This warn is located on the another server.");
+				else {
+					await warns.destroy({ where: { id: id } });
+					msg.channel.send(`> :white_check_mark: Deleted warn with ID ${warn.id}`);
+				}
 				return;
 					
 			}
@@ -50,9 +60,14 @@ module.exports = {
 			if (member.hasPermission("ADMINISTRATOR"))
 				return msg.channel.send("> :x: You can't warn the administrator.");
 
-			await client.db.run(`insert into warns values (NULL, ?, ?, ?, ?)`, msg.guild.id, member.user.id, msg.author.id, reason);
+			await warns.create({
+				server: msg.guild.id,
+				user: member.user.id,
+				warnedBy: msg.author.id,
+				reason: reason,
+			});
 
-			const embed = new Discord.RichEmbed()
+			const embed = new Discord.MessageEmbed()
 				.setAuthor(`${member.user.tag} was warned`, member.user.displayAvatarURL())
 				.setTimestamp()
 				.setColor("GREEN")
