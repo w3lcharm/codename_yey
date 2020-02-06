@@ -1,9 +1,7 @@
-function autorole(client, member) {
-    client.db.get("select * from settings where server = ?", member.guild.id, async (err, row) => {
-        if (!row || !row.autorole) return;
-        if (member.guild.me.hasPermission("MANAGE_ROLES"))
-            member.roles.add(row.autorole);
-    });
-}
+module.exports = async member => {
+    const dbItem = await settings.findOne({ where: { server: member.guild.id } });
 
-module.exports = autorole;
+    if (!dbItem.autorole) return;
+    if (member.guild.me.hasPermission("MANAGE_ROLES"))
+        await member.roles.add(dbItem.autorole);
+}
