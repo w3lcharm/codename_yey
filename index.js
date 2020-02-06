@@ -1,13 +1,20 @@
 #!/usr/bin/env node
 const Discord = require("discord.js");
-const sqlite3 = require("sqlite3");
+const Sequelize = require("sequelize");
 const fs = require("fs");
 const config = require("./config.json");
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
-client.db = new sqlite3.Database("./bot.db");
 client.musicQueue = new Map();
+
+global.sequelize = new Sequelize({
+	dialect: "sqlite",
+	storage: "./bot.db",
+});
+
+global.warns = (require("./dbModels/warns"))(sequelize, Sequelize.DataTypes);
+global.settings = (require("./dbModels/settings"))(sequelize, Sequelize.DataTypes);
 
 const autorole = require("./modules/autorole");
 
@@ -47,10 +54,9 @@ fs.readdirSync("./commands").filter(file => file.endsWith(".js")).forEach(file =
 
 function onReady() {
 	console.log(`${client.user.username} online!`);
-	client.db
-		.run("create table if not exists warns('id' integer primary key autoincrement not null, server, user, moderator, reason)")
-		.run("create table if not exists settings(server, autorole)");
 	client.user.setActivity(`${config.prefix}help`, { type: "WATCHING" });
+
+	sequelize.sync();
 }
 
 async function onMessage(msg) {
