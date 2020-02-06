@@ -11,6 +11,7 @@ client.musicQueue = new Map();
 global.sequelize = new Sequelize({
 	dialect: "sqlite",
 	storage: "./bot.db",
+	logging: false,
 });
 
 global.warns = (require("./dbModels/warns"))(sequelize, Sequelize.DataTypes);
