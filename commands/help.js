@@ -30,11 +30,13 @@ module.exports = {
 			await msg.channel.send(embed);
 		} else {
 			embed.setTitle("Bot commands")
+				.setDescription("Note: music features are experimental now. If there are any bugs, report them in support server.")
 				.addField("Basic:", "`help`, `ping`, `avatar`, `user`, `links`, `serverinfo`, `status`")
 				.addField("Utility:", "`say`, `qr`, `poll`")
 				.addField("Moderation:", "`ban`, `kick`, `warn`, `purge`, `hackban`")
 				.addField("Music:", "`play`, `pause`, `resume`, `queue`, `skip`, `stop`")
-				.addField("Other:", "`8ball`, `settings`");
+				.addField("Settings:", "`autorole`")
+				.addField("Other:", "`8ball`");
 			
 			await msg.channel.send(embed);
 		}
