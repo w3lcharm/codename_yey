@@ -92,6 +92,6 @@ async function onMessage(msg) {
 client
 	.on("ready", onReady)
 	.on("message", onMessage)
-	.on("guildMemberAdd", member => autorole(client, member));
+	.on("guildMemberAdd", autorole);
 
 client.login(config.token);
