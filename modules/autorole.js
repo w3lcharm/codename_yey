@@ -6,4 +6,4 @@ module.exports = async member => {
 		if (member.guild.me.hasPermission("MANAGE_ROLES"))
 			await member.roles.add(dbItem.autorole);
 	}
-}p
+}
