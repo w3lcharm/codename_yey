@@ -13,10 +13,14 @@ module.exports = {
 
 		if (!member) return;
 
+		let avatarURL = member.user.displayAvatarURL({ size: 2048 });
+		if (member.user.avatar && member.user.avatar.startsWith("a_"))
+			avatarURL = avatarURL.replace(".webp", ".gif");
+
 		const embed = new Discord.MessageEmbed()
 			.setTitle(`${member.user.tag}'s avatar:`)
 			.setColor("RANDOM")
-			.setImage(member.user.displayAvatarURL({ size: 2048 }));
+			.setImage(avatarURL);
 		
 		await msg.channel.send(embed);
 	}
