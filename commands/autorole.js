@@ -6,7 +6,7 @@ module.exports = {
 	usage: "[role: id, name, mention or \"disable\" to disable]",
 	guildOnly: true,
 	async run(client, msg, args, prefix) {
-		if (msg.member.hasPermission("MANAGE_SERVER")) {
+		if (msg.member.hasPermission("MANAGE_GUILD")) {
 			let roleID = args[0];
 			if (roleID && roleID.startsWith("<@&"))
 				roleID = roleID.replace("<@&", "").replace("<@&", "");
