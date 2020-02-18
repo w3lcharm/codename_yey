@@ -17,14 +17,14 @@ module.exports = {
 			.addField("ID:", msg.guild.id, true)
 			.addField("Voice region:", msg.guild.region, true)
 			.addField("Members:", `**total** - ${msg.guild.memberCount}\n` +
-				`**online** - ${msg.guild.members.filter(p => p.presence.status == "online").size}\n` +
-				`**idle** - ${msg.guild.members.filter(p => p.presence.status == "idle").size}\n` +
-				`**DND** - ${msg.guild.members.filter(p => p.presence.status == "dnd").size}\n` +
-				`**offline** - ${msg.guild.members.filter(p => p.presence.status == "offline").size}`, true)
-			.addField("Channels:", `**categories** - ${msg.guild.channels.filter(c => c instanceof Discord.CategoryChannel).size}\n` +
-				`**text** - ${msg.guild.channels.filter(c => c instanceof Discord.TextChannel).size}\n` +
-				`**voice** - ${msg.guild.channels.filter(c => c instanceof Discord.VoiceChannel).size}\n`, true)
-			.addField("Roles count:", msg.guild.roles.size, true)
+				`**online** - ${msg.guild.members.cache.filter(p => p.presence.status == "online").size}\n` +
+				`**idle** - ${msg.guild.members.cache.filter(p => p.presence.status == "idle").size}\n` +
+				`**DND** - ${msg.guild.members.cache.filter(p => p.presence.status == "dnd").size}\n` +
+				`**offline** - ${msg.guild.members.cache.filter(p => p.presence.status == "offline").size}`, true)
+			.addField("Channels:", `**categories** - ${msg.guild.channels.cache.filter(c => c instanceof Discord.CategoryChannel).size}\n` +
+				`**text** - ${msg.guild.channels.cache.filter(c => c instanceof Discord.TextChannel).size}\n` +
+				`**voice** - ${msg.guild.channels.cache.filter(c => c instanceof Discord.VoiceChannel).size}\n`, true)
+			.addField("Roles count:", msg.guild.roles.cache.size, true)
 			.addField("Created at:", msg.guild.createdAt);
 		await msg.channel.send(embed);
 	}
