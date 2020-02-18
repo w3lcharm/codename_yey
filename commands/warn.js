@@ -12,7 +12,7 @@ module.exports = {
 		if (args[0] == "--list") {
 			let member;
 			if (!args[1]) member = msg.member;
-			else member = msg.mentions.members.first() || msg.guild.member(client.users.find(u => u.id == args[1] || u.tag == args[1]));
+			else member = msg.mentions.members.first() || msg.guild.member(client.users.cache.find(u => u.id == args[1] || u.tag == args[1]));
 			let embed = new Discord.MessageEmbed()
 				.setColor("RANDOM")
 				.setAuthor(member.user.tag, member.user.displayAvatarURL());
@@ -23,7 +23,7 @@ module.exports = {
 					user: member.user.id,
 				},
 			});
-			for(let warn of warnList)
+			for (let warn of warnList)
 				embed.addField(`ID: ${warn.id}`, `Reason: ${warn.reason}`);
 			embed.setFooter(`Total warns: ${warnList.length}`);
 			await msg.channel.send(embed);
@@ -51,7 +51,7 @@ module.exports = {
 			}
 			const userID = args.shift();
 			const reason = args.join(" ");
-			const member = msg.mentions.members.first() || msg.guild.member(client.users.find(u => u.id == userID || u.tag == userID));
+			const member = msg.mentions.members.first() || msg.guild.member(client.users.cache.find(u => u.id == userID || u.tag == userID));
 			if (!member) return;
 			if (member.user.id == msg.author.id)
 				return msg.channel.send("> :x: You can't warn yourself.");

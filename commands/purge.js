@@ -17,13 +17,13 @@ module.exports = {
 				return msg.channel.send("> :x: Not less than 1 message at a time.");
 			else {
 				if (msg.guild.me.hasPermission("MANAGE_MESSAGES")) {
-					await msg.channel.bulkDelete(amount + 1);
+					await msg.channel.bulkDelete(amount);
 					let embed = new Discord.MessageEmbed()
 						.setTitle(`:white_check_mark: Successfully deleted ${amount} messages.`)
 						.setColor("GREEN")
 						.setTimestamp();
 					let message = await msg.channel.send(embed);
-					setTimeout(async () => await message.delete(), 5000);
+					setTimeout(message.delete, 5000);
 				} else
 					return msg.channel.send("> :x: I can't delete messages in this channel. Please give me the \"Manage messages\" permission and try again.");
 			}

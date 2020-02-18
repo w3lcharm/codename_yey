@@ -14,7 +14,7 @@ module.exports = {
 			if (!roleID) {
 				const dbItem = await settings.findOne({ where: { server: msg.guild.id } });
 				let role;
-				if (dbItem) role = msg.guild.roles.get(dbItem.autorole);
+				if (dbItem) role = msg.guild.roles.cache.get(dbItem.autorole);
 
 				const embed = new Discord.MessageEmbed()
 					.setTitle("Autorole")
@@ -29,7 +29,7 @@ module.exports = {
 					await settings.update({ autorole: null }, { where: { server: msg.guild.id } });
 					await msg.channel.send("> :white_check_mark: Successfully set autorole to **\"disabled\"**.");
 				} else {
-					const role = msg.guild.roles.find(r => r.id == roleID || r.name == roleID);
+					const role = msg.guild.roles.cache.find(r => r.id == roleID || r.name == roleID);
 					if (!role) return msg.channel.send("> :x: Invalid role name or ID provided.");
 
 					await settings.update({ autorole: role.id }, { where: { server: msg.guild.id } });

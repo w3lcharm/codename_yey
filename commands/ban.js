@@ -12,7 +12,7 @@ module.exports = {
 		const userID = args.shift();
 		const reason = args.join(" ");
 
-		let member = msg.mentions.members.first() || msg.guild.member(client.users.find(u => u.tag == userID || u.id == userID));
+		let member = msg.mentions.members.first() || msg.guild.member(client.users.cache.find(u => u.tag == userID || u.id == userID));
 
 		if (!member) return;
 		

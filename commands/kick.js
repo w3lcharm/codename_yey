@@ -11,7 +11,7 @@ module.exports = {
 
 		const userID = args.shift();
 		const reason = args.join(" ");
-		let member = msg.mentions.members.first() || msg.guild.member(client.users.find(u => u.id == userID || u.tag == userID));
+		let member = msg.mentions.members.first() || msg.guild.member(client.users.cache.find(u => u.id == userID || u.tag == userID));
 		if (!member) return;
 
 		if (msg.guild.member(msg.author).hasPermission("KICK_MEMBERS")) {

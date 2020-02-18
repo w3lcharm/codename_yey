@@ -18,7 +18,7 @@ module.exports = {
 			user = msg.author;
 			member = msg.guild.member(user);
 		} else {
-			user = msg.mentions.users.first() || client.users.find(u => u.id == args[0] || u.tag == args[0]);
+			user = msg.mentions.users.first() || client.users.cache.find(u => u.id == args[0] || u.tag == args[0]);
 			member = msg.guild.member(user);
 		}
 

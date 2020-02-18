@@ -9,7 +9,7 @@ module.exports = {
 		if (!args.length)
 			member = msg.guild.member(msg.author);
 		else
-			member = msg.mentions.members.first() || msg.guild.member(client.users.find(u => u.id == args[0] || u.tag == args[0]));
+			member = msg.mentions.members.first() || msg.guild.member(client.users.cache.find(u => u.id == args[0] || u.tag == args[0]));
 
 		if (!member) return;
 
