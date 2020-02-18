@@ -15,10 +15,10 @@
     "erlpack": "github:discordapp/erlpack",
     "ffmpeg-static": "^3.0.0",
     "qrcode": "^1.4.4",
-    "sequelize": "^5.21.3",
-    "sqlite3": "^4.1.0",
+    "sequelize": "^5.21.4",
+    "sqlite3": "^4.1.1",
     "utf-8-validate": "^5.0.2",
-    "ytdl-core": "^1.0.6",
+    "ytdl-core": "^1.0.9",
     "ytsr": "^0.1.10",
     "zlib-sync": "^0.1.6"
   }
