@@ -19,6 +19,7 @@ module.exports = {
 
 		const embed = new Discord.MessageEmbed()
 			.setTitle(`${member.user.tag}'s avatar:`)
+			.setURL(avatarURL)
 			.setColor("RANDOM")
 			.setImage(avatarURL);
 		
