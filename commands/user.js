@@ -33,7 +33,7 @@ module.exports = {
 			.addField("Status:", userStatus(member))
 			.addField("Playing:", member.presence.activities.length ? member.presence.activities[0].name : "nothing")
 			.addField("ID:", user.id)
-			.addField("Roles:", Array.from(member.roles.values()).join(", "))
+			.addField("Roles:", Array.from(member.roles.cache.values()).join(", "))
 			.addField("Registered at:", user.createdAt)
 			.addField("Joined this server at:", member.joinedAt)
 			.addField("Bot?", user.bot ? "Yes" : "No");
