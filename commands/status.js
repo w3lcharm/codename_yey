@@ -23,9 +23,9 @@ module.exports = {
 			.setTitle("Status:")
 			.setColor("RANDOM")
 			.addField("Uptime:", parseUptime(client.uptime))
-			.addField("Total servers:", client.guilds.size)
+			.addField("Total servers:", client.guilds.cache.size)
 			.addField("Platform:", process.platform)
-			.addField("Total users:", client.users.size)
+			.addField("Total users:", client.users.cache.size)
 			.addField("Versions:", `**discord.js**: ${Discord.version}\n**Node.js**: ${process.version}`)
 			.setFooter("codename_yey (c) GDRadio, 2020", client.user.displayAvatarURL());
 		await msg.channel.send(embed);
