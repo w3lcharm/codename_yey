@@ -1,97 +1,58 @@
-#!/usr/bin/env node
-const Discord = require("discord.js");
+const CmdClient = require("./src/client");
 const Sequelize = require("sequelize");
-const fs = require("fs");
 const config = require("./config.json");
 
-const client = new Discord.Client();
-client.commands = new Discord.Collection();
-client.musicQueue = new Map();
+const autorole = require("./src/modules/autorole");
+
+const client = new CmdClient(config.token, {
+	prefix: config.prefix,
+	owners: config.owners,
+});
 
 global.sequelize = new Sequelize({
 	dialect: "sqlite",
 	storage: "./bot.db",
 	logging: false,
 });
+global.warns = (require("./src/dbModels/warns"))(sequelize, Sequelize.DataTypes);
+global.settings = (require("./src/dbModels/settings"))(sequelize, Sequelize.DataTypes);
 
-global.warns = (require("./dbModels/warns"))(sequelize, Sequelize.DataTypes);
-global.settings = (require("./dbModels/settings"))(sequelize, Sequelize.DataTypes);
+client.loadGroups([
+	"Basic",
+	"Utility",
+	"Moderation",
+	"Settings",
+	"Dev",
+]);
 
-const autorole = require("./modules/autorole");
-
-function parseArgs(str) {
-	let args = [];
-
-	while (str.length) {
-		let arg;
-		if (str.startsWith('"') && str.indexOf('"', 1) > 0) {
-			arg = str.slice(1, str.indexOf('"', 1));
-			str = str.slice(str.indexOf('"', 1) + 1);
-		} else {
-			arg = str.split(/\s+/g)[0].trim();
-			str = str.slice(arg.length);
-		}
-		args.push(arg.trim())
-		str = str.trim()
-	}
-
-	return args;
-}
-
-function sleep(duration) {
-	return new Promise(resolve => setTimeout(resolve, duration));
-}
-
-console.log("Loading the commands...")
-fs.readdirSync("./commands").filter(file => file.endsWith(".js")).forEach(file => {
-	try {
-		const command = require(`./commands/${file}`);
-		client.commands.set(command.name, command);
-		console.log(`${file} has been successfully loaded.`);
-	} catch (err) {
-		throw err
-	}
+client.on("ready", () => {
+	console.log(`${client.user.username} online!`);
+	sequelize.sync();
 });
 
-function onReady() {
-	console.log(`${client.user.username} online!`);
-	client.user.setActivity(`${config.prefix}help`, { type: "WATCHING" });
+client.on("guildMemberAdd", (guild, member) => autorole(client, guild, member));
 
-	sequelize.sync();
-}
-
-async function onMessage(msg) {
-	if (!msg.content.startsWith(config.prefix) || msg.author.bot) return;
-
-	const args = parseArgs(msg.content.slice(config.prefix.length));
-	const commandName = args.shift();
-
-	if (!client.commands.has(commandName)) return;
-	
-	const command = client.commands.get(commandName);
-	
-	if (command.guildOnly && !msg.guild)
-		return msg.channel.send("> :x: This command can only be used in the server.");
-
-	if (command.ownerOnly && config.owners.indexOf(msg.author.id) == -1)
-		return;
-
-	try {
-		await command.run(client, msg, args, config.prefix);
-		console.log(`${msg.author.tag} used the ${commandName} command in ${msg.guild ? msg.guild.name : "bot DM"}`);
-	} catch (err) {
-		const embed = new Discord.MessageEmbed()
-			.setTitle(`:x: Error in command ${commandName}:`)
-			.setDescription("```\n" + err + "\n```")
-			.setColor("RED");
-		console.log(`Error in command ${commandName}:\n${err.stack}`);
-		await msg.channel.send(embed);
+client.on("commandError", async (commandName, msg, error) => {
+	if (error instanceof CmdClient.PermissionError) {
+		const embed = {
+			title: ":x: You don't have permissions to use this command.",
+			description: `Missing permission: \`${error.missingPermission}\``,
+			color: 15158332,
+			footer: {
+				text: "codename_yey",
+				icon_url: client.user.avatarURL,
+			},
+		};
+		return msg.channel.createMessage({ embed: embed });
 	}
-}
 
-client
-	.on("ready", onReady)
-	.on("message", onMessage)
-	.on("guildMemberAdd", autorole);
+	const embed = {
+		title: `:x: Error in command ${commandName}:`,
+		description: `\`\`\`\n${error}\`\`\``,
+		color: 15158332,
+	}
+	await msg.channel.createMessage({ embed: embed });
+	console.log(`Error in command ${commandName}:\n${error.stack}`);
+});
 
-client.login(config.token);
+client.connect();
