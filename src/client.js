@@ -52,9 +52,6 @@ class CmdClient extends Eris.Client {
 			}
 		});
 	}
-	
-	static PermissionError = PermissionError;
-	static Group = Group;
 
 	_parseArgs(str) {
 		let args = [];
@@ -106,5 +103,8 @@ class CmdClient extends Eris.Client {
 		this.loadCommand(pathToCommand);
 	}
 }
+
+CmdClient.PermissionError = PermissionError;
+CmdClient.Group = Group;
 
 module.exports = CmdClient;
