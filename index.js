@@ -27,6 +27,7 @@ client.loadGroups([
 
 client.on("ready", () => {
 	console.log(`${client.user.username} online!`);
+	client.editStatus("online", { name: `now on Eris! | ${config.prefix}help` });
 	sequelize.sync();
 });
 
