@@ -1,4 +1,5 @@
 const fetch = require("node-fetch");
+const { URLSearchParams } = require("url");
 
 module.exports = {
 	name: "ud",
@@ -10,8 +11,15 @@ module.exports = {
 			return msg.channel.createMessage(`> Usage: \`${prefix}${this.name} ${this.length}\``);
 
 		const word = msg.content.slice(prefix.length + this.name.length + 1);
-		const resp = await fetch(`http://api.urbandictionary.com/v0/define?term=${word}`);
+
+		const params = new URLSearchParams();
+		params.append("term", word);
+
+		const resp = await fetch(`http://api.urbandictionary.com/v0/define?${params}`);
 		const data = (await resp.json()).list[0];
+
+		if (!data)
+			return msg.channel.createMessage(`> :x: Word not found.`);
 
 		const embed = {
 			title: data.word,
