@@ -96,7 +96,7 @@ class CmdClient extends Eris.Client {
 		if (!command)
 			throw new Error("command does not exist.");
 
-		const pathToCommand = require.resolve(`./src/commands/${command.group}/${commandName}`);
+		const pathToCommand = require.resolve(`./commands/${command.group}/${commandName}`);
 		delete require.cache[pathToCommand];
 
 		this.commands.delete(commandName);
