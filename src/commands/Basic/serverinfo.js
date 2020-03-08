@@ -16,7 +16,7 @@ module.exports = {
 				{
 					name: "Owner:",
 					value: `${owner.username}#${owner.discriminator}`,
-					inline: false,
+					inline: true,
 				},
 				{
 					name: "ID:",
@@ -42,6 +42,11 @@ module.exports = {
 					value: `**categories** - ${msg.channel.guild.channels.filter(c => c instanceof CategoryChannel).length}\n` +
 						`**text** - ${msg.channel.guild.channels.filter(c => c instanceof TextChannel).length}\n` +
 						`**voice** - ${msg.channel.guild.channels.filter(c => c instanceof VoiceChannel).length}`,
+					inline: true,
+				},
+				{
+					name: "Total roles:",
+					value: msg.channel.guild.roles.size,
 					inline: true,
 				},
 				{
