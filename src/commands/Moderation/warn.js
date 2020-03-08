@@ -5,12 +5,12 @@ module.exports = {
 	group: "Moderation",
 	description: "Warns the specified user. Requires \"Kick members\" permission.",
 	guildOnly: true,
-	usage: "[--delete <id>] [--list <user>] <user> [reason]",
+	usage: "[-d | --delete <id>] [-l | --list <user>] <user> [reason]",
 	async run(client, msg, args, prefix) {
 		if (!args.length)
 			return msg.channel.createMessage(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
 
-		if (args[0] == "--list") {
+		if (args[0] == "--list" || args[0] == "-l") {
 			let member;
 			if (!args[1]) member = msg.member;
 			else member = msg.channel.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") || msg.channel.guild.members.get(args[1]);
@@ -40,7 +40,7 @@ module.exports = {
 		}
 
 		if (msg.member.permission.has("kickMembers")) {
-			if (args[0] == "--delete") {
+			if (args[0] == "--delete" || args[0] == "-d") {
 				let id = args[1];
 				const warn = await warns.findOne({
 					where: {
@@ -53,7 +53,7 @@ module.exports = {
 					msg.channel.createMessage("> :x: This warn is located on the another server.");
 				else {
 					await warns.destroy({ where: { id: id } });
-					msg.channel.createMessage(`> :white_check_mark: Deleted warn with ID ${warn.id}`);
+					msg.channel.createMessage(`> :white_check_mark: Deleted a warn with ID ${warn.id}.`);
 				}
 				return;
 					
