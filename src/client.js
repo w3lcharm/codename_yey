@@ -4,6 +4,7 @@ const fs = require("fs");
 const PermissionError = require("./errors/permissionError");
 
 const Group = require("./group");
+const Logger = require("./logger");
 
 function validatePermission(member, permissions) {
 	if (permissions instanceof Array) {
@@ -28,6 +29,14 @@ class CmdClient extends Eris.Client {
 		this.commands = new Eris.Collection();
 		this.groups = new Eris.Collection();
 
+		this.debugMode = options.debugMode || false;
+
+		this.logger = new Logger(options.debugMode ? Logger.TRACE : Logger.INFO, "codename_yey");
+		if (options.debugMode) {
+			this._erisLogger = new Logger(Logger.TRACE, "eris");
+			this.on("debug", msg => this._erisLogger.debug(msg));
+		}
+
 		this.on("messageCreate", async msg => {
 			if (!msg.content.startsWith(this.prefix) || msg.author.bot) return;
 
@@ -47,6 +56,7 @@ class CmdClient extends Eris.Client {
 			try {
 				if (command.requiredPermissions) validatePermission(msg.member, command.requiredPermissions);
 				await command.run(this, msg, args, this.prefix);
+				this.logger.info(`${msg.author.username}#${msg.author.discriminator} used ${commandName} command in ${msg.channel.guild ? msg.channel.guild.name : "bot DM"}`);
 			} catch (err) {
 				this.emit("commandError", commandName, msg, err);
 			}
@@ -81,14 +91,17 @@ class CmdClient extends Eris.Client {
 		}
 
 		this.commands.set(command.name, command);
+		this.logger.debug(`successfully loaded ${command.name} command.`);
 	}
 
 	loadGroups(groups) {
+		this.logger.info("loading the commands...")
 		for (const dir of groups) {
 			const commands = fs.readdirSync(`./src/commands/${dir}`).filter(f => f.endsWith(".js"));
 			for (let command of commands)
 				this.loadCommand(`./commands/${dir}/${command}`);
 		}
+		this.logger.info(`successfully loaded all commands.`);
 	}
 
 	reloadCommand(commandName) {
@@ -102,9 +115,15 @@ class CmdClient extends Eris.Client {
 		this.commands.delete(commandName);
 		this.loadCommand(pathToCommand);
 	}
+
+	async connect() {
+		this.logger.info("trying to login now...");
+		return super.connect();
+	}
 }
 
 CmdClient.PermissionError = PermissionError;
 CmdClient.Group = Group;
+CmdClient.Logger = Logger;
 
 module.exports = CmdClient;
