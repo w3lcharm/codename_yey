@@ -56,7 +56,7 @@ client.on("commandError", async (commandName, msg, error) => {
 		color: 15158332,
 	}
 	await msg.channel.createMessage({ embed: embed });
-	this.logger.error(`Error in command ${commandName}:\n${error.stack}`);
+	client.logger.error(`Error in command ${commandName}:\n${error.stack}`);
 });
 
 client.connect();
