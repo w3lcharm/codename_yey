@@ -36,7 +36,7 @@ module.exports = {
 					},
 				],
 				footer: {
-					title: "codename_yey",
+					text: "codename_yey",
 					icon_url: client.user.avatarURL,
 				},
 			};
