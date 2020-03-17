@@ -18,9 +18,9 @@ module.exports = {
 
 		try {
 			if (member.id === msg.author.id)
-				return msg.channel.createMessage("> :x: You can't kick yourself.");
+				return msg.channel.createMessage("> :x: You can't ban yourself.");
 			if (member.id === client.user.id)
-				return msg.channel.createMessage("> :x: You can't kick a bot.");
+				return msg.channel.createMessage("> :x: You can't ban a bot.");
 
 			await member.ban(0, reason);
 
