@@ -49,6 +49,41 @@ module.exports = {
 			],
 		};
 
+		if (member.game) {
+			switch (member.game.type) {
+				case 4:
+					embed.fields.unshift({
+						name: "Custom status:",
+						value: member.game.emoji ? `${member.game.emoji.name} ${member.game.state}` : member.game.state,
+					});
+					break;
+				case 3:
+					embed.fields.unshift({
+						name: "Watching:",
+						value: member.game.name,
+					});
+					break;
+				case 2:
+					embed.fields.unshift({
+						name: "Listening to:",
+						value: member.game.name,
+					});
+					break;
+				case 1:
+					embed.fields.unshift({
+						name: "Streaming:",
+						value: `[${member.game.name}](${member.game.url})`,
+					});
+					break;
+				case 0:
+					embed.fields.unshift({
+						name: "Playing:",
+						value: member.game.name,
+					});
+					break;
+			}
+		}
+
 		await msg.channel.createMessage({ embed: embed });
 	}
 };
