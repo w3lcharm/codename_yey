@@ -47,7 +47,7 @@ module.exports = {
 				},
 			],
 			footer: {
-				text: "codename_yey © GDRadio, 2020",
+				text: "codename_yey © 1z3ngero, 2020",
 				icon_url: client.user.avatarURL,
 			},
 		};
