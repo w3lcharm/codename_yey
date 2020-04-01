@@ -43,9 +43,7 @@ class CmdClient extends Eris.Client {
 			const args = this._parseArgs(msg.content.slice(this.prefix.length));
 			const commandName = args.shift();
 
-			await msg.channel.createMessage("the bot is quarantined");
-
-/*			if (!this.commands.has(commandName)) return;
+			if (!this.commands.has(commandName)) return;
 
 			const command = this.commands.get(commandName);
 
@@ -62,7 +60,7 @@ class CmdClient extends Eris.Client {
 			} catch (err) {
 				this.emit("commandError", commandName, msg, err);
 			} 
-		}); */
+		});
 	}
 
 	_parseArgs(str) {
