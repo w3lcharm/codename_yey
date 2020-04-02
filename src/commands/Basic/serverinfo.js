@@ -31,6 +31,7 @@ module.exports = {
 				{
 					name: "Members:",
 					value: `**total** - ${msg.channel.guild.memberCount}\n` +
+						`**bots** - ${msg.channel.guild.members.filter(m => m.bot).length}\n` +
 						`**online** - ${msg.channel.guild.members.filter(m => m.status === "online").length}\n` +
 						`**idle** - ${msg.channel.guild.members.filter(m => m.status === "idle").length}\n` +
 						`**DND** - ${msg.channel.guild.members.filter(m => m.status === "dnd").length}\n` +
