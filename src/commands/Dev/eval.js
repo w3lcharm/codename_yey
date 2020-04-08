@@ -17,7 +17,7 @@ module.exports = {
 
 			await msg.channel.createMessage(`\`\`\`js\n${evaled}\n\`\`\``);
 		} catch (err) {
-			await msg.channel.createMessage(`\`\`\`js\n${err.stack}\n\`\`\``);
+			await msg.channel.createMessage(`\`\`\`js\n${err}\n\`\`\``);
 		}
 	}
 };
