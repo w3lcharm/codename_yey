@@ -26,11 +26,11 @@ module.exports = {
 
 			const embed = {
 				author: {
-					name: `${member.username}#${member.discriminator} was kicked`,
+					name: `${member.username}#${member.discriminator} has been kicked`,
 					icon_url: member.avatarURL,
 				},
 				title: "Reason:",
-				description: reason || "not provided",
+				description: reason || "none",
 				color: 3066993,
 				timestamp: new Date().toISOString(),
 			};
@@ -40,6 +40,8 @@ module.exports = {
 			let description;
 			if (!msg.channel.guild.members.get(client.user.id).permission.has("kickMembers"))
 				description = "I don't have the \"Kick members\" permission to do this.";
+			else if (member.id === msg.channel.guild.ownerID)
+				description = "Provided user is a server owner."
 			else description = "Provided user's role is higher than my role.";
 
 			const embed = {

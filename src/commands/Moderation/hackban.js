@@ -1,41 +1,36 @@
 module.exports = {
-	name: "ban",
+	name: "hackban",
 	group: "Moderation",
-	description: "Bans the specified member.\nThis command requires \"Ban members\" permission.",
+	description: "Hackbans the provided user.\nThis command requires \"Ban members\" permission.",
+	usage: "<userID> [reason]",
 	requiredPermissions: "banMembers",
-	guildOnly: true,
-	usage: "<user> [reason]",
 	async run(client, msg, args, prefix) {
 		if (!args.length)
 			return msg.channel.createMessage(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
-
+		
 		const userID = args.shift();
-		const reason = args.join(" ");
-
-		const member = msg.channel.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") || msg.channel.guild.members.get(userID);
-
-		if (!member) return;
+		const reason = args.join("\n");
 
 		try {
-			if (member.id === msg.author.id)
+			if (userID === msg.author.id)
 				return msg.channel.createMessage("> :x: You can't ban yourself.");
-			if (member.id === client.user.id)
+			if (userID === client.user.id)
 				return msg.channel.createMessage("> :x: You can't ban a bot.");
-
-			await member.ban(0, reason);
+			
+			await msg.channel.guild.banMember(userID, 0, reason);
 
 			const embed = {
-				author: {
-					name: `${member.username}#${member.discriminator} has been banned`,
-					icon_url: member.avatarURL,
-				},
-				title: "Reason:",
-				description: reason || "none",
+				title: `:white_check_mark: User with ID \`${userID}\` has been successfully hackbanned.`,
 				color: 3066993,
 				timestamp: new Date().toISOString(),
+				fields: [
+					{
+						name: "Reason:",
+						value: reason || "none",
+					},
+				],
 			};
-				
-			await msg.channel.createMessage({ embed: embed });
+			await msg.channel.createMessage({ embed });
 		} catch (err) {
 			let description;
 			if (!msg.channel.guild.members.get(client.user.id).permission.has("banMembers"))
@@ -45,11 +40,11 @@ module.exports = {
 			else description = "Provided user's role is higher than my role.";
 
 			const embed = {
-				title: ":x: Ban failed.",
+				title: ":x: Hackban failed.",
 				description: description,
 				color: 15158332,
 			};
 			await msg.channel.createMessage({ embed: embed });
 		}
 	}
-};
+}

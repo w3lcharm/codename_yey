@@ -32,7 +32,7 @@ module.exports = {
 			for (let warn of warnList)
 				embed.fields.push({
 					name: `ID: ${warn.id}`,
-					value: `Reason: ${warn.reason || "not provided"}`,
+					value: `Reason: ${warn.reason || "none"}`,
 				});
 			embed.footer = { text: `Total warns: ${warnList.length}` };
 			await msg.channel.createMessage({ embed: embed });
