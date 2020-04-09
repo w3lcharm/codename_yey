@@ -70,7 +70,7 @@ module.exports = {
 			if (member.permission.has("administrator"))
 				return msg.channel.createMessage("> :x: You can't warn the administrator.");
 
-			await warns.create({
+			const warnObj = await warns.create({
 				server: msg.channel.guild.id,
 				user: member.id,
 				warnedBy: msg.author.id,
@@ -79,13 +79,14 @@ module.exports = {
 
 			const embed = {
 				author: {
-					name: `${member.username}#${member.discriminator} was warned`,
+					name: `${member.username}#${member.discriminator} has been warned`,
 					icon_url: member.avatarURL,
 				},
 				title: "Reason:",
 				description: reason,
 				color: 3066993,
 				timestamp: new Date().toISOString(),
+				footer: { text: `Warn ID: ${warnObj.id}` },
 			};
 			await msg.channel.createMessage({ embed: embed });
 		} else
