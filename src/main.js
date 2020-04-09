@@ -27,7 +27,7 @@ client.loadGroups([
 	"Dev",
 ]);
 
-client.on("ready", () => {
+client.once("ready", () => {
 	client.logger.info(`${client.user.username} online!`);
 	client.editStatus("online", { name: `${config.prefix}help`, type: 3 });
 	sequelize.sync()
