@@ -6,10 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "GDRadio",
+  "author": "1z3ngero",
   "license": "ISC",
   "dependencies": {
+    "bufferutil": "^4.0.1",
     "eris": "^0.11.2",
+    "erlpack": "github:abalabahaha/erlpack",
+    "eventemitter3": "^4.0.0",
     "node-fetch": "^2.6.0",
     "qrcode": "^1.4.4",
     "sequelize": "^5.21.5",
