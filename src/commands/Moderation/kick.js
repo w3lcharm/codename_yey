@@ -22,7 +22,7 @@ module.exports = {
 			if (member.id === client.user.id)
 				return msg.channel.createMessage("> :x: You can't kick a bot.");
 			
-			await member.kick(0, reason);
+			await member.kick(reason);
 
 			const embed = {
 				author: {
