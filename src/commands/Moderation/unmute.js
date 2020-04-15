@@ -9,7 +9,8 @@ module.exports = {
 			return msg.channel.createMessage(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
 
 		const userID = args[0];
-		const member = msg.channel.guild.members.get(msg.mentions[0].id || userID);
+		const member = msg.channel.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") ||
+			msg.channel.guild.members.get(userID);
 
 		if (!member) return;
 
@@ -28,6 +29,9 @@ module.exports = {
 				}
 			}
 
+			if (!member.roles.includes(mutedRole.id))
+				return msg.channel.createMessage("> :x: This user is not muted.");
+
 			await member.removeRole(mutedRole.id, "unmute");
 
 			const embed = {
@@ -40,6 +44,8 @@ module.exports = {
 			};
 
 			await msg.channel.createMessage({ embed });
+			clearTimeout(muteTimers.get(member.id));
+			muteTimers.delete(member.id);
 		} catch (err) {
 			let description;
                         if (!msg.channel.guild.members.get(client.user.id).permission.has("manageRoles"))
