@@ -1,3 +1,5 @@
+global.muteTimers = new Map();
+
 function parseTime(time) {
 	if (!time) return;
 	let timeNumber = parseInt(time.substr(0, time.length - 1)) * 1000;
@@ -21,7 +23,8 @@ module.exports = {
 			return msg.channel.createMessage(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
 
 		let [ userID, time, ...reason ] = args;
-		const member = msg.channel.guild.members.get(msg.mentions[0].id || userID);
+		const member = msg.channel.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") ||
+			msg.channel.guild.members.get(userID);
 		if (!member) return;
 
 		const parsedTime = parseTime(time);
@@ -70,7 +73,13 @@ module.exports = {
 			};
 
 			await msg.channel.createMessage({ embed });
-			if (parsedTime) setTimeout(() => member.removeRole(mutedRole.id, "unmute"), parsedTime);
+			if (parsedTime) {
+				muteTimers.set(member.id, setTimeout(() => member.removeRole(mutedRole.id, "unmute"), parsedTime));
+				setTimeout(() => {
+					clearTimeout(muteTimers.get(member.id));
+					muteTimers.delete(member.id);
+				}, parsedTime);
+			}
 		} catch (err) {
 			let description;
 			if (!msg.channel.guild.members.get(client.user.id).permission.has("manageRoles"))
