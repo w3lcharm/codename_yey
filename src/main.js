@@ -1,6 +1,7 @@
 const CmdClient = require("./client");
 const Sequelize = require("sequelize");
 const config = require("../config");
+const { inspect } = require("util");
 
 const autorole = require("./modules/autorole");
 
@@ -60,7 +61,7 @@ client.on("commandError", async (commandName, msg, error) => {
 });
 
 client.on("error", (error, id) => {
-	client.logger.error(`Error in shard ${id}:\n${error.stack}`);
+	client.logger.error(`Error in shard ${id}:\n${inspect(error)}`);
 });
 
 client.on("guildCreate", guild => client.logger.info(`New server: ${guild.name} (ID: ${guild.id})`));
