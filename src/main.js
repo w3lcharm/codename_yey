@@ -63,4 +63,8 @@ client.on("error", (error, id) => {
 	client.logger.error(`Error in shard ${id}:\n${error.stack}`);
 });
 
+client.on("guildCreate", guild => client.logger.info(`New server: ${guild.name} (ID: ${guild.id})`));
+
+client.on("guildDelete", guild => client.logger.info(`Left from server ${guild.name} (ID: ${guild.id})`));
+
 client.connect();
