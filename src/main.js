@@ -13,8 +13,9 @@ const client = new CmdClient(config.token, {
 const sequelizeLogger = new CmdClient.Logger(client.debugMode ? CmdClient.Logger.TRACE : CmdClient.Logger.INFO, "sequelize");
 
 global.sequelize = new Sequelize({
+	host: "localhost",
 	dialect: "sqlite",
-	storage: "../bot.db",
+	storage: config.pathToDBFile || "../bot.db",
 	logging: (...msg) => sequelizeLogger.debug(msg),
 });
 global.warns = (require("./dbModels/warns"))(sequelize, Sequelize.DataTypes);
