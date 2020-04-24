@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "bufferutil": "^4.0.1",
-    "eris": "github:abalabahaha/eris#dev",
+    "eris": "^0.11.2",
     "erlpack": "github:abalabahaha/erlpack",
     "eventemitter3": "^4.0.0",
     "node-fetch": "^2.6.0",
