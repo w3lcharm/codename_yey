@@ -9,7 +9,7 @@ module.exports = {
 			return msg.channel.createMessage(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
 		
 		const userID = args.shift();
-		const reason = args.join("\n");
+		const reason = args.join(" ");
 
 		try {
 			if (userID === msg.author.id)
