@@ -61,9 +61,9 @@ client.on("commandError", async (commandName, msg, error) => {
 	client.logger.error(`Error in command ${commandName}:\n${error.stack}`);
 });
 
-client.on("error", (error, id) => {
+/* client.on("error", (error, id) => {
 	client.logger.error(`Error in shard ${id}:\n${error.stack}`);
-});
+}); */
 
 client.on("guildCreate", guild => client.logger.info(`New server: ${guild.name} (ID: ${guild.id})`));
 
