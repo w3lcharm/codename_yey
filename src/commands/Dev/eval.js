@@ -1,3 +1,5 @@
+const Eris = require("eris");
+
 module.exports = {
 	name: "eval",
 	group: "Dev",
