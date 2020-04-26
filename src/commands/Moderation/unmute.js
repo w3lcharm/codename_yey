@@ -52,7 +52,12 @@ module.exports = {
 				description = "I don't have the \"Manage roles\" permission to do this.";
 			else if (member.id === msg.channel.guild.ownerID)
 				description = "This user is a server owner.";
-			else description = "This user's role is higher than my role.";
+			else if (member.highestRole.position >= msg.channel.guild.members.get(client.user.id).highestRole.position)
+				description = "This user's role is higher than my role.";
+			else {
+				description = "Something went wrong. Try again later.";
+				client.emit("commandError", this.name, msg, err, false);
+			}
 
 			const embed = {
 				title: ":x: Unmute failed.",

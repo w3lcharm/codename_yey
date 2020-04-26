@@ -35,9 +35,7 @@ module.exports = {
 			let description;
 			if (!msg.channel.guild.members.get(client.user.id).permission.has("banMembers"))
 				description = "I don't have the \"Ban members\" permission to do this.";
-			else if (member.id === msg.channel.guild.ownerID)
-				description = "Provided user is a server owner."
-			else description = "Provided user's role is higher than my role.";
+			else description = "This user is an server owner or his role is higher than my role";
 
 			const embed = {
 				title: ":x: Hackban failed.",

@@ -38,7 +38,7 @@ client.once("ready", () => {
 
 client.on("guildMemberAdd", (guild, member) => autorole(client, guild, member));
 
-client.on("commandError", async (commandName, msg, error) => {
+client.on("commandError", async (commandName, msg, error, showErr) => {
 	if (error instanceof CmdClient.PermissionError) {
 		const embed = {
 			title: ":x: You don't have permissions to use this command.",
@@ -57,7 +57,8 @@ client.on("commandError", async (commandName, msg, error) => {
 		description: `\`\`\`\n${error}\`\`\``,
 		color: 15158332,
 	}
-	await msg.channel.createMessage({ embed: embed });
+	if (showErr)
+		await msg.channel.createMessage({ embed: embed });
 	client.logger.error(`Error in command ${commandName}:\n${error.stack}`);
 });
 
