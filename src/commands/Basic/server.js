@@ -1,7 +1,7 @@
 const { CategoryChannel, TextChannel, VoiceChannel } = require("eris");
 
 module.exports = {
-	name: "serverinfo",
+	name: "server",
 	group: "Basic",
 	description: "Shows info about server.",
 	guildOnly: true,
