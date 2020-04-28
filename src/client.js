@@ -38,11 +38,9 @@ class CmdClient extends Eris.Client {
 		}
 
 		this.on("messageCreate", async msg => {
-			if (!msg.content.startsWith(this.prefix) || msg.author.bot) return;
-
-			const args = this._parseArgs(msg.content.slice(this.prefix.length));
-			const commandName = args.shift();
-
+			if (!msg.content.toLowerCase().startsWith(this.prefix) || msg.author.bot) return;
+			const args = this._parseArgs(msg.content);
+			const commandName = args.shift().toLowerCase().slice(this.prefix.length);
 			if (!this.commands.has(commandName)) return;
 
 			const command = this.commands.get(commandName);
