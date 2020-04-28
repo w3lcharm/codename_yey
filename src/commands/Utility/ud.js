@@ -8,7 +8,7 @@ module.exports = {
 	usage: "<word>",
 	async run(client, msg, args, prefix) {
 		if (!args.length)
-			return msg.channel.createMessage(`> Usage: \`${prefix}${this.name} ${this.length}\``);
+			return msg.channel.createMessage(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
 
 		const word = msg.content.slice(prefix.length + this.name.length + 1);
 
