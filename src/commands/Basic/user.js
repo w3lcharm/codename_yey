@@ -54,7 +54,7 @@ module.exports = {
 				case 4:
 					embed.fields.unshift({
 						name: "Custom status:",
-						value: member.game.emoji ? `${member.game.emoji.name} ${member.game.state}` : member.game.state,
+						value: member.game.emoji ? `${member.game.emoji.name} ${member.game.state || ""}` : member.game.state,
 					});
 					break;
 				case 3:
