@@ -8,7 +8,9 @@ module.exports = {
 		let member;
 		let userID = args[0];
 		if (!userID) member = msg.member;
-		else member = msg.channel.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") || msg.channel.guild.members.find(m => m.id == userID);
+		else member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") ||
+			msg.guild.members.find(m => m.id == userID) ||
+			client.users.get(userID);
 
 		if (!member) return;
 
@@ -24,11 +26,11 @@ module.exports = {
 			fields: [
 				{
 					name: "Status:",
-					value: member.status,
+					value: member.status || "n/a",
 				},
 				{
 					name: "ID:",
-					value: member.user.id,
+					value: member.id,
 				},
 				{
 					name: "Registered at:",
@@ -36,7 +38,7 @@ module.exports = {
 				},
 				{
 					name: "Joined this server at:",
-					value: new Date(member.joinedAt).toLocaleString(),
+					value: member.joinedAt ? new Date(member.joinedAt).toLocaleString() : "n/a",
 				},
 				{
 					name: "Roles:",
