@@ -20,7 +20,7 @@ module.exports = {
 		const embed = {
 			author: {
 				name: name,
-				icon_url: member.user.avatarURL,
+				icon_url: member.avatarURL,
 			},
 			color: Math.round(Math.random() * 16777216) + 1,
 			fields: [

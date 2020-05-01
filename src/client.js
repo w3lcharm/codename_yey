@@ -56,7 +56,7 @@ class CmdClient extends Eris.Client {
 				await command.run(this, msg, args, this.prefix);
 				this.logger.info(`${msg.author.username}#${msg.author.discriminator} used ${commandName} command in ${msg.channel.guild ? msg.channel.guild.name : "bot DM"}`);
 			} catch (err) {
-				this.emit("commandError", commandName, msg, err);
+				this.emit("commandError", commandName, msg, err, true);
 			} 
 		});
 	}
