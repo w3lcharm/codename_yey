@@ -42,7 +42,7 @@ module.exports = {
 				},
 				{
 					name: "Roles:",
-					value: member.roles.map(r => `<@&${r}>`).join(", ") || "None",
+					value: member.roles ? member.roles.map(r => `<@&${r}>`).join(", ") || "None" : "n/a",
 				},
 				{
 					name: "Bot?",
