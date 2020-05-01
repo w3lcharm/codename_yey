@@ -14,7 +14,7 @@ module.exports = {
 
 		if (!member) return;
 
-		let name = `${member.user.username}#${member.user.discriminator}`;
+		let name = `${member.username}#${member.discriminator}`;
 		if (member.nick) name += ` (${member.nick})`;
 
 		const embed = {
