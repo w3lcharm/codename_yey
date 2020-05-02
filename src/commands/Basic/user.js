@@ -17,6 +17,10 @@ module.exports = {
 		let name = `${member.username}#${member.discriminator}`;
 		if (member.nick) name += ` (${member.nick})`;
 
+		const createdDaysAgo = Math.floor((Date.now() - member.createdAt) / (1000 * 86400));
+		const joinedDaysAgo = Math.floor((Date.now() - member.joinedAt) / (1000 * 86400));
+
+
 		const embed = {
 			author: {
 				name: name,
@@ -34,11 +38,11 @@ module.exports = {
 				},
 				{
 					name: "Registered at:",
-					value: new Date(member.createdAt).toLocaleString(),
+					value: `${new Date(member.createdAt).toLocaleString()} (${createdDaysAgo} days ago)`,
 				},
 				{
 					name: "Joined this server at:",
-					value: member.joinedAt ? new Date(member.joinedAt).toLocaleString() : "n/a",
+					value: member.joinedAt ? `${new Date(member.joinedAt).toLocaleString()} (${joinedDaysAgo} days ago)` : "n/a",
 				},
 				{
 					name: "Roles:",

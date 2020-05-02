@@ -3,7 +3,7 @@ const Sequelize = require("sequelize");
 const config = require("../config");
 const { inspect } = require("util");
 
-const autorole = require("./modules/autorole");
+const autorole = require("./utils/autorole");
 
 const client = new CmdClient(config.token, {
 	prefix: config.prefix,
