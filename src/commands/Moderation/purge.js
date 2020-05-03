@@ -29,6 +29,8 @@ module.exports = {
 		};
 
 		const message = await msg.channel.createMessage({ embed: embed });
-		setTimeout(() => message.delete(), 5000);
+		setTimeout(() => {
+			message.delete().catch(() => {});
+		}, 5000);
 	}
 };
