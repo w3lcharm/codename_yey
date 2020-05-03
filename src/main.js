@@ -3,7 +3,7 @@ const Sequelize = require("sequelize");
 const config = require("../config");
 const { inspect } = require("util");
 
-const autorole = require("./utils/autorole");
+const autoroleFunc = require("./utils/autorole");
 
 const client = new CmdClient(config.token, {
 	prefix: config.prefix,
@@ -18,8 +18,9 @@ global.sequelize = new Sequelize({
 	storage: config.pathToDBFile || "../bot.db",
 	logging: (...msg) => sequelizeLogger.debug(msg),
 });
-global.warns = (require("./dbModels/warns"))(sequelize, Sequelize.DataTypes);
-global.settings = (require("./dbModels/settings"))(sequelize, Sequelize.DataTypes);
+global.warns = require("./dbModels/warns")(sequelize, Sequelize.DataTypes);
+global.autorole = require("./dbModels/autorole")(sequelize, Sequelize.DataTypes);
+global.modlogs = require("./dbModels/modlogs")(sequelize, Sequelize.DataTypes);
 
 client.loadGroups([
 	"Basic",
@@ -36,7 +37,7 @@ client.once("ready", () => {
 		.then(() => client.logger.info("successfully connected to the database."));
 });
 
-client.on("guildMemberAdd", (guild, member) => autorole(client, guild, member));
+client.on("guildMemberAdd", (guild, member) => autoroleFunc(client, guild, member));
 
 client.on("commandError", async (commandName, msg, error, showErr) => {
 	if (error instanceof CmdClient.PermissionError) {

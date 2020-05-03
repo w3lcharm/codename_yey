@@ -11,7 +11,7 @@ module.exports = {
 			roleID = roleID.replace("<@&", "").replace("<@&", "");
 
 		if (!roleID) {
-			const dbItem = await settings.findOne({ where: { server: msg.channel.guild.id } });
+			const dbItem = await autorole.findOne({ where: { server: msg.channel.guild.id } });
 			let role;
 			if (dbItem) role = msg.channel.guild.roles.get(dbItem.autorole);
 
@@ -26,15 +26,15 @@ module.exports = {
 
 			await msg.channel.createMessage({ embed: embed });
 		} else {
-			await settings.findOrCreate({ where: { server: msg.channel.guild.id } });
+			await autorole.findOrCreate({ where: { server: msg.channel.guild.id } });
 			if (roleID == "disable") {
-				await settings.update({ autorole: null }, { where: { server: msg.channel.guild.id } });
+				await autorole.update({ autorole: null }, { where: { server: msg.channel.guild.id } });
 				await msg.channel.createMessage("> :white_check_mark: Successfully set autorole to **\"disabled\"**.");
 			} else {
 				const role = msg.channel.guild.roles.find(r => r.id == roleID || r.name == roleID);
 				if (!role) return msg.channel.createMessage("> :x: Invalid role name or ID provided.");
 
-				await settings.update({ autorole: role.id }, { where: { server: msg.channel.guild.id } });
+				await autorole.update({ autorole: role.id }, { where: { server: msg.channel.guild.id } });
 				await msg.channel.createMessage(`> :white_check_mark: Successfully set autorole to **\"${role.name}\"**.`);
 			}
 		}

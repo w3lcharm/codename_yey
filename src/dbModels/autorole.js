@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-	return sequelize.define("settings", {
+	return sequelize.define("autorole", {
 		server: DataTypes.STRING,
 		autorole: DataTypes.STRING,
-	});
+	}, { timestamps: false });
 }
