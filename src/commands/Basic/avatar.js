@@ -18,8 +18,10 @@ module.exports = {
 			format = user.avatar.startsWith("a_") ? "gif" : "webp";
 
 		const embed = {
-			title: `${user.username}#${user.discriminator}'s avatar:`,
-			url: user.dynamicAvatarURL(format, 2048),
+			author: {
+				name: `${user.username}#${user.discriminator}'s avatar:`,
+				url: user.dynamicAvatarURL(format, 2048),
+			},
 			color: Math.round(Math.random() * 16777216) + 1,
 			image: { url: user.dynamicAvatarURL(format, 2048) },
 		};
