@@ -22,7 +22,7 @@ module.exports = {
 			if (member.id === client.user.id)
 				return msg.channel.createMessage("> :x: You can't ban a bot.");
 
-			await member.ban(0, reason);
+			await member.ban(0, `${reason} (banned by ${msg.author.username}#${msg.author.discriminator})`);
 
 			const embed = {
 				author: {

@@ -4,6 +4,7 @@ const config = require("../config");
 const { inspect } = require("util");
 
 const autoroleFunc = require("./utils/autorole");
+const modlogFunctions = require("./utils/modlogs");
 
 const client = new CmdClient(config.token, {
 	prefix: config.prefix,
@@ -67,8 +68,13 @@ client.on("commandError", async (commandName, msg, error, showErr) => {
 	client.logger.error(`Error in shard ${id}:\n${error.stack}`);
 }); */
 
-client.on("guildCreate", guild => client.logger.info(`New server: ${guild.name} (ID: ${guild.id})`));
-
-client.on("guildDelete", guild => client.logger.info(`Left from server ${guild.name} (ID: ${guild.id})`));
-
+client.on("guildCreate", guild => client.logger.info(`New server: ${guild.name} (ID: ${guild.id})`))
+	.on("guildDelete", guild => client.logger.info(`Left from server ${guild.name} (ID: ${guild.id})`))
+	.on("guildMemberAdd", (guild, member) => modlogFunctions.onGuildMemberAdd(client, guild, member))
+	.on("guildMemberRemove", (guild, member) => modlogFunctions.onGuildMemberRemove(client, guild, member))
+	.on("guildBanAdd", (guild, user) => modlogFunctions.onGuildBanAdd(client, guild, user))
+	.on("guildBanRemove", (guild, user) => modlogFunctions.onGuildBanRemove(client, guild, user))
+	.on("messageDelete", msg => modlogFunctions.onMessageDelete(client, msg))
+	.on("messageUpdate", (newMsg, oldMsg) => modlogFunctions.onMessageUpdate(client, newMsg, oldMsg));
+	
 client.connect();
