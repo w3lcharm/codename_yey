@@ -179,7 +179,7 @@ async function onMessageUpdate(client, newMsg, oldMsg) {
 
 	if (newMsg.author.bot) return;
 
-	let oldContent = oldMsg.cleanContent;
+	let oldContent = oldMsg.content;
 	let newContent = newMsg.cleanContent;
 	if (oldMsg.attachments.length) {
 		oldContent += "\n-----";
