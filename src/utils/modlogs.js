@@ -129,6 +129,8 @@ async function onMessageDelete(client, msg) {
 	const channel = await getModlogChannel(msg.channel.guild);
 	if (!channel) return;
 
+	if (!msg.author) return;
+
 	if (msg.author.bot) return;
 
 	let content = msg.cleanContent;
@@ -172,6 +174,8 @@ async function onMessageUpdate(client, newMsg, oldMsg) {
 
 	const channel = await getModlogChannel(newMsg.guild);
 	if (!channel) return;
+
+	if (!newMsg.author) return;
 
 	if (newMsg.author.bot) return;
 
