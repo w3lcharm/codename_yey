@@ -6,6 +6,7 @@ function getModlogChannel(guild) {
 }
 
 async function onGuildMemberAdd(client, guild, member) {
+	if (!guild) return;
 	const channel = await getModlogChannel(guild);
 	if (!channel) return;
 
@@ -32,6 +33,7 @@ async function onGuildMemberAdd(client, guild, member) {
 }
 
 async function onGuildMemberRemove(client, guild, member) {
+	if (!guild) return;
 	const channel = await getModlogChannel(guild);
 	if (!channel) return;
 
@@ -51,6 +53,7 @@ async function onGuildMemberRemove(client, guild, member) {
 }
 
 async function onGuildBanAdd(client, guild, user) {
+	if (!guild) return;
 	const channel = await getModlogChannel(guild);
 	if (!channel) return;
 
@@ -91,6 +94,7 @@ async function onGuildBanAdd(client, guild, user) {
 }
 
 async function onGuildBanRemove(client, guild, user) {
+	if (!guild) return;
 	const channel = await getModlogChannel(guild);
 	if (!channel) return;
 	
@@ -126,6 +130,7 @@ async function onGuildBanRemove(client, guild, user) {
 
 async function onMessageDelete(client, msg) {
 	if (!msg instanceof Message) return;
+	if (!msg.channel.guild) return;
 	const channel = await getModlogChannel(msg.channel.guild);
 	if (!channel) return;
 
@@ -171,8 +176,8 @@ async function onMessageDelete(client, msg) {
 
 async function onMessageUpdate(client, newMsg, oldMsg) {
 	if (!oldMsg) return;
-
-	const channel = await getModlogChannel(newMsg.guild);
+	if (!newMsg.channel.guild) return;
+	const channel = await getModlogChannel(newMsg.channel.guild);
 	if (!channel) return;
 
 	if (!newMsg.author) return;
