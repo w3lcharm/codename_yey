@@ -11,13 +11,13 @@
   "license": "ISC",
   "dependencies": {
     "bufferutil": "^4.0.1",
-    "eris": "^0.11.2",
+    "eris": "^0.13.1",
     "eris-additions": "^1.4.1",
     "erlpack": "github:abalabahaha/erlpack",
-    "eventemitter3": "^4.0.0",
+    "eventemitter3": "^4.0.4",
     "node-fetch": "^2.6.0",
     "qrcode": "^1.4.4",
-    "sequelize": "^5.21.7",
-    "sqlite3": "^4.1.1"
+    "sequelize": "^5.21.8",
+    "sqlite3": "^4.2.0"
   }
 }
