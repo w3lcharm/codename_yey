@@ -1,7 +1,8 @@
 const { VERSION } = require("eris");
 
 function parseUptime(time) {
-	const obj = new Date(time);
+	const ms = Math.floor(time * 1000);
+	const obj = new Date(ms);
 
 	let days = obj.getUTCDate() - 1;
 	let hours = obj.getUTCHours();
@@ -26,7 +27,7 @@ module.exports = {
 			fields: [
 				{
 					name: "Uptime:",
-					value: parseUptime(client.uptime),
+					value: parseUptime(process.uptime()),
 				},
 				{
 					name: "Servers:",
