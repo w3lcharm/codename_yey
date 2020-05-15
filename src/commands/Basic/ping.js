@@ -3,7 +3,9 @@ module.exports = {
 	group: "Basic",
 	description: "Shows the bot latency.",
 	async run(client, msg, args, prefix) {
-		const shard = client.shards.get(client.guildShardMap[msg.channel.guild.id]);
+		let shard;
+		if (msg.guild) shard = client.shards.get(client.guildShardMap[msg.guild.id]);
+		else shard = client.shards.get(0);
 
 		const startTime = Date.now();
 		const message = await msg.channel.createMessage("Measuring...");
@@ -16,7 +18,7 @@ module.exports = {
 				icon_url: client.user.avatarURL,
 			},
 		}
-		await message.edit({ content: "", embed: embed });
+		await message.edit({ content: "", embed });
 	}
 };
 			
