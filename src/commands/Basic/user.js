@@ -42,7 +42,7 @@ module.exports = {
 				},
 				{
 					name: "Joined this server at:",
-					value: member.joinedAt ? `${new Date(member.joinedAt).toLocaleString()} (${joinedDaysAgo} days ago)` : "n/a",
+					value: member.joinedAt ? `${new Date(member.joinedAt).toLocaleString()} (${joinedDaysAgo} days ago)` : "offline",
 				},
 				{
 					name: "Roles:",
