@@ -30,7 +30,7 @@ module.exports = {
 			fields: [
 				{
 					name: "Status:",
-					value: member.status || "n/a",
+					value: member.status || "offline",
 				},
 				{
 					name: "ID:",
@@ -42,7 +42,7 @@ module.exports = {
 				},
 				{
 					name: "Joined this server at:",
-					value: member.joinedAt ? `${new Date(member.joinedAt).toLocaleString()} (${joinedDaysAgo} days ago)` : "offline",
+					value: member.joinedAt ? `${new Date(member.joinedAt).toLocaleString()} (${joinedDaysAgo} days ago)` : "n/a",
 				},
 				{
 					name: "Roles:",
