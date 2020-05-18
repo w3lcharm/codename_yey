@@ -22,6 +22,7 @@ global.sequelize = new Sequelize({
 global.warns = require("./dbModels/warns")(sequelize, Sequelize.DataTypes);
 global.autorole = require("./dbModels/autorole")(sequelize, Sequelize.DataTypes);
 global.modlogs = require("./dbModels/modlogs")(sequelize, Sequelize.DataTypes);
+global.languages = require("./dbModels/languages")(sequelize, Sequelize.DataTypes);
 
 client.loadGroups([
 	"Basic",

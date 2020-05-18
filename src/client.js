@@ -20,6 +20,20 @@ function validatePermission(member, permissions) {
 	}
 }
 
+function loadLanguages() {
+	const languages = {};
+
+	const langFiles = fs.readdirSync("./src/languages").filter(f => f.endsWith(".js"));
+	for (let file of langFiles) {
+		const fileWithoutExtension = file.replace(".js", "");
+
+		const lang = require(`./languages/${file}`);
+		languages[fileWithoutExtension] = lang;
+	}
+
+	return languages;
+}
+
 class CmdClient extends Eris.Client {
 	constructor(token, options = {}) {
 		super(token, options);
@@ -28,6 +42,7 @@ class CmdClient extends Eris.Client {
 
 		this.commands = new Eris.Collection();
 		this.groups = new Eris.Collection();
+		this.languages = loadLanguages();
 
 		this.debugMode = options.debugMode || false;
 
@@ -44,16 +59,17 @@ class CmdClient extends Eris.Client {
 			if (!this.commands.has(commandName)) return;
 
 			const command = this.commands.get(commandName);
+			const lang = this.languages[(await languages.findOrCreate({ where: { user: msg.author.id } }))[0].lang];
 
 			if (command.guildOnly && !msg.channel.guild)
-				return msg.channel.createMessage(`> :x: You cannot use this command in DM.`);
+				return msg.channel.createMessage(lang.cantUseCommandInDM);
 
 			if (command.ownerOnly && this.owners.indexOf(msg.author.id) === -1)
 				return;
 
 			try {
 				if (command.requiredPermissions) validatePermission(msg.member, command.requiredPermissions);
-				await command.run(this, msg, args, this.prefix);
+				await command.run(this, msg, args, this.prefix, lang);
 				this.logger.info(`${msg.author.username}#${msg.author.discriminator} used ${commandName} command in ${msg.channel.guild ? msg.channel.guild.name : "bot DM"}`);
 			} catch (err) {
 				this.emit("commandError", commandName, msg, err, true);
