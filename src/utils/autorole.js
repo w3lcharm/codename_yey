@@ -1,4 +1,6 @@
 module.exports = async (client, guild, member) => {
+	if (member.bot) return;
+
 	const dbItem = await autorole.findOne({ where: { server: member.guild.id } });
 	if (dbItem) {
 		if (!dbItem.autorole) return;
