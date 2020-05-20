@@ -2,10 +2,10 @@ const { CategoryChannel, TextChannel, VoiceChannel } = require("eris");
 
 module.exports = {
 	name: "server",
-	group: "Basic",
-	description: "Shows info about server.",
+	group: "basicGroup",
+	description: "serverDescription",
 	guildOnly: true,
-	async run(client, msg, args, prefix) {
+	async run(client, msg, args, prefix, lang) {
 		const owner = client.users.get(msg.guild.ownerID);
 
 		const createdDaysAgo = Math.floor((Date.now() - msg.guild.createdAt) / (1000 * 86400));
@@ -16,8 +16,8 @@ module.exports = {
 			color: Math.round(Math.random() * 16777216) + 1,
 			fields: [
 				{
-					name: "Owner:",
-					value: `${owner.username}#${owner.discriminator}`,
+					name: lang.serverOwner,
+					value: owner.tag,
 					inline: true,
 				},
 				{
@@ -26,35 +26,35 @@ module.exports = {
 					inline: true,
 				},
 				{
-					name: "Region:",
+					name: lang.serverRegion,
 					value: msg.guild.region,
 					inline: true,
 				},
 				{
-					name: "Members:",
-					value: `**total** - ${msg.guild.memberCount}\n` +
-						`**bots** - ${msg.guild.members.filter(m => m.bot).length}\n` +
-						`**online** - ${msg.guild.members.filter(m => m.status === "online").length}\n` +
-						`**idle** - ${msg.guild.members.filter(m => m.status === "idle").length}\n` +
-						`**DND** - ${msg.guild.members.filter(m => m.status === "dnd").length}\n` +
-						`**offline** - ${msg.guild.members.filter(m => m.status === "offline").length}`,
+					name: lang.serverMembers,
+					value: `**${lang.serverMembersTotal}** - ${msg.guild.memberCount}\n` +
+						`**${lang.serverMembersBots}** - ${msg.guild.members.filter(m => m.bot).length}\n` +
+						`**${lang.serverMembersOnline}** - ${msg.guild.members.filter(m => m.status === "online").length}\n` +
+						`**${lang.serverMembersIdle}** - ${msg.guild.members.filter(m => m.status === "idle").length}\n` +
+						`**${lang.serverMembersDND}** - ${msg.guild.members.filter(m => m.status === "dnd").length}\n` +
+						`**${lang.serverMembersOffline}** - ${msg.guild.members.filter(m => m.status === "offline").length}`,
 					inline: true,
 				},
 				{
-					name: "Channels:",
-					value: `**categories** - ${msg.guild.channels.filter(c => c instanceof CategoryChannel).length}\n` +
-						`**text** - ${msg.guild.channels.filter(c => c instanceof TextChannel).length}\n` +
-						`**voice** - ${msg.guild.channels.filter(c => c instanceof VoiceChannel).length}`,
+					name: lang.serverChannels,
+					value: `**${lang.serverChannelsCategories}** - ${msg.guild.channels.filter(c => c instanceof CategoryChannel).length}\n` +
+						`**${lang.serverChannelsText}** - ${msg.guild.channels.filter(c => c instanceof TextChannel).length}\n` +
+						`**${lang.serverChannelsVoice}** - ${msg.guild.channels.filter(c => c instanceof VoiceChannel).length}`,
 					inline: true,
 				},
 				{
-					name: "Total roles:",
+					name: lang.serverTotalRoles,
 					value: msg.guild.roles.size,
 					inline: true,
 				},
 				{
-					name: "Created at:",
-					value: `${new Date(msg.guild.createdAt).toLocaleString()} (${createdDaysAgo} days ago)`,
+					name: lang.serverCreatedAt,
+					value: `${new Date(msg.guild.createdAt).toLocaleString()} ${lang.daysAgo(createdDaysAgo)}`,
 					inline: true,
 				},
 			]

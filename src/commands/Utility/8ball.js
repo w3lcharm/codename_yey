@@ -2,22 +2,22 @@ const magicball = require("../../utils/8ball");
 
 module.exports = {
 	name: "8ball",
-	group: "Utility",
-	description: "A magic 8 ball.",
-	usage: "<question>",
-	async run(client, msg, args, prefix) {
+	group: "utilityGroup",
+	description: "_8ballDescription",
+	usage: "_8ballUsage",
+	async run(client, msg, args, prefix, lang) {
 		if (!args.length)
-			return msg.channel.createMessage(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
+			return msg.channel.createMessage(lang.commandUsage(prefix, this));
 
 		const question = msg.content.slice(prefix.length + this.name.length + 1);
 
 		const embed = {
-			title: ":8ball: The magic ball's answer is:",
+			title: lang.magicballAnswer,
 			description: magicball.predict(question, 0.25, msg.author.id),
 			color: 9807270,
 			fields: [
 				{
-					name: "Your question",
+					name: lang.yourQuestion,
 					value: question,
 				},
 			],

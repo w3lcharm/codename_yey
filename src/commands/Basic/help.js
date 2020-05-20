@@ -1,9 +1,9 @@
 module.exports = {
 	name: "help",
-	group: "Basic",
-	description: "Shows information about bot commands.",
-	usage: "[command]",
-	async run(client, msg, args, prefix) {
+	group: "basicGroup",
+	description: "helpDescription",
+	usage: "helpUsage",
+	async run(client, msg, args, prefix, lang) {
 		const commandName = args[0];
 		let embed;
 		
@@ -11,8 +11,8 @@ module.exports = {
 			const command = client.commands.get(commandName);
 			if (!command || command.hidden) {
 				embed = {
-					title: `:x: Command **${commandName}** does not exist.`,
-					description: `Type \`${prefix}help\` for list of all commands.`,
+					title: lang.helpCommandDoesntExist(commandName),
+					description: lang.helpCommandDoesntExistDesc(prefix),
 					color: 15158332,
 					footer: {
 						text: "codename_yey",
@@ -23,15 +23,15 @@ module.exports = {
 			}
 
 			let usage = `${prefix}${command.name}`;
-			if (command.usage) usage += ` ${command.usage}`;
+			if (command.usage) usage += ` ${lang[command.usage]}`;
 
 			embed = {
-				title: `Help for command \`${command.name}\`:`,
-				description: command.description,
+				title: lang.helpCommandEmbedTitle(command.name),
+				description: lang[command.description],
 				color: Math.round(Math.random() * 16777216) + 1,
 				fields: [
 					{
-						name: "Usage:",
+						name: lang.helpCommandUsage,
 						value: `\`\`\`\n${usage}\n\`\`\``,
 					},
 				],
@@ -49,15 +49,15 @@ module.exports = {
 				if (!commandNames.length) continue;
 
 				fields.push({
-					name: group.name,
+					name: lang[group.name],
 					value: commandNames.join(", "),
 				});
 			}
 			
 			embed = {
-				title: "Bot commands",
+				title: lang.helpTitle,
 				color: Math.round(Math.random() * 16777216) + 1,
-				fields: fields,
+				fields,
 				footer: {
 					text: "codename_yey",
 					icon_url: client.user.avatarURL,

@@ -1,18 +1,18 @@
 module.exports = {
 	name: "reload",
-	group: "Dev",
-	description: "Reloads the command.",
-	usage: "<command>",
+	group: "devGroup",
+	description: "reloadDescription",
+	usage: "reloadUsage",
 	ownerOnly: true,
 	hidden: true,
-	async run(client, msg, args, prefix) {
+	async run(client, msg, args, prefix, lang) {
 		if (!args.length) {
-			return msg.channel.createMessage(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
+			return msg.channel.createMessage(lang.commandUsage(prefix, this));
 		}
 
 		const cmd = args[0];
 		if (!client.commands.has(cmd)) {
-			return msg.channel.createMessage(`> :x: **${command}** command doesn't exist.`);
+			return msg.channel.createMessage(lang.reloadCmdDoesntExist(cmd));
 		}
 
 		client.reloadCommand(cmd);

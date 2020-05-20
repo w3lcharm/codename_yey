@@ -3,12 +3,12 @@ const { URLSearchParams } = require("url");
 
 module.exports = {
 	name: "ud",
-	group: "Utility",
-	description: "Searches the word definition in Urban Dictionary.",
-	usage: "<word>",
-	async run(client, msg, args, prefix) {
+	group: "utilityGroup",
+	description: "udDescription",
+	usage: "udUsage",
+	async run(client, msg, args, prefix, lang) {
 		if (!args.length)
-			return msg.channel.createMessage(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
+			return msg.channel.createMessage(lang.commandUsage(prefix, this));
 
 		const word = msg.content.slice(prefix.length + this.name.length + 1);
 
@@ -21,7 +21,7 @@ module.exports = {
 		if (!data) {
 			return msg.channel.createMessage({
 				embed: {
-					title: ":x: Word not found.",
+					title: lang.wordNotFound,
 					color: 15158332,
 				},
 			});
@@ -31,8 +31,8 @@ module.exports = {
 			(!data.example.length || data.example.length > 1000)) {
 			return msg.channel.createMessage({
 				embed: {
-					title: ":x: I can't show this definition here.",
-					description: `But there is a link to this definition: [(click here)](${data.permalink})`,
+					title: lang.cantShowDefinition,
+					description: lang.linkToDefinition(data.permalink),
 					color: 15158332,
 				},
 			});
@@ -46,12 +46,12 @@ module.exports = {
 			color: Math.round(Math.random() * 16777216) + 1,
 			fields: [
 				{
-					name: "Example:",
+					name: lang.example,
 					value: data.example,
 				},
 			],
 			footer: {
-				text: `Author: ${data.author}`,
+				text: lang.author(data.author),
 			},
 		};
 		await msg.channel.createMessage({ embed: embed });

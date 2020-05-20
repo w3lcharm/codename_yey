@@ -20,20 +20,6 @@ function validatePermission(member, permissions) {
 	}
 }
 
-function loadLanguages() {
-	const languages = {};
-
-	const langFiles = fs.readdirSync("./src/languages").filter(f => f.endsWith(".js"));
-	for (let file of langFiles) {
-		const fileWithoutExtension = file.replace(".js", "");
-
-		const lang = require(`./languages/${file}`);
-		languages[fileWithoutExtension] = lang;
-	}
-
-	return languages;
-}
-
 class CmdClient extends Eris.Client {
 	constructor(token, options = {}) {
 		super(token, options);
@@ -42,7 +28,7 @@ class CmdClient extends Eris.Client {
 
 		this.commands = new Eris.Collection();
 		this.groups = new Eris.Collection();
-		this.languages = loadLanguages();
+		this.languages = this._loadLanguages();
 
 		this.debugMode = options.debugMode || false;
 
@@ -59,7 +45,7 @@ class CmdClient extends Eris.Client {
 			if (!this.commands.has(commandName)) return;
 
 			const command = this.commands.get(commandName);
-			const lang = this.languages[(await languages.findOrCreate({ where: { user: msg.author.id } }))[0].lang];
+			const lang = this.languages.get((await languages.findOrCreate({ where: { user: msg.author.id } }))[0].lang);
 
 			if (command.guildOnly && !msg.channel.guild)
 				return msg.channel.createMessage(lang.cantUseCommandInDM);
@@ -96,6 +82,28 @@ class CmdClient extends Eris.Client {
 		return args;
 	}
 
+	_loadLanguages() {
+		let languages = new Eris.Collection();
+
+		let englishLang = require("./languages/en");
+		languages.set("en", englishLang);
+
+		let files = fs.readdirSync("./src/languages").filter(f => f.endsWith(".js") || f !== "en.js");
+		for (let file of files) {
+			let langName = file.replace(".js", "");
+			let lang = require(`./languages/${file}`);
+
+			for (let key in englishLang) {
+				if (lang[key]) continue;
+				lang[key] = englishLang[key];
+			}
+		
+			languages.set(langName, lang);
+		}
+
+		return languages;
+	}
+
 	loadCommand(path) {
 		const command = require(path);
 		if (!this.groups.has(command.group)) {
@@ -119,15 +127,28 @@ class CmdClient extends Eris.Client {
 	}
 
 	reloadCommand(commandName) {
-		const command = this.commands.get(commandName);
+		let command = this.commands.get(commandName);
 		if (!command)
 			throw new Error("command does not exist.");
 
-		const pathToCommand = require.resolve(`./commands/${command.group}/${commandName}`);
+		let enLang = this.languages.get("en")
+
+		let pathToCommand = require.resolve(`./commands/${enLang[command.group]}/${commandName}`);
 		delete require.cache[pathToCommand];
 
 		this.commands.delete(commandName);
 		this.loadCommand(pathToCommand);
+	}
+
+	reloadLanguages() {
+		for (let lang of this.languages.keys()) {
+			let path = require.resolve(`./languages/${lang}`);
+			delete require.cache[path];
+		}
+
+		this.languages.clear();
+
+		this.languages = this._loadLanguages();
 	}
 
 	async connect() {

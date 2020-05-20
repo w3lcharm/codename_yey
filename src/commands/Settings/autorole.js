@@ -1,11 +1,11 @@
 module.exports = {
 	name: "autorole",
-	group: "Settings",
-	description: "This command allows you to manage the autorole setting.\nRequires \"Manage server\" permission.",
+	group: "settingsGroup",
+	description: "autoroleDescription",
 	requiredPermissions: "manageGuild",
-	usage: "[role: id, name, mention or \"disable\" to disable]",
+	usage: "autoroleUsage",
 	guildOnly: true,
-	async run(client, msg, args, prefix) {
+	async run(client, msg, args, prefix, lang) {
 		let roleID = args[0];
 		if (roleID && roleID.startsWith("<@&"))
 			roleID = roleID.replace("<@&", "").replace("<@&", "");
@@ -16,26 +16,26 @@ module.exports = {
 			if (dbItem) role = msg.channel.guild.roles.get(dbItem.autorole);
 
 			const embed = {
-				title: "Autorole",
-				description: role ? `Autorole is enabled for role **${role.name}**.` : "Autorole is disabled.",
+				title: lang.autorole,
+				description: role ? lang.autoroleEnabled(role.name) : lang.autoroleDisabled,
 				color: Math.round(Math.random() * 16777216) + 1,
 				footer: {
-					text: `Type ${prefix}autorole [role] if you want to enable or change the autorole, else ${prefix}autorole disable.`,
+					text: lang.autoroleTip(prefix),
 				},
 			};
 
-			await msg.channel.createMessage({ embed: embed });
+			await msg.channel.createMessage({ embed });
 		} else {
 			await autorole.findOrCreate({ where: { server: msg.channel.guild.id } });
 			if (roleID == "disable") {
 				await autorole.update({ autorole: null }, { where: { server: msg.channel.guild.id } });
-				await msg.channel.createMessage("> :white_check_mark: Successfully set autorole to **\"disabled\"**.");
+				await msg.channel.createMessage(lang.autoroleDisableSuccess);
 			} else {
 				const role = msg.channel.guild.roles.find(r => r.id == roleID || r.name == roleID);
-				if (!role) return msg.channel.createMessage("> :x: Invalid role name or ID provided.");
+				if (!role) return msg.channel.createMessage(lang.invalidRoleID);
 
 				await autorole.update({ autorole: role.id }, { where: { server: msg.channel.guild.id } });
-				await msg.channel.createMessage(`> :white_check_mark: Successfully set autorole to **\"${role.name}\"**.`);
+				await msg.channel.createMessage(lang.autoroleSuccess(role.name));
 			}
 		}
 	}

@@ -18,31 +18,31 @@ function parseUptime(time) {
 
 module.exports = {
 	name: "status",
-	group: "Basic",
-	description: "Bot status",
-	async run(client, msg, args, prefix) {
+	group: "basicGroup",
+	description: "statusDescription",
+	async run(client, msg, args, prefix, lang) {
 		const embed = {
-			title: "Bot status",
+			title: lang.statusTitle,
 			color: Math.round(Math.random() * 16777216) + 1,
 			fields: [
 				{
-					name: "Uptime:",
+					name: lang.statusUptime,
 					value: parseUptime(process.uptime()),
 				},
 				{
-					name: "Servers:",
+					name: lang.statusServers,
 					value: client.guilds.size,
 				},
 				{
-					name: "Users:",
+					name: lang.statusUsers,
 					value: client.users.size,
 				},
 				{
-					name: "Platform:",
+					name: lang.statusPlatform,
 					value: process.platform,
 				},
 				{
-					name: "Versions:",
+					name: lang.statusVersions,
 					value: `**Node.js**: ${process.version}\n` +
 						`**Eris**: ${VERSION}`,
 				},

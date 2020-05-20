@@ -1,11 +1,11 @@
 module.exports = {
 	name: "invite",
-	group: "Basic",
-	description: "Bot invite link",
-	async run(client, msg, args, prefix) {
+	group: "basicGroup",
+	description: "inviteDescription",
+	async run(client, msg, args, prefix, lang) {
 		const embed = {
-			title: "Bot invite link:",
-			description: "[(click here)](https://discordapp.com/api/oauth2/authorize?client_id=641312878804074497&permissions=8&scope=bot)",
+			title: lang.inviteBotInvite,
+			description: `[${lang.clickHere}](https://discordapp.com/api/oauth2/authorize?client_id=641312878804074497&permissions=8&scope=bot)`,
 			color: Math.round(Math.random() * 16777216) + 1,
 			footer: {
 				text: "codename_yey",
@@ -13,8 +13,8 @@ module.exports = {
 			},
 			fields: [
 				{
-					name: "codename_yey server:",
-					value: "[(click here)](https://discord.gg/JGXB5sK)"
+					name: lang.inviteSupportServer,
+					value: `[${lang.clickHere}](https://discord.gg/JGXB5sK)`,
 				},
 			],
 		};

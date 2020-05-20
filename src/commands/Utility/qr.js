@@ -2,14 +2,14 @@ const QRCode = require("qrcode");
 
 module.exports = {
 	name: "qr",
-	group: "Utility",
-	description: "Generates a QR code from provided text.",
-	usage: "<text>",
-	async run(client, msg, args, prefix) {
+	group: "utilityGroup",
+	description: "qrDescription",
+	usage: "qrUsage",
+	async run(client, msg, args, prefix, lang) {
 		const text = msg.content.slice(prefix.length + this.name.length + 1);
 
 		if (!text.length)
-			return msg.channel.createMessage(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
+			return msg.channel.createMessage(lang.commandUsage(prefix, this));
 
 		const startTime = Date.now();
 		let qr = await QRCode.toDataURL(text);
@@ -17,10 +17,9 @@ module.exports = {
 		const finishTime = Date.now() - startTime;
 
 		const embed = {
-			title: ":white_check_mark: Generated!",
-			color: 3066993,
+			color: Math.round(Math.random() * 16777216) + 1,
 			image: { url: "attachment://file.png" },
-			footer: { text: `Took ${finishTime} ms.`},
+			footer: { text: lang.generationTime(finishTime)},
 		};
 
 		await msg.channel.createMessage({ embed: embed }, {

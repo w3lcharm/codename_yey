@@ -1,6 +1,6 @@
 module.exports = {
 	name: "kotletki",
-	group: "Basic",
+	group: "basicGroup",
 	description: "котлетки",
 	hidden: true,
 	async run(client, msg, args, prefix) {

@@ -1,16 +1,16 @@
 module.exports = {
 	name: "user",
-	group: "Basic",
-	description: "Shows info about you or about provided user.",
-	usage: "[user: id or mention]",
+	group: "basicGroup",
+	description: "userDescription",
+	usage: "userUsage",
 	guildOnly: true,
-	async run(client, msg, args, prefix) {
+	async run(client, msg, args, prefix, lang) {
 		let member;
 		let userID = args[0];
 		if (!userID) member = msg.member;
 		else member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") ||
-			msg.guild.members.find(m => m.id == userID) ||
-			client.users.get(userID);
+			msg.guild.members.find(m => m.id === userID || m.tag === userID) ||
+			client.users.find(u => u.id === userID || u.tag === userID);
 
 		if (!member) return;
 
@@ -20,16 +20,15 @@ module.exports = {
 		const createdDaysAgo = Math.floor((Date.now() - member.createdAt) / (1000 * 86400));
 		const joinedDaysAgo = Math.floor((Date.now() - member.joinedAt) / (1000 * 86400));
 
-
 		const embed = {
 			author: {
-				name: name,
+				name,
 				icon_url: member.avatarURL,
 			},
 			color: Math.round(Math.random() * 16777216) + 1,
 			fields: [
 				{
-					name: "Status:",
+					name: lang.userStatus,
 					value: member.status || "offline",
 				},
 				{
@@ -37,20 +36,20 @@ module.exports = {
 					value: member.id,
 				},
 				{
-					name: "Registered at:",
-					value: `${new Date(member.createdAt).toLocaleString()} (${createdDaysAgo} days ago)`,
+					name: lang.userRegisteredAt,
+					value: `${new Date(member.createdAt).toLocaleString()} ${lang.daysAgo(createdDaysAgo)}`,
 				},
 				{
-					name: "Joined this server at:",
-					value: member.joinedAt ? `${new Date(member.joinedAt).toLocaleString()} (${joinedDaysAgo} days ago)` : "n/a",
+					name: lang.userJoinedAt,
+					value: member.joinedAt ? `${new Date(member.joinedAt).toLocaleString()} ${lang.daysAgo(joinedDaysAgo)}` : "n/a",
 				},
 				{
-					name: "Roles:",
+					name: lang.userRoles,
 					value: member.roles ? member.roles.map(r => `<@&${r}>`).join(", ") || "None" : "n/a",
 				},
 				{
-					name: "Bot?",
-					value: member.bot ? "Yes" : "No",
+					name: lang.userBot,
+					value: lang.userBotDefine(member.bot),
 				},
 			],
 		};
@@ -59,31 +58,31 @@ module.exports = {
 			switch (member.game.type) {
 				case 4:
 					embed.fields.unshift({
-						name: "Custom status:",
+						name: lang.userCustomStatus,
 						value: member.game.emoji ? `${member.game.emoji.name} ${member.game.state || ""}` : member.game.state,
 					});
 					break;
 				case 3:
 					embed.fields.unshift({
-						name: "Watching:",
+						name: lang.userWatching,
 						value: member.game.name,
 					});
 					break;
 				case 2:
 					embed.fields.unshift({
-						name: "Listening to:",
+						name: lang.userListening,
 						value: member.game.name,
 					});
 					break;
 				case 1:
 					embed.fields.unshift({
-						name: "Streaming:",
+						name: lang.userStreaming,
 						value: `[${member.game.name}](${member.game.url})`,
 					});
 					break;
 				case 0:
 					embed.fields.unshift({
-						name: "Playing:",
+						name: lang.userPlaying,
 						value: member.game.name,
 					});
 					break;

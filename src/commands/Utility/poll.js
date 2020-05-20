@@ -1,27 +1,27 @@
 module.exports = {
 	name: "poll",
-	group: "Utility",
-	description: "Creates a reaction poll (up to 10 answers).",
-	usage: "<question> <answers>",
-	async run(client, msg, args, prefix) {
+	group: "utilityGroup",
+	description: "pollDescription",
+	usage: "pollUsage",
+	async run(client, msg, args, prefix, lang) {
 		if (!args.length)
-			return msg.channel.createMessage(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
+			return msg.channel.createMessage(lang.commandUsage(prefix, this));
 
 		const [ question, ...answers ] = args;
 		const reactions = [ "🇦", "🇧", "🇨", "🇩", "🇪", "🇫", "🇬", "🇭", "🇮", "🇯" ];
 
 		if (!answers.length)
-			return msg.channel.createMessage("> :warning: There must be at least one answer in the poll.");
+			return msg.channel.createMessage(lang.noAnswers);
 
 		if (answers.length > 10)
-			return msg.channel.createMessage("> :x: Not more than 10 answers in the poll.");
+			return msg.channel.createMessage(lang.pollNotMoreThan10Answers);
 
 		const embed = {
 			title: question,
 			description: answers.map((a, i) => `${reactions[i]} - ${a}`).join("\n"),
 			color: Math.round(Math.random() * 16777216) + 1,
 			footer: {
-				text: `Started by ${msg.author.username}#${msg.author.discriminator}`,
+				text: lang.startedBy(msg.author),
 				icon_url: msg.author.avatarURL,
 			},
 		};

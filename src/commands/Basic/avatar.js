@@ -1,15 +1,15 @@
 module.exports = {
 	name: "avatar",
-	group: "Basic",
-	description: "Gets your or someone's avatar.",
-	usage: "[user: id or mention]",
+	group: "basicGroup",
+	description: "avatarDescription",
+	usage: "avatarUsage",
 	guildOnly: true,
-	async run(client, msg, args, prefix) {
+	async run(client, msg, args, prefix, lang) {
 		let userID = args[0];
 		let user;
 
 		if (!userID) user = msg.author;
-		else user = client.users.get(msg.mentions.length ? msg.mentions[0].id : "") || client.users.get(userID);
+		else user = msg.mentions[0] || client.users.find(u => u.tag === userID || u.id === userID);
 
 		if (!user) return;
 		
@@ -19,7 +19,7 @@ module.exports = {
 
 		const embed = {
 			author: {
-				name: `${user.username}#${user.discriminator}'s avatar:`,
+				name: lang.avatarUser(user),
 				url: user.dynamicAvatarURL(format, 2048),
 			},
 			color: Math.round(Math.random() * 16777216) + 1,

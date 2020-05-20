@@ -1,17 +1,17 @@
 module.exports = {
 	name: "ping",
-	group: "Basic",
-	description: "Shows the bot latency.",
-	async run(client, msg, args, prefix) {
+	group: "basicGroup",
+	description: "pingDescription",
+	async run(client, msg, args, prefix, lang) {
 		let shard;
 		if (msg.guild) shard = client.shards.get(client.guildShardMap[msg.guild.id]);
 		else shard = client.shards.get(0);
 
 		const startTime = Date.now();
-		const message = await msg.channel.createMessage("Measuring...");
+		const message = await msg.channel.createMessage(lang.pingMeasuring);
 		const embed = {
-			title: `Bot latency is ${Date.now() - startTime} ms.`,
-			description: `WebSocket latency is ${shard.latency} ms.`,
+			title: lang.pingBotLatency(Date.now() - startTime),
+			description: lang.pingWebSocketLatency(shard.latency),
 			color: Math.floor(Math.random() * 16777214) + 1,
 			footer: {
 				text: "codename_yey",

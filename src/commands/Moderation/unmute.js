@@ -1,28 +1,28 @@
 module.exports = {
 	name: "unmute",
-	group: "Moderation",
-	description: "Unmutes the provided user.\n This command requires \"Kick members\" permission.",
-	usage: "<user>",
+	group: "moderationGroup",
+	description: "unmuteDescription",
+	usage: "unmuteUsage",
 	requiredPermissions: "kickMembers",
-	async run(client, msg, args, prefix) {
+	async run(client, msg, args, prefix, lang) {
 		if (!args.length)
-			return msg.channel.createMessage(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
+			return msg.channel.createMessage(lang.commandUsage(prefix, this));
 
 		const userID = args[0];
-		const member = msg.channel.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") ||
-			msg.channel.guild.members.get(userID);
+		const member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") ||
+			msg.guild.members.find(m => m.id == userID || m.tag == userID);
 
 		if (!member) return;
 
 		try {
-			let mutedRole = msg.channel.guild.roles.find(r => r.name === "Muted");
+			let mutedRole = msg.guild.roles.find(r => r.name === "Muted");
 			if (!mutedRole) {
-				mutedRole = await msg.channel.guild.createRole({
+				mutedRole = await msg.guild.createRole({
 					name: "Muted",
 					mentionable: false,
 				});
 
-				for (const channel of msg.channel.guild.channels.values()) {
+				for (const channel of msg.guild.channels.values()) {
 					try {
 						await channel.editPermission(mutedRole.id, 0, 6144, "role");
 					} catch {}
@@ -30,13 +30,13 @@ module.exports = {
 			}
 
 			if (!member.roles.includes(mutedRole.id))
-				return msg.channel.createMessage("> :x: This user is not muted.");
+				return msg.channel.createMessage(lang.userNotMuted);
 
 			await member.removeRole(mutedRole.id, "unmute");
 
 			const embed = {
 				author: {
-					name: `${member.username}#${member.discriminator} has been unmuted`,
+					name: lang.unmuteSuccess(member),
 					icon_url: member.avatarURL,
 				},
 				color: 3066993,
@@ -48,19 +48,19 @@ module.exports = {
 			muteTimers.delete(member.id);
 		} catch (err) {
 			let description;
-                        if (!msg.channel.guild.members.get(client.user.id).permission.has("manageRoles"))
-				description = "I don't have the \"Manage roles\" permission to do this.";
-			else if (member.id === msg.channel.guild.ownerID)
-				description = "This user is a server owner.";
-			else if (member.highestRole.position >= msg.channel.guild.members.get(client.user.id).highestRole.position)
-				description = "This user's role is higher than my role.";
+                        if (!msg.guild.members.get(client.user.id).permission.has("manageRoles"))
+				description = lang.botDontHavePerms("Manage roles");
+			else if (member.id === msg.guild.ownerID)
+				description = lang.userIsOwner;
+			else if (member.highestRole.position >= msg.guild.members.get(client.user.id).highestRole.position)
+				description = lang.roleHigher;
 			else {
-				description = "Something went wrong. Try again later.";
+				description = lang.somethingWentWrong;
 				client.emit("commandError", this.name, msg, err, false);
 			}
 
 			const embed = {
-				title: ":x: Unmute failed.",
+				title: lang.unmuteFail,
 				description,
 				color: 15158332,
 			};

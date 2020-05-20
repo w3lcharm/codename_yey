@@ -1,11 +1,11 @@
 module.exports = {
 	name: "say",
-	group: "Utility",
-	description: "Says your text.",
-	usage: "<text>",
-	async run(client, msg, args, prefix) {
+	group: "utilityGroup",
+	description: "sayDescription",
+	usage: "sayUsage",
+	async run(client, msg, args, prefix, lang) {
 		if (!args.length)
-			return msg.channel.createMessage(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
+			return msg.channel.createMessage(lang.commandUsage(prefix, this));
 
 		const text = msg.content.slice(prefix.length + this.name.length + 1);
 

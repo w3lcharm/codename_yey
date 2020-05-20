@@ -2,15 +2,15 @@ const { exec } = require("child_process");
 
 module.exports = {
 	name: "update",
-	group: "Dev",
-	description: "Just git pull.",
+	group: "devGroup,",
+	description: "updateDescription",
 	ownerOnly: true,
 	hidden: true,
-	async run(client, msg, args, prefix) {
+	async run(client, msg, args, prefix, lang) {
 		exec("git pull", (err, stdout, stderr) => {
 			if (err) throw err;
 			const embed = {
-				title: ":white_check_mark: Successfully updated.",
+				title: lang.updateSuccess,
 				description: "```\n" + stdout + "\n```",
 				color: 3066993,
 			};

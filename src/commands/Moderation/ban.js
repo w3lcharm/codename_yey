@@ -1,60 +1,59 @@
 module.exports = {
 	name: "ban",
-	group: "Moderation",
-	description: "Bans the specified member.\nThis command requires \"Ban members\" permission.",
+	group: "moderationGroup",
+	description: "banDescription",
 	requiredPermissions: "banMembers",
 	guildOnly: true,
-	usage: "<user> [reason]",
-	async run(client, msg, args, prefix) {
+	usage: "banUsage",
+	async run(client, msg, args, prefix, lang) {
 		if (!args.length)
-			return msg.channel.createMessage(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
+			return msg.channel.createMessage(lang.commandUsage(prefix, this));
 
 		const userID = args.shift();
 		const reason = args.join(" ");
 
-		const member = msg.channel.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") || msg.channel.guild.members.get(userID);
+		const member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") || msg.guild.members.find(m => m.id === userID || m.tag === userID);
 
 		if (!member) return;
 
 		try {
 			if (member.id === msg.author.id)
-				return msg.channel.createMessage("> :x: You can't ban yourself.");
+				return msg.channel.createMessage(lang.cantBanYourself);
 			if (member.id === client.user.id)
-				return msg.channel.createMessage("> :x: You can't ban a bot.");
+				return msg.channel.createMessage(lang.cantBanBot);
 
 			await member.ban(0, `${reason} (banned by ${msg.author.username}#${msg.author.discriminator})`);
 
 			const embed = {
 				author: {
-					name: `${member.username}#${member.discriminator} has been banned`,
+					name: lang.banSuccess(member),
 					icon_url: member.avatarURL,
 				},
-				title: "Reason:",
-				description: reason || "none",
+				description: lang.reason(reason),
 				color: 3066993,
 				timestamp: new Date().toISOString(),
 			};
 				
-			await msg.channel.createMessage({ embed: embed });
+			await msg.channel.createMessage({ embed });
 		} catch (err) {
 			let description;
 			if (!msg.channel.guild.members.get(client.user.id).permission.has("banMembers"))
-				description = "I don't have the \"Ban members\" permission to do this.";
+				description = lang.botDontHavePerms("Ban members");
 			else if (member.id === msg.channel.guild.ownerID)
-				description = "Provided user is a server owner."
+				description = lang.userIsOwner;
 			else if (member.highestRole.position >= msg.channel.guild.members.get(client.user.id).highestRole.position)
-				description = "This user's role is higher than my role.";
+				description = lang.roleIsHigher;
 			else {
-				description = "Something went wrong. Try again later.";
+				description = lang.somethingWentWrong;
 				client.emit("commandError", this.name, msg, err, false);
 			}
 
 			const embed = {
-				title: ":x: Ban failed.",
-				description: description,
+				title: lang.banFail,
+				description,
 				color: 15158332,
 			};
-			await msg.channel.createMessage({ embed: embed });
+			await msg.channel.createMessage({ embed });
 		}
 	}
 };

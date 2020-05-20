@@ -2,11 +2,11 @@ const Eris = require("eris");
 
 module.exports = {
 	name: "eval",
-	group: "Dev",
-	description: "Evaluates the JavaScript code.",
+	group: "devGroup",
+	description: "evalDescription",
 	hidden: true,
 	ownerOnly: true,
-	usage: "<code>",
+	usage: "evalUsage",
 	async run(client, msg, args, prefix) {
 		const code = msg.content.slice(prefix.length + this.name.length + 1);
 		const asyncifiedCode = `(async () => {\n${code}\n})()`;

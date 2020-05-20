@@ -1,60 +1,59 @@
 module.exports = {
 	name: "kick",
-	group: "Moderation",
-	description: "Kicks the specified member.\nThis command requires \"Kick members\" permission.",
+	group: "moderationGroup",
+	description: "kickDescription",
 	requiredPermissions: "kickMembers",
 	guildOnly: true,
-	usage: "<user> [reason]",
-	async run(client, msg, args, prefix) {
+	usage: "kickUsage",
+	async run(client, msg, args, prefix, lang) {
 		if (!args.length)
-			return msg.channel.createMessage(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
+			return msg.channel.createMessage(lang.commandUsage(prefix, this));
 
 		const userID = args.shift();
 		const reason = args.join(" ");
 
-		const member = msg.channel.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") || msg.channel.guild.members.get(userID);
+		const member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") || msg.guild.members.find(m => m.id === userID || m.tag == userID);
 
 		if (!member) return;
 
 		try {
 			if (member.id === msg.author.id)
-				return msg.channel.createMessage("> :x: You can't kick yourself.");
+				return msg.channel.createMessage(lang.cantKickYourself);
 			if (member.id === client.user.id)
-				return msg.channel.createMessage("> :x: You can't kick a bot.");
+				return msg.channel.createMessage(lang.cantKickBot);
 			
-			await member.kick(`${reason} (banned by ${msg.author.username}#${msg.author.discriminator})`);
+			await member.kick(`${reason} (kicked by ${msg.author.username}#${msg.author.discriminator})`);
 
 			const embed = {
 				author: {
-					name: `${member.username}#${member.discriminator} has been kicked`,
+					name: lang.kickSuccess(member),
 					icon_url: member.avatarURL,
 				},
-				title: "Reason:",
-				description: reason || "none",
+				description: lang.reason(reason),
 				color: 3066993,
 				timestamp: new Date().toISOString(),
 			};
 				
-			await msg.channel.createMessage({ embed: embed });
+			await msg.channel.createMessage({ embed });
 		} catch (err) {
 			let description;
 			if (!msg.channel.guild.members.get(client.user.id).permission.has("kickMembers"))
-				description = "I don't have the \"Kick members\" permission to do this.";
+				description = lang.botDontHavePerms("Kick members");
 			else if (member.id === msg.channel.guild.ownerID)
-				description = "Provided user is a server owner."
+				description = lang.userIsOwner;
 			else if (member.highestRole.position >= msg.channel.guild.members.get(client.user.id).highestRole.position)
-				description = "This user's role is higher than my role.";
+				description = lang.roleHigher;
 			else {
-				description = "Something went wrong. Try again later.";
+				description = lang.somethingWentWrong;
 				client.emit("commandError", this.name, msg, err, false);
 			}
 
 			const embed = {
-				title: ":x: Kick failed.",
-				description: description,
+				title: lang.kickFail,
+				description,
 				color: 15158332,
 			};
-			await msg.channel.createMessage({ embed: embed });
+			await msg.channel.createMessage({ embed });
 		}
 	}
 };

@@ -2,18 +2,18 @@ const PermissionError = require("../../errors/permissionError");
 
 module.exports = {
 	name: "warn",
-	group: "Moderation",
-	description: "Warns the specified user. Requires \"Kick members\" permission.",
+	group: "moderationGroup",
+	description: "warnDescription",
 	guildOnly: true,
-	usage: "[-d | --delete <id>] [-l | --list <user>] <user> [reason]",
-	async run(client, msg, args, prefix) {
+	usage: "warnUsage",
+	async run(client, msg, args, prefix, lang) {
 		if (!args.length)
-			return msg.channel.createMessage(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
+			return msg.channel.createMessage(lang.commandUsage(prefix, this));
 
 		if (args[0] == "--list" || args[0] == "-l") {
 			let member;
 			if (!args[1]) member = msg.member;
-			else member = msg.channel.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") || msg.channel.guild.members.get(args[1]);
+			else member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") || msg.guild.members.find(m => m.id === args[1] || m.tag === args[1]);
 			let embed = {
 				author: {
 					name: `${member.username}#${member.discriminator}`,
@@ -25,17 +25,17 @@ module.exports = {
 				
 			const warnList = await warns.findAll({
 				where: {
-					server: msg.channel.guild.id,
+					server: msg.guild.id,
 					user: member.user.id,
 				},
 			});
 			for (let warn of warnList)
 				embed.fields.push({
 					name: `ID: ${warn.id}`,
-					value: `Reason: ${warn.reason || "none"}`,
+					value: lang.reason(warn.reason),
 				});
-			embed.footer = { text: `Total warns: ${warnList.length}` };
-			await msg.channel.createMessage({ embed: embed });
+			embed.footer = { text: lang.totalWarns(warnList.length) };
+			await msg.channel.createMessage({ embed });
 			return;
 		}
 
@@ -44,34 +44,34 @@ module.exports = {
 				let id = args[1];
 				const warn = await warns.findOne({
 					where: {
-						server: msg.channel.guild.id,
+						server: msg.guild.id,
 						id: id,
 					},
 				});
-				if (!warn) msg.channel.createMessage("> :x: Invalid ID.");
-				else if (warn.server != msg.channel.guild.id)
-					msg.channel.createMessage("> :x: This warn is located on the another server.");
+				if (!warn) msg.channel.createMessage(lang.invalidID);
+				else if (warn.server != msg.guild.id)
+					msg.channel.createMessage(lang.warnOnAnotherServer);
 				else {
 					await warns.destroy({ where: { id: id } });
-					msg.channel.createMessage(`> :white_check_mark: Deleted a warn with ID ${warn.id}.`);
+					msg.channel.createMessage(lang.warnDeleteSuccess(warn.id));
 				}
 				return;
 					
 			}
 			const userID = args.shift();
 			const reason = args.join(" ");
-			const member = msg.channel.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") || msg.channel.guild.members.get(userID);
+			const member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") || msg.guild.members.find(m => m.tag === userID || m.id === userID);
 
 			if (!member) return;
 			if (member.id == msg.author.id)
-				return msg.channel.createMessage("> :x: You can't warn yourself.");
+				return msg.channel.createMessage(lang.cantWarnYourself);
 			if (member.id == client.user.id)
-				return msg.channel.createMessage("> :x: You can't warn a bot.");
+				return msg.channel.createMessage(lang.cantWarnBot);
 			if (member.permission.has("administrator"))
-				return msg.channel.createMessage("> :x: You can't warn the administrator.");
+				return msg.channel.createMessage(lang.cantWarnAdmin);
 
 			const warnObj = await warns.create({
-				server: msg.channel.guild.id,
+				server: msg.guild.id,
 				user: member.id,
 				warnedBy: msg.author.id,
 				reason: reason,
@@ -79,14 +79,13 @@ module.exports = {
 
 			const embed = {
 				author: {
-					name: `${member.username}#${member.discriminator} has been warned`,
+					name: lang.warnSuccess(member),
 					icon_url: member.avatarURL,
 				},
-				title: "Reason:",
-				description: reason,
+				description: lang.reason(reason),
 				color: 3066993,
 				timestamp: new Date().toISOString(),
-				footer: { text: `Warn ID: ${warnObj.id}` },
+				footer: { text: lang.warnID(warnObj.id) },
 			};
 			await msg.channel.createMessage({ embed: embed });
 		} else

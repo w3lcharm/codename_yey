@@ -1,29 +1,29 @@
 module.exports = {
 	name: "purge",
-	group: "Moderation",
-	description: "Deleted the specified amount of messages in this channel.\nRequires \"Manage messages\" permission",
+	group: "moderationGroup",
+	description: "purgeDescription",
 	guildOnly: true,
 	requiredPermissions: "manageMessages",
-	usage: "[amount]",
-	async run(client, msg, args, prefix) {
+	usage: "purgeUsage",
+	async run(client, msg, args, prefix, lang) {
 		if (!args.length)
-			return msg.channel.createMessage(`> Usage: \`${prefix}${this.name} ${this.usage}\``);
+			return msg.channel.createMessage(lang.commandUsage(prefix, this));
 
 		const amount = parseInt(args[0]);
 
 		if (isNaN(amount))
-			return msg.channel.createMessage(`> :x: Amount value must be an integer.`);
+			return msg.channel.createMessage(lang.amountIsNaN);
 
 		if (amount < 1)
-			return msg.channel.createMessage(`> :x: Not less than 1 message per time.`);
+			return msg.channel.createMessage(lang.notLessThan1Msg);
 		if (amount > 100)
-			return msg.channel.createMessage(`> :x: Not more than 100 messages per time.`);
+			return msg.channel.createMessage(lang.notMoreThan100Msgs);
 
 		await msg.channel.purge(amount + 1);
 
 		const embed = {
-			title: `:white_check_mark: Successfully deleted ${amount} messages.`,
-			description: "This message will be automatically deleted in 5 seconds.",
+			title: lang.purgeSuccess(amount),
+			description: lang.msgWillBeDeleted,
 			timestamp: new Date().toISOString(),
 			color: 3066993,
 		};
