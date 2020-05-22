@@ -13,9 +13,9 @@ module.exports = {
 
 		if (!user) return;
 		
-		let format;
-		if (user.avatar)
-			format = user.avatar.startsWith("a_") ? "gif" : "webp";
+		let format, size = 2048;
+		if (user.avatar) format = user.avatar.startsWith("a_") ? "gif" : "webp";
+		if (format === "gif") size = 256;
 
 		const embed = {
 			author: {
@@ -23,7 +23,7 @@ module.exports = {
 				url: user.dynamicAvatarURL(format, 2048),
 			},
 			color: Math.round(Math.random() * 16777216) + 1,
-			image: { url: user.dynamicAvatarURL(format, 2048) },
+			image: { url: user.dynamicAvatarURL(format, size) },
 		};
 
 		await msg.channel.createMessage({ embed: embed });
