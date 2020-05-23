@@ -42,7 +42,7 @@ module.exports = {
 			else if (member.id === msg.channel.guild.ownerID)
 				description = lang.userIsOwner;
 			else if (member.highestRole.position >= msg.channel.guild.members.get(client.user.id).highestRole.position)
-				description = lang.roleIsHigher;
+				description = lang.roleHigher;
 			else {
 				description = lang.somethingWentWrong;
 				client.emit("commandError", this.name, msg, err, false);
