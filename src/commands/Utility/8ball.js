@@ -13,7 +13,7 @@ module.exports = {
 
 		const embed = {
 			title: lang.magicballAnswer,
-			description: magicball.predict(question, 0.25, msg.author.id),
+			description: magicball.predict(question, 0.25, msg.author.id, lang.langName),
 			color: 9807270,
 			fields: [
 				{

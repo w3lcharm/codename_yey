@@ -1,4 +1,6 @@
 module.exports = {
+	langName: "en",
+
 	cantUseCommandInDM: `> :x: You cannot use this command in DM.`,
 	clickHere: "(click here)",
 	daysAgo: days => `(${days} days ago)`,
@@ -9,6 +11,9 @@ module.exports = {
 	userIsOwner: "This user is a server owner.",
 	roleHigher: "This user's role is higher than my role.",
 	somethingWentWrong: "Something went wrong. Try again later.",
+	dontHavePerms: ":x: You don't have permissions to use this command.",
+	missingPermission: perm => `Missing permission: \`${perm}\``,
+	errorInCommand: cmd => `:x: Error in command \`${cmd}\`:`,
 
 	basicGroup: "Basic",
 	devGroup: "Dev",

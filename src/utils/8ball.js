@@ -20,12 +20,42 @@
     ]
 };
 
+const answersRU = {
+    "true": [
+            "Бесспорно",
+        "Без сомнений",
+        "Да",
+        "Определенно да",
+        "Можешь быть уверен(а) в этом",
+        "Предрешено",
+        "Мне кажется - да",
+        "Вероятнее всего",
+        "Хорошие перспективы",
+        "Знаки говорят - да",
+    ],
+    "false": [
+        "Даже не думай",
+        "Нет",
+        "Перспективы не очень хорошие",
+        "Весьма сомнительно",
+        "По моим данным, нет",
+    ],
+};
+
 const failAnswers = [
     "Reply hazy, try again",
     "Ask again later",
     "Better not tell you now",
     "Cannot predict now",
     "Concentrate and ask again"
+];
+
+const failAnswersRU = [
+    "Пока не ясно, попробуй снова",
+    "Спроси позже",
+    "Лучше не рассказывать",
+    "Сейчас нельзя предсказать",
+    "Сконцентрируйся и спроси опять",
 ];
 
 const life = 42;
@@ -52,15 +82,15 @@ function hashCode(s) {
     return h;
 };
 
-function predict(question, failChance, seed = 1) {
+function predict(question, failChance, seed = 1, lang = "en") {
     const clQuestion = question.toLowerCase()
         .replace(/[.,:;!?\s@#$%^&*()_+\-=]/g, "");
     if (Math.random() <= failChance)
-        return getRandom(failAnswers);
+        return getRandom(lang == "en" ? failAnswers : failAnswersRU);
 
     const isPos = getNth(ansMapping, hashCode(clQuestion) + (seed *
         Math.round(life / getNth(vals, seed))));
-    return getRandom(answers[isPos]);
+    return getRandom(lang == "en" ? answers[isPos] : answersRU[isPos]);
 }
 
 module.exports = {

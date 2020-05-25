@@ -16,7 +16,7 @@ const sequelizeLogger = new CmdClient.Logger(client.debugMode ? CmdClient.Logger
 global.sequelize = new Sequelize({
 	host: "localhost",
 	dialect: "sqlite",
-	storage: config.pathToDBFile || "../bot.db",
+	storage: config.pathToDBFile || "./bot.db",
 	logging: (...msg) => sequelizeLogger.debug(msg),
 });
 global.warns = require("./dbModels/warns")(sequelize, Sequelize.DataTypes);
@@ -41,11 +41,11 @@ client.once("ready", () => {
 
 client.on("guildMemberAdd", (guild, member) => autoroleFunc(client, guild, member));
 
-client.on("commandError", async (commandName, msg, error, showErr) => {
+client.on("commandError", async (commandName, msg, error, showErr, lang) => {
 	if (error instanceof CmdClient.PermissionError) {
 		const embed = {
-			title: ":x: You don't have permissions to use this command.",
-			description: `Missing permission: \`${error.missingPermission}\``,
+			title: lang.dontHavePerms,
+			description: lang.missingPermission(error.missingPermission),
 			color: 15158332,
 			footer: {
 				text: "codename_yey",
@@ -56,7 +56,7 @@ client.on("commandError", async (commandName, msg, error, showErr) => {
 	}
 
 	const embed = {
-		title: `:x: Error in command ${commandName}:`,
+		title: lang.errorInCommand(commandName),
 		description: `\`\`\`\n${error}\`\`\``,
 		color: 15158332,
 	}
