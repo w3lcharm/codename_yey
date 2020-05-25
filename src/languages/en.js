@@ -196,4 +196,12 @@ module.exports = {
 	linkToDefinition: link => `But there is a link to this definition: [(click here)](${link})`,
 	example: "Example:",
 	author: author => `Author: ${author}`,
+
+	languageDescription: "Changes the language.",
+	languageUsage: "[language]",
+	availableLanguages: "Available languages:",
+	yourLanguage: "Your language:",
+	languagesTip: prefix => `You can change the language by typing ${prefix}language [language]`,
+	langDoesntExist: "> :x: This language doesn't exist.",
+	langSuccess: name => `> :white_check_mark: Your language has been changed to \`${name}\`.`,
 };

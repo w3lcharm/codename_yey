@@ -196,4 +196,12 @@ module.exports = {
 	linkToDefinition: link => `Ссылка на определение: [(нажмите сюда)](${link})`,
 	example: "Example:",
 	author: author => `Author: ${author}`,
+
+	languageDescription: "Меняет ваш язык.",
+	languageUsage: "[язык]",
+	availableLanguages: "Доступные языки:",
+	yourLanguage: "Ваш язык:",
+	languagesTip: prefix => `Вы можете сменить язык, введя ${prefix}language [язык]`,
+	langDoesntExist: "> :x: Данного языка не существует.",
+	langSuccess: name => `> :white_check_mark: Ваш язык был изменен на \`${name}\`.`,
 };
