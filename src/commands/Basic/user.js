@@ -55,11 +55,20 @@ module.exports = {
 		};
 
 		if (member.game) {
+			let emoji;
+			if (member.game.emoji) {
+				if (member.game.emoji.id) {
+					emoji = `<:${member.game.emoji.name}:${member.game.emoji.id}>`;
+				} else {
+					emoji = member.game.emoji.name;
+				}
+			}
+
 			switch (member.game.type) {
 				case 4:
 					embed.fields.unshift({
 						name: lang.userCustomStatus,
-						value: member.game.emoji ? `${member.game.emoji.name} ${member.game.state || ""}` : member.game.state,
+						value: emoji ? `${emoji} ${member.game.state || ""}` : member.game.state,
 					});
 					break;
 				case 3:
