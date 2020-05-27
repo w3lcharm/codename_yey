@@ -28,11 +28,14 @@ class CmdClient extends Eris.Client {
 
 		this.commands = new Eris.Collection();
 		this.groups = new Eris.Collection();
-		this.languages = this._loadLanguages();
 
 		this.debugMode = options.debugMode || false;
 
 		this.logger = new Logger(options.debugMode ? Logger.TRACE : Logger.INFO, "codename_yey");
+		this.logger.info("logger initialized.");
+
+		this.languages = this._loadLanguages();
+
 		if (options.debugMode) {
 			this._erisLogger = new Logger(Logger.TRACE, "eris");
 			this.on("debug", msg => this._erisLogger.debug(msg));
@@ -61,6 +64,8 @@ class CmdClient extends Eris.Client {
 				this.emit("commandError", commandName, msg, err, true, lang);
 			} 
 		});
+		
+		this.logger.info("client initialized.");
 	}
 
 	_parseArgs(str) {
@@ -99,8 +104,10 @@ class CmdClient extends Eris.Client {
 			}
 		
 			languages.set(langName, lang);
+			this.logger.debug(`loaded ${langName} language.`);
 		}
-
+		
+		this.logger.info("successfully loaded all language files.");
 		return languages;
 	}
 
