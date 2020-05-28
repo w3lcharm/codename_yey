@@ -129,7 +129,7 @@ module.exports = {
 	notLessThan1Msg: "> :x: Не менее, чем 1 сообщение за раз.",
 	notMoreThan100Msgs: "> :x: Не более 100 сообщений за раз",
 	purgeSuccess: amount => `:white_check_mark: Успешно удалено ${amount} сообщений.`,
-	msgWillBeDeleted: "Это сообщение будет автоматически удалено чернз 5 секунд.",
+	msgWillBeDeleted: "Это сообщение будет автоматически удалено через 5 секунд.",
 	purgeFailed: ":x: Не удалось удалить сообщения.",
 
 	unmuteDescription: "Размутит указанного пользователя.\nЭта команда требует право \"Выгонять участников\".",
@@ -166,7 +166,7 @@ module.exports = {
 	modlogsEnabled: channel => `Логи модерации включены в канале ${channel}.`,
 	modlogsDisabled: "Логи модерации выключены.",
 	modlogsTip: prefix => `Вы можете включить логи модерации либо изменить канал для них, введя ${prefix}modlogs [канал], или ${prefix}modlogs disable для выключения.`,
-	modlogsDisableSuccess: "> :white_check_mark: Логи модерпции были выключены.",
+	modlogsDisableSuccess: "> :white_check_mark: Логи модерации были выключены.",
 	modlogsSuccess: channel => `> :white_check_mark: Логи модерации были включены в канале **\"${channel}\"**.`,
 	invalidChannel: "> :x: Указан неверный канал.",
 	modlogsDontHavePerms: ":x: Я не имею прав на отправление сообщений в этом канале",
