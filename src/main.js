@@ -9,14 +9,15 @@ const modlogFunctions = require("./utils/modlogs");
 const client = new CmdClient(config.token, {
 	prefix: config.prefix,
 	owners: config.owners,
+//	debugMode: true,
 });
 
 const sequelizeLogger = new CmdClient.Logger(client.debugMode ? CmdClient.Logger.TRACE : CmdClient.Logger.INFO, "sequelize");
 
-global.sequelize = new Sequelize({
-	host: "localhost",
-	dialect: "sqlite",
-	storage: config.pathToDBFile || "./bot.db",
+global.sequelize = new Sequelize(config.database.database, config.database.username, config.database.password, {
+	host: config.database.host,
+	dialect: config.database.dialect,
+	storage: config.database.storage || "./bot.db",
 	logging: (...msg) => sequelizeLogger.debug(msg),
 });
 global.warns = require("./dbModels/warns")(sequelize, Sequelize.DataTypes);
