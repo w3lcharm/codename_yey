@@ -18,19 +18,34 @@ module.exports = {
 			return msg.channel.createMessage(lang.notLessThan1Msg);
 		if (amount > 100)
 			return msg.channel.createMessage(lang.notMoreThan100Msgs);
+		try {
+			await msg.channel.purge(amount + 1);
 
-		await msg.channel.purge(amount + 1);
+			const embed = {
+				title: lang.purgeSuccess(amount),
+				description: lang.msgWillBeDeleted,
+				timestamp: new Date().toISOString(),
+				color: 3066993,
+			};
 
-		const embed = {
-			title: lang.purgeSuccess(amount),
-			description: lang.msgWillBeDeleted,
-			timestamp: new Date().toISOString(),
-			color: 3066993,
-		};
+			const message = await msg.channel.createMessage({ embed: embed });
+			setTimeout(() => {
+				message.delete().catch(() => {});
+			}, 5000);
+		} catch (err) {
+			let description;
+			if (!msg.guild.me.permission.has("manageMessages")) {
+				description = lang.botDontHavePerms("manageMessages");
+			} else {
+				description = lang.somethingWentWrong;
+			}
 
-		const message = await msg.channel.createMessage({ embed: embed });
-		setTimeout(() => {
-			message.delete().catch(() => {});
-		}, 5000);
+			let embed = {
+				title: lang.purgeFailed,
+				color: 15158332,
+				description,
+			};
+			await msg.channel.createMessage({ embed });
+		}
 	}
 };

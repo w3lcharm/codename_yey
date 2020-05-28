@@ -130,6 +130,7 @@ module.exports = {
 	notMoreThan100Msgs: "> :x: Not more than 100 messages.",
 	purgeSuccess: amount => `:white_check_mark: Successfully deleted ${amount} messages.`,
 	msgWillBeDeleted: "This message will be automatically deleted in 5 seconds.",
+	purgeFailed: ":x: Purge failed.",
 
 	unmuteDescription: "Unmutes the provided user.\nThis command requires the \"Kick members\" permission.",
 	unmuteUsage: "<user>",

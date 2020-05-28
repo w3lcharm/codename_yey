@@ -130,6 +130,7 @@ module.exports = {
 	notMoreThan100Msgs: "> :x: Не более 100 сообщений за раз",
 	purgeSuccess: amount => `:white_check_mark: Успешно удалено ${amount} сообщений.`,
 	msgWillBeDeleted: "Это сообщение будет автоматически удалено чернз 5 секунд.",
+	purgeFailed: ":x: Не удалось удалить сообщения.",
 
 	unmuteDescription: "Размутит указанного пользователя.\nЭта команда требует право \"Выгонять участников\".",
 	unmuteUsage: "<пользователь>",
