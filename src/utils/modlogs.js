@@ -145,7 +145,6 @@ async function onMessageDelete(client, msg) {
 			content += `\n${attachment.url}`;
 		}
 	}
-	content = `\`\`\`\n${content}\n\`\`\``;
 
 	const embed = {
 		title: "Message deleted",
@@ -185,7 +184,7 @@ async function onMessageUpdate(client, newMsg, oldMsg) {
 	if (newMsg.author.bot) return;
 
 	let oldContent = oldMsg.content;
-	let newContent = newMsg.cleanContent;
+	let newContent = newMsg.content;
 	if (oldMsg.attachments.length) {
 		oldContent += "\n-----";
 		for (const attachment of oldMsg.attachments) {
@@ -206,11 +205,11 @@ async function onMessageUpdate(client, newMsg, oldMsg) {
 		fields: [
 			{
 				name: "Old message:",
-				value: "```\n" + oldContent + "\n```",
+				value: oldContent,
 			},
 			{
 				name: "New message:",
-				value: "```\n" + newContent + "\n```",
+				value: newContent,
 			},
 			{
 				name: "Author:",
