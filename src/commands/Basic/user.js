@@ -57,8 +57,9 @@ module.exports = {
 		if (member.game) {
 			let emoji;
 			if (member.game.emoji) {
+				let animated = member.game.emoji.animated ? "a" : "";
 				if (member.game.emoji.id) {
-					emoji = `<:${member.game.emoji.name}:${member.game.emoji.id}>`;
+					emoji = `<${animated}:${member.game.emoji.name}:${member.game.emoji.id}>`;
 				} else {
 					emoji = member.game.emoji.name;
 				}
