@@ -180,8 +180,8 @@ async function onMessageUpdate(client, newMsg, oldMsg) {
 	if (!channel) return;
 
 	if (!newMsg.author) return;
-
 	if (newMsg.author.bot) return;
+	if (!oldMsg.embeds.length || !newMsg.embeds.length) return;
 
 	let oldContent = oldMsg.content;
 	let newContent = newMsg.content;
