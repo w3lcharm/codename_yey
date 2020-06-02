@@ -1,5 +1,13 @@
 const Eris = require("eris");
 
+function insertReturn(code) {
+	let codeLines = code.split("\n");
+	let lastCodeLine = codeLines[codeLines.length - 1];
+	lastCodeLine = `return ${lastCodeLine}`;
+	codeLines[codeLines.length - 1] = lastCodeLine;
+	return codeLines.join("\n");
+}
+
 module.exports = {
 	name: "eval",
 	group: "devGroup",
@@ -8,8 +16,9 @@ module.exports = {
 	ownerOnly: true,
 	usage: "evalUsage",
 	async run(client, msg, args, prefix) {
-		const code = msg.content.slice(prefix.length + this.name.length + 1);
-		const asyncifiedCode = `(async () => {\n${code}\n})()`;
+		let code = msg.content.slice(prefix.length + this.name.length + 1);
+		code = insertReturn(code);
+		let asyncifiedCode = `(async () => {\n${code}\n})()`;
 
 		try {
 			let evaled = await eval(asyncifiedCode);
