@@ -1,3 +1,5 @@
+const moment = require("moment");
+
 module.exports = {
 	name: "user",
 	group: "basicGroup",
@@ -5,6 +7,8 @@ module.exports = {
 	usage: "userUsage",
 	guildOnly: true,
 	async run(client, msg, args, prefix, lang) {
+		moment.locale(lang.langName);
+
 		let member;
 		let userID = args[0];
 		if (!userID) member = msg.member;
@@ -37,11 +41,11 @@ module.exports = {
 				},
 				{
 					name: lang.userRegisteredAt,
-					value: `${new Date(member.createdAt).toLocaleString()} ${lang.daysAgo(createdDaysAgo)}`,
+					value: `${moment(member.createdAt).format("lll")} ${lang.daysAgo(createdDaysAgo)}`,
 				},
 				{
 					name: lang.userJoinedAt,
-					value: member.joinedAt ? `${new Date(member.joinedAt).toLocaleString()} ${lang.daysAgo(joinedDaysAgo)}` : "n/a",
+					value: member.joinedAt ? `${moment(member.joinedAt).format("lll")} ${lang.daysAgo(joinedDaysAgo)}` : "n/a",
 				},
 				{
 					name: lang.userRoles,

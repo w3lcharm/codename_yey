@@ -1,4 +1,5 @@
 const { CategoryChannel, TextChannel, VoiceChannel } = require("eris");
+const moment = require("moment");
 
 module.exports = {
 	name: "server",
@@ -6,6 +7,7 @@ module.exports = {
 	description: "serverDescription",
 	guildOnly: true,
 	async run(client, msg, args, prefix, lang) {
+		moment.locale(lang.langName);
 		const owner = client.users.get(msg.guild.ownerID);
 
 		const createdDaysAgo = Math.floor((Date.now() - msg.guild.createdAt) / (1000 * 86400));
@@ -54,7 +56,7 @@ module.exports = {
 				},
 				{
 					name: lang.serverCreatedAt,
-					value: `${new Date(msg.guild.createdAt).toLocaleString()} ${lang.daysAgo(createdDaysAgo)}`,
+					value: `${moment(msg.guild.createdAt).format("lll")} ${lang.daysAgo(createdDaysAgo)}`,
 					inline: true,
 				},
 			]
