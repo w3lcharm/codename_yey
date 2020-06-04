@@ -14,6 +14,14 @@ module.exports = {
 	dontHavePerms: ":x: You don't have permissions to use this command.",
 	missingPermission: perm => `Missing permission: \`${perm}\``,
 	errorInCommand: cmd => `:x: Error in command \`${cmd}\`:`,
+	
+	permissions: {
+		kickMembers: "Kick Members",
+		banMembers: "Ban Members",
+		manageRoles: "Manage Roles",
+		manageMessages: "Manage Messages",
+		manageGuild: "Manage Server",
+	},
 
 	basicGroup: "Basic",
 	devGroup: "Dev",

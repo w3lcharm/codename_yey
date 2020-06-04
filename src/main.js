@@ -46,7 +46,7 @@ client.on("commandError", async (commandName, msg, error, showErr, lang) => {
 	if (error instanceof CmdClient.PermissionError) {
 		const embed = {
 			title: lang.dontHavePerms,
-			description: lang.missingPermission(error.missingPermission),
+			description: lang.missingPermission(lang.permissions[error.missingPermission]),
 			color: 15158332,
 			footer: {
 				text: "codename_yey",

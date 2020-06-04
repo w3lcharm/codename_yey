@@ -38,7 +38,7 @@ module.exports = {
 		} catch (err) {
 			let description;
 			if (!msg.channel.guild.members.get(client.user.id).permission.has("kickMembers"))
-				description = lang.botDontHavePerms("Kick members");
+				description = lang.botDontHavePerms(lang.permissions.kickMembers);
 			else if (member.id === msg.channel.guild.ownerID)
 				description = lang.userIsOwner;
 			else if (member.highestRole.position >= msg.channel.guild.members.get(client.user.id).highestRole.position)

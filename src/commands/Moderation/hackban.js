@@ -29,7 +29,7 @@ module.exports = {
 		} catch (err) {
 			let description;
 			if (!msg.channel.guild.members.get(client.user.id).permission.has("banMembers"))
-				description = lang.botDontHavePerms("Ban members");
+				description = lang.botDontHavePerms(lang.permissions.banMembers);
 			else description = lang.somethingWentWrong;
 
 			const embed = {

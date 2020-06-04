@@ -7,13 +7,21 @@ module.exports = {
 	commandUsage: function (prefix, command) {
 		return `> Как использовать: \`${prefix}${command.name} ${this[command.usage]}\``;
 	},
-	botDontHavePerms: perm => `У меня нет разрешений для выполнения этого действия.`,
+	botDontHavePerms: perm => `У меня нет права \"${perm}\" для выполнения этого действия.`,
 	userIsOwner: "Этот пользователь является владельцем сервера",
 	roleHigher: "Роль этого пользователя выше моей роли.",
 	somethingWentWrong: "Что-то пошло не так. Попробуйте позже снова.",
 	dontHavePerms: ":x: Вы не имеете нужных прав на использование этой команды.",
 	missingPermission: perm => `Нужное право: \`${perm}\``,
 	errorInCommand: cmd => `:x: Ошибка в команде \`${cmd}\`:`,
+	
+	permissions: {
+		kickMembers: "Выгонять участников",
+		banMembers: "Банить участников",
+		manageRoles: "Управлять ролями",
+		manageMessages: "Управлять сообщениями",
+		manageGuild: "Управлять сервером",
+	},
 
 	basicGroup: "Основные",
 	devGroup: "Команды разработчика",

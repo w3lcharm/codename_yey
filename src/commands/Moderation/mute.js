@@ -78,7 +78,7 @@ module.exports = {
 		} catch (err) {
 			let description;
 			if (!msg.guild.members.get(client.user.id).permission.has("manageRoles"))
-				description = lang.botDontHavePerms("Manage roles")
+				description = lang.botDontHavePerms(lang.permissions.manageRoles)
 			else if (member.id === msg.guild.ownerID)
 				description = lang.userIsOwner;
 			else if (member.highestRole.position >= msg.guild.members.get(client.user.id).highestRole.position)

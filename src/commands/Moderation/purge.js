@@ -35,7 +35,7 @@ module.exports = {
 		} catch (err) {
 			let description;
 			if (!msg.guild.me.permission.has("manageMessages")) {
-				description = lang.botDontHavePerms("manageMessages");
+				description = lang.botDontHavePerms(lang.permissions.manageMessages);
 			} else {
 				description = lang.somethingWentWrong;
 			}
