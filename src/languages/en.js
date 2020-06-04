@@ -5,7 +5,15 @@ module.exports = {
 	clickHere: "(click here)",
 	daysAgo: days => `(${days} days ago)`,
 	commandUsage: function (prefix, command) {
-		return `> Usage: \`${prefix}${command.name} ${this[command.usage]}\``;
+		let usages = command.usage;
+		let str = `>>> Usage: `;
+		if (usages instanceof Array) {
+			usages = usages.map(u => `${prefix}${command.name} ${this[u]}`).join("\n");
+			str += `\`\`\`\n${usages}\n\`\`\``
+		}
+		else str += `\`${prefix}${command.name} ${this[command.usage]}\``;
+
+		return str;
 	},
 	botDontHavePerms: perm => `I don't have "${perm}" permission to do this.`,
 	userIsOwner: "This user is a server owner.",
@@ -213,4 +221,9 @@ module.exports = {
 	languagesTip: prefix => `You can change the language by typing ${prefix}language [language]`,
 	langDoesntExist: "> :x: This language doesn't exist.",
 	langSuccess: name => `> :white_check_mark: Your language has been changed to \`${name}\`.`,
+
+	randomDescription: "Generates a random number in specified range.\nIf one number specified, generates in range from 1 to number.\nIf two numbers specified, generates in range from smallest to biggest number.",
+	randomUsageMax: "<max>",
+	randomUsageMinMax: "<min> <max>",
+	notANumber: "> :x: Not a number.",
 };

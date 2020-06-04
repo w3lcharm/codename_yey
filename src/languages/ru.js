@@ -5,7 +5,15 @@ module.exports = {
 	clickHere: "(нажмите сюда)",
 	daysAgo: days => `(${days} дней назад)`,
 	commandUsage: function (prefix, command) {
-		return `> Как использовать: \`${prefix}${command.name} ${this[command.usage]}\``;
+		let usages = command.usage;
+		let str = `>>> Как использовать: `;
+		if (usages instanceof Array) {
+			usages = usages.map(u => `${prefix}${command.name} ${this[u]}`).join("\n");
+			str += `\`\`\`\n${usages}\n\`\`\``
+		}
+		else str += `\`${prefix}${command.name} ${this[command.usage]}\``;
+
+		return str;
 	},
 	botDontHavePerms: perm => `У меня нет права \"${perm}\" для выполнения этого действия.`,
 	userIsOwner: "Этот пользователь является владельцем сервера",
@@ -213,4 +221,9 @@ module.exports = {
 	languagesTip: prefix => `Вы можете сменить язык, введя ${prefix}language [язык]`,
 	langDoesntExist: "> :x: Данного языка не существует.",
 	langSuccess: name => `> :white_check_mark: Ваш язык был изменен на \`${name}\`.`,
+
+	randomDescription: "Генерирует случайное число в заданном диапазоне.\nЕсли одно число предоставлено, генерирует в диапазоне от 1 до заданного числа.\nЕсли 2 числа предоставлено, генерирует в диапазоне от меньшего до большего числа.",
+	randomUsageMax: "<макс>",
+	randomUsageMinMax: "<мин> <макc>",
+	notANumber: "> :x: Не число.",
 };

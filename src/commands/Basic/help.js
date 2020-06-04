@@ -23,7 +23,13 @@ module.exports = {
 			}
 
 			let usage = `${prefix}${command.name}`;
-			if (command.usage) usage += ` ${lang[command.usage]}`;
+			if (command.usage) {
+				if (command.usage instanceof Array) {
+					usage = command.usage.map(u => `${prefix}${command.name} ${lang[u]}`).join("\n");
+				} else {
+					usage += ` ${lang[command.usage]}`;
+				}
+			}
 
 			embed = {
 				title: lang.helpCommandEmbedTitle(command.name),
