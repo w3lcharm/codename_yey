@@ -2,9 +2,14 @@ const Eris = require("eris");
 
 function insertReturn(code) {
 	let codeLines = code.split("\n");
+
 	let lastCodeLine = codeLines[codeLines.length - 1];
+	let firstWord = lastCodeLine.split(" ")[0];
+	if (firstWord.startsWith("throw") || firstWord.startsWith("return")) return;
 	lastCodeLine = `return ${lastCodeLine}`;
+
 	codeLines[codeLines.length - 1] = lastCodeLine;
+
 	return codeLines.join("\n");
 }
 
