@@ -5,7 +5,7 @@ function insertReturn(code) {
 
 	let lastCodeLine = codeLines[codeLines.length - 1];
 	let firstWord = lastCodeLine.split(" ")[0];
-	if (firstWord.startsWith("throw") || firstWord.startsWith("return")) return;
+	if (firstWord.startsWith("throw") || firstWord.startsWith("return")) return code;
 	lastCodeLine = `return ${lastCodeLine}`;
 
 	codeLines[codeLines.length - 1] = lastCodeLine;
