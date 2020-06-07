@@ -1,4 +1,5 @@
 bot.db
 node_modules/
 config.js
+todo.txt
 config.json
