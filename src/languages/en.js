@@ -31,6 +31,13 @@ module.exports = {
     manageGuild: "Manage Server",
   },
 
+  status: {
+    online: "Online",
+    idle: "Idle",
+    dnd: "Do not disturb",
+    offline: "Offline",
+  },
+
   basicGroup: "Basic",
   devGroup: "Dev",
   moderationGroup: "Moderation",

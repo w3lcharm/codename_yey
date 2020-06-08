@@ -31,6 +31,13 @@ module.exports = {
     manageGuild: "Управлять сервером",
   },
 
+  status: {
+    online: "В сети",
+    idle: "Не активен",
+    dnd: "Не беспокоить",
+    offline: "Не в сети",
+  },
+
   basicGroup: "Основные",
   devGroup: "Команды разработчика",
   moderationGroup: "Модерация",

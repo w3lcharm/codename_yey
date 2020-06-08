@@ -33,7 +33,7 @@ module.exports = {
       fields: [
         {
           name: lang.userStatus,
-          value: member.status || "offline",
+          value: lang.status[member.status] || "offline",
         },
         {
           name: "ID:",
