@@ -2,7 +2,7 @@ const magicball = require("../../utils/8ball");
 
 module.exports = {
   name: "8ball",
-  group: "utilityGroup",
+  group: "funGroup",
   description: "_8ballDescription",
   usage: "_8ballUsage",
   async run(client, msg, args, prefix, lang) {

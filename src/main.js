@@ -29,6 +29,7 @@ client.loadGroups([
   "Basic",
   "Utility",
   "Moderation",
+  "Fun",
   "Settings",
   "Dev",
 ]);

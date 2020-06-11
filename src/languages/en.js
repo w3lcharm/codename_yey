@@ -43,6 +43,7 @@ module.exports = {
   moderationGroup: "Moderation",
   settingsGroup: "Settings",
   utilityGroup: "Utility",
+  funGroup: "Fun",
 
   avatarDescription: "Gets your or someone's avatar.",
   avatarUsage: "[user: id, tag or mention]",

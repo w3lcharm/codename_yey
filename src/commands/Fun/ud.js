@@ -3,7 +3,7 @@ const { URLSearchParams } = require("url");
 
 module.exports = {
   name: "ud",
-  group: "utilityGroup",
+  group: "funGroup",
   description: "udDescription",
   usage: "udUsage",
   async run(client, msg, args, prefix, lang) {

@@ -43,6 +43,7 @@ module.exports = {
   moderationGroup: "Модерация",
   settingsGroup: "Настройки",
   utilityGroup: "Утилиты",
+  devGroup: "Развлекательные",
 
   avatarDescription: "Показывает ваш аватар, либо аватар указанного пользователя.",
   avatarUsage: "[пользователь: id, упоминание либо тег]",
