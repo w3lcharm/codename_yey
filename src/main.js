@@ -43,7 +43,7 @@ client.once("ready", () => {
 
 client.on("guildMemberAdd", (guild, member) => autoroleFunc(client, guild, member));
 
-client.on("commandError", async (commandName, msg, error, showErr, lang) => {
+client.on("commandError", async (commandName, msg, error, showErr, lang = client.languages.get("en")) => {
   if (error instanceof CmdClient.PermissionError) {
     const embed = {
       title: lang.dontHavePerms,
