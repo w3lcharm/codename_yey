@@ -44,11 +44,14 @@ module.exports = {
       };
 
       await msg.channel.createMessage({ embed });
-      clearTimeout(muteTimers.get(msg.guild.id).get(member.id));
-      muteTimers.get(msg.guild.id).delete(member.id);
+      if (muteTimers.has(msg.guild.id)) {
+        if (!muteTimers.get(msg.guild.id).has(member.id)) return;
+        clearTimeout(muteTimers.get(msg.guild.id).get(member.id));
+        muteTimers.get(msg.guild.id).delete(member.id);
+      }  
     } catch (err) {
       let description;
-                        if (!msg.guild.members.get(client.user.id).permission.has("manageRoles"))
+      if (!msg.guild.members.get(client.user.id).permission.has("manageRoles"))
         description = lang.botDontHavePerms(lang.permissions.manageRoles);
       else if (member.id === msg.guild.ownerID)
         description = lang.userIsOwner;
