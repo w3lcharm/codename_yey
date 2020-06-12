@@ -54,8 +54,7 @@ module.exports = {
       if (member.roles.includes(mutedRole.id))
         return msg.channel.createMessage(lang.userAlreadyMuted);
 
-      await member.addRole(mutedRole.id, `muted by ${msg.author.username}#${msg.author.discriminator}`);
-
+      await member.addRole(mutedRole.id)
       const embed = {
         author: {
           name: lang.muteSuccess(member),
@@ -69,10 +68,14 @@ module.exports = {
 
       await msg.channel.createMessage({ embed });
       if (parsedTime) {
-        muteTimers.set(member.id, setTimeout(() => member.removeRole(mutedRole.id, "unmute"), parsedTime));
+        if (!muteTimers.has(msg.guild.id)) {
+          muteTimers.set(msg.guild.id, new Map());
+        }
+        guildMuteTimers = muteTimers.get(msg.guild.id);
+        guildMuteTimers.set(member.id, setTimeout(() => member.removeRole(mutedRole.id), parsedTime));
         setTimeout(() => {
-          clearTimeout(muteTimers.get(member.id));
-          muteTimers.delete(member.id);
+          clearTimeout(guildMuteTimers.get(member.id));
+          guildMuteTimers.delete(member.id);
         }, parsedTime);
       }
     } catch (err) {

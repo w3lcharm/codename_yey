@@ -44,8 +44,8 @@ module.exports = {
       };
 
       await msg.channel.createMessage({ embed });
-      clearTimeout(muteTimers.get(member.id));
-      muteTimers.delete(member.id);
+      clearTimeout(muteTimers.get(msg.guild.id).get(member.id));
+      muteTimers.get(msg.guild.id).delete(member.id);
     } catch (err) {
       let description;
                         if (!msg.guild.members.get(client.user.id).permission.has("manageRoles"))
