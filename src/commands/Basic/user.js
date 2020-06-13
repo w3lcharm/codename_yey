@@ -33,7 +33,7 @@ module.exports = {
       fields: [
         {
           name: lang.userStatus,
-          value: lang.status[member.status] || "offline",
+          value: lang.status[member.status] || lang.status.offline,
         },
         {
           name: "ID:",
@@ -59,6 +59,10 @@ module.exports = {
     };
 
     if (member.game) {
+      if (!member.game.name) {
+        return msg.channel.createMessage({ embed });
+      }
+
       let emoji;
       if (member.game.emoji) {
         let animated = member.game.emoji.animated ? "a" : "";
@@ -68,7 +72,7 @@ module.exports = {
           emoji = member.game.emoji.name;
         }
       }
-
+  
       switch (member.game.type) {
         case 4:
           embed.fields.unshift({
