@@ -236,4 +236,11 @@ module.exports = {
   notANumber: "> :x: Not a number.",
 
   xkcdDescription: "Gets a random xkcd comic.",
+
+  roleDescription: "Shows info about provided role.",
+  roleUsage: "<role: name or id>",
+  roleNotFound: "> :x: Role not found.",
+  roleColor: "Color:",
+  roleMentionable: "Mentionable?",
+  yesNo: what => what ? "Yes" : "No",
 };

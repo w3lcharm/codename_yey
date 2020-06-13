@@ -54,35 +54,37 @@ async function onGuildMemberRemove(client, guild, member) {
     footer: { text: `ID: ${member.id}` },
   };
 
-  if (entry && entry.actionType === 20) {
-    embed.author.name = "Member kicked";
-    embed.fields = [
-      {
-        name: "Reason:",
-        value: entry.reason || "None",
-        inline: true,
-      },
-      {
-        name: "Kicked by:",
-        value: entry.user.tag,
-        inline: true,
-      },
-    ];
-  }
-  if (entry && entry.actionType === 22) {
-    embed.author.name = "Member banned";
-    embed.fields = [
-      {
-        name: "Reason:",
-        value: entry.reason || "None",
-        inline: true,
-      },
-      {
-        name: "Banned by:",
-        value: entry.user.tag,
-        inline: true,
-      },
-    ];
+  if (entry && entry.target) {
+    if (entry && entry.actionType === 20 && entry.target.id === member.id) {
+      embed.author.name = "Member kicked";
+      embed.fields = [
+        {
+          name: "Reason:",
+          value: entry.reason || "None",
+          inline: true,
+        },
+        {
+          name: "Kicked by:",
+          value: entry.user.tag,
+          inline: true,
+        },
+      ];
+    }
+    if (entry && entry.actionType === 22 && entry.target.id === member.id) {
+      embed.author.name = "Member banned";
+      embed.fields = [
+        {
+          name: "Reason:",
+          value: entry.reason || "None",
+          inline: true,
+        },
+        {
+          name: "Banned by:",
+          value: entry.user.tag,
+          inline: true,
+        },
+      ];
+    }
   }
 
   try {
