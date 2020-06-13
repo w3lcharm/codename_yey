@@ -22,7 +22,7 @@ module.exports = {
       if (member.id === client.user.id)
         return msg.channel.createMessage(lang.cantKickBot);
       
-      await member.kick(`${reason} (kicked by ${msg.author.username}#${msg.author.discriminator})`);
+      await member.kick(`${encodeURI(reason)} (kicked by ${msg.author.username}#${msg.author.discriminator})`);
 
       const embed = {
         author: {

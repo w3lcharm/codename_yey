@@ -75,7 +75,6 @@ client.on("guildCreate", guild => client.logger.info(`New server: ${guild.name} 
   .on("guildDelete", guild => client.logger.info(`Left from server ${guild.name} (ID: ${guild.id})`))
   .on("guildMemberAdd", (guild, member) => modlogFunctions.onGuildMemberAdd(client, guild, member))
   .on("guildMemberRemove", (guild, member) => modlogFunctions.onGuildMemberRemove(client, guild, member))
-  .on("guildBanAdd", (guild, user) => modlogFunctions.onGuildBanAdd(client, guild, user))
   .on("guildBanRemove", (guild, user) => modlogFunctions.onGuildBanRemove(client, guild, user))
   .on("messageDelete", msg => modlogFunctions.onMessageDelete(client, msg))
   .on("messageUpdate", (newMsg, oldMsg) => modlogFunctions.onMessageUpdate(client, newMsg, oldMsg));

@@ -36,6 +36,13 @@ async function onGuildMemberRemove(client, guild, member) {
   if (!guild) return;
   const channel = await getModlogChannel(guild);
   if (!channel) return;
+  
+  let entry;
+  if (guild.me.permission.has("viewAuditLogs")) {
+    entry = await guild.getAuditLogs()
+      .then(audit => audit.entries.filter(e => (e.actionType === 20 || e.actionType === 22)))
+      .then(entries => entries[0])
+  }
 
   const embed = {
     author: {
@@ -47,42 +54,32 @@ async function onGuildMemberRemove(client, guild, member) {
     footer: { text: `ID: ${member.id}` },
   };
 
-  try {
-    await client.createMessage(channel, { embed });
-  } catch {}
-}
-
-async function onGuildBanAdd(client, guild, user) {
-  if (!guild) return;
-  const channel = await getModlogChannel(guild);
-  if (!channel) return;
-
-  let entry;
-  if (guild.me.permission.has("viewAuditLogs")) {
-    entry = await guild.getAuditLogs()
-      .then(audit => audit.entries.filter(e => e.actionType === 22)[0]);
-  }
-
-  const embed = {
-    author: {
-      name: "Member banned",
-      icon_url: user.avatarURL,
-    },
-    description: `${user.username}#${user.discriminator}`,
-    timestamp: new Date().toISOString(),
-    footer: { text: `ID: ${user.id}` },
-  };
-
-  if (entry) {
+  if (entry && entry.actionType === 20) {
+    embed.author.name = "Member kicked";
     embed.fields = [
       {
         name: "Reason:",
-        value: entry.reason || "none",
+        value: entry.reason || "None",
+        inline: true,
+      },
+      {
+        name: "Kicked by:",
+        value: entry.user.tag,
+        inline: true,
+      },
+    ];
+  }
+  if (entry && entry.actionType === 22) {
+    embed.author.name = "Member banned";
+    embed.fields = [
+      {
+        name: "Reason:",
+        value: entry.reason || "None",
         inline: true,
       },
       {
         name: "Banned by:",
-        value: `${entry.user.username}#${entry.user.discriminator}`,
+        value: entry.user.tag,
         inline: true,
       },
     ];
@@ -232,7 +229,6 @@ async function onMessageUpdate(client, newMsg, oldMsg) {
 module.exports = {
   onGuildMemberAdd,
   onGuildMemberRemove,
-  onGuildBanAdd,
   onGuildBanRemove,
   onMessageDelete,
   onMessageUpdate,
