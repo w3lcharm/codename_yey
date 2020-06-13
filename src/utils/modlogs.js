@@ -54,8 +54,8 @@ async function onGuildMemberRemove(client, guild, member) {
     footer: { text: `ID: ${member.id}` },
   };
 
-  if (entry && entry.target) {
-    if (entry && entry.actionType === 20 && entry.target.id === member.id) {
+  if (entry) {
+    if (entry && entry.actionType === 20 && entry.targetID === member.id) {
       embed.author.name = "Member kicked";
       embed.fields = [
         {
@@ -70,7 +70,7 @@ async function onGuildMemberRemove(client, guild, member) {
         },
       ];
     }
-    if (entry && entry.actionType === 22 && entry.target.id === member.id) {
+    if (entry && entry.actionType === 22 && entry.targetID === member.id) {
       embed.author.name = "Member banned";
       embed.fields = [
         {
