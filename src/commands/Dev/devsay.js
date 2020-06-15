@@ -7,7 +7,7 @@ module.exports = {
   async run(client, msg, args, prefix, lang) {
     if (!args.length) return;
 
-    let text = msg.content.slice(preifx.length + this.name.length + 1);
+    let text = msg.content.slice(prefix.length + this.name.length + 1);
 
     try {
       await msg.delete();
