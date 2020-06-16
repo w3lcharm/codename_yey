@@ -1,6 +1,6 @@
 const Eris = require("eris");
 
-function insertReturn(code) {
+/* function insertReturn(code) {
   let codeLines = code.split("\n");
 
   let lastCodeLine = codeLines[codeLines.length - 1];
@@ -11,7 +11,7 @@ function insertReturn(code) {
   codeLines[codeLines.length - 1] = lastCodeLine;
 
   return codeLines.join("\n");
-}
+} */
 
 module.exports = {
   name: "eval",
@@ -22,7 +22,7 @@ module.exports = {
   usage: "evalUsage",
   async run(client, msg, args, prefix) {
     let code = msg.content.slice(prefix.length + this.name.length + 1);
-    code = insertReturn(code);
+    // code = insertReturn(code);
     let asyncifiedCode = `(async () => {\n${code}\n})()`;
 
     try {
