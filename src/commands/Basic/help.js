@@ -65,7 +65,7 @@ module.exports = {
         color: Math.round(Math.random() * 16777216) + 1,
         fields,
         footer: {
-          text: "codename_yey",
+          text: lang.helpTip(prefix),
           icon_url: client.user.avatarURL,
         },
       };

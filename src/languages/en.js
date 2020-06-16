@@ -56,6 +56,7 @@ module.exports = {
   helpCommandEmbedTitle: cmd => `Help for command \`${cmd}\`:`,
   helpCommandUsage: "Usage:",
   helpTitle: "Bot commands:",
+  helpTip: prefix => `Want to get info of some command? Use ${prefix}help [command]`,
 
   inviteDescription: "Bot invite link and support server invite.",
   inviteBotInvite: "Bot invite link:",
@@ -243,4 +244,6 @@ module.exports = {
   roleColor: "Color:",
   roleMentionable: "Mentionable?",
   yesNo: what => what ? "Yes" : "No",
+  roleDefaultColor: "Default",
+  roleCreatedAt: "Created at:"
 };
