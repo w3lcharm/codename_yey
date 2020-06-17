@@ -56,7 +56,7 @@ module.exports = {
   helpCommandEmbedTitle: cmd => `Help for command \`${cmd}\`:`,
   helpCommandUsage: "Usage:",
   helpTitle: "Bot commands:",
-  helpTip: prefix => `Want to get info of some command? Use ${prefix}help [command]`,
+  helpTip: prefix => `Want to get info about some command? Use ${prefix}help [command]`,
 
   inviteDescription: "Bot invite link and support server invite.",
   inviteBotInvite: "Bot invite link:",
