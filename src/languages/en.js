@@ -47,7 +47,9 @@ module.exports = {
 
   avatarDescription: "Gets your or someone's avatar.",
   avatarUsage: "[user: id, tag or mention]",
+  avatarUsageServer: "server",
   avatarUser: user => `${user.tag}'s avatar:`,
+  serverIcon: "Server icon:",
 
   helpDescription: "Shows information about bot commands.",
   helpUsage: "[command]",

@@ -47,7 +47,9 @@ module.exports = {
   
   avatarDescription: "Показывает ваш аватар, либо аватар указанного пользователя.",
   avatarUsage: "[пользователь: id, упоминание либо тег]",
+  avatarUsageServer: "server",
   avatarUser: user => `Аватар ${user.tag}:`,
+  serverIcon: "Иконка сервера:",
 
   helpDescription: "Показывает информацию о командах бота.",
   helpUsage: "[команда]",
