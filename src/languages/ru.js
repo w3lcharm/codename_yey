@@ -236,5 +236,12 @@ module.exports = {
   randomUsageMinMax: "<мин> <макc>",
   notANumber: "> :x: Не число.",
   
-  xkcdDescription: "Получает случайный комикс xkcd (на англ. языке)."
+  xkcdDescription: "Получает случайный комикс xkcd (на англ. языке).",
+
+  roleDescription: "Показывает информацию о указанной роли.",
+  roleUsage: "<роль: id, имя или упоминание>",
+  roleNotFound: "> :x: Роль не найдена.",
+  roleColor: "Цвет:",
+  roleMentionable: "Упоминаемая?",
+  roleCreatedAt: "Создана:",
 };
