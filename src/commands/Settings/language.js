@@ -6,7 +6,7 @@ module.exports = {
   async run(client, msg, args, prefix, lang) {
     let langName = args[0];
     if (!langName) {
-      let userLanguage = await languages.findOne({ where: { user: msg.author.id } })
+      let userLanguage = await db.languages.findOne({ where: { user: msg.author.id } })
         .then(l => l.lang);
 
       let embed = {
@@ -28,7 +28,7 @@ module.exports = {
         return msg.channel.createMessage(lang.langDoesntExist);
       }
 
-      await languages.update(
+      await db.languages.update(
         { lang: langName },
         { where: { user: msg.author.id } }
       );

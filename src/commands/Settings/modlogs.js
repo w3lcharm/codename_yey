@@ -9,7 +9,7 @@ module.exports = {
   guildOnly: true,
   async run(client, msg, args, prefix, lang) {
     let channel = args[0];
-    const modlogChannel = await modlogs.findOrCreate({ where: { server: msg.guild.id } })
+    const modlogChannel = await db.modlogs.findOrCreate({ where: { server: msg.guild.id } })
       .then(i => i[0].channel ? client.getChannel(i[0].channel) : undefined);
 
     if (!channel) {
@@ -32,7 +32,7 @@ module.exports = {
       return msg.channel.createMessage({ embed });
     } else {
       if (channel === "disable") {
-        await modlogs.update(
+        await db.modlogs.update(
           { channel: null },
           { where: { server: msg.guild.id } }
         );
@@ -56,7 +56,7 @@ module.exports = {
           return msg.channel.createMessage({ embed });
         }
 
-        await modlogs.update(
+        await db.modlogs.update(
           { channel: ch.id },
           { where: { server: msg.guild.id } },
         );

@@ -1,7 +1,7 @@
 const { Message } = require("eris");
 
 function getModlogChannel(guild) {
-  return modlogs.findOrCreate({ where: { server: guild.id } })
+  return db.modlogs.findOrCreate({ where: { server: guild.id } })
     .then(c => c[0].channel);
 }
 

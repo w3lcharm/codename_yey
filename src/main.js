@@ -5,6 +5,7 @@ const { inspect } = require("util");
 
 const autoroleFunc = require("./utils/autorole");
 const modlogFunctions = require("./utils/modlogs");
+const initDB = require("./utils/initDB");
 
 const client = new CmdClient(config.token, {
   prefix: config.prefix,
@@ -20,10 +21,7 @@ global.sequelize = new Sequelize(config.database.database, config.database.usern
   storage: config.database.storage || "./bot.db",
   logging: (...msg) => sequelizeLogger.debug(msg),
 });
-global.warns = require("./dbModels/warns")(sequelize, Sequelize.DataTypes);
-global.autorole = require("./dbModels/autorole")(sequelize, Sequelize.DataTypes);
-global.modlogs = require("./dbModels/modlogs")(sequelize, Sequelize.DataTypes);
-global.languages = require("./dbModels/languages")(sequelize, Sequelize.DataTypes);
+global.db = initDB(sequelize, Sequelize.DataTypes);
 
 client.loadGroups([
   "Basic",

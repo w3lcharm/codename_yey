@@ -23,7 +23,7 @@ module.exports = {
         fields: [],
       };
         
-      const warnList = await warns.findAll({
+      const warnList = await db.warns.findAll({
         where: {
           server: msg.guild.id,
           user: member.user.id,
@@ -42,7 +42,7 @@ module.exports = {
     if (msg.member.permission.has("kickMembers")) {
       if (args[0] == "--delete" || args[0] == "-d") {
         let id = args[1];
-        const warn = await warns.findOne({
+        const warn = await db.warns.findOne({
           where: {
             server: msg.guild.id,
             id: id,
@@ -52,7 +52,7 @@ module.exports = {
         else if (warn.server != msg.guild.id)
           msg.channel.createMessage(lang.warnOnAnotherServer);
         else {
-          await warns.destroy({ where: { id: id } });
+          await db.warns.destroy({ where: { id: id } });
           msg.channel.createMessage(lang.warnDeleteSuccess(warn.id));
         }
         return;
@@ -70,7 +70,7 @@ module.exports = {
       if (member.permission.has("administrator"))
         return msg.channel.createMessage(lang.cantWarnAdmin);
 
-      const warnObj = await warns.create({
+      const warnObj = await db.warns.create({
         server: msg.guild.id,
         user: member.id,
         warnedBy: msg.author.id,
