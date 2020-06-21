@@ -1,10 +1,13 @@
 const Eris = require("eris-additions")(require("eris"));
 const fs = require("fs");
+const Sequelize = require("sequelize");
 
 const PermissionError = require("./errors/permissionError");
 
 const Group = require("./group");
 const Logger = require("./logger");
+
+const initDB = require("./utils/initDB");
 
 function validatePermission(member, permissions) {
   if (permissions instanceof Array) {
@@ -35,6 +38,15 @@ class CmdClient extends Eris.Client {
     this.logger.info("logger initialized.");
 
     this.languages = this._loadLanguages();
+
+    this.sequelizeLogger = new Logger(this.debugMode ? Logger.TRACE : Logger.INFO, "sequelize");
+    global.sequelize = new Sequelize(options.db.database, options.db.username, options.db.password, {
+      host: options.db.localhost,
+      dialect: options.db.dialect,
+      storage: options.db.storage,
+      logging: (...msg) => this.sequelizeLogger.debug(msg),
+    });
+    global.db = initDB(sequelize, Sequelize.DataTypes);
 
     if (options.debugMode) {
       this._erisLogger = new Logger(Logger.TRACE, "eris");

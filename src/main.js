@@ -1,27 +1,16 @@
 const CmdClient = require("./client");
-const Sequelize = require("sequelize");
 const config = require("../config");
 const { inspect } = require("util");
 
 const autoroleFunc = require("./utils/autorole");
 const modlogFunctions = require("./utils/modlogs");
-const initDB = require("./utils/initDB");
 
 const client = new CmdClient(config.token, {
   prefix: config.prefix,
   owners: config.owners,
+  db: config.database,
 //	debugMode: true,
 });
-
-const sequelizeLogger = new CmdClient.Logger(client.debugMode ? CmdClient.Logger.TRACE : CmdClient.Logger.INFO, "sequelize");
-
-global.sequelize = new Sequelize(config.database.database, config.database.username, config.database.password, {
-  host: config.database.host,
-  dialect: config.database.dialect,
-  storage: config.database.storage || "./bot.db",
-  logging: (...msg) => sequelizeLogger.debug(msg),
-});
-global.db = initDB(sequelize, Sequelize.DataTypes);
 
 client.loadGroups([
   "Basic",
