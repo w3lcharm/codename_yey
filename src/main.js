@@ -1,6 +1,7 @@
 const CmdClient = require("./client");
 const config = require("../config");
 const { inspect } = require("util");
+const SDC = require("@megavasiliy007/sdc-api");
 
 const autoroleFunc = require("./utils/autorole");
 const modlogFunctions = require("./utils/modlogs");
@@ -9,8 +10,10 @@ const client = new CmdClient(config.token, {
   prefix: config.prefix,
   owners: config.owners,
   db: config.database,
-//	debugMode: true,
+  debugMode: config.debugMode,
 });
+
+const sdcClient = new SDC(config.sdcApiKey);
 
 client.loadGroups([
   "Basic",
@@ -26,6 +29,10 @@ client.once("ready", () => {
   client.editStatus("online", { name: `${config.prefix}help`, type: 3 });
   sequelize.sync()
     .then(() => client.logger.info("successfully connected to the database."));
+
+  if (!client.debugMode) {
+    sdcClient.setAutoPost(client);
+  }
 });
 
 client.on("guildMemberAdd", (guild, member) => autoroleFunc(client, guild, member));

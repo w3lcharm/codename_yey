@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@megavasiliy007/sdc-api@github:MegaVasiliy007/sdc-api":
+  version "1.1.5"
+  resolved "https://codeload.github.com/MegaVasiliy007/sdc-api/tar.gz/0eb1da3d783cd97c3b3847b38312bf101a9e7148"
+
 "@types/geojson@^7946.0.7":
   version "7946.0.7"
   resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.7.tgz#c8fa532b60a0042219cdf173ca21a975ef0666ad"
