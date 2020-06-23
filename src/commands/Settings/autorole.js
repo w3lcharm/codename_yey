@@ -26,7 +26,7 @@ module.exports = {
 
       await msg.channel.createMessage({ embed });
     } else {
-      await autorole.findOrCreate({ where: { server: msg.channel.guild.id } });
+      await db.autorole.findOrCreate({ where: { server: msg.channel.guild.id } });
       if (roleID == "disable") {
         await db.autorole.update({ autorole: null }, { where: { server: msg.channel.guild.id } });
         await msg.channel.createMessage(lang.autoroleDisableSuccess);
