@@ -2,6 +2,7 @@ const CmdClient = require("./client");
 const config = require("../config");
 const { inspect } = require("util");
 const SDC = require("@megavasiliy007/sdc-api");
+const DBL = require("dblapi.js");
 
 const autoroleFunc = require("./utils/autorole");
 const modlogFunctions = require("./utils/modlogs");
@@ -15,6 +16,14 @@ const client = new CmdClient(config.token, {
 });
 
 const sdcClient = new SDC(config.sdcApiKey);
+
+let dblClient, dblLogger;
+if (!client.debugMode) {
+  dblClient = new DBL(config.dblApiKey, client);
+  dblLogger = new CmdClient.Logger(CmdClient.Logger.INFO, "dbl");
+
+  dblClient.on("posted", () => dblLogger.info("stats posted."));
+}
 
 client.loadGroups([
   "Basic",
