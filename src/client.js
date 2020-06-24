@@ -39,6 +39,8 @@ class CmdClient extends Eris.Client {
 
     this.languages = this._loadLanguages();
 
+    this.supportChannelID = options.supportChannelID;
+
     this.sequelizeLogger = new Logger(this.debugMode ? Logger.TRACE : Logger.INFO, "sequelize");
     global.sequelize = new Sequelize(options.db.database, options.db.username, options.db.password, {
       host: options.db.localhost,
