@@ -8,8 +8,6 @@ module.exports = {
   guildOnly: true,
   async run(client, msg, args, prefix, lang) {
     moment.locale(lang.langName);
-    const owner = client.users.get(msg.guild.ownerID);
-
     const createdDaysAgo = Math.floor((Date.now() - msg.guild.createdAt) / (1000 * 86400));
 
     const embed = {
@@ -19,7 +17,7 @@ module.exports = {
       fields: [
         {
           name: lang.serverOwner,
-          value: owner.tag,
+          value: `<@${msg.guild.ownerID}>`,
           inline: true,
         },
         {
