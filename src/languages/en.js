@@ -247,5 +247,17 @@ module.exports = {
   roleMentionable: "Mentionable?",
   yesNo: what => what ? "Yes" : "No",
   roleDefaultColor: "Default",
-  roleCreatedAt: "Created at:"
+  roleCreatedAt: "Created at:",
+
+  supportDescription: "Sends the question to support server.\nYou may be prohibited from using this command for spam/flood/etc.",
+  supportUsage: "<question>",
+  supportBan: reason => `> :x: You are forbidden to use this command. Reason: ${reason || "none"}`,
+  emptyQuestion: "> :warning: Question cannot be empty.",
+  supportSuccess: "> :white_check_mark: Your question has been successfully sent to support server. Please wait for the answer, it usually takes from 5 to 10 minutes.",
+
+  respondDescription: "Responds to question.",
+  respondUsage: "<id> <answer>",
+  respondInvalidID: "> :x: Invalid ID.",
+  receivedAnswer: "Your question has been answered:",
+  respondQuestion: "Your question:",
 };

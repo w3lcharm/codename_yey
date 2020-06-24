@@ -244,6 +244,19 @@ module.exports = {
   roleUsage: "<роль: id, имя или упоминание>",
   roleNotFound: "> :x: Роль не найдена.",
   roleColor: "Цвет:",
+  yesNo: what => what ? "Да" : "Нет",
   roleMentionable: "Упоминаемая?",
   roleCreatedAt: "Создана:",
+
+  supportDescription: "Отправляет вопрос на сервер поддержки.\nОбратите внимание, что вам может быть запрещено использование этой команды за флуд/спам/т.п.",
+  supportUsage: "<вопрос>",
+  supportBan: reason => `> :x: Вам запрещено использовать эту команду. Причина: ${reason || "отсутствует"}`,
+  emptyQuestion: "> :warning: Вопрос не может быть пустым.",
+  supportSuccess: "> :white_check_mark: Ваш вопрос был успешно отправлен на сервер поддержки. Пожалуйста, ожидайте ответ, это обычно занимает от 5 до 10 минут.",
+
+  respondDescription: "Отвечает на вопрос",
+  respondUsage: "<id> <ответ>",
+  respondInvalidID: "> :x: Неправильный ID.",
+  receivedAnswer: "На ваш вопрос пришел ответ:",
+  respondQuestion: "Ваш вопрос:",
 };
