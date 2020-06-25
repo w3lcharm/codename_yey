@@ -13,6 +13,7 @@ const client = new CmdClient(config.token, {
   db: config.database,
   debugMode: config.debugMode,
   supportChannelID: config.supportChannelID,
+  getAllUsers: true,
 });
 
 const sdcClient = new SDC(config.sdcApiKey);
