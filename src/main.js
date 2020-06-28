@@ -20,9 +20,9 @@ const sdcClient = new SDC(config.sdcApiKey);
 let dblClient, dblLogger;
 if (!client.debugMode) {
   dblClient = new DBL(config.dblApiKey, client);
-  dblLogger = new CmdClient.Logger(CmdClient.Logger.INFO, "dbl");
+  // dblLogger = new CmdClient.Logger(CmdClient.Logger.INFO, "dbl");
 
-  dblClient.on("posted", () => dblLogger.info("stats posted."));
+  // dblClient.on("posted", () => dblLogger.info("stats posted."));
 }
 
 client.loadGroups([
