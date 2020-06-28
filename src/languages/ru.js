@@ -259,4 +259,12 @@ module.exports = {
   respondInvalidID: "> :x: Неправильный ID.",
   receivedAnswer: "На ваш вопрос пришел ответ:",
   respondQuestion: "Ваш вопрос:",
+
+  remindmeDescription: "Задает напоминание.\nРазрешенные настройки времени: Ns, Nm, Nh, Nd, где N - число.",
+  remindmeUsage: "<время> <текст>",
+  remindmeInvalidTime: "> :x: Неправильно указано время.",
+  notMoreThan7Days: "> :warning: Вы можете задать напоминание на не более чем 7 дней.",
+  textCantBeEmpty: "> :x: Текст не может быть пустым.",
+  remindmeSuccess: "> :white_check_mark: Напоминание успешно задано.",
+  reminder: "Напоминание:",
 };

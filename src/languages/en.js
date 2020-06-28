@@ -260,4 +260,12 @@ module.exports = {
   respondInvalidID: "> :x: Invalid ID.",
   receivedAnswer: "Your question has been answered:",
   respondQuestion: "Your question:",
+  
+  remindmeDescription: "Sets a reminder.\nAllowed time settings: Ns, Nm, Nh, Nd, where N is a number.",
+  remindmeUsage: "<time> <text>",
+  remindmeInvalidTime: "> :x: Invalid time.",
+  notMoreThan7Days: "> :warning: You can set a reminder for no more than 7 days.",
+  textCantBeEmpty: "> :x: Text cannot be empty.",
+  remindmeSuccess: "> :white_check_mark: Reminder has been successfully set.",
+  reminder: "Reminder:",
 };

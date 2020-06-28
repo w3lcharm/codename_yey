@@ -13,7 +13,7 @@
     "@megavasiliy007/sdc-api": "github:MegaVasiliy007/sdc-api",
     "bufferutil": "^4.0.1",
     "dblapi.js": "^2.4.0",
-    "eris": "^0.13.1",
+    "eris": "^0.13.3",
     "eris-additions": "^1.4.1",
     "erlpack": "github:abalabahaha/erlpack",
     "eventemitter3": "^4.0.4",
@@ -21,7 +21,7 @@
     "moment": "^2.26.0",
     "node-fetch": "^2.6.0",
     "qrcode": "^1.4.4",
-    "sequelize": "^5.21.8",
+    "sequelize": "^5.22.2",
     "sqlite3": "^4.2.0"
   }
 }

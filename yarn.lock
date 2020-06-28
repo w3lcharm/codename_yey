@@ -12,14 +12,14 @@
   integrity sha512-wE2v81i4C4Ol09RtsWFAqg3BUitWbHSpSlIo+bNdsCJijO9sjme+zm+73ZMCa/qMC8UEERxzGbvmr1cffo2SiQ==
 
 "@types/node@*":
-  version "14.0.11"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.11.tgz#61d4886e2424da73b7b25547f59fdcb534c165a3"
-  integrity sha512-lCvvI24L21ZVeIiyIUHZ5Oflv1hhHQ5E1S25IRlKIXaRkVgmXpJMI3wUJkmym2bTbCe+WoIibQnMVAU3FguaOg==
+  version "14.0.14"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.14.tgz#24a0b5959f16ac141aeb0c5b3cd7a15b7c64cbce"
+  integrity sha512-syUgf67ZQpaJj01/tRTknkMNoBBLWJOBODF0Zm4NrXmiSuxjymFrxnTu1QVYRubhVkRcZLYZG8STTwJRdVm/WQ==
 
 "@types/node@^13.9.8":
-  version "13.13.10"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.13.10.tgz#34a9be3cbc409fd235984bd18a130006f5234396"
-  integrity sha512-J+FbkhLTcFstD7E5mVZDjYxa1VppwT2HALE6H3n2AnBSP8uiCQk0Pyr6BkJcP38dFV9WecoVJRJmFnl9ikIW7Q==
+  version "13.13.12"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.13.12.tgz#9c72e865380a7dc99999ea0ef20fc9635b503d20"
+  integrity sha512-zWz/8NEPxoXNT9YyF2osqyA9WjssZukYpgI4UYZpOjcyqwIUqWGkcCionaEb9Ki+FULyPyvNFpg/329Kd2/pbw==
 
 abbrev@1:
   version "1.1.1"
@@ -269,10 +269,10 @@ eris@^0.12.0:
     opusscript "^0.0.7"
     tweetnacl "^1.0.1"
 
-eris@^0.13.1:
-  version "0.13.1"
-  resolved "https://registry.yarnpkg.com/eris/-/eris-0.13.1.tgz#cdf6af407faafefee6242b7785297db9e14d484c"
-  integrity sha512-c/059ie4W/NfPufFCsEFdgbvEVjEpcttAZijQ33P+3EemCMUfuehp1qFq1WcrAHYU+y0lCOqQDw2YdkGjgYdUQ==
+eris@^0.13.3:
+  version "0.13.3"
+  resolved "https://registry.yarnpkg.com/eris/-/eris-0.13.3.tgz#22abb71f9ce0d453200b537cad457dc39c7b302b"
+  integrity sha512-WBtLyknOWZpYZL9yPhez0oKUWvYpunSg43hGxawwjwSf3gFXmbEPYrT8KlmZXtpJnX16eQ7mzIq+MgSh3LarEg==
   dependencies:
     ws "^7.2.1"
   optionalDependencies:
@@ -359,9 +359,9 @@ iconv-lite@^0.4.4:
     safer-buffer ">= 2.1.2 < 3"
 
 iconv-lite@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.5.1.tgz#b2425d3c7b18f7219f2ca663d103bddb91718d64"
-  integrity sha512-ONHr16SQvKZNSqjQT9gy5z24Jw+uqfO02/ngBSBoqChZ+W8qXX7GPRa1RoUnzGADw8K63R1BXUMzarCVQBpY8Q==
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.5.2.tgz#af6d628dccfb463b7364d97f715e4b74b8c8c2b8"
+  integrity sha512-kERHXvpSaB4aU3eANwidg79K8FlrN77m8G9V+0vOR3HYaRifrlwMEpT7ZBJqLSEIHnEgJTHcWK82wwLwwKwtag==
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
 
@@ -500,9 +500,9 @@ moment-timezone@^0.5.21, moment-timezone@^0.5.31:
     moment ">= 2.9.0"
 
 "moment@>= 2.9.0", moment@^2.24.0, moment@^2.26.0:
-  version "2.26.0"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.26.0.tgz#5e1f82c6bafca6e83e808b30c8705eed0dcbd39a"
-  integrity sha512-oIixUO+OamkUkwjhAVE18rAMfRJNsNe/Stid/gwHSOfHrOtw9EhAY2AHvdKZ/k/MggcYELFCJz/Sn2pL8b8JMw==
+  version "2.27.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.27.0.tgz#8bff4e3e26a236220dfe3e36de756b6ebaa0105d"
+  integrity sha512-al0MUK7cpIcglMv3YF13qSgdAIqxHTO7brRtaz3DlSULbqfazqkc5kEjNrLDOM7fsjshoFIihnU8snrP7zUvhQ==
 
 ms@^2.1.1:
   version "2.1.2"
@@ -774,10 +774,10 @@ sequelize-pool@^2.3.0:
   resolved "https://registry.yarnpkg.com/sequelize-pool/-/sequelize-pool-2.3.0.tgz#64f1fe8744228172c474f530604b6133be64993d"
   integrity sha512-Ibz08vnXvkZ8LJTiUOxRcj1Ckdn7qafNZ2t59jYHMX1VIebTAOYefWdRYFt6z6+hy52WGthAHAoLc9hvk3onqA==
 
-sequelize@^5.21.8:
-  version "5.21.12"
-  resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-5.21.12.tgz#859e9cdf2f9d60e69c0f018fc41660fac6b798c1"
-  integrity sha512-WRTXLoH72HQnlEUbKI1Iev2yS1/epg72Chz0fHqk0MLn4Wj2pH/TS01lpMDGQqxZPXCxRGrwk1YxwUw2C0yI9A==
+sequelize@^5.22.2:
+  version "5.22.2"
+  resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-5.22.2.tgz#deeb2108718fe8f5b389325a836bdd301cbd3fe0"
+  integrity sha512-mJQnrnGppq9VkOXaf6Zq1K/5604+gkAfrDdHyobfnxpRcLazVGipvt110huGGMLI2MUXzHILYA2OqHlr3bFRyA==
   dependencies:
     bluebird "^3.5.0"
     cls-bluebird "^2.1.0"
