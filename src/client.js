@@ -41,6 +41,8 @@ class CmdClient extends Eris.Client {
 
     this.supportChannelID = options.supportChannelID;
 
+    this.cooldowns = new Eris.Collection();
+
     this.sequelizeLogger = new Logger(this.debugMode ? Logger.TRACE : Logger.INFO, "sequelize");
     global.sequelize = new Sequelize(options.db.database, options.db.username, options.db.password, {
       host: options.db.localhost,
@@ -64,15 +66,36 @@ class CmdClient extends Eris.Client {
       const command = this.commands.get(commandName);
       const lang = this.languages.get((await db.languages.findOrCreate({ where: { user: msg.author.id } }))[0].lang);
 
-      if (command.guildOnly && !msg.channel.guild)
+      if (command.guildOnly && !msg.channel.guild) {
         return msg.channel.createMessage(lang.cantUseCommandInDM);
+      }
 
-      if (command.ownerOnly && this.owners.indexOf(msg.author.id) === -1)
-        return;
+      if (command.ownerOnly && this.owners.indexOf(msg.author.id) === -1) return;
+
+      if (command.cooldown) {
+        if (!this.cooldowns.has(command.name)) {
+          this.cooldowns.set(command.name, new Eris.Collection());
+        }
+
+        let cmdCooldowns = this.cooldowns.get(command.name);
+        let now = Date.now();
+        if (cmdCooldowns.has(msg.author.id)) {
+          let expiration = cmdCooldowns.get(msg.author.id) + (command.cooldown * 1000);
+          if (now < expiration) {
+            let secsLeft = Math.floor((expiration - now) / 1000);
+            return msg.channel.createMessage(lang.cooldown(secsLeft));
+          }
+        }
+      }
 
       try {
         if (command.requiredPermissions) validatePermission(msg.member, command.requiredPermissions);
         await command.run(this, msg, args, this.prefix, lang);
+        if (command.cooldown) {
+          let cmdCooldowns = this.cooldowns.get(command.name);
+          cmdCooldowns.set(msg.author.id, Date.now());
+          setTimeout(() => cmdCooldowns.delete(msg.author.id), command.cooldown * 1000);
+        }
         this.logger.info(`${msg.author.username}#${msg.author.discriminator} used ${commandName} command in ${msg.channel.guild ? msg.channel.guild.name : "bot DM"}`);
       } catch (err) {
         this.emit("commandError", commandName, msg, err, true, lang);
@@ -181,5 +204,6 @@ class CmdClient extends Eris.Client {
 CmdClient.PermissionError = PermissionError;
 CmdClient.Group = Group;
 CmdClient.Logger = Logger;
+CmdClient.Eris = Eris;
 
 module.exports = CmdClient;

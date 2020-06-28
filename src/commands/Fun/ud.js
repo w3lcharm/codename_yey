@@ -6,6 +6,7 @@ module.exports = {
   group: "funGroup",
   description: "udDescription",
   usage: "udUsage",
+  cooldown: 10,
   async run(client, msg, args, prefix, lang) {
     if (!args.length)
       return msg.channel.createMessage(lang.commandUsage(prefix, this));

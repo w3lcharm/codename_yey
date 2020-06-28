@@ -22,7 +22,8 @@ module.exports = {
   dontHavePerms: ":x: Вы не имеете нужных прав на использование этой команды.",
   missingPermission: perm => `Нужное право: \`${perm}\``,
   errorInCommand: cmd => `:x: Ошибка в команде \`${cmd}\`:`,
-  
+  cooldown: left => `> :warning: Вам нужно подождать ${left} секунд, чтобы использовать эту команду снова.`,
+
   permissions: {
     kickMembers: "Выгонять участников",
     banMembers: "Банить участников",
