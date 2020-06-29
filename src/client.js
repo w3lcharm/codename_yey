@@ -57,6 +57,14 @@ class CmdClient extends Eris.Client {
       this.on("debug", msg => this._erisLogger.debug(msg));
     }
 
+    this.once("ready", () => {
+      this.logger.info(`${this.user.username} online!`);
+      this.editStatus("online", { name: `${this.prefix}help`, type: 3 });
+
+      sequelize.sync()
+        .then(() => this.logger.info("successfully connected to the database."));
+    });
+
     this.on("messageCreate", async msg => {
       if (!msg.content.toLowerCase().startsWith(this.prefix) || msg.author.bot) return;
       const args = this._parseArgs(msg.content);

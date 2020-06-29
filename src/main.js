@@ -35,11 +35,6 @@ client.loadGroups([
 ]);
 
 client.once("ready", () => {
-  client.logger.info(`${client.user.username} online!`);
-  client.editStatus("online", { name: `${config.prefix}help`, type: 3 });
-  sequelize.sync()
-    .then(() => client.logger.info("successfully connected to the database."));
-
   if (!client.debugMode) {
     sdcClient.setAutoPost(client);
   }
