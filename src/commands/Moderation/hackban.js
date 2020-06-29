@@ -17,7 +17,7 @@ module.exports = {
       if (userID === client.user.id)
         return msg.channel.createMessage(lang.cantBanBot);
       
-      await msg.channel.guild.banMember(userID, 0, reason);
+      await msg.channel.guild.banMember(userID, 0, encodeURI(reason));
 
       const embed = {
         title: lang.hackbanSuccess(userID),
