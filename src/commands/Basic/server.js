@@ -9,7 +9,8 @@ module.exports = {
   async run(client, msg, args, prefix, lang) {
     moment.locale(lang.langName);
     
-    let owner = msg.guild.members.get(msg.guild.ownerID);
+    let owner = msg.guild.members.get(msg.guild.ownerID)
+      || await client.fetchUser(msg.guild.ownerID);
 
     const createdDaysAgo = Math.floor((Date.now() - msg.guild.createdAt) / (1000 * 86400));
 

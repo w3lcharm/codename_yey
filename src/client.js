@@ -195,6 +195,11 @@ class CmdClient extends Eris.Client {
     this.languages = this._loadLanguages();
   }
 
+  async fetchUser(userID) {
+    return this.requestHandler.request("GET", `/users/${userID}`, true)
+      .then(user => new Eris.User(user, this));
+  }
+
   async connect() {
     this.logger.info("trying to login now...");
     return super.connect();
