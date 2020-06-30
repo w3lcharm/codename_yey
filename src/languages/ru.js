@@ -268,4 +268,9 @@ module.exports = {
   textCantBeEmpty: "> :x: Текст не может быть пустым.",
   remindmeSuccess: "> :white_check_mark: Напоминание успешно задано.",
   reminder: "Напоминание:",
+
+  decodeqrDescription: "Декодирует QR-код из изображения.",
+  decodeqrUsage: "<изображение: url или вложение>",
+  decodeqrInvalidURL: "> :x: Неправильный URL. Возможно, вы указали URL без протокола?",
+  decodeqrFail: "> :x: Невозможно декодировать QR-код из этого изображения.",
 };

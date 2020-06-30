@@ -269,4 +269,9 @@ module.exports = {
   textCantBeEmpty: "> :x: Text cannot be empty.",
   remindmeSuccess: "> :white_check_mark: Reminder has been successfully set.",
   reminder: "Reminder:",
+
+  decodeqrDescription: "Decodes the QR code from image.",
+  decodeqrUsage: "<image: url or attachment>",
+  decodeqrInvalidURL: "> :x: Invalid URL. Maybe you specified the URL without a protocol?",
+  decodeqrFail: "> :x: Unable to decode QR code from this image.",
 };
