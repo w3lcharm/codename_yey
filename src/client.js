@@ -48,6 +48,7 @@ class CmdClient extends Eris.Client {
       host: options.db.localhost,
       dialect: options.db.dialect,
       storage: options.db.storage,
+      dialectOptions: { timezone: "Etc/GMT0" },
       logging: (...msg) => this.sequelizeLogger.debug(msg),
     });
     global.db = initDB(sequelize, Sequelize.DataTypes);
