@@ -74,6 +74,13 @@ class CmdClient extends Eris.Client {
 
       const command = this.commands.get(commandName);
       const lang = this.languages.get((await db.languages.findOrCreate({ where: { user: msg.author.id } }))[0].lang);
+      
+      if (msg.guild) {
+        if (
+          !msg.channel.memberHasPermission(msg.guild.me, "sendMessages") ||
+          !msg.channel.memberHasPermission(msg.guild.me, "embedLinks")
+        ) return;
+      }
 
       if (command.guildOnly && !msg.channel.guild) {
         return msg.channel.createMessage(lang.cantUseCommandInDM);

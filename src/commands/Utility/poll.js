@@ -4,17 +4,26 @@ module.exports = {
   description: "pollDescription",
   usage: "pollUsage",
   async run(client, msg, args, prefix, lang) {
-    if (!args.length)
+    if (!args.length) {
       return msg.channel.createMessage(lang.commandUsage(prefix, this));
+    }
 
-    const [ question, ...answers ] = args;
+    let [ question, ...answers ] = args;
     const reactions = [ "🇦", "🇧", "🇨", "🇩", "🇪", "🇫", "🇬", "🇭", "🇮", "🇯" ];
 
-    if (!answers.length)
-      return msg.channel.createMessage(lang.noAnswers);
+    let deleteFlag;
+    if (question === "-d" || question === "--delete") {
+      deleteFlag = true;
+      question = answers.shift();
+    }
 
-    if (answers.length > 10)
+    if (!answers.length) {
+      return msg.channel.createMessage(lang.noAnswers);
+    }
+
+    if (answers.length > 10) {
       return msg.channel.createMessage(lang.pollNotMoreThan10Answers);
+    }
 
     const embed = {
       title: question,
@@ -26,9 +35,18 @@ module.exports = {
       },
     };
 
+    if (deleteFlag) {
+      try {
+        await msg.delete();
+      } catch {
+        await msg.channel.createMessage(lang.pollCantDeleteMessage);
+      }
+    }
+
     const message = await msg.channel.createMessage({ embed: embed });
 
-    for (let i = 0; i < answers.length; i++)
+    for (let i = 0; i < answers.length; i++) {
       await message.addReaction(reactions[i]);
+    }
   }
 };

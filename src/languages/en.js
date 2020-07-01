@@ -206,11 +206,12 @@ module.exports = {
   magicballAnswer: ":8ball: The magic ball's answer is:",
   yourQuestion: "Your question:",
 
-  pollDescription: "Creates a reaction poll (up to 10 answers).",
-  pollUsage: "<question> <answers>",
+  pollDescription: "Creates a reaction poll (up to 10 answers).\nIf -d or --delete key is specified, also tries to delete your message.",
+  pollUsage: "[-d, --delete] <question> <answers>",
   noAnswers: "> :warning: There must be at least 1 answer in the poll.",
   pollNotMoreThan10Answers: "> :x: Not more than 10 answers.",
   startedBy: user => `Started by ${user.tag}`,
+  pollCantDeleteMessage: "> :warning: Couldn't delete message, please check bot permissions.",
 
   qrDescription: "Generates a QR code from your text.",
   qrUsage: "<text>",

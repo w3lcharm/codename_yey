@@ -206,11 +206,12 @@ module.exports = {
   magicballAnswer: ":8ball: Магический шар ответил:",
   yourQuestion: "Ваш вопрос:",
 
-  pollDescription: "Создает опрос из реакций (до 10 вариантов ответа).",
-  pollUsage: "<вопрос> <ответы>",
+  pollDescription: "Создает опрос из реакций (до 10 вариантов ответа).\nЕсли указан ключ -d или --delete, то пробует удалить ваше сообщение.",
+  pollUsage: "[-d, --delete] <вопрос> <ответы>",
   noAnswers: "> :warning: В опросе должен быть как минимум один вариант ответа.",
   pollNotMoreThan10Answers: "> :x: Не более 10 вариантов ответа.",
   startedBy: user => `Начал опрос: ${user.tag}`,
+  pollCantDeleteMessage: "> :warning: Невозможно удалить сообщение, проверьте разрешения бота",
 
   qrDescription: "Генерирует QR-код из вашего текста.",
   qrUsage: "<текст>",
