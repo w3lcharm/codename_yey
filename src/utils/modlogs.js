@@ -175,15 +175,16 @@ async function onMessageDelete(client, msg) {
 async function onMessageUpdate(client, newMsg, oldMsg) {
   if (!oldMsg) return;
   if (!newMsg.channel.guild) return;
-  const channel = await getModlogChannel(newMsg.channel.guild);
-  if (!channel) return;
-
   if (!newMsg.author) return;
   if (newMsg.author.bot) return;
-
+  
   let oldContent = oldMsg.content;
   let newContent = newMsg.content;
   if (oldContent === newContent) return;
+  
+  const channel = await getModlogChannel(newMsg.channel.guild);
+  if (!channel) return;
+
   if (oldMsg.attachments.length) {
     oldContent += "\n-----";
     for (const attachment of oldMsg.attachments) {
