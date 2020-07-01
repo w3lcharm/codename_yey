@@ -23,6 +23,7 @@ module.exports = {
   missingPermission: perm => `Нужное право: \`${perm}\``,
   errorInCommand: cmd => `:x: Ошибка в команде \`${cmd}\`:`,
   cooldown: left => `> :warning: Вам нужно подождать ${left} секунд, чтобы использовать эту команду снова.`,
+  cantFindUser: "> :x: Пользователь не найден.",
 
   permissions: {
     kickMembers: "Выгонять участников",

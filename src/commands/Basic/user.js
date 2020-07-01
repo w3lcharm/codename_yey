@@ -10,13 +10,15 @@ module.exports = {
     moment.locale(lang.langName);
 
     let member;
-    let userID = args[0];
+    let userID = args.join(" ");
     if (!userID) member = msg.member;
     else member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") ||
-      msg.guild.members.find(m => m.id === userID || m.tag === userID) ||
+      msg.guild.findMembers(userID)[0] ||
       client.users.find(u => u.id === userID || u.tag === userID);
 
-    if (!member) return;
+    if (!member) {
+      return msg.channel.createMessage(lang.cantFindUser);
+    }
 
     let name = `${member.username}#${member.discriminator}`;
     if (member.nick) name += ` (${member.nick})`;
