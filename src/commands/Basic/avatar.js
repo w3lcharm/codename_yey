@@ -1,3 +1,5 @@
+const { Member } = require("eris");
+
 module.exports = {
   name: "avatar",
   group: "basicGroup",
@@ -5,7 +7,7 @@ module.exports = {
   usage: [ "avatarUsage", "avatarUsageServer" ],
   guildOnly: true,
   async run(client, msg, args, prefix, lang) {
-    let userID = args[0];
+    let userID = args.join(" ");
     let user;
 
     let embed = {
@@ -21,9 +23,15 @@ module.exports = {
       embed.image = { url: iconURL };
     } else {
       if (!userID) user = msg.author;
-      else user = msg.mentions[0] || client.users.find(u => u.tag === userID || u.id === userID);
+      else user = msg.mentions[0] ||
+        msg.guild.members.find(m => m.effectiveName === userID) ||
+        client.users.find(u => u.tag === userID || u.id === userID || u.username === userID);
 
-      if (!user) return;
+      if (user instanceof Member) user = user.user;
+
+      if (!user) {
+        return msg.channel.createMessage(lang.cantFindUser);
+      }
     
       let format, size = 2048;
       if (user.avatar) format = user.avatar.startsWith("a_") ? "gif" : "png";
