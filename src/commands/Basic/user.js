@@ -51,7 +51,7 @@ module.exports = {
         },
         {
           name: lang.userRoles,
-          value: member.roles ? member.roles.map(r => `<@&${r}>`).join(", ") || "None" : "n/a",
+          value: member.roles ? member.roleObjects.sort((a, b) => b.position - a.position).map(r => r.mention).join(", ") || "None" : "n/a",
         },
         {
           name: lang.userBot,
