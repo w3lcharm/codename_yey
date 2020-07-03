@@ -38,6 +38,7 @@ module.exports = {
         description = lang.botDontHavePerms(lang.permissions.manageMessages);
       } else {
         description = lang.somethingWentWrong;
+        client.emit("commandError", this.name, msg, err, false);
       }
 
       let embed = {
