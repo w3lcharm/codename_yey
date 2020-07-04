@@ -6,6 +6,7 @@ const DBL = require("dblapi.js");
 
 const autoroleFunc = require("./utils/autorole");
 const modlogFunctions = require("./utils/modlogs");
+const errorHandler = require("./utils/errHandler");
 
 const client = new CmdClient(config.token, {
   prefix: config.prefix,
@@ -43,29 +44,9 @@ client.once("ready", () => {
 client.on("guildMemberAdd", (guild, member) => autoroleFunc(client, guild, member));
 
 client.on("commandError", async (commandName, msg, error, showErr, lang = client.languages.get("en")) => {
-  if (error instanceof CmdClient.PermissionError) {
-    const embed = {
-      title: lang.dontHavePerms,
-      description: lang.missingPermission(lang.permissions[error.missingPermission]),
-      color: 15158332,
-      footer: {
-        text: "codename_yey",
-        icon_url: client.user.avatarURL,
-      },
-    };
-    return msg.channel.createMessage({ embed: embed });
-  }
-
-  const embed = {
-    title: lang.errorInCommand(commandName),
-    description: `\`\`\`\n${error}\`\`\``,
-    color: 15158332,
-  }
-  if (showErr)
-    await msg.channel.createMessage({ embed: embed });
-  client.logger.error(`Error in command ${commandName}:\n${error.stack}`);
+  await errorHandler(client, commandName, msg, error, showErr, lang);
 });
-
+  
 /* client.on("error", (error, id) => {
   client.logger.error(`Error in shard ${id}:\n${error.stack}`);
 }); */
