@@ -87,6 +87,14 @@ module.exports = {
   serverChannelsVoice: "voice",
   serverTotalRoles: "Roles:",
   serverCreatedAt: "Created at:",
+  serverVerificationLevel: "Verification level:",
+  verificationLevel: [
+    "None",
+    "Low",
+    "Medium",
+    "High",
+    "Very high",
+  ],
 
   statsDescription: "Shows the bot stats.",
   statsTitle: "Bot stats",

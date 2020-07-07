@@ -87,6 +87,14 @@ module.exports = {
   serverChannelsVoice: "голосовых",
   serverTotalRoles: "Кол-во ролей:",
   serverCreatedAt: "Создан:",
+  serverVerificationLevel: "Уровень проверки:",
+  verificationLevel: [
+    "Отсутствует",
+    "Низкий",
+    "Средний",
+    "Высокий",
+    "Очень высокий",
+  ],
 
   statsDescription: "Показывакт статистику бота.",
   statsTitle: "Статистика бота",

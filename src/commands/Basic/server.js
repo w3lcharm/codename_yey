@@ -54,6 +54,11 @@ module.exports = {
           inline: true,
         },
         {
+          name: lang.serverVerificationLevel,
+          value: lang.verificationLevel[msg.guild.verificationLevel],
+          inline: true,
+        },
+        {
           name: lang.serverTotalRoles,
           value: msg.guild.roles.size,
           inline: true,
@@ -61,10 +66,9 @@ module.exports = {
         {
           name: lang.serverCreatedAt,
           value: `${moment(msg.guild.createdAt).format("lll")} ${lang.daysAgo(createdDaysAgo)}`,
-          inline: true,
         },
       ]
-    }
+    };
 
     await msg.channel.createMessage({ embed });
   }
