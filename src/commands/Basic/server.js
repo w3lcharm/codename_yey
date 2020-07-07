@@ -15,8 +15,10 @@ module.exports = {
     const createdDaysAgo = Math.floor((Date.now() - msg.guild.createdAt) / (1000 * 86400));
 
     const embed = {
-      title: msg.guild.name,
-      thumbnail: { url: msg.guild.iconURL },
+      author: {
+        name: msg.guild.name,
+        icon_url: msg.guild.iconURL,
+      },
       color: Math.round(Math.random() * 16777216) + 1,
       fields: [
         {
