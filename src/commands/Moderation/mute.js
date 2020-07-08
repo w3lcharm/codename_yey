@@ -72,7 +72,7 @@ module.exports = {
           muteTimers.set(msg.guild.id, new Map());
         }
         guildMuteTimers = muteTimers.get(msg.guild.id);
-        guildMuteTimers.set(member.id, setTimeout(() => member.removeRole(mutedRole.id), parsedTime));
+        guildMuteTimers.set(member.id, setTimeout(() => member.removeRole(mutedRole.id).catch(e => client.logger.warn(e.stack)), parsedTime));
         setTimeout(() => {
           clearTimeout(guildMuteTimers.get(member.id));
           guildMuteTimers.delete(member.id);

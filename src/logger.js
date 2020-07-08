@@ -22,12 +22,12 @@ class Logger {
   warn(msg) {
     if (this.level > Logger.WARN) return;
     console.log(`\x1b[33mWARNING [${this.name}]\x1b[0m: ${msg}`);
-        }
+  }
 
   error(msg) {
-                if (this.level > Logger.ERROR) return;
-                console.log(`\x1b[31mERROR [${this.name}]\x1b[0m: ${msg}`);
-        }
+    if (this.level > Logger.ERROR) return;
+    console.log(`\x1b[31mERROR [${this.name}]\x1b[0m: ${msg}`);
+  }
 }
 
 Logger.TRACE = 1;
