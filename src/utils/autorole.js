@@ -4,7 +4,12 @@ module.exports = async (client, guild, member) => {
   const dbItem = await db.autorole.findOne({ where: { server: member.guild.id } });
   if (dbItem) {
     if (!dbItem.autorole) return;
-    if (member.guild.members.get(client.user.id).permission.has("manageRoles"))
-      await member.addRole(dbItem.autorole);
+    if (member.guild.me.permission.has("manageRoles")) {
+      try {
+        await member.addRole(dbItem.autorole);
+      } catch (err) {
+        client.logger.error(`Unexpected autorole error:\n${err.stack}`);
+      }
+    }
   }
 }
