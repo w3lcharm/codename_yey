@@ -186,18 +186,28 @@ class CmdClient extends Eris.Client {
     this.logger.info(`successfully loaded all commands.`);
   }
 
-  reloadCommand(commandName) {
-    let command = this.commands.get(commandName);
-    if (!command)
-      throw new Error("command does not exist.");
+  reloadCommand(name) {
+    if (!this.commands.has(name)) {
+      throw new Error("command doesn't exist.");
+    }
+    
+    let cmd = this.commands.get(name);
+    let group = this.languages.get("en")[cmd.group];
 
-    let enLang = this.languages.get("en")
+    this.unloadCommand(name);
+    this.loadCommand(`./commands/${group}/${name}`);
+  }
 
-    let pathToCommand = require.resolve(`./commands/${enLang[command.group]}/${commandName}`);
-    delete require.cache[pathToCommand];
+  unloadCommand(name) {
+    if (!this.commands.has(name)) {
+      throw new Error("command doesn't exist.");
+    }
 
-    this.commands.delete(commandName);
-    this.loadCommand(pathToCommand);
+    let cmd = this.commands.get(name);
+    let path = require.resolve(`./commands/${this.languages.get("en")[cmd.group]}/${name}`);
+
+    delete require.cache[path];
+    this.commands.delete(name);
   }
 
   reloadLanguages() {
