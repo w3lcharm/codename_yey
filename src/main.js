@@ -26,6 +26,12 @@ if (!client.debugMode) {
   // dblClient.on("posted", () => dblLogger.info("stats posted."));
 }
 
+process.on("unhandledRejection", reason => {
+  console.warn(`Unhandled promise rejection:\n${reason instanceof Error ? reason.stack : reason}`);
+});
+
+process.on("uncaughtException", e => console.warn(`Uncaught exception:\n${e.stack}`));
+
 client.loadGroups([
   "Basic",
   "Utility",
