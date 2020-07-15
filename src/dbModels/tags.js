@@ -7,5 +7,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    guild: {
+      type: DataTypes.STRING,
+      defaultValue: null
+    },
   }, { timestamps: false });
 }
