@@ -29,7 +29,7 @@ module.exports = {
     }
 
     if ((!data.definition.length || data.definition.length > 1980) ||
-      (!data.example.length || data.example.length > 1000)) {
+      data.example.length > 1000) {
       return msg.channel.createMessage({
         embed: {
           title: lang.cantShowDefinition,
@@ -45,16 +45,20 @@ module.exports = {
       description: data.definition,
       url: data.permalink,
       color: Math.round(Math.random() * 16777216) + 1,
-      fields: [
-        {
-          name: lang.example,
-          value: data.example,
-        },
-      ],
       footer: {
         text: lang.author(data.author),
       },
     };
+
+    if (data.example) {
+      embed.fields = [
+        {
+          name: lang.example,
+          value: data.example,
+        },
+      ];
+    }
+
     await msg.channel.createMessage({ embed: embed });
   }
 };
