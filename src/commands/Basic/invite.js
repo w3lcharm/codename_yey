@@ -14,7 +14,7 @@ module.exports = {
       fields: [
         {
           name: lang.inviteSupportServer,
-          value: `[${lang.clickHere}](https://discord.gg/JGXB5sK)`,
+          value: `[${lang.clickHere}](https://discord.gg/bFqtTER)`,
         },
       ],
     };
