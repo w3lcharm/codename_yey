@@ -18,6 +18,7 @@
     "erlpack": "github:abalabahaha/erlpack",
     "eventemitter3": "^4.0.4",
     "mariadb": "^2.4.0",
+    "mathjs": "^7.1.0",
     "moment": "^2.26.0",
     "node-fetch": "^2.6.0",
     "qrcode": "^1.4.4",
