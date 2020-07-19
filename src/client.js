@@ -172,6 +172,8 @@ class CmdClient extends Eris.Client {
       else this.groups.set("Uncategorized", new Group(this, "Uncategorized"));
     }
 
+    command.path = path;
+
     this.commands.set(command.name, command);
     this.logger.debug(`successfully loaded ${command.name} command.`);
   }
@@ -191,11 +193,10 @@ class CmdClient extends Eris.Client {
       throw new Error("command doesn't exist.");
     }
     
-    let cmd = this.commands.get(name);
-    let group = this.languages.get("en")[cmd.group];
+    let { path } = this.commands.get(name);
 
     this.unloadCommand(name);
-    this.loadCommand(`./commands/${group}/${name}`);
+    this.loadCommand(path);
   }
 
   unloadCommand(name) {
@@ -204,7 +205,7 @@ class CmdClient extends Eris.Client {
     }
 
     let cmd = this.commands.get(name);
-    let path = require.resolve(`./commands/${this.languages.get("en")[cmd.group]}/${name}`);
+    let path = require.resolve(cmd.path);
 
     delete require.cache[path];
     this.commands.delete(name);
