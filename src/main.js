@@ -14,6 +14,11 @@ const client = new CmdClient(config.token, {
   db: config.database,
   debugMode: config.debugMode,
   supportChannelID: config.supportChannelID,
+  guildSubscriptions: false,
+  intents: [
+    "guilds", "guildMembers", "guildBans",
+    "guildPresences", "guildMessages", "directMessages",
+  ],
 });
 
 const sdcClient = new SDC(config.sdcApiKey);
