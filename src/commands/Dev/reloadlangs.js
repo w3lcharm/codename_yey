@@ -5,7 +5,7 @@ module.exports = {
   ownerOnly: true,
   hidden: true,
   async run(client, msg, args, prefix, lang) {
-    client.reloadLangauges();
+    client.reloadLanguages();
     await msg.addReaction("✅");
   }
 }

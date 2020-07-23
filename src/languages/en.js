@@ -284,4 +284,10 @@ module.exports = {
   decodeqrUsage: "<image: url or attachment>",
   decodeqrInvalidURL: "> :x: Invalid URL. Maybe you specified the URL without a protocol?",
   decodeqrFail: "> :x: Unable to decode QR code from this image.",
+
+  discriminatorDescription: "Shows up to 20 users who have provided discriminator.\nIf discriminator not provided, shows users who have the same discriminator with you.",
+  discriminatorUsage: "[discriminator]",
+  invalidDiscriminator: "> :x: You've provided invalid discriminator. Valid discriminators are in range from 0001 to 9999.",
+  discriminatorEmbedTitle: discrim => `Users who have the #${discrim} discriminator:`,
+  discriminatorNoUsersFound: "Currently I didn't seen any user who have this discriminator.",
 };

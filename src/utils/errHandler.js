@@ -17,7 +17,7 @@ module.exports = async (client, cmdName, msg, err, showErr, lang) => {
     return msg.channel.createMessage({ embed });
   }
   
-  client.logger.error(`Error in command ${cmdName}:\n${err}`);
+  client.logger.error(`Error in command ${cmdName}:\n${err.stack}`);
 
   let embed = {
     title: lang.errorInCommand(cmdName),
