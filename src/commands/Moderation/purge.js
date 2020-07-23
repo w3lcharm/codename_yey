@@ -5,6 +5,7 @@ module.exports = {
   guildOnly: true,
   requiredPermissions: "manageMessages",
   usage: "purgeUsage",
+  cooldown: 10,
   async run(client, msg, args, prefix, lang) {
     if (!args.length)
       return msg.channel.createMessage(lang.commandUsage(prefix, this));
