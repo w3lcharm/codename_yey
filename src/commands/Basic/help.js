@@ -4,14 +4,14 @@ module.exports = {
   description: "helpDescription",
   usage: "helpUsage",
   async run(client, msg, args, prefix, lang) {
-    const commandName = args[0];
+    const cmdName = args[0];
     let embed;
     
-    if (commandName) {
-      const command = client.commands.get(commandName);
+    if (cmdName) {
+      const command = client.commands.find(cmd => cmd.name === cmdName || (cmd.aliases && cmd.aliases.includes(cmdName)));
       if (!command || command.hidden) {
         embed = {
-          title: lang.helpCommandDoesntExist(commandName),
+          title: lang.helpCommandDoesntExist(cmdName),
           description: lang.helpCommandDoesntExistDesc(prefix),
           color: 15158332,
           footer: {
@@ -47,16 +47,23 @@ module.exports = {
         },
       };
 
+      if (command.aliases) {
+        embed.fields.push({
+          name: lang.helpAliases,
+          value: command.aliases.map(a => `\`${a}\``).join(", "),
+        });
+      }
+
       await msg.channel.createMessage({ embed: embed });
     } else {
       let fields = [];
       for (let group of Array.from(client.groups.values())) {
-        const commandNames = group.commands.filter(c => !c.hidden).map(cmd => `\`${cmd.name}\``);
-        if (!commandNames.length) continue;
+        const cmdNames = group.commands.filter(c => !c.hidden).map(cmd => `\`${cmd.name}\``);
+        if (!cmdNames.length) continue;
 
         fields.push({
           name: lang[group.name],
-          value: commandNames.join(", "),
+          value: cmdNames.join(", "),
         });
       }
       

@@ -69,10 +69,11 @@ class CmdClient extends Eris.Client {
     this.on("messageCreate", async msg => {
       if (!msg.content.toLowerCase().startsWith(this.prefix) || msg.author.bot) return;
       const args = this._parseArgs(msg.content);
-      const commandName = args.shift().toLowerCase().slice(this.prefix.length);
-      if (!this.commands.has(commandName)) return;
+      const cmdName = args.shift().toLowerCase().slice(this.prefix.length);
+      
+      const command = this.commands.find(cmd => cmd.name === cmdName || (cmd.aliases && cmd.aliases.includes(cmdName)));
+      if (!command) return;
 
-      const command = this.commands.get(commandName);
       const lang = this.languages.get((await db.languages.findOrCreate({ where: { user: msg.author.id } }))[0].lang);
       
       if (msg.guild) {
@@ -112,9 +113,9 @@ class CmdClient extends Eris.Client {
           cmdCooldowns.set(msg.author.id, Date.now());
           setTimeout(() => cmdCooldowns.delete(msg.author.id), command.cooldown * 1000);
         }
-        this.logger.info(`${msg.author.username}#${msg.author.discriminator} used ${commandName} command in ${msg.channel.guild ? msg.channel.guild.name : "bot DM"}`);
+        this.logger.info(`${msg.author.username}#${msg.author.discriminator} used ${cmdName} command in ${msg.channel.guild ? msg.channel.guild.name : "bot DM"}`);
       } catch (err) {
-        this.emit("commandError", commandName, msg, err, true, lang);
+        this.emit("commandError", cmdName, msg, err, true, lang);
       } 
     });
     

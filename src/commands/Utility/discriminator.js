@@ -3,6 +3,7 @@ module.exports = {
   group: "utilityGroup",
   description: "discriminatorDescription",
   usage: "discriminatorUsage",
+  aliases: [ "discrim" ],
   async run(client, msg, args, prefix, lang) {
     let discriminator = args[0] || msg.author.discriminator;
 

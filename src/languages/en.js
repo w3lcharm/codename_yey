@@ -61,6 +61,7 @@ module.exports = {
   helpCommandUsage: "Usage:",
   helpTitle: "Bot commands:",
   helpTip: prefix => `Want to get info about some command? Use ${prefix}help [command]`,
+  helpAliases: "Aliases:",
 
   inviteDescription: "Bot invite link and support server invite.",
   inviteBotInvite: "Bot invite link:",

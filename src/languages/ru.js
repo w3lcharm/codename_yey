@@ -61,6 +61,7 @@ module.exports = {
   helpCommandUsage: "Как использовать:",
   helpTitle: "Команды бота:",
   helpTip: prefix => `Хотите получить информацию о какой-либо команде? Используйте ${prefix}help [команда]`,
+  helpAliases: "Псевдонимы:",
 
   inviteDescription: "Ссылка-приглашение бота и приглашение на сервер поддержки.",
   inviteBotInvite: "Ссылка на приглашение бота:",
