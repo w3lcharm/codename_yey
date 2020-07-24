@@ -6,6 +6,7 @@ module.exports = {
   group: "basicGroup",
   description: "serverDescription",
   guildOnly: true,
+  aliases: [ "s", "serverinfo" ],
   async run(client, msg, args, prefix, lang) {
     moment.locale(lang.langName);
     
