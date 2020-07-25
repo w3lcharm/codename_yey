@@ -31,7 +31,7 @@ module.exports = {
       file = {
         name: msg.attachments[0].filename,
         file: buffer,
-      }
+      };
     }
   
     let id = generateID();

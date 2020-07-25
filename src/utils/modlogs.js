@@ -41,7 +41,7 @@ async function onGuildMemberRemove(client, guild, member) {
   if (guild.me.permission.has("viewAuditLogs")) {
     entry = await guild.getAuditLogs()
       .then(audit => audit.entries.filter(e => (e.actionType === 20 || e.actionType === 22)))
-      .then(entries => entries[0])
+      .then(entries => entries[0]);
   }
 
   const embed = {

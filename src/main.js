@@ -1,6 +1,6 @@
 const CmdClient = require("./client");
 const config = require("../config");
-const { inspect } = require("util");
+// const { inspect } = require("util");
 const SDC = require("@megavasiliy007/sdc-api");
 const DBL = require("dblapi.js");
 
@@ -23,7 +23,7 @@ const client = new CmdClient(config.token, {
 
 const sdcClient = new SDC(config.sdcApiKey);
 
-let dblClient, dblLogger;
+let dblClient;
 if (!client.debugMode) {
   dblClient = new DBL(config.dblApiKey, client);
   // dblLogger = new CmdClient.Logger(CmdClient.Logger.INFO, "dbl");

@@ -54,7 +54,7 @@ module.exports = {
       if (member.roles.includes(mutedRole.id))
         return msg.channel.createMessage(lang.userAlreadyMuted);
 
-      await member.addRole(mutedRole.id)
+      await member.addRole(mutedRole.id);
       const embed = {
         author: {
           name: lang.muteSuccess(member),
@@ -81,7 +81,7 @@ module.exports = {
     } catch (err) {
       let description;
       if (!msg.guild.members.get(client.user.id).permission.has("manageRoles"))
-        description = lang.botDontHavePerms(lang.permissions.manageRoles)
+        description = lang.botDontHavePerms(lang.permissions.manageRoles);
       else if (member.id === msg.guild.ownerID)
         description = lang.userIsOwner;
       else if (member.highestRole.position >= msg.guild.members.get(client.user.id).highestRole.position)
