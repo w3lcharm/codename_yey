@@ -42,7 +42,7 @@ module.exports = {
         if (channel.startsWith("<#")) {
           channel = channel.replace("<#", "").replace(">", "");
         }
-      7
+
         const ch = client.getChannel(channel);
         if (!ch || ch instanceof VoiceChannel) {
           return msg.channel.createMessage(lang.invalidChannel);
