@@ -5,7 +5,7 @@ function getModlogChannel(guild) {
     .then(c => c[0].channel);
 }
 
-async function onGuildMemberAdd(client, guild, member) {
+async function onGuildMemberAdd(guild, member) {
   if (!guild) return;
   const channel = await getModlogChannel(guild);
   if (!channel) return;
@@ -32,7 +32,7 @@ async function onGuildMemberAdd(client, guild, member) {
   } catch {}
 }
 
-async function onGuildMemberRemove(client, guild, member) {
+async function onGuildMemberRemove(guild, member) {
   if (!guild) return;
   const channel = await getModlogChannel(guild);
   if (!channel) return;
@@ -92,7 +92,7 @@ async function onGuildMemberRemove(client, guild, member) {
   } catch {}
 }
 
-async function onGuildBanRemove(client, guild, user) {
+async function onGuildBanRemove(guild, user) {
   if (!guild) return;
   const channel = await getModlogChannel(guild);
   if (!channel) return;
@@ -127,7 +127,7 @@ async function onGuildBanRemove(client, guild, user) {
   } catch {}
 }
 
-async function onMessageDelete(client, msg) {
+async function onMessageDelete(msg) {
   if (!msg instanceof Message) return;
   if (!msg.channel.guild) return;
   const channel = await getModlogChannel(msg.channel.guild);
@@ -172,7 +172,7 @@ async function onMessageDelete(client, msg) {
   } catch {}
 }
 
-async function onMessageUpdate(client, newMsg, oldMsg) {
+async function onMessageUpdate(newMsg, oldMsg) {
   if (!oldMsg) return;
   if (!newMsg.channel.guild) return;
   if (!newMsg.author) return;
@@ -229,10 +229,18 @@ async function onMessageUpdate(client, newMsg, oldMsg) {
   } catch {}
 }
 
-module.exports = {
-  onGuildMemberAdd,
-  onGuildMemberRemove,
-  onGuildBanRemove,
-  onMessageDelete,
-  onMessageUpdate,
-};
+module.exports.load = function load() {
+  client.on("guildMemberAdd", onGuildMemberAdd)
+    .on("guildMemberRemove", onGuildMemberRemove)
+    .on("guildBanRemove", onGuildBanRemove)
+    .on("messageDelete", onMessageDelete)
+    .on("messageUpdate", onMessageUpdate);
+}
+
+module.exports.unload = function unload() {
+  client.off("guildMemberAdd", onGuildMemberAdd)
+    .off("guildMemberRemove", onGuildMemberRemove)
+    .off("guildBanRemove", onGuildBanRemove)
+    .off("messageUpdate", onMessageUpdate)
+    .off("messageUpdate", onMessageUpdate);
+}

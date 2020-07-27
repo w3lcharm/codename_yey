@@ -41,7 +41,9 @@ class CmdClient extends Eris.Client {
 
     this.supportChannelID = options.supportChannelID;
 
-    this.cooldowns = new Eris.Collection();
+    this.cooldowns = new Eris.Collection()
+
+    this.extensions = {};
 
     this.sequelizeLogger = new Logger(this.debugMode ? Logger.TRACE : Logger.INFO, "sequelize");
     global.sequelize = new Sequelize(options.db.database, options.db.username, options.db.password, {
@@ -224,13 +226,52 @@ class CmdClient extends Eris.Client {
   }
 
   async fetchUser(userID) {
-    return this.requestHandler.request("GET", `/users/${userID}`, true)
-      .then(user => new Eris.User(user, this));
+    const user = await this.requestHandler.request("GET", `/users/${userID}`, true);
+
+    if (!this.users.has(user.id)) {
+      this.users.add(user);
+    }
+
+    return new Eris.User(user, this);
   }
 
   async connect() {
     this.logger.info("trying to login now...");
     return super.connect();
+  }
+
+  loadExtension(path, ...args) {
+    const ext = require(path);
+
+    if (!ext.load) throw new Error("extension should export a load() method.");
+    if (!ext.unload) throw new Error("extension should export a unload() method.");
+
+    ext.load(...args);
+
+    this.extensions[path] = ext;
+
+    this.logger.debug(`loaded extension ${path}.`);
+  }
+
+  reloadExtension(path) {
+    this.unloadExtension(path);
+    this.loadExtension(path);
+  }
+
+  unloadExtension(path) {
+    if (!this.extensions[path]) {
+      throw new Error("extension not loaded or doesn't exist.");
+    }
+
+    const ext = this.extensions[path];
+    ext.unload();
+
+    const fullPath = require.resolve(path);
+
+    delete require.cache[fullPath];
+    delete this.extensions[path];
+
+    this.logger.debug(`unloaded extension ${path}.`);
   }
 }
 

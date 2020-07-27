@@ -4,11 +4,9 @@ const config = require("../config");
 const SDC = require("@megavasiliy007/sdc-api");
 const DBL = require("dblapi.js");
 
-const autoroleFunc = require("./utils/autorole");
-const modlogFunctions = require("./utils/modlogs");
 const errorHandler = require("./utils/errHandler");
 
-const client = new CmdClient(config.token, {
+global.client = new CmdClient(config.token, {
   prefix: config.prefix,
   owners: config.owners,
   db: config.database,
@@ -19,7 +17,6 @@ const client = new CmdClient(config.token, {
     "guilds", "guildMembers", "guildBans",
     "guildPresences", "guildMessages", "directMessages",
   ],
-  getAllUsers: true,
 });
 
 const sdcClient = new SDC(config.sdcApiKey);
@@ -53,22 +50,18 @@ client.once("ready", () => {
   }
 });
 
-client.on("guildMemberAdd", (guild, member) => autoroleFunc(client, guild, member));
-
 client.on("commandError", async (commandName, msg, error, showErr, lang = client.languages.get("en")) => {
   await errorHandler(client, commandName, msg, error, showErr, lang);
 });
+
+client.loadExtension("./utils/autorole");
+client.loadExtension("./utils/modlogs");
   
 /* client.on("error", (error, id) => {
   client.logger.error(`Error in shard ${id}:\n${error.stack}`);
 }); */
 
 client.on("guildCreate", guild => client.logger.info(`New server: ${guild.name} (ID: ${guild.id})`))
-  .on("guildDelete", guild => client.logger.info(`Left from server ${guild.name} (ID: ${guild.id})`))
-  .on("guildMemberAdd", (guild, member) => modlogFunctions.onGuildMemberAdd(client, guild, member))
-  .on("guildMemberRemove", (guild, member) => modlogFunctions.onGuildMemberRemove(client, guild, member))
-  .on("guildBanRemove", (guild, user) => modlogFunctions.onGuildBanRemove(client, guild, user))
-  .on("messageDelete", msg => modlogFunctions.onMessageDelete(client, msg))
-  .on("messageUpdate", (newMsg, oldMsg) => modlogFunctions.onMessageUpdate(client, newMsg, oldMsg));
-  
+  .on("guildDelete", guild => client.logger.info(`Left from server ${guild.name} (ID: ${guild.id})`));
+
 client.connect();
