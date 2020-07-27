@@ -19,6 +19,7 @@ const client = new CmdClient(config.token, {
     "guilds", "guildMembers", "guildBans",
     "guildPresences", "guildMessages", "directMessages",
   ],
+  getAllUsers: true,
 });
 
 const sdcClient = new SDC(config.sdcApiKey);
