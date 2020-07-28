@@ -34,10 +34,10 @@ module.exports = {
   },
 
   status: {
-    online: "Online",
-    idle: "Idle",
-    dnd: "Do not disturb",
-    offline: "Offline",
+    online: "<:online:737261991017840660> Online",
+    idle: "<:idle:737262151718141963> Idle",
+    dnd: "<:dnd:737262249378316360> Do not disturb",
+    offline: "<:offline:737262088904507402> Offline",
   },
 
   basicGroup: "Basic",

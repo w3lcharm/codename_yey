@@ -1,11 +1,10 @@
-const { Member } = require("eris");
-
 module.exports = {
   name: "avatar",
   group: "basicGroup",
   description: "avatarDescription",
   usage: [ "avatarUsage", "avatarUsageServer" ],
   guildOnly: true,
+  aliases: [ "av", "pfp" ],
   async run(client, msg, args, prefix, lang) {
     let userID = args.join(" ");
     let user;
@@ -24,10 +23,9 @@ module.exports = {
     } else {
       if (!userID) user = msg.author;
       else user = msg.mentions[0] ||
-        msg.guild.members.find(m => m.effectiveName === userID) ||
-        client.users.find(u => u.tag === userID || u.id === userID || u.username === userID);
+        client.users.find(u => u.tag === userID || u.id === userID || u.username.toLowerCase() === userID);
 
-      if (user instanceof Member) user = user.user;
+      // if (user instanceof Member) user = user.user;
 
       if (!user) {
         return msg.channel.createMessage(lang.cantFindUser);
