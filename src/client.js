@@ -246,7 +246,7 @@ class CmdClient extends Eris.Client {
     if (!ext.load) throw new Error("extension should export a load() method.");
     if (!ext.unload) throw new Error("extension should export a unload() method.");
 
-    ext.load(...args);
+    ext.load(this, ...args);
 
     this.extensions[path] = ext;
 
@@ -264,7 +264,7 @@ class CmdClient extends Eris.Client {
     }
 
     const ext = this.extensions[path];
-    ext.unload();
+    ext.unload(this);
 
     const fullPath = require.resolve(path);
 

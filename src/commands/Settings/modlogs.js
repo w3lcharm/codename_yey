@@ -43,8 +43,8 @@ module.exports = {
           channel = channel.replace("<#", "").replace(">", "");
         }
 
-        const ch = client.getChannel(channel);
-        if (!ch || ch instanceof VoiceChannel) {
+        const ch = msg.guild.channels.find(c => c.id === channel || c.name === channel);
+        if (!ch || (ch && ch.type > 0)) {
           return msg.channel.createMessage(lang.invalidChannel);
         }
         if (!ch.memberHasPermission(msg.guild.me, "sendMessages") || !ch.memberHasPermission(msg.guild.me, "embedLinks")) {

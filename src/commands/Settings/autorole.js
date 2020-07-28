@@ -7,8 +7,9 @@ module.exports = {
   guildOnly: true,
   async run(client, msg, args, prefix, lang) {
     let roleID = args[0];
-    if (roleID && roleID.startsWith("<@&"))
-      roleID = roleID.replace("<@&", "").replace("<@&", "");
+    if (roleID && roleID.startsWith("<@&")) {
+      roleID = roleID.replace("<@&", "").replace(">", "");
+    }
 
     if (!roleID) {
       const dbItem = await db.autorole.findOne({ where: { server: msg.channel.guild.id } });
