@@ -57,6 +57,7 @@ client.on("commandError", async (commandName, msg, error, showErr, lang = client
 
 client.loadExtension("./utils/autorole");
 client.loadExtension("./utils/modlogs");
+client.loadExtension("./utils/welcomeMessages.js");
   
 /* client.on("error", (error, id) => {
   client.logger.error(`Error in shard ${id}:\n${error.stack}`);
