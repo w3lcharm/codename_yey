@@ -14,7 +14,7 @@ module.exports = {
     let userID = args.join(" ");
     if (!userID) member = msg.member;
     else member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") ||
-      msg.guild.members.find(m => m.id === userID || m.username.toLowerCase() === userID ||  m.tag === userID) ||
+      msg.guild.members.find(m => m.id === userID || m.username.toLowerCase() === userID.toLowerCase() || m.tag === userID) ||
       client.users.find(u => u.id === userID || u.tag === userID);
 
     if (!member) {
