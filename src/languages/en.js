@@ -46,6 +46,7 @@ module.exports = {
   settingsGroup: "Settings",
   utilityGroup: "Utility",
   funGroup: "Fun",
+  miscGroup: "Misc",
 
   avatarDescription: "Gets your or someone's avatar.",
   avatarUsage: "[user: id, tag or mention]",
@@ -291,4 +292,12 @@ module.exports = {
   invalidDiscriminator: "> :x: You've provided invalid discriminator. Valid discriminators are in range from 0001 to 9999.",
   discriminatorEmbedTitle: discrim => `Users who have the #${discrim} discriminator:`,
   discriminatorNoUsersFound: "Currently I didn't seen any user who have this discriminator.",
+
+  rextesterDescription: "Runs your Node.js code on Rextester.",
+  rextesterUsage: "<code>",
+  rextesterError: ":x: An error occurred while executing your code:",
+  // rextesterErrorFooter: "Fix these errors, then try again.",
+  rextesterCantShowResult: ":x: Result is too big to be shown in Discord.",
+  rextesterSuccess: ":white_check_mark: Here is a result of your code:",
+  rextesterEmptyResult: "Code returned empty result.",
 };

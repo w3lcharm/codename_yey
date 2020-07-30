@@ -46,6 +46,7 @@ module.exports = {
   settingsGroup: "Настройки",
   utilityGroup: "Утилиты",
   funGroup: "Развлекательные",
+  miscGroup: "Разное",
   
   avatarDescription: "Показывает ваш аватар, либо аватар указанного пользователя.",
   avatarUsage: "[пользователь: id, упоминание либо тег]",
@@ -290,4 +291,11 @@ module.exports = {
   invalidDiscriminator: "> :x: Вы указали неправильный дискриминатор. Дискриминаторы должны быть в диапазоне от 0001 до 9999",
   discriminatorEmbedTitle: discrim => `Пользователи с дискриминатором #${discrim}:`,
   discriminatorNoUsersFound: "Сейчас я не вижу пользователей с таким дискриминатором.",
+
+  rextesterDescription: "Выполняет ваш код Node.js на Rextester.",
+  rextesterUsage: "<код>",
+  rextesterError: ":x: Произошла ошибка во время выполнения вашего кода:",
+  rextesterCantShowResult: ":x: Результат слишком большой, чтобы его показать.",
+  rextesterSuccess: ":white_check_mark: Вот результат выполнения кода:",
+  rextesterEmptyResult: "Код вернул пустой результат.",
 };

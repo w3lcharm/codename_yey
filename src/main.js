@@ -25,9 +25,6 @@ const sdcClient = new SDC(config.sdcApiKey);
 let dblClient;
 if (!client.debugMode) {
   dblClient = new DBL(config.dblApiKey, client);
-  // dblLogger = new CmdClient.Logger(CmdClient.Logger.INFO, "dbl");
-
-  // dblClient.on("posted", () => dblLogger.info("stats posted."));
 }
 
 process.on("unhandledRejection", reason => {
@@ -41,6 +38,7 @@ client.loadGroups([
   "Utility",
   "Moderation",
   "Fun",
+  "Misc",
   "Settings",
   "Dev",
 ]);
@@ -57,7 +55,7 @@ client.on("commandError", async (commandName, msg, error, showErr, lang = client
 
 client.loadExtension("./utils/autorole");
 client.loadExtension("./utils/modlogs");
-client.loadExtension("./utils/welcomeMessages.js");
+client.loadExtension("./utils/welcomeMessages");
   
 /* client.on("error", (error, id) => {
   client.logger.error(`Error in shard ${id}:\n${error.stack}`);
