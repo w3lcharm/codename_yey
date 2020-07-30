@@ -15,7 +15,7 @@ module.exports = {
 
     const code = msg.content.slice(prefix.length + this.name.length + 1);
 
-    const encodedURL = encodeURI(`${url}?LanguageChoice=23&Program=${code}`);
+    const encodedURL = `${url}?LanguageChoice=23&Program=${encodeURIComponent(code)}`;
 
     const response = await fetch(encodedURL, { method: "POST" })
       .then(r => r.json());
