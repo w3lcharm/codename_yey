@@ -14,10 +14,9 @@ async function onGuildMemberAdd(guild, member) {
 
   const embed = {
     author: {
-      name: "Member joined",
+      name: `${member.tag} joined the server`,
       icon_url: member.avatarURL,
     },
-    description: `${member.username}#${member.discriminator}`,
     timestamp: new Date().toISOString(),
     footer: { text: `ID: ${member.id}` },
     fields: [
@@ -40,23 +39,24 @@ async function onGuildMemberRemove(guild, member) {
   let entry;
   if (guild.me.permission.has("viewAuditLogs")) {
     entry = await guild.getAuditLogs()
-      .then(audit => audit.entries.filter(e => (e.actionType === 20 || e.actionType === 22)))
+      .then(audit => audit.entries.filter(e => e.targetID === member.id))
       .then(entries => entries[0]);
   }
 
+  const tag = `${member.username}#${member.discriminator}`;
+
   const embed = {
     author: {
-      name: "Member left",
+      name: `${tag} left the server`,
       icon_url: member.user.avatarURL,
     },
-    description: `${member.user.username}#${member.user.discriminator}`,
     timestamp: new Date().toISOString(),
     footer: { text: `ID: ${member.id}` },
   };
 
   if (entry) {
-    if (entry && entry.actionType === 20 && entry.targetID === member.id) {
-      embed.author.name = "Member kicked";
+    if (entry && entry.actionType === 20) {
+      embed.author.name = `${tag} was kicked`;
       embed.fields = [
         {
           name: "Reason:",
@@ -70,8 +70,8 @@ async function onGuildMemberRemove(guild, member) {
         },
       ];
     }
-    if (entry && entry.actionType === 22 && entry.targetID === member.id) {
-      embed.author.name = "Member banned";
+    if (entry && entry.actionType === 22) {
+      embed.author.name = `${tag} was banned`;
       embed.fields = [
         {
           name: "Reason:",
@@ -105,10 +105,9 @@ async function onGuildBanRemove(guild, user) {
 
   const embed = {
     author: {
-      name: "Member unbanned",
+      name: `${user.tag} was unbanned`,
       icon_url: user.avatarURL,
     },
-    description: `${user.username}#${user.discriminator}`,
     timestamp: new Date().toISOString(),
     footer: { text: `ID: ${user.id}` },
   };
