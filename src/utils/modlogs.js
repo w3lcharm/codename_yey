@@ -240,6 +240,6 @@ module.exports.unload = function unload() {
   client.off("guildMemberAdd", onGuildMemberAdd)
     .off("guildMemberRemove", onGuildMemberRemove)
     .off("guildBanRemove", onGuildBanRemove)
-    .off("messageUpdate", onMessageUpdate)
+    .off("messageDelete", onMessageUpdate)
     .off("messageUpdate", onMessageUpdate);
 }
