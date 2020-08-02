@@ -47,6 +47,7 @@ client.once("ready", () => {
   if (!client.debugMode) {
     sdcClient.setAutoPost(client);
   }
+  editStatus();
 });
 
 client.on("commandError", async (commandName, msg, error, showErr, lang = client.languages.get("en")) => {
@@ -63,5 +64,11 @@ client.loadExtension("./utils/welcomeMessages");
 
 client.on("guildCreate", guild => client.logger.info(`New server: ${guild.name} (ID: ${guild.id})`))
   .on("guildDelete", guild => client.logger.info(`Left from server ${guild.name} (ID: ${guild.id})`));
+
+function editStatus() {
+  return client.editStatus({ name: `on ${client.guilds.size} servers | type ${client.prefix}help` });
+}
+client.on("guildCreate", editStatus)
+  .on("guildDelete", editStatus);
 
 client.connect();
