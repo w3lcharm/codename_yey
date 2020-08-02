@@ -3,6 +3,7 @@ module.exports = {
   group: "basicGroup",
   description: "helpDescription",
   usage: "helpUsage",
+  aliases: [ "h" ],
   async run(client, msg, args, prefix, lang) {
     const cmdName = args[0];
     let embed;
