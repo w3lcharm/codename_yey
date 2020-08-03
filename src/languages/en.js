@@ -64,10 +64,6 @@ module.exports = {
   helpTip: prefix => `Want to get info about some command? Use ${prefix}help [command]`,
   helpAliases: "Aliases:",
 
-  inviteDescription: "Bot invite link and support server invite.",
-  inviteBotInvite: "Bot invite link:",
-  inviteSupportServer: "codename_yey server:",
-
   pingDescription: "Shows the bot latency.",
   pingMeasuring: "Measuring...",
   pingBotLatency: latency => `Bot latency is ${latency} ms.`,
@@ -300,4 +296,12 @@ module.exports = {
   rextesterCantShowResult: ":x: Result is too big to be shown in Discord.",
   rextesterSuccess: ":white_check_mark: Here is a result of your code:",
   rextesterEmptyResult: "Code returned empty result.",
+
+  infoDescription: "Information about bot.",
+  infoDesc: "A simple to use multipurpose bot written on JavaScript with Eris library.",
+  infoDeveloper: "Developed by:",
+  infoLinks: "Links:",
+  infoBotInvite: "Invite me to your server",
+  infoSupportServer: "Support server",
+  infoDonate: "~~Donate~~ (will be added soon)",
 };

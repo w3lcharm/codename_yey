@@ -64,10 +64,6 @@ module.exports = {
   helpTip: prefix => `Хотите получить информацию о какой-либо команде? Используйте ${prefix}help [команда]`,
   helpAliases: "Псевдонимы:",
 
-  inviteDescription: "Ссылка-приглашение бота и приглашение на сервер поддержки.",
-  inviteBotInvite: "Ссылка на приглашение бота:",
-  inviteSupportServer: "Сервер codename_yey:",
-
   pingDescription: "Показывает задержку бота до серверов Discord'а.",
   pingMeasuring: "Измеряется...",
   pingBotLatency: latency => `Задержка бота ${latency} мс.`,
@@ -298,4 +294,12 @@ module.exports = {
   rextesterCantShowResult: ":x: Результат слишком большой, чтобы его показать.",
   rextesterSuccess: ":white_check_mark: Вот результат выполнения кода:",
   rextesterEmptyResult: "Код вернул пустой результат.",
+
+  infoDescription: "Информация о боте.",
+  infoDesc: "Простой в использовании многофункциональный бот, написанный на JavaScript с использованием библиотеки Eris.",
+  infoDeveloper: "Разработчик:",
+  infoLinks: "Ссылки:",
+  infoBotInvite: "Добавить меня на свой сервер",
+  infoSupportServer: "Сервер поддержки",
+  infoDonate: "~~Пожертвовать~~ (будет добавлено позже)",
 };
