@@ -12,6 +12,7 @@
   "dependencies": {
     "@megavasiliy007/sdc-api": "github:MegaVasiliy007/sdc-api",
     "bufferutil": "^4.0.1",
+    "common-tags": "^1.8.0",
     "dblapi.js": "^2.4.0",
     "eris": "^0.13.3",
     "eris-additions": "^1.4.1",
