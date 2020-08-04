@@ -304,4 +304,13 @@ module.exports = {
   infoBotInvite: "Invite me to your server",
   infoSupportServer: "Support server",
   infoDonate: "~~Donate~~ (will be added soon)",
+
+  inviteDescription: "Shows information about invite.",
+  inviteUsage: "<invite>",
+  inviteInvalid: "> :x: Invite is invalid or expired.",
+  inviteVerificationLevel: "Verification level:",
+  inviteChannel: "Channel:",
+  inviteMemberCount: "Member count:",
+  inviteInviter: "Inviter:",
+  inviteMemberCountDesc: (count, presences) => `${count} (${presences} online)`,
 };

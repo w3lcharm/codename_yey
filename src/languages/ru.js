@@ -302,4 +302,13 @@ module.exports = {
   infoBotInvite: "Добавить меня на свой сервер",
   infoSupportServer: "Сервер поддержки",
   infoDonate: "~~Пожертвовать~~ (будет добавлено позже)",
+
+  inviteDescription: "Показывает информацию о приглашении.",
+  inviteUsage: "<приглашение>",
+  inviteInvalid: "> :x: Приглашение неправильное или истек срок его действия.",
+  inviteVerificationLevel: "Уровень проверки:",
+  inviteChannel: "Канал:",
+  inviteMemberCount: "Кол-во участников:",
+  inviteInviter: "Приглашающий:",
+  inviteMemberCountDesc: (count, presences) => `${count} (${presences} в сети)`,
 };
