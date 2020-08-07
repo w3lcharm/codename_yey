@@ -181,7 +181,7 @@ module.exports = {
   warnDeleteSuccess: id => `> :white_check_mark: Deleted warn with ID ${id}`,
   cantWarnYourself: "> :x: You can't warn yourself.",
   cantWarnBot: "> :x: You can't warn a bot.",
-  cantWarnAdmin: "> :x: You can't warn the administrator.",
+  cantWarnAdmin: "> :x: You can't warn a member whose role higher than yours.",
   warnSuccess: user => `${user.tag} has been warned`,
   warnID: id => `Warn ID: ${id}`,
 

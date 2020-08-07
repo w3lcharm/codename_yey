@@ -4,6 +4,6 @@ module.exports = {
   description: "котлетки",
   hidden: true,
   async run(client, msg, args, prefix) {
-    await msg.channel.createMessage("kotletki");
+    await msg.channel.createMessage("котлетки"); // RGltdXRlcjA1INGI0LjQt9C+0LjQtA==
   }
 };

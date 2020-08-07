@@ -13,7 +13,12 @@ module.exports = {
     if (args[0] == "--list" || args[0] == "-l") {
       let member;
       if (!args[1]) member = msg.member;
-      else member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") || msg.guild.members.find(m => m.id === args[1] || m.tag === args[1]);
+      else member = msg.mentions.length ? 
+        msg.guild.members.get(msg.mentions[0]) :
+        msg.guild.members.find(m => m.id === args[1] || m.tag === args[1]);
+        
+      if (!member) return msg.channel.createMessage(lang.cantFindUser);
+
       let embed = {
         author: {
           name: `${member.username}#${member.discriminator}`,
@@ -56,8 +61,8 @@ module.exports = {
           msg.channel.createMessage(lang.warnDeleteSuccess(warn.id));
         }
         return;
-          
       }
+
       const userID = args.shift();
       const reason = args.join(" ");
       const member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") || msg.guild.members.find(m => m.tag === userID || m.id === userID);
@@ -67,7 +72,7 @@ module.exports = {
         return msg.channel.createMessage(lang.cantWarnYourself);
       if (member.id == client.user.id)
         return msg.channel.createMessage(lang.cantWarnBot);
-      if (member.permission.has("administrator"))
+      if (msg.member.highestRole.position < member.highestRole.position)
         return msg.channel.createMessage(lang.cantWarnAdmin);
 
       const warnObj = await db.warns.create({
