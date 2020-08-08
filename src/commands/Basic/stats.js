@@ -1,6 +1,7 @@
 const { VERSION } = require("eris");
+const moment = require("moment");
 
-function parseUptime(time) {
+/* function parseUptime(time) {
   const ms = Math.floor(time * 1000);
   const obj = new Date(ms);
 
@@ -14,20 +15,24 @@ function parseUptime(time) {
   if (seconds < 10) seconds = "0" + seconds;
 
   return `${days}:${hours}:${minutes}:${seconds}`;
-}
+} */
 
 module.exports = {
   name: "stats",
   group: "basicGroup",
   description: "statsDescription",
   async run(client, msg, args, prefix, lang) {
+    const uptime = process.uptime();
+    const uptimeDays = (uptime / 86400).toFixed();
+    const parsedUptime = uptimeDays + moment.utc(uptime * 1000).format(":HH:mm:ss");
+
     const embed = {
       title: lang.statsTitle,
       color: Math.round(Math.random() * 16777216) + 1,
       fields: [
         {
           name: lang.statsUptime,
-          value: parseUptime(process.uptime()),
+          value: parsedUptime,
         },
         {
           name: lang.statsServers,
