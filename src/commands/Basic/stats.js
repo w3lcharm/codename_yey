@@ -23,7 +23,7 @@ module.exports = {
   description: "statsDescription",
   async run(client, msg, args, prefix, lang) {
     const uptime = process.uptime();
-    const uptimeDays = (uptime / 86400).toFixed();
+    const uptimeDays = Math.floor(uptime / 86400);
     const parsedUptime = uptimeDays + moment.utc(uptime * 1000).format(":HH:mm:ss");
 
     const embed = {
