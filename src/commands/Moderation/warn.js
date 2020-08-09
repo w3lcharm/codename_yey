@@ -14,7 +14,7 @@ module.exports = {
       let member;
       if (!args[1]) member = msg.member;
       else member = msg.mentions.length ? 
-        msg.guild.members.get(msg.mentions[0]) :
+        msg.guild.members.get(msg.mentions[0].id) :
         msg.guild.members.find(m => m.id === args[1] || m.tag === args[1]);
         
       if (!member) return msg.channel.createMessage(lang.cantFindUser);
