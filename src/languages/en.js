@@ -57,7 +57,7 @@ module.exports = {
   helpDescription: "Shows information about bot commands.",
   helpUsage: "[command]",
   helpCommandDoesntExist: cmd => `Command **${cmd}** does not exist.`,
-  helpCommandDoesntExistDesc: prefix => `Type ${prefix}help for list of commands.`,
+  helpCommandDoesntExistDesc: prefix => `Type ${prefix}help to get a list of commands.`,
   helpCommandEmbedTitle: cmd => `Help for command \`${cmd}\`:`,
   helpCommandUsage: "Usage:",
   helpTitle: "Bot commands:",
