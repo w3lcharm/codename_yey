@@ -94,7 +94,7 @@ module.exports = {
     "Очень высокий",
   ],
 
-  statsDescription: "Показывакт статистику бота.",
+  statsDescription: "Показывает статистику бота.",
   statsTitle: "Статистика бота",
   statsUptime: "Аптайм:",
   statsServers: "Кол-во серверов:",
