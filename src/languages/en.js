@@ -313,4 +313,8 @@ module.exports = {
   inviteMemberCount: "Member count:",
   inviteInviter: "Inviter:",
   inviteMemberCountDesc: (count, presences) => `${count} (${presences} online)`,
+
+  embedDescription: "Sends an embed from JSON. You can use [this embed generator](https://leovoel.github.io/embed-visualizer/) to generate the JSON embed.",
+  embedUsage: "<json>",
+  embedParseError: ":x: An error occurred while parsing your JSON data:",
 };

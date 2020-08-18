@@ -311,4 +311,7 @@ module.exports = {
   inviteMemberCount: "Кол-во участников:",
   inviteInviter: "Приглашающий:",
   inviteMemberCountDesc: (count, presences) => `${count} (${presences} в сети)`,
+
+  embedDescription: "Посылает эмбед из JSON. Вы можете использовать [этот генератор эмбедов](https://leovoel.github.io/embed-visualizer/), чтобы сгенерировать ваш эмбед.",
+  embedParseError: ":x: Произошла ошибка при обработке JSON:",
 };
