@@ -13,7 +13,11 @@ module.exports = {
     
     let embed;
     try {
-      embed = JSON.parse(jsonData);
+      const data = JSON.parse(jsonData);
+
+      if (data.embeds && data.embeds instanceof Array) embed = data.embeds[0];
+      else if (data.embed) embed = data.embed;
+      else embed = data;
     } catch (err) {
       embed = {
         title: lang.embedParseError,
@@ -21,7 +25,11 @@ module.exports = {
         color: 15158332,
       };
     }
-
-    await msg.channel.createMessage({ embed });
+    
+    if (embed instanceof Object) {
+      await msg.channel.createMessage({ embed });
+    } else {
+      await msg.channel.createMessage(lang.embedInvalid);
+    }
   }
 };
