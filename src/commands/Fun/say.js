@@ -1,6 +1,6 @@
 module.exports = {
   name: "say",
-  group: "utilityGroup",
+  group: "funGroup",
   description: "sayDescription",
   usage: "sayUsage",
   async run(client, msg, args, prefix, lang) {
