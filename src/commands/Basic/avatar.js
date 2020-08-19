@@ -14,12 +14,11 @@ module.exports = {
     };
 
     if (userID === "server") {
-      let iconURL = msg.guild.iconURL.replace("size=128", "size=512");
       embed.author = {
         name: lang.serverIcon,
-        url: iconURL,
+        url: msg.guild.iconURL,
       };
-      embed.image = { url: iconURL };
+      embed.image = { url: msg.guild.iconURL };
     } else {
       if (!userID) user = msg.author;
       else user = msg.mentions[0] ||
@@ -30,16 +29,12 @@ module.exports = {
       if (!user) {
         return msg.channel.createMessage(lang.cantFindUser);
       }
-    
-      let format, size = 2048;
-      if (user.avatar) format = user.avatar.startsWith("a_") ? "gif" : "png";
-      if (format === "gif") size = 256;
 
       embed.author = {
         name: lang.avatarUser(user),
-        url: user.dynamicAvatarURL(format, 2048),
+        url: user.avatarURL,
       };
-      embed.image = { url: user.dynamicAvatarURL(format, size) };
+      embed.image = { url: user.avatarURL };
     }
   
     await msg.channel.createMessage({ embed });

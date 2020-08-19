@@ -17,7 +17,7 @@ global.client = new CmdClient(config.token, {
     "guilds", "guildMembers", "guildBans",
     "guildPresences", "guildMessages", "directMessages",
   ],
-  getAllUsers: true,
+  defaultImageSize: 2048,
 });
 
 const sdcClient = new SDC(config.sdcApiKey);
