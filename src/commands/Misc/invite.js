@@ -29,6 +29,7 @@ module.exports = {
   group: "miscGroup",
   description: "inviteDescription",
   usage: "inviteUsage",
+  aliases: [ "inv" ],
   async run(client, msg, args, prefix, lang) {
     if (!args.length) {
       return msg.channel.createMessage(lang.commandUsage(prefix, this));
