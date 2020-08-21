@@ -7,9 +7,10 @@ async function onGuildMemberAdd(guild, member) {
   const channel = guild.channels.get(dbItem.channel);
   if (!channel) return;
 
-  const messageText = dbItem.message.replace("{mention}", member.mention)
-    .replace("{tag}", member.tag)
-    .replace("{server}", guild.name);
+  const messageText = dbItem.message.replace(/{mention}/g, member.mention)
+    .replace(/{tag}/g, member.tag)
+    .replace(/{server}/g, guild.name)
+    .replace(/{memberCount}/g, guild.memberCount);
 
   await channel.createMessage(messageText);
 }
@@ -25,9 +26,10 @@ async function onGuildMemberRemove(guild, member) {
   const channel = guild.channels.get(dbItem.channel);
   if (!channel) return;
 
-  const messageText = dbItem.message.replace("{mention}", member.mention)
-    .replace("{tag}", member.tag)
-    .replace("{server}", guild.name);
+  const messageText = dbItem.message.replace(/{mention}/g, member.mention)
+    .replace(/{tag}/g, member.tag)
+    .replace(/{server}/g, guild.name)
+    .replace(/{memberCount}/g, guild.memberCount);
 
   await channel.createMessage(messageText);
 }
