@@ -72,7 +72,7 @@ module.exports = {
         return msg.channel.createMessage(lang.cantWarnYourself);
       if (member.id == client.user.id)
         return msg.channel.createMessage(lang.cantWarnBot);
-      if (msg.member.highestRole.position < member.highestRole.position)
+      if (msg.member.highestRole.position <= member.highestRole.position)
         return msg.channel.createMessage(lang.cantWarnAdmin);
 
       const warnObj = await db.warns.create({
@@ -92,8 +92,39 @@ module.exports = {
         timestamp: new Date().toISOString(),
         footer: { text: lang.warnID(warnObj.id) },
       };
-      await msg.channel.createMessage({ embed: embed });
-    } else
+      await msg.channel.createMessage({ embed });
+
+      const { channel: modlogChannel } = await db.modlogs.findOrCreate({ where: { server: msg.guild.id } })
+        .then(i => i[0]);
+      try {
+        const modlogEmbed = {
+          author: {
+            name: `${member.tag} has been warned`,
+            icon_url: member.avatarURL,
+          },
+          fields: [
+            {
+              name: "Reason",
+              value: reason,
+            },
+            {
+              name: "Warned by:",
+              value: msg.author.tag,
+              inline: true,
+            },
+            {
+              name: "Warn ID:",
+              value: warnObj.id,
+              inline: true,
+            },
+          ],
+          timestamp: new Date().toISOString(),
+        };
+
+        await client.createMessage(modlogChannel, { embed: modlogEmbed });
+      } catch {}
+    } else {
       throw new PermissionError("missing permission", "kickMembers");
+    }
   }
 };
