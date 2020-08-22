@@ -3,6 +3,7 @@ module.exports = {
   group: "settingsGroup",
   description: "languageDescription",
   usage: "languageUsage",
+  aliases: [ "lang" ],
   async run(client, msg, args, prefix, lang) {
     let langName = args[0];
     if (!langName) {
