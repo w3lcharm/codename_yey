@@ -184,6 +184,8 @@ module.exports = {
   cantWarnAdmin: "> :x: Вы не можете выдать предупреждение участнику, роль которого выше вашей.",
   warnSuccess: user => `Выдано предупреждение пользователю ${user.tag}`,
   warnID: id => `ID предупреждения: ${id}`,
+  warnsFooter: (total, maxPages, page) => `Всего предупреждений: ${total} | Страница ${page} из ${maxPages}`,
+  warnListFieldName: (id, user) => `ID: ${id} | выдал ${user.tag}`,
 
   autoroleDescription: "Позволяет вам включить или выключить автороль.\nТребует право \"Управлять сервером\".",
   autoroleUsage: "[роль: id, имя либо \"disable\" для выключения]",

@@ -1,4 +1,5 @@
 const PermissionError = require("../../errors/permissionError");
+const ReactionHandler = require("../../reactionHandler.js");
 
 module.exports = {
   name: "warn",
@@ -34,13 +35,62 @@ module.exports = {
           user: member.user.id,
         },
       });
-      for (let warn of warnList)
-        embed.fields.push({
-          name: `ID: ${warn.id}`,
-          value: lang.reason(warn.reason),
+      let warnsLength = warnList.length;
+      let pages = [];
+      if (warnList.length > 10) {
+        while (warnList.length) {
+          const arr = [];
+
+          for (let item of warnList.splice(0, 10)) {
+            arr.push({
+              name: lang.warnListFieldName(item.id, await client.fetchUser(item.warnedBy)),
+              value: lang.reason(item.reason),
+            });
+          }
+
+          pages.push(arr);
+        }
+
+        embed.fields = pages[0];
+        embed.footer = { text: lang.warnsFooter(warnsLength, pages.length, 1) };
+      } else {
+        for (let item of warnList) {
+          embed.fields.push({
+            name: warnListFieldName(item.id, await client.fetchUser(item.warnedBy)),
+            value: lang.reason(item.reason),
+          });
+        }
+        embed.footer = { text: lang.totalWarns(warnList.length) };
+      }
+      const message = await msg.channel.createMessage({ embed });
+      if (warnsLength > 10) {
+        await message.addReaction("◀️");
+        await message.addReaction("▶️");
+
+        let pageNumber = 0;
+
+        const reactionHandler = new ReactionHandler(message, u => u === msg.author.id, 600000);
+        reactionHandler.on("reaction", (msg, emoji) => {
+          console.log("k");
+          switch (emoji.name) {
+            case "◀️": 
+              if (pageNumber === 0) return;
+              pageNumber--;
+              break;
+            case "▶️":
+              if (pageNumber === (pages.length - 1)) return;
+              pageNumber++;
+              break;
+            default: return;
+          }
+          
+          const page = pages[pageNumber];
+          const embed = msg.embeds[0];
+          embed.fields = page;
+          embed.footer.text = lang.warnsFooter(warnsLength, pages.length, pageNumber + 1);
+          message.edit({ embed });
         });
-      embed.footer = { text: lang.totalWarns(warnList.length) };
-      await msg.channel.createMessage({ embed });
+      }
       return;
     }
 

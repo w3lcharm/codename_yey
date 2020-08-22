@@ -184,6 +184,8 @@ module.exports = {
   cantWarnAdmin: "> :x: You can't warn a member whose role higher than yours.",
   warnSuccess: user => `${user.tag} has been warned`,
   warnID: id => `Warn ID: ${id}`,
+  warnsFooter: (total, maxPages, page) => `Total warns: ${total} | Page ${page} of ${maxPages}`,
+  warnListFieldName: (id, user) => `ID: ${id} | warned by ${user.tag}`,
 
   autoroleDescription: "Lets you to enable or disable the autorole.\nRequires \"Manage server\" permission.",
   autoroleUsage: "[role: id, name or mention or \"disable\" to disable]",
