@@ -321,4 +321,11 @@ module.exports = {
   embedUsage: "<json>",
   embedParseError: ":x: An error occurred while parsing your JSON data:",
   embedInvalid: "> :x: Embed should be an object.",
+
+  prefixDescription: "Sets the new bot prefix.\nRequires the \"Manage server\" permission.",
+  prefixUsage: "[prefix]",
+  prefixDesc: prefix => `My prefix in this server is \`${prefix}\``,
+  prefixFooter: prefix => `You can change the prefix by typing ${prefix}prefix [prefix]`,
+  prefixCantBeLong: "> :x: Prefix cannot be longer than 6 characters.",
+  prefixSuccess: prefix => `> :white_check_mark: Now my prefix in this server is \`${prefix}\``,
 };

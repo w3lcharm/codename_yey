@@ -318,4 +318,11 @@ module.exports = {
   embedDescription: "Посылает эмбед из JSON. Вы можете использовать [этот генератор эмбедов](https://leovoel.github.io/embed-visualizer/) или [Discohook](https://discohook.com), чтобы сгенерировать ваш эмбед.",
   embedParseError: ":x: Произошла ошибка при обработке JSON:",
   embedInvalid: "> :x: Эмбед должен быть объектом.",
+
+  prefixDescription: "Задает новый префикс бота.\nЭта команда требует право \"Управлять сервером\".",
+  prefixUsage: "[префикс]",
+  prefixDesc: prefix => `Мой префикс на этом сервере - \`${prefix}\``,
+  prefixFooter: prefix => `Вы можете сменить префикс, введя ${prefix}prefix [префикс]`,
+  prefixCantBeLong: "> :x: Префикс не может быть длинее 6 символов.",
+  prefixSuccess: prefix => `> :white_check_mark: Теперь мой новый префикс на этом сервере - \`${prefix}\``,
 };
