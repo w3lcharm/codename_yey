@@ -67,7 +67,7 @@ client.on("guildCreate", guild => client.logger.info(`New server: ${guild.name} 
   .on("guildDelete", guild => client.logger.info(`Left from server ${guild.name} (ID: ${guild.id})`));
 
 function editStatus() {
-  return client.editStatus({ name: `on ${client.guilds.size} servers | type ${client.prefix}help` });
+  return client.editStatus({ name: `on ${client.guilds.size}` });
 }
 client.on("guildCreate", editStatus)
   .on("guildDelete", editStatus);

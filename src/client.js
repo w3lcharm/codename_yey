@@ -69,24 +69,29 @@ class CmdClient extends Eris.Client {
     });
 
     this.on("messageCreate", async msg => {
-      if (!msg.content.toLowerCase().startsWith(this.prefix) || msg.author.bot) return;
-      const args = this._parseArgs(msg.content);
+      if (msg.author.bot || !msg.guild) return;
+      if (!msg.channel.memberHasPermission(msg.guild.me, "sendMessages") ||
+        !msg.channel.memberHasPermission(msg.guild.me, "embedLinks")) return;
       
-      args.raw = msg.content.slice(this.prefix.length).split(/ +/g);
+      const lang = this.languages.get((await db.languages.findOrCreate({ where: { user: msg.author.id } }))[0].lang);
+      const prefix = await db.prefixes.findOne({ where: { server: msg.guild.id } })
+        .then(p => p && p.prefix) || this.prefix;
+
+      if (msg.content === this.user.mention) {
+        return msg.channel.createMessage(lang.botPrefix(prefix, msg.author));
+      }
+
+      if (!msg.content.toLowerCase().startsWith(prefix)) return;
+
+      const args = this._parseArgs(msg.content);
+
+      args.raw = msg.content.slice(prefix.length).split(/ +/g);
       args.raw.shift();
 
-      const cmdName = args.shift().toLowerCase().slice(this.prefix.length);
+      const cmdName = args.shift().toLowerCase().slice(prefix.length);
       
       const command = this.commands.find(cmd => cmd.name === cmdName || (cmd.aliases && cmd.aliases.includes(cmdName)));
       if (!command) return;
-
-      const lang = this.languages.get((await db.languages.findOrCreate({ where: { user: msg.author.id } }))[0].lang);
-            
-      if (!msg.guild) return;
-      if (
-        !msg.channel.memberHasPermission(msg.guild.me, "sendMessages") ||
-        !msg.channel.memberHasPermission(msg.guild.me, "embedLinks")
-      ) return;
 
       if (command.ownerOnly && this.owners.indexOf(msg.author.id) === -1) return;
 
@@ -108,7 +113,7 @@ class CmdClient extends Eris.Client {
 
       try {
         if (command.requiredPermissions) validatePermission(msg.member, command.requiredPermissions);
-        await command.run(this, msg, args, this.prefix, lang);
+        await command.run(this, msg, args, prefix, lang);
         if (command.cooldown) {
           let cmdCooldowns = this.cooldowns.get(command.name);
           cmdCooldowns.set(msg.author.id, Date.now());

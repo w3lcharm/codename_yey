@@ -24,6 +24,7 @@ module.exports = {
   errorInCommand: cmd => `:x: Ошибка в команде \`${cmd}\`:`,
   cooldown: left => `> :warning: Вам нужно подождать ${left} секунд, чтобы использовать эту команду снова.`,
   cantFindUser: "> :x: Пользователь не найден.",
+  botPrefix: (prefix, user) => `${user.mention}, мой префикс на этом сервере \`${prefix}\``,
 
   permissions: {
     kickMembers: "Выгонять участников",
