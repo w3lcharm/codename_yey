@@ -21,7 +21,7 @@ module.exports = {
 
       const guildPrefix = await db.prefixes.findOrCreate({ where: { server: msg.guild.id } })
         .then(i => i[0]);
-      await guildPrefix.update({ prefix: prefixArg });
+      await guildPrefix.update({ prefix: prefixArg.toLowerCase() });
 
       await msg.channel.createMessage(lang.prefixSuccess(prefixArg));
     }
