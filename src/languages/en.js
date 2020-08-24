@@ -102,6 +102,7 @@ module.exports = {
   statsUsers: "Users:",
   statsPlatform: "Platform:",
   statsVersions: "Versions:",
+  statsRamUsed: "RAM usage:",
 
   userDescription: "Shows info about you or about provided user.",
   userUsage: "[user: id, tag or mention]",

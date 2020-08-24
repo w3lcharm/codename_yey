@@ -26,6 +26,8 @@ module.exports = {
     const uptimeDays = Math.floor(uptime / 86400);
     const parsedUptime = uptimeDays + moment.utc(uptime * 1000).format(":HH:mm:ss");
 
+    const ramUsed = process.memoryUsage().heapUsed / 1048576;
+
     const embed = {
       title: lang.statsTitle,
       color: Math.round(Math.random() * 16777216) + 1,
@@ -50,6 +52,10 @@ module.exports = {
           name: lang.statsVersions,
           value: `**Node.js**: ${process.version}\n` +
             `**Eris**: ${VERSION}`,
+        },
+        {
+          name: lang.statsRamUsed,
+          value: `${ramUsed.toFixed(1)} MB`,
         },
       ],
       footer: {
