@@ -56,7 +56,7 @@ module.exports = {
       } else {
         for (let item of warnList) {
           embed.fields.push({
-            name: warnListFieldName(item.id, await client.fetchUser(item.warnedBy)),
+            name: lang.warnListFieldName(item.id, await client.fetchUser(item.warnedBy)),
             value: lang.reason(item.reason),
           });
         }
