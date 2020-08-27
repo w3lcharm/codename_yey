@@ -329,4 +329,29 @@ module.exports = {
   prefixFooter: prefix => `You can change the prefix by typing ${prefix}prefix [prefix]`,
   prefixCantBeLong: "> :x: Prefix cannot be longer than 6 characters.",
   prefixSuccess: prefix => `> :white_check_mark: Now my prefix in this server is \`${prefix}\``,
+
+  joinmessageDescription: "Sets the message when new member joins the server.\n" + 
+    "These keywords can be used in the message:\n" + 
+    "`{mention}` - will be replaced with member mention\n" + 
+    "`{tag}` - will be replaced with member tag\n" + 
+    "`{server}` - will be replaced with server name\n" + 
+    "`{memberCount}` - will be replaced with server member count\n" +
+    "This command requires the \"Manage server\" permission.",
+  joinmessageUsage: "[channel] [text]",
+  joinmessageDisabled: "Join messages are disabled.",
+  joinmessageEnabled: channel => `Join messages are enabled in channel ${channel}`,
+  joinMessage: "Message:",
+  joinmessageInvalidChannel: "> :x: Invalid channel.",
+  joinmessageEmpty: "> :x: The text is empty.",
+  joinMessageTooLong: "> :x: The text shound not be longer than 1536 characters.",
+  joinmessageSuccess: channel => `> :white_check_mark: Successfully enabled join messages in channel ${channel}.`,
+  joinmessageFooter: prefix => `You can enable join messages by typing ${prefix}joinmessage [channel] [text], to disable type ${prefix}joinmessage disable`,
+  joinmessageDisableSuccess: "> :white_check_mark: Join messages have been successfully disabled.",
+
+  leavemessageDescription: "Sets the message when member leaves the server.\nOther stuff is similar as in joinmessage command.",
+  leavemessageDisabled: "Leave messages are disabled.",
+  leavemessageEnabled: channel => `Leave messages are enabled in channel ${channel}`,
+  leavemessageDisableSuccess: "> :white_check_mark: Leave messages have been successfully disabled.",
+  leavemessageSuccess: channel => `> :white_check_mark: Successfully enabled join messages in channel ${channel}.`,
+  leavemessageFooter: prefix => `You can enable leave messages by typing ${prefix}leavemessage [channel] [text], to disable type ${prefix}leavemessage disable`,
 };
