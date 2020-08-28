@@ -326,4 +326,28 @@ module.exports = {
   prefixFooter: prefix => `Вы можете сменить префикс, введя ${prefix}prefix [префикс]`,
   prefixCantBeLong: "> :x: Префикс не может быть длинее 6 символов.",
   prefixSuccess: prefix => `> :white_check_mark: Теперь мой новый префикс на этом сервере - \`${prefix}\``,
+
+  joinmessageDescription: "Задает сообщение при входе участника на сервер.\n" +
+    "Эти ключевые слова могут быть использованы в сообщении:\n" +
+    "`{mention}` - будет заменено на упоминание участника\n" +
+    "`{tag}` - будет заменено на тег участника\n" +
+    "`{server}` - будет заменено на имя сервера\n" +
+    "`{memberCount}` - будет заменено на количество участниклв на сервере\n" +
+    "Требует право \"Управлять сервером\".",
+  joinmessageUsage: "[канал] [текст]",
+  joinmessageDisabled: "Сообщения при входе выключены.",
+  joinmessageEnabled: channel => `Сообщения при входе включены в канале ${channel}`,
+  joinMessage: "Сообщение:",
+  joinmessageInvalidChannel: "> :x: Такого канала не существует либо он не является текстовым.",
+  joinmessageEmpty: "> :x: Текст не должен быть пустым.",
+  joinmessageSuccess: channel => `> :white_check_mark: Сообщения при входе успешно включены в каналн ${channel}.`,
+  joinmessageFooter: prefix => `Вы можете включить сообщения при входе, введя ${prefix}joinmessage [канал] [текст], либо ${prefix}joinmessage disable для выключения.`,
+  joinmessageDisableSuccess: "> :white_check_mark: Сообщения при входе были выключены.",
+
+  leavemessageDescription: "Задает сообщение при выходе участника с сервера.\nВсе аналогично команде joinmessage.",
+  leavemessageDisabled: "Сообщения при выходе выключены.",
+  leavemessageEnabled: "Сообщения при выходе включены.",
+  leavemessageDisableSuccess: "> :white_check_mark: Сообщения при выходе были выключены.",
+  leavemessageSuccess: channel => `> :white_check_mark: Сооьщения при выходе были успешно включены в канале ${channel}.`,
+  leavemessageFooter: prefix => `Вы можеье включить сообщения при выходе, введя ${prefix}leavemessage [канал] [текст], либо ${prefix}leavemessage disable для выключения.`,
 };

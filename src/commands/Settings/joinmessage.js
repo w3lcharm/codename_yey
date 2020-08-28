@@ -11,8 +11,6 @@ module.exports = {
       .then(i => i[0]);
 
     if (!channelID) {
-      let title = lang.joinmessageDisabled;
-
       const embed = {
         description: lang.joinmessageDisabled,
         color: Math.round(Math.random() * 16777216),
@@ -44,6 +42,21 @@ module.exports = {
 
       if (!channel || channel.type > 0) {
         return msg.channel.createMessage(lang.joinmessageInvalidChannel);
+      }
+
+      if (!channel.memberHasPermission(msg.guild.me, "sendMessages") ||
+        !channel.memberHasPermission(msg.guild.me, "embedLinks")) {
+          const embed = {
+            title: lang.modlogsDontHavePerms,
+            description: lang.modlogsDontHavePermsDesc,
+            color: 15158332,
+            footer: {
+              text: "codename_yey",
+              icon_url: client.user.avatarURL,
+            },
+          };
+
+          return msg.channel.createMessage({ embed })
       }
       
       const messageStr = message.join(" ");

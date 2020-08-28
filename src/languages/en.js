@@ -352,6 +352,6 @@ module.exports = {
   leavemessageDisabled: "Leave messages are disabled.",
   leavemessageEnabled: channel => `Leave messages are enabled in channel ${channel}`,
   leavemessageDisableSuccess: "> :white_check_mark: Leave messages have been successfully disabled.",
-  leavemessageSuccess: channel => `> :white_check_mark: Successfully enabled join messages in channel ${channel}.`,
+  leavemessageSuccess: channel => `> :white_check_mark: Successfully enabled leave messages in channel ${channel}.`,
   leavemessageFooter: prefix => `You can enable leave messages by typing ${prefix}leavemessage [channel] [text], to disable type ${prefix}leavemessage disable`,
 };
