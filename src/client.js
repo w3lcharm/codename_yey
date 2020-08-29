@@ -77,7 +77,7 @@ class CmdClient extends Eris.Client {
       const prefix = await db.prefixes.findOne({ where: { server: msg.guild.id } })
         .then(p => p && p.prefix) || this.prefix;
 
-      if (msg.content === this.user.mention) {
+      if (msg.content.replace("<@!", "<@") === this.user.mention) {
         return msg.channel.createMessage(lang.botPrefix(prefix, msg.author));
       }
 
