@@ -350,4 +350,13 @@ module.exports = {
   leavemessageDisableSuccess: "> :white_check_mark: Сообщения при выходе были выключены.",
   leavemessageSuccess: channel => `> :white_check_mark: Сооьщения при выходе были успешно включены в канале ${channel}.`,
   leavemessageFooter: prefix => `Вы можеье включить сообщения при выходе, введя ${prefix}leavemessage [канал] [текст], либо ${prefix}leavemessage disable для выключения.`,
+
+  weatherDescription: "Получает текущую погоду в указанном местоположении.",
+  weatherUsage: "<местоположение>",
+  locationNotFound: "> :x: Местоположение не найдено.",
+  weatherEmbedTitle: location => `Погода в ${location}:`,
+  weatherTemperature: "Температура:",
+  weatherFeelsLike: "Ощущается как:",
+  weatherHumidity: "Влажность воздуха:",
+  weatherWind: "Ветер:",
 };

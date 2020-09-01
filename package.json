@@ -24,6 +24,7 @@
     "node-fetch": "^2.6.0",
     "qrcode": "^1.4.4",
     "sequelize": "^5.22.2",
-    "sqlite3": "^4.2.0"
+    "sqlite3": "^4.2.0",
+    "weather-js": "^2.0.0"
   }
 }

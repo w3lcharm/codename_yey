@@ -354,4 +354,13 @@ module.exports = {
   leavemessageDisableSuccess: "> :white_check_mark: Leave messages have been successfully disabled.",
   leavemessageSuccess: channel => `> :white_check_mark: Successfully enabled leave messages in channel ${channel}.`,
   leavemessageFooter: prefix => `You can enable leave messages by typing ${prefix}leavemessage [channel] [text], to disable type ${prefix}leavemessage disable`,
+
+  weatherDescription: "Gets the current weather in specified location.",
+  weatherUsage: "<location>",
+  locationNotFound: "> :x: Location not found.",
+  weatherEmbedTitle: location => `Weather in ${location}:`,
+  weatherTemperature: "Temperature:",
+  weatherFeelsLike: "Feels like:",
+  weatherHumidity: "Humidity:",
+  weatherWind: "Wind:",
 };
