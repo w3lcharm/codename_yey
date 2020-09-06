@@ -15,7 +15,7 @@ module.exports = {
 
       await msg.channel.createMessage({ embed });
     } else {
-      if (prefixArg.length > 6) {
+      if (prefixArg.length > 10) {
         return msg.channel.createMessage(lang.prefixCantBeLong);
       }
 

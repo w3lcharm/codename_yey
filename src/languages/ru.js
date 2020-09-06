@@ -324,7 +324,7 @@ module.exports = {
   prefixUsage: "[префикс]",
   prefixDesc: prefix => `Мой префикс на этом сервере - \`${prefix}\``,
   prefixFooter: prefix => `Вы можете сменить префикс, введя ${prefix}prefix [префикс]`,
-  prefixCantBeLong: "> :x: Префикс не может быть длинее 6 символов.",
+  prefixCantBeLong: "> :x: Префикс не может быть длинее 10 символов.",
   prefixSuccess: prefix => `> :white_check_mark: Теперь мой новый префикс на этом сервере - \`${prefix}\``,
 
   joinmessageDescription: "Задает сообщение при входе участника на сервер.\n" +

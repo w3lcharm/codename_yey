@@ -327,7 +327,7 @@ module.exports = {
   prefixUsage: "[prefix]",
   prefixDesc: prefix => `My prefix in this server is \`${prefix}\``,
   prefixFooter: prefix => `You can change the prefix by typing ${prefix}prefix [prefix]`,
-  prefixCantBeLong: "> :x: Prefix cannot be longer than 6 characters.",
+  prefixCantBeLong: "> :x: Prefix cannot be longer than 10 characters.",
   prefixSuccess: prefix => `> :white_check_mark: Now my prefix in this server is \`${prefix}\``,
 
   joinmessageDescription: "Sets the message when new member joins the server.\n" + 

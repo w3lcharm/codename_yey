@@ -83,6 +83,9 @@ class CmdClient extends Eris.Client {
 
       if (!msg.content.toLowerCase().startsWith(prefix)) return;
 
+      const blacklistItem = await db.blacklist.findOne({ where: { user: msg.author.id } });
+      if (blacklistItem && blacklistItem.blacklisted) return;
+
       const args = this._parseArgs(msg.content);
 
       args.raw = msg.content.slice(prefix.length).split(/ +/g);
