@@ -21,7 +21,7 @@ module.exports = {
 
     const location = args.raw.join(" ");
 
-    const data = await findWeather({ search: location, degreeType: "C", lang: lang.langName })
+    const data = await findWeather({ search: location.join(" "), degreeType: "C", lang: lang.langName })
       .then(r => r[0]);
 
     if (!data) {
