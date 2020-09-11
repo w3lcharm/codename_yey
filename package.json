@@ -21,7 +21,7 @@
     "mariadb": "^2.4.0",
     "mathjs": "^7.1.0",
     "moment": "^2.26.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "qrcode": "^1.4.4",
     "sequelize": "^5.22.2",
     "sqlite3": "^4.2.0",
