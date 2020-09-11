@@ -1,5 +1,7 @@
-const Eris = require("eris-additions")(require("eris"));
 const fs = require("fs");
+const path = require("path");
+
+const Eris = require("eris-additions")(require("eris"));
 const Sequelize = require("sequelize");
 
 const PermissionError = require("./errors/permissionError");
@@ -156,7 +158,8 @@ class CmdClient extends Eris.Client {
     let englishLang = require("./languages/en");
     languages.set("en", englishLang);
 
-    let files = fs.readdirSync("./src/languages").filter(f => f.endsWith(".js") || f !== "en.js");
+    const files = fs.readdirSync(path.join(__dirname, "languages"))
+      .filter(f => f.endsWith(".js") || f !== "en.js");
     for (let file of files) {
       let langName = file.replace(".js", "");
       let lang = require(`./languages/${file}`);
@@ -191,9 +194,12 @@ class CmdClient extends Eris.Client {
   loadGroups(groups) {
     this.logger.info("loading the commands...")
     for (const dir of groups) {
-      const commands = fs.readdirSync(`./src/commands/${dir}`).filter(f => f.endsWith(".js"));
-      for (let command of commands)
+      const commands = fs.readdirSync(path.join(__dirname, `commands/${dir}`))
+        .filter(f => f.endsWith(".js"));
+
+      for (const command of commands) {
         this.loadCommand(`./commands/${dir}/${command}`);
+      }
     }
     this.logger.info(`successfully loaded all commands.`);
   }
@@ -203,10 +209,10 @@ class CmdClient extends Eris.Client {
       throw new Error("command doesn't exist.");
     }
     
-    let { path } = this.commands.get(name);
+    const { path: cmdPath } = this.commands.get(name);
 
     this.unloadCommand(name);
-    this.loadCommand(path);
+    this.loadCommand(cmdPath);
   }
 
   unloadCommand(name) {
@@ -215,16 +221,16 @@ class CmdClient extends Eris.Client {
     }
 
     let cmd = this.commands.get(name);
-    let path = require.resolve(cmd.path);
+    let cmdPath = require.resolve(cmd.path);
 
-    delete require.cache[path];
+    delete require.cache[cmdPath];
     this.commands.delete(name);
   }
 
   reloadLanguages() {
     for (let lang of this.languages.keys()) {
-      let path = require.resolve(`./languages/${lang}`);
-      delete require.cache[path];
+      let cmdPath = require.resolve(`./languages/${lang}`);
+      delete require.cache[cmdPath];
     }
 
     this.languages.clear();
@@ -247,38 +253,38 @@ class CmdClient extends Eris.Client {
     return super.connect();
   }
 
-  loadExtension(path, ...args) {
-    const ext = require(path);
+  loadExtension(extPath, ...args) {
+    const ext = require(extPath);
 
     if (!ext.load) throw new Error("extension should export a load() method.");
     if (!ext.unload) throw new Error("extension should export a unload() method.");
 
     ext.load(this, ...args);
 
-    this.extensions[path] = ext;
+    this.extensions[extPath] = ext;
 
-    this.logger.debug(`loaded extension ${path}.`);
+    this.logger.debug(`loaded extension ${extPath}.`);
   }
 
-  reloadExtension(path) {
-    this.unloadExtension(path);
-    this.loadExtension(path);
+  reloadExtension(extPath) {
+    this.unloadExtension(extPath);
+    this.loadExtension(extPath);
   }
 
-  unloadExtension(path) {
-    if (!this.extensions[path]) {
+  unloadExtension(extPath) {
+    if (!this.extensions[extPath]) {
       throw new Error("extension not loaded or doesn't exist.");
     }
 
-    const ext = this.extensions[path];
+    const ext = this.extensions[extPath];
     ext.unload(this);
 
-    const fullPath = require.resolve(path);
+    const fullPath = require.resolve(extPath);
 
     delete require.cache[fullPath];
-    delete this.extensions[path];
+    delete this.extensions[extPath];
 
-    this.logger.debug(`unloaded extension ${path}.`);
+    this.logger.debug(`unloaded extension ${extPath}.`);
   }
 }
 
