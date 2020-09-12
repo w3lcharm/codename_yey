@@ -1,4 +1,4 @@
-const magicball = require("../../utils/8ball");
+const magicball = require("../../extensions/8ball");
 
 module.exports = {
   name: "8ball",

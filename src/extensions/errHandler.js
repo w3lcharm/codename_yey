@@ -1,4 +1,4 @@
-const PermissionError = require("../errors/permissionError");
+const { PermissionError } = require("../core/client");
 
 module.exports = async (client, cmdName, msg, err, showErr, lang) => {
   if (!lang) lang = client.languages.get("en");

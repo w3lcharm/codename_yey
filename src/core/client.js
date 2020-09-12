@@ -9,7 +9,7 @@ const PermissionError = require("./errors/permissionError");
 const Group = require("./group");
 const Logger = require("./logger");
 
-const initDB = require("./utils/initDB");
+const initDB = require("./initDB");
 
 function validatePermission(member, permissions) {
   if (permissions instanceof Array) {
@@ -155,14 +155,14 @@ class CmdClient extends Eris.Client {
   _loadLanguages() {
     let languages = new Eris.Collection();
 
-    let englishLang = require("./languages/en");
+    let englishLang = require("../languages/en");
     languages.set("en", englishLang);
 
-    const files = fs.readdirSync(path.join(__dirname, "languages"))
+    const files = fs.readdirSync(path.join(__dirname, "../languages"))
       .filter(f => f.endsWith(".js") || f !== "en.js");
     for (let file of files) {
       let langName = file.replace(".js", "");
-      let lang = require(`./languages/${file}`);
+      let lang = require(`../languages/${file}`);
 
       for (let key in englishLang) {
         if (lang[key]) continue;
@@ -191,14 +191,14 @@ class CmdClient extends Eris.Client {
     this.logger.debug(`successfully loaded ${command.name} command.`);
   }
 
-  loadGroups(groups) {
+  loadGroups(groups, cmdPath) {
     this.logger.info("loading the commands...")
     for (const dir of groups) {
-      const commands = fs.readdirSync(path.join(__dirname, `commands/${dir}`))
+      const commands = fs.readdirSync(path.join(__dirname, `../commands/${dir}`))
         .filter(f => f.endsWith(".js"));
 
       for (const command of commands) {
-        this.loadCommand(`./commands/${dir}/${command}`);
+        this.loadCommand(`../commands/${dir}/${command}`);
       }
     }
     this.logger.info(`successfully loaded all commands.`);
