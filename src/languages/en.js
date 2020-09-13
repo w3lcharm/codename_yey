@@ -307,7 +307,7 @@ module.exports = {
   infoLinks: "Links:",
   infoBotInvite: "Invite me to your server",
   infoSupportServer: "Support server",
-  infoDonate: "~~Donate~~ (will be added soon)",
+  infoDonate: "[Donate](https://www.donationalerts.com/r/codename_yey)",
 
   inviteDescription: "Shows information about invite.",
   inviteUsage: "<invite>",
