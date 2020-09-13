@@ -229,7 +229,7 @@ class CmdClient extends Eris.Client {
 
   reloadLanguages() {
     for (let lang of this.languages.keys()) {
-      let cmdPath = require.resolve(`./languages/${lang}`);
+      let cmdPath = require.resolve(`../languages/${lang}`);
       delete require.cache[cmdPath];
     }
 
