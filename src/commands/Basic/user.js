@@ -32,7 +32,7 @@ module.exports = {
         name,
         icon_url: member.avatarURL,
       },
-      color: Math.round(Math.random() * 16777216) + 1,
+      color: member.color,
       fields: [
         {
           name: lang.userStatus,
