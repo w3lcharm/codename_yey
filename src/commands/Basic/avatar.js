@@ -1,3 +1,5 @@
+const { Member } = require("eris");
+
 module.exports = {
   name: "avatar",
   group: "basicGroup",
@@ -25,17 +27,20 @@ module.exports = {
         msg.guild.members.find(m => m.username.toLowerCase() === userID.toLowerCase()) ||
         client.users.find(u => u.tag === userID || u.id === userID);
 
-      // if (user instanceof Member) user = user.user;
+      if (user instanceof Member) user = user.user;
 
       if (!user) {
         return msg.channel.createMessage(lang.cantFindUser);
       }
 
+      const format = user.avatar.startsWith("a_") ? "gif" : "png";
+      const url = user.dynamicAvatarURL(format, 2048);
+
       embed.author = {
         name: lang.avatarUser(user),
-        url: user.avatarURL,
+        url,
       };
-      embed.image = { url: user.avatarURL };
+      embed.image = { url };
     }
   
     await msg.channel.createMessage({ embed });
