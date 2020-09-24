@@ -28,6 +28,9 @@ module.exports = {
     if (!member) return;
 
     const parsedTime = parseTime(time);
+    if (parsedTime > 604800000) {
+      return msg.channel.createMessage(lang.muteTimeTooLong);
+    }
     
     if (!parsedTime) reason.unshift(time);
     

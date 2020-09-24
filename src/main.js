@@ -1,9 +1,6 @@
 const CmdClient = require("./core/client");
 const path = require("path");
 
-const SDC = require("@megavasiliy007/sdc-api");
-const DBL = require("dblapi.js");
-
 const errorHandler = require("./extensions/errHandler");
 
 let config;
@@ -29,13 +26,6 @@ global.client = new CmdClient(config.token, {
   defaultImageSize: 2048,
 });
 
-const sdcClient = new SDC(config.sdcApiKey);
-
-let dblClient;
-if (!client.debugMode) {
-  dblClient = new DBL(config.dblApiKey, client);
-}
-
 process.on("unhandledRejection", reason => {
   console.warn(`Unhandled promise rejection:\n${reason instanceof Error ? reason.stack : reason}`);
 });
@@ -52,12 +42,7 @@ client.loadGroups([
   "Dev",
 ], path.join(__dirname, "commands"));
 
-client.once("ready", () => {
-  if (!client.debugMode) {
-    sdcClient.setAutoPost(client);
-  }
-  editStatus();
-});
+client.once("ready", () => editStatus());
 
 client.on("commandError", async (commandName, msg, error, showErr, lang = client.languages.get("en")) => {
   await errorHandler(client, commandName, msg, error, showErr, lang);

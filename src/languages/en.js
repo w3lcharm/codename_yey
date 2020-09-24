@@ -159,6 +159,7 @@ module.exports = {
   muteSuccess: user => `${user.tag} has been muted`,
   canUnmuteSuggestion: prefix => `You can unmute the user by typing ${prefix}unmute <user>.`,
   muteFail: ":x: Mute failed.",
+  muteTimeTooLong: "> :x: Mute time should not be more than 7 days.",
 
   purgeDescription: "Deletes the specified amount of messages.\nThis command requires the \"Manage messages\" permission.",
   purgeUsage: "<amount>",
@@ -216,7 +217,7 @@ module.exports = {
   magicballAnswer: ":8ball: The magic ball's answer is:",
   yourQuestion: "Your question:",
 
-  pollDescription: "Creates a reaction poll (up to 10 answers).\nIf -d or --delete key is specified, also tries to delete your message.",
+  pollDescription: "Creates a reaction poll (up to 10 answers).\nIf -d or --delete key is specified, also tries to delete your message.\nYou can also use double quotes for question and answers.",
   pollUsage: "[-d, --delete] <question> <answers>",
   noAnswers: "> :warning: There must be at least 1 answer in the poll.",
   pollNotMoreThan10Answers: "> :x: Not more than 10 answers.",

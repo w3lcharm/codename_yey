@@ -266,9 +266,9 @@ class CmdClient extends Eris.Client {
     this.logger.debug(`loaded extension ${extPath}.`);
   }
 
-  reloadExtension(extPath) {
+  reloadExtension(extPath, ...args) {
     this.unloadExtension(extPath);
-    this.loadExtension(extPath);
+    this.loadExtension(extPath, ...args);
   }
 
   unloadExtension(extPath) {
