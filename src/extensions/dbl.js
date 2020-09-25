@@ -8,7 +8,7 @@ let interval;
 
 async function postStats(client) {
   const body = JSON.stringify({ server_count: client.guilds.size });
-  const headers = { Authorization: apiKey };
+  const headers = { Authorization: apiKey, "Content-Type": "application/json" };
 
   const response = await fetch(`${apiURL}/bots/${client.user.id}/stats`, { method: "POST", headers, body });
   const data = await response.json()
@@ -22,6 +22,8 @@ module.exports.load = (client, key) => {
 
   if (!key) return logger.warn("No API key provided.");
   apiKey = key;
+
+  postStats(client);
 
   interval = setInterval(async () => {
     try {
