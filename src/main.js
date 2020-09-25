@@ -52,7 +52,8 @@ client.loadExtension(path.join(__dirname, "extensions/autorole.js"));
 client.loadExtension(path.join(__dirname, "extensions/modlogs.js"));
 client.loadExtension(path.join(__dirname, "extensions/welcomeMessages.js"));
 client.loadExtension(path.join(__dirname, "extensions/dbl.js"), config.dblApiKey);
-  
+client.loadExtension(path.join(__dirname, "extensions/sdc.js"), config.sdcApiKey);
+
 client.on("error", (error, id) => {
   client.logger.error(`Error in shard ${id}:\n${error.stack}`);
 });
