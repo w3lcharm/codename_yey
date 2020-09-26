@@ -23,16 +23,18 @@ module.exports.load = (client, key) => {
   if (!key) return logger.warn("No API key provided.");
   apiKey = key;
 
-  postStats(client);
-
-  interval = setInterval(async () => {
+  async function postHandler() {
     try {
       await postStats(client);
       logger.info("stats posted.");
     } catch (err) {
       logger.error(`An error occurred:\n${err.stack}`);
     }
-  }, 1800000);
+  }
+
+  client.once("ready", postHandler);
+
+  interval = setInterval(postHandler, 1800000);
 }
 
 module.exports.unload = () => clearInterval(interval);
