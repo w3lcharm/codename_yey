@@ -27,7 +27,7 @@ module.exports.load = (client, key) => {
   const logger = new Logger(Logger.INFO, "sdc");
 
   if (!key) return logger.warn("No API key provided.");
-  apiKey = key;
+  apiKey = "SDC " + key;
 
   async function postHandler() {
     try {
