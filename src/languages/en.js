@@ -364,4 +364,10 @@ module.exports = {
   weatherFeelsLike: "Feels like:",
   weatherHumidity: "Humidity:",
   weatherWind: "Wind:",
+
+  blacklistDescription: "Blacklists the user.",
+  blacklistUsage: "<user>",
+  userNotBlacklisted: "> :x: This user isn't blacklisted.",
+  userAlreadyBlacklisted: "> :x: This user is already blacklisted.",
+  userNotFound: `> :x: User not found.`,
 };
