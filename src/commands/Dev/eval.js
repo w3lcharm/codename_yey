@@ -21,6 +21,7 @@ module.exports = {
   ownerOnly: true,
   usage: "evalUsage",
   async run(client, msg, args, prefix) {
+    if (!args.raw.length) return msg.channel.createMessage("eval)");
     let code = msg.content.slice(prefix.length + this.name.length + 1);
     // code = insertReturn(code);
     let asyncifiedCode = `(async () => {\n${code}\n})()`;
