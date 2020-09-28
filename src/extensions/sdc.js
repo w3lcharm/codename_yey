@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 const Logger = require("../core/logger");
-const FormData = require("form-data");
+const { stringify } = require("querystring");
 
 const apiURL = "https://api.server-discord.com/v2";
 let apiKey;
@@ -8,16 +8,13 @@ let apiKey;
 let interval;
 
 async function postStats(client) {
-  const formData = new FormData();
-  formData.append("shards", client.shards.size);
-  formData.append("servers", client.guilds.size);
-
   const response = await fetch(`${apiURL}/bots/${client.user.id}/stats`, {
     method: "POST",
     headers: { Authorization: apiKey, "Content-Type": "application/x-www-form-urlencoded" },
-    body: formData,
+    body: stringify({ shards: client.shards.size, servers: client.guilds.size }),
   });
   const data = await response.json();
+
   if (response.status != 200) {
     throw new Error(`${data.error.code} ${data.error.type}: ${data.error.message}`);
   }
