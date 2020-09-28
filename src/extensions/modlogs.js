@@ -255,6 +255,16 @@ async function onGuildMemberUpdate(guild, member, oldMember) {
       timestamp: new Date().toISOString(),
       footer: { text: `ID: ${member.id}` },
     };
+
+    const auditEntry = await guild.getAuditLogs()
+      .then(audit => audit.entries.filter(e => e.actionType == 24)[0]);
+
+    if (auditEntry.targetID == member.id) {
+      embed.fields.push({
+        name: "Changed by:",
+        value: auditEntry.user.tag,
+      });
+    }
   } else {
     const addedRoles = member.roles.filter(r => !oldMember.roles.includes(r));
     const removedRoles = oldMember.roles.filter(r => !member.roles.includes(r));
@@ -280,20 +290,60 @@ async function onGuildMemberUpdate(guild, member, oldMember) {
   } catch {}
 }
 
+async function onVoiceChannelJoin(member, voiceChannel) {
+  const channel = await getModlogChannel(member.guild);
+  if (!channel) return;
+
+  const embed = {
+    author: {
+      name: `${member.tag} joined the voice channel ${voiceChannel.name}`,
+      icon_url: member.avatarURL,
+    },
+    timestamp: new Date().toISOString(),
+    footer: { text: `Channel ID: ${voiceChannel.id}` },
+  };
+
+  try {
+    await client.createMessage(channel, { embed });
+  } catch {}
+}
+
+async function onVoiceChannelLeave(member, voiceChannel) {
+  const channel = await getModlogChannel(member.guild);
+  if (!channel) return;
+
+  const embed = {
+    author: {
+      name: `${member.tag} left the voice channel ${voiceChannel.name}`,
+      icon_url: member.avatarURL,
+    },
+    timestamp: new Date().toISOString(),
+    footer: { text: `Channel ID: ${voiceChannel.id}` },
+  };
+
+  try {
+    await client.createMessage(channel, { embed });
+  } catch {}
+}
+
 module.exports.load = client => {
   client.on("guildMemberAdd", onGuildMemberAdd)
     .on("guildMemberRemove", onGuildMemberRemove)
     .on("guildBanRemove", onGuildBanRemove)
     .on("messageDelete", onMessageDelete)
     .on("messageUpdate", onMessageUpdate)
-    .on("guildMemberUpdate", onGuildMemberUpdate);
+    .on("guildMemberUpdate", onGuildMemberUpdate)
+    .on("voiceChannelJoin", onVoiceChannelJoin)
+    .on("voiceChannelLeave", onVoiceChannelLeave);
 }
 
 module.exports.unload = client => {
   client.off("guildMemberAdd", onGuildMemberAdd)
     .off("guildMemberRemove", onGuildMemberRemove)
     .off("guildBanRemove", onGuildBanRemove)
-    .off("messageDelete", onMessageUpdate)
+    .off("messageDelete", onMessageDelete)
     .off("messageUpdate", onMessageUpdate)
-    .off("guildMemberUpdate", onGuildMemberUpdate);
+    .off("guildMemberUpdate", onGuildMemberUpdate)
+    .off("voiceChannelJoin", onVoiceChannelJoin)
+    .off("voiceChannelLeave", onVoiceChannelLeave);
 }
