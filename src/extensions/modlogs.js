@@ -269,15 +269,18 @@ async function onGuildMemberUpdate(guild, member, oldMember) {
     const addedRoles = member.roles.filter(r => !oldMember.roles.includes(r));
     const removedRoles = oldMember.roles.filter(r => !member.roles.includes(r));
 
+    const role = guild.roles.get(addedRoles[0] || removedRoles[0]);
+    if (!role) return;
+
     embed = {
       author: {
-        name: `${member.tag}'s roles was changed`,
+        name: `${member.tag}'s roles were changed`,
         icon_url: member.avatarURL,
       },
       fields: [
         {
           name: addedRoles.length ? "Role added:": "Role removed:",
-          value: guild.roles.get(addedRoles[0] || removedRoles[0]).mention,
+          value: role.mention,
         },
       ],
       timestamp: new Date().toISOString(),
