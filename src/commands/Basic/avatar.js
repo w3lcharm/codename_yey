@@ -33,7 +33,7 @@ module.exports = {
         return msg.channel.createMessage(lang.cantFindUser);
       }
 
-      const format = user.avatar.startsWith("a_") ? "gif" : "png";
+      const format = user.avatar && user.avatar.startsWith("a_") ? "gif" : "png";
       const url = user.dynamicAvatarURL(format, 2048);
 
       embed.author = {
