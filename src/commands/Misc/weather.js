@@ -31,7 +31,7 @@ module.exports = {
     const embed = {
       title: lang.weatherEmbedTitle(data.location.name),
       description: data.current.skytext,
-//      thumbnail: { url: data.current.imageUrl },
+      thumbnail: { url: data.current.imageUrl },
       color: Math.round(Math.random() * 16777216),
       fields: [
         {
