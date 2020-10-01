@@ -103,6 +103,7 @@ module.exports = {
   statsPlatform: "Платформа:",
   statsVersions: "Версии:",
   statsRamUsed: "ОЗУ использовано:",
+  statsBot: "бота",
 
   userDescription: "Показывает информацию о вас или о указанном пользователе.",
   userUsage: "[пользователь: id, упоминание или тег]",

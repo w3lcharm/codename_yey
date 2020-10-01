@@ -26,6 +26,8 @@ global.client = new CmdClient(config.token, {
   defaultImageSize: 2048,
 });
 
+client.version = "2.2.2";
+
 process.on("unhandledRejection", reason => {
   console.warn(`Unhandled promise rejection:\n${reason instanceof Error ? reason.stack : reason}`);
 });
