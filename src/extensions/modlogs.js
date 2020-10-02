@@ -136,23 +136,12 @@ async function onMessageDelete(msg) {
 
   if (msg.author.bot) return;
 
-  let content = msg.cleanContent;
-  if (msg.attachments.length) {
-    content += "\n-----";
-    for (const attachment of msg.attachments) {
-      content += `\n${attachment.url}`;
-    }
-  }
-
   const embed = {
     title: "Message deleted",
+    description: msg.cleanContent,
     timestamp: new Date().toISOString(),
     footer: { text: `Message ID: ${msg.id}` },
     fields: [
-      {
-        name: "Content:",
-        value: content,
-      },
       {
         name: "Author:",
         value: `${msg.author.username}#${msg.author.discriminator}`,
