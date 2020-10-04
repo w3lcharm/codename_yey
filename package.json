@@ -10,7 +10,6 @@
   "author": "1z3ngero",
   "license": "ISC",
   "dependencies": {
-    "@megavasiliy007/sdc-api": "github:MegaVasiliy007/sdc-api",
     "bufferutil": "^4.0.1",
     "common-tags": "^1.8.0",
     "dotenv": "^8.2.0",
