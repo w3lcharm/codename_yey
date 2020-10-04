@@ -191,17 +191,12 @@ class CmdClient extends Eris.Client {
     this.logger.debug(`successfully loaded ${command.name} command.`);
   }
 
-  loadGroups(groups, cmdPath) {
-    this.logger.info("loading the commands...")
-    for (const dir of groups) {
-      const commands = fs.readdirSync(path.join(__dirname, `../commands/${dir}`))
-        .filter(f => f.endsWith(".js"));
+  loadCommandGroup(groupPath) {
+    const commands = fs.readdirSync(groupPath).filter(f => f.endsWith("js"));
 
-      for (const command of commands) {
-        this.loadCommand(`../commands/${dir}/${command}`);
-      }
+    for (const command of commands) {
+      this.loadCommand(path.join(groupPath, command));
     }
-    this.logger.info(`successfully loaded all commands.`);
   }
 
   reloadCommand(name) {
