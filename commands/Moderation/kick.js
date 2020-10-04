@@ -16,13 +16,13 @@ module.exports = {
 
     if (!member) return;
 
-    try {
+    if (member.kickable && member.highestRole.position < msg.member.highestRole.position) {
       if (member.id === msg.author.id)
         return msg.channel.createMessage(lang.cantKickYourself);
       if (member.id === client.user.id)
         return msg.channel.createMessage(lang.cantKickBot);
       
-      await member.kick(`${encodeURI(reason)} (kicked by ${msg.author.username}#${msg.author.discriminator})`);
+      await member.kick(encodeURI(`${reason} (kicked by ${msg.author.username}#${msg.author.discriminator})`));
 
       const embed = {
         author: {
@@ -35,17 +35,16 @@ module.exports = {
       };
         
       await msg.channel.createMessage({ embed });
-    } catch (err) {
+    } else {
       let description;
-      if (!msg.channel.guild.members.get(client.user.id).permission.has("kickMembers"))
+      if (!msg.guild.me.permission.has("kickMembers")) {
         description = lang.botDontHavePerms(lang.permissions.kickMembers);
-      else if (member.id === msg.channel.guild.ownerID)
+      } else if (member.id === msg.guild.ownerID) {
         description = lang.userIsOwner;
-      else if (member.highestRole.position >= msg.channel.guild.members.get(client.user.id).highestRole.position)
+      } else if (member.highestRole.position >= msg.guild.me.highestRole.position) {
         description = lang.roleHigher;
-      else {
-        description = lang.somethingWentWrong;
-        client.emit("commandError", this.name, msg, err, false);
+      } else if (member.highestRole.position >= msg.member.highestRole.position) {
+        description = lang.memberRoleHigher;
       }
 
       const embed = {

@@ -28,7 +28,7 @@ global.client = new CmdClient(config.token, {
 
 client.version = "2.2.2";
 
-const cmdGroups = [ "Basic", "Utility", "Moderation", "Fun", "Misc", "Settings" ];
+const cmdGroups = [ "Basic", "Utility", "Moderation", "Fun", "Misc", "Settings", "Dev" ];
 for (const group of cmdGroups) {
   client.loadCommandGroup(path.join(__dirname, "commands", group));
 }

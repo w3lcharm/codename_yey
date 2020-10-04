@@ -16,7 +16,7 @@ module.exports = {
 
     if (!member) return;
 
-    try {
+    if (member.bannable && member.highestRole.position < msg.member.highestRole.position) {
       if (member.id === msg.author.id)
         return msg.channel.createMessage(lang.cantBanYourself);
       if (member.id === client.user.id)
@@ -35,17 +35,16 @@ module.exports = {
       };
         
       await msg.channel.createMessage({ embed });
-    } catch (err) {
+    } else {
       let description;
-      if (!msg.channel.guild.members.get(client.user.id).permission.has("banMembers"))
+      if (!msg.guild.me.permission.has("banMembers")) {
         description = lang.botDontHavePerms(lang.permissions.banMembers);
-      else if (member.id === msg.channel.guild.ownerID)
+      } else if (member.id === msg.guild.ownerID) {
         description = lang.userIsOwner;
-      else if (member.highestRole.position >= msg.channel.guild.members.get(client.user.id).highestRole.position)
+      } else if (member.highestRole.position >= msg.guild.me.highestRole.position) {
         description = lang.roleHigher;
-      else {
-        description = lang.somethingWentWrong;
-        client.emit("commandError", this.name, msg, err, false);
+      } else if (member.highestRole.position >= msg.member.highestRole.position) {
+        description = lang.memberRoleHigher;
       }
 
       const embed = {

@@ -18,6 +18,7 @@ module.exports = {
   botDontHavePerms: perm => `I don't have "${perm}" permission to do this.`,
   userIsOwner: "This user is a server owner.",
   roleHigher: "This user's role is higher than my role.",
+  memberRoleHigher: "This user's role is higher than your role.",
   somethingWentWrong: "Something went wrong. Try again later.",
   dontHavePerms: ":x: You don't have permissions to use this command.",
   missingPermission: perm => `Missing permission: \`${perm}\``,
