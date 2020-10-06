@@ -4,8 +4,8 @@ module.exports = {
   description: "base64Description",
   usage: [ "base64Usage", "base64DecodeUsage" ],
   async run(client, msg, args, prefix, lang) {
-    if (!args.length) {
-      return msg.channel.createMessage(prefix, this);
+    if (!args.raw.length) {
+      return msg.channel.createMessage(lang.commandUsage(prefix, this));
     }
     
     let decodeFlag = false;
