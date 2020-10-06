@@ -362,4 +362,8 @@ module.exports = {
   weatherFeelsLike: "Ощущается как:",
   weatherHumidity: "Влажность воздуха:",
   weatherWind: "Ветер:",
+
+  base64Description: "Кодирует ваш текст в base64.\nВы можете использовать ключ -d или -decode для декодирования из base64.",
+  base64Usage: "<текст>",
+  base64DecodeUsage: "-d <текст> или --decode <текст>",
 };

@@ -372,4 +372,8 @@ module.exports = {
   userNotBlacklisted: "> :x: This user isn't blacklisted.",
   userAlreadyBlacklisted: "> :x: This user is already blacklisted.",
   userNotFound: `> :x: User not found.`,
+
+  base64Description: "Encodes your text to base64.\nYou can use -d or --decode flag to decode from base64.",
+  base64Usage: "<text>",
+  base64DecodeUsage: "-d <text> or --decode <text>",
 };
