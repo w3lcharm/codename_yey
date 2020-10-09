@@ -20,7 +20,7 @@ global.client = new CmdClient(config.token, {
   guildSubscriptions: false,
   intents: [
     "guilds", "guildMembers", "guildBans",
-    "guildPresences", "guildMessages", "directMessages",
+    "guildMessages", "directMessages",
     "guildMessageReactions", "guildVoiceStates",
   ],
   defaultImageSize: 2048,
