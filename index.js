@@ -17,12 +17,12 @@ global.client = new CmdClient(config.token, {
   db: config.database,
   debugMode: config.debugMode,
   supportChannelID: config.supportChannelID,
-  guildSubscriptions: false,
+/*  guildSubscriptions: false,
   intents: [
     "guilds", "guildMembers", "guildBans",
     "guildMessages", "directMessages",
     "guildMessageReactions", "guildVoiceStates",
-  ],
+  ], */
   defaultImageSize: 2048,
 });
 
