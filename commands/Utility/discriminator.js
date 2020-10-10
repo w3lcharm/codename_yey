@@ -20,7 +20,8 @@ module.exports = {
       .filter(u => u.discriminator === discriminator)
       .splice(0, 20)
       .map(u => u.tag)
-      .join("\n");
+      .join("\n")
+      .replace(/[_~*\|]/g, "\\$&");
 
     const embed = {
       title: lang.discriminatorEmbedTitle(discriminator),
