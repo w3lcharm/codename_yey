@@ -11,11 +11,13 @@ module.exports = {
     moment.locale(lang.langName);
 
     let member;
-    let userID = args.join(" ");
+    let userID = args.raw.join(" ");
     if (!userID) member = msg.member;
     else member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") ||
-      msg.guild.members.find(m => m.id === userID || m.username.toLowerCase() === userID.toLowerCase() || m.tag === userID) ||
-      client.users.find(u => u.id === userID || u.tag === userID);
+      msg.guild.members.find(m =>
+        m.tag.toLowerCase().startsWith(userID) ||
+        (m.nick && m.nick.toLowerCase().startsWith(userID))
+      ) || client.users.find(u => u.id === userID || u.tag === userID);
 
     if (!member) {
       return msg.channel.createMessage(lang.cantFindUser);
