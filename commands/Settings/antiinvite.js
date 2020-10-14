@@ -16,7 +16,7 @@ module.exports = {
       const embed = {
         description: dbItem.action ?
           lang.antiinviteEnabled(dbItem.action) :
-          lang.anttinviteDisabled,
+          lang.antiinviteDisabled,
         color: Math.round(Math.random() * 16777216),
         footer: { text: lang.antiinviteFooter(prefix) },
       };
