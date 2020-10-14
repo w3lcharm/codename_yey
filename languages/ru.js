@@ -26,6 +26,7 @@ module.exports = {
   cooldown: left => `> :warning: Вам нужно подождать ${left} секунд, чтобы использовать эту команду снова.`,
   cantFindUser: "> :x: Пользователь не найден.",
   botPrefix: (prefix, user) => `${user.mention}, мой префикс на этом сервере \`${prefix}\``,
+  antiInviteReason: "отправил ссылку-приглашение",
 
   permissions: {
     kickMembers: "Выгонять участников",
