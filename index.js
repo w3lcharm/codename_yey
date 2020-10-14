@@ -26,7 +26,7 @@ global.client = new CmdClient(config.token, {
   defaultImageSize: 2048,
 });
 
-client.version = "2.4.1";
+client.version = "2.5";
 
 const cmdGroups = [ "Basic", "Utility", "Moderation", "Fun", "Misc", "Settings", "Dev" ];
 for (const group of cmdGroups) {
@@ -47,6 +47,7 @@ client.loadExtension(path.join(__dirname, "extensions/modlogs.js"));
 client.loadExtension(path.join(__dirname, "extensions/welcomeMessages.js"));
 client.loadExtension(path.join(__dirname, "extensions/dbl.js"), config.dblApiKey);
 client.loadExtension(path.join(__dirname, "extensions/sdc.js"), config.sdcApiKey);
+client.loadExtension(path.join(__dirname, "extensions/antiInvite.js"));
 
 client.on("error", (error, id) => {
   client.logger.error(`Error in shard ${id}:\n${error.stack}`);

@@ -11,7 +11,7 @@ async function onMessage(msg) {
 
   if (regexp.test(msg.content)) {
     const dbItem = await db.antiInvite.findOne({ where: { server: msg.guild.id } });
-    if (!dbItem) return;
+    if (!dbItem || !dbItem.action) return;
 
     const userLang = await db.languages.findOrCreate({ where: { user: msg.member.id } })
       .then(l => msg._client.languages.get(l[0].lang));

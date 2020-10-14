@@ -405,4 +405,13 @@ module.exports = {
   base64Description: "Encodes your text to base64.\nYou can use -d or --decode flag to decode from base64.",
   base64Usage: "<text>",
   base64DecodeUsage: "-d <text> or --decode <text>",
+
+  antiinviteDescription: "Lets you to manage the anti-invite.\nThe anti-invite will ignore the users who have the \"Manage Messages\" permission.",
+  antiinviteUsage: "[action: delete, warn, kick, ban or disable]",
+  antiinviteEnabled: action => `Anti-invite is enabled with the \`${action}\` action`,
+  antiinviteDisabled: "Anti-invite is disabled.",
+  antiinviteDisableSuccess: "> :white_check_mark: Anti-invite has been successfully disabled.",
+  antiinviteInvalidAction: "> :x: You've provided an invalid action. The valid actions are delete, warn, kick, ban.",
+  antiinviteEnableSuccess: action => `> :white_check_mark: Anti-invite has been successfully enabled with \`${action}\` action.`,
+  antiinviteFooter: prefix => `You can enable the anti-invite by typing \`${prefix}\`antiinvite [action: delete, warn, kick, ban or disable].`,
 };
