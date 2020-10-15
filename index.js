@@ -48,7 +48,7 @@ client.loadExtension(path.join(__dirname, "extensions/welcomeMessages.js"));
 client.loadExtension(path.join(__dirname, "extensions/dbl.js"), config.dblApiKey);
 client.loadExtension(path.join(__dirname, "extensions/sdc.js"), config.sdcApiKey);
 client.loadExtension(path.join(__dirname, "extensions/antiInvite.js"));
-client.loadExtension(path.join(__dirname, "extensions/dbots.js", config.dbotsApiKey));
+client.loadExtension(path.join(__dirname, "extensions/dbots.js"), config.dbotsApiKey);
 
 client.on("error", (error, id) => {
   client.logger.error(`Error in shard ${id}:\n${error.stack}`);
