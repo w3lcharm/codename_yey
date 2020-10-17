@@ -3,8 +3,8 @@ const regexp = /(https?:\/\/)?(www\.|canary\.|ptb\.)?discord(\.gg|(app)?\.com\/i
 async function onMessage(msg) {
   if (!msg.guild) return;
   if (
-    msg.member.permission.has("manageMessages") ||
-    msg.guild.me.highestRole.position <= msg.member.highestRole.position
+    msg.member && (msg.member.permission.has("manageMessages") ||
+    msg.guild.me.highestRole.position <= msg.member.highestRole.position)
   ) return;
   if (!msg.channel.memberHasPermission(msg.guild.me, "readMessageHistory")) return;
   if (msg.author.bot) return;

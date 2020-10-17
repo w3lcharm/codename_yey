@@ -15,9 +15,9 @@ module.exports = {
     if (!userID) member = msg.member;
     else member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") ||
       msg.guild.members.find(m =>
-        m.tag.toLowerCase().startsWith(userID) ||
-        (m.nick && m.nick.toLowerCase().startsWith(userID))
-      ) || client.users.find(u => u.id === userID || u.tag === userID);
+        m.tag.toLowerCase().startsWith(userID.toLowerCase()) ||
+        (m.nick && m.nick.toLowerCase().startsWith(userID.toLowerCase()))
+      ) || client.users.find(u => u.id === userID);
 
     if (!member) {
       return msg.channel.createMessage(lang.cantFindUser);
