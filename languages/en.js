@@ -25,7 +25,7 @@ module.exports = {
   errorInCommand: cmd => `:x: Error in command \`${cmd}\`:`,
   cooldown: left => `> :warning: You need to wait ${left} seconds before using this command again.`,
   cantFindUser: "> :x: User not found.",
-  botPrefix: (prefix, user) => `${user.mention}, my prefix in this server is \`${prefix}\``,
+  botPrefix: (prefix, user) => `>>> ${user.mention}, my prefix in this server is \`${prefix}\`.\nType \`${prefix}help to get a list of commands.\``,
   antiInviteReason: "sent an invite link",
 
   permissions: {
