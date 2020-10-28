@@ -25,7 +25,7 @@ module.exports = {
   errorInCommand: cmd => `:x: Error in command \`${cmd}\`:`,
   cooldown: left => `> :warning: You need to wait ${left} seconds before using this command again.`,
   cantFindUser: "> :x: User not found.",
-  botPrefix: (prefix, user) => `>>> ${user.mention}, my prefix in this server is \`${prefix}\`.\nType \`${prefix}help to get a list of commands.\``,
+  botPrefix: (prefix, user) => `>>> ${user.mention}, my prefix in this server is \`${prefix}\`.\nType \`${prefix}help\` to get a list of commands.`,
   antiInviteReason: "sent an invite link",
 
   permissions: {
@@ -413,5 +413,5 @@ module.exports = {
   antiinviteDisableSuccess: "> :white_check_mark: Anti-invite has been successfully disabled.",
   antiinviteInvalidAction: "> :x: You've provided an invalid action. The valid actions are delete, warn, kick, ban.",
   antiinviteEnableSuccess: action => `> :white_check_mark: Anti-invite has been successfully enabled with \`${action}\` action.`,
-  antiinviteFooter: prefix => `You can enable the anti-invite by typing \`${prefix}\`antiinvite [action: delete, warn, kick, ban or disable].`,
+  antiinviteFooter: prefix => `You can enable the anti-invite by typing ${prefix}antiinvite [action: delete, warn, kick, ban or disable].`,
 };
