@@ -17,16 +17,16 @@ global.client = new CmdClient(config.token, {
   db: config.database,
   debugMode: config.debugMode,
   supportChannelID: config.supportChannelID,
-/*  guildSubscriptions: false,
+  guildSubscriptions: false,
   intents: [
     "guilds", "guildMembers", "guildBans",
     "guildMessages", "directMessages",
     "guildMessageReactions", "guildVoiceStates",
-  ], */
+  ],
   defaultImageSize: 2048,
 });
 
-client.version = "2.4.1";
+client.version = "2.5.1";
 
 const cmdGroups = [ "Basic", "Utility", "Moderation", "Fun", "Misc", "Settings", "Dev" ];
 for (const group of cmdGroups) {
@@ -47,6 +47,8 @@ client.loadExtension(path.join(__dirname, "extensions/modlogs.js"));
 client.loadExtension(path.join(__dirname, "extensions/welcomeMessages.js"));
 client.loadExtension(path.join(__dirname, "extensions/dbl.js"), config.dblApiKey);
 client.loadExtension(path.join(__dirname, "extensions/sdc.js"), config.sdcApiKey);
+client.loadExtension(path.join(__dirname, "extensions/antiInvite.js"));
+client.loadExtension(path.join(__dirname, "extensions/dbots.js"), config.dbotsApiKey);
 
 client.on("error", (error, id) => {
   client.logger.error(`Error in shard ${id}:\n${error.stack}`);
@@ -56,7 +58,7 @@ client.on("guildCreate", guild => client.logger.info(`New server: ${guild.name} 
   .on("guildDelete", guild => client.logger.info(`Left from server ${guild.name} (ID: ${guild.id})`));
 
 function editStatus() {
-  return client.editStatus({ name: `on ${client.guilds.size} servers | you can mention me to find out my prefix` });
+  return client.editStatus({ name: `on ${client.guilds.size} servers | type @${client.user.username}` });
 }
 client.on("guildCreate", editStatus)
   .on("guildDelete", editStatus)

@@ -133,8 +133,9 @@ async function onMessageDelete(msg) {
   if (!channel) return;
 
   if (!msg.author) return;
-
   if (msg.author.bot) return;
+
+  if (!msg.content) return;
 
   const embed = {
     title: "Message deleted",
@@ -144,7 +145,7 @@ async function onMessageDelete(msg) {
     fields: [
       {
         name: "Author:",
-        value: `${msg.author.username}#${msg.author.discriminator}`,
+        value: `${msg.author.tag} (${msg.author.mention})`,
         inline: true,
       },
       {
@@ -201,7 +202,7 @@ async function onMessageUpdate(newMsg, oldMsg) {
       },
       {
         name: "Author:",
-        value: `${newMsg.author.username}#${newMsg.author.discriminator}`,
+        value: `${newMsg.author.tag} (${newMsg.author.mention})`,
         inline: true,
       },
       {

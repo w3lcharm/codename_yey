@@ -25,7 +25,8 @@ module.exports = {
   errorInCommand: cmd => `:x: Ошибка в команде \`${cmd}\`:`,
   cooldown: left => `> :warning: Вам нужно подождать ${left} секунд, чтобы использовать эту команду снова.`,
   cantFindUser: "> :x: Пользователь не найден.",
-  botPrefix: (prefix, user) => `${user.mention}, мой префикс на этом сервере \`${prefix}\``,
+  botPrefix: (prefix, user) => `>>> ${user.mention}, мой префикс на этом сервере \`${prefix}\`.\nВведите \`${prefix}help\` для получения команд бота.`,
+  antiInviteReason: "отправил ссылку-приглашение",
 
   permissions: {
     kickMembers: "Выгонять участников",
@@ -394,4 +395,13 @@ module.exports = {
   base64Description: "Кодирует ваш текст в base64.\nВы можете использовать ключ -d или --decode для декодирования из base64.",
   base64Usage: "<текст>",
   base64DecodeUsage: "-d <текст> или --decode <текст>",
+
+  antiinviteDescription: "Позволяет управлять вам анти-инвайтом.",
+  antiinviteUsage: "[действие: delete, warn, kick, ban или disable]",
+  antiinviteEnabled: action => `Анти-инвайт включен с действием \`${action}\``,
+  antiinviteDisabled: "Анти-инвайт выключен.",
+  antiinviteDisableSuccess: "> :white_check_mark: Анти-инвайт был успешно выключен.",
+  antiinviteInvalidAction: "> :x: Вы указали неверное действие для анти-инвайта.",
+  antiinviteEnableSuccess: action => `> :white_check_mark: Анти-инвайт был успешно включен с действием \`${action}\`.`,
+  antiinviteFooter: prefix => `Вы можете управлять анти-инвайтом, используя ${prefix}antiinvite [действие: delete, warn, kick, ban или disable]`,
 };

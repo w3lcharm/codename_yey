@@ -24,8 +24,10 @@ module.exports = {
     } else {
       if (!userID) user = msg.author;
       else user = msg.mentions[0] ||
-        msg.guild.members.find(m => m.username.toLowerCase() === userID.toLowerCase()) ||
-        client.users.find(u => u.tag === userID || u.id === userID);
+        msg.guild.members.find(m => 
+          m.tag.toLowerCase().startsWith(userID.toLowerCase()) ||
+          (m.nick && m.nick.toLowerCase().startsWith(userID.toLowerCase()))
+        ) || client.users.find(u => u.id === userID);
 
       if (user instanceof Member) user = user.user;
 

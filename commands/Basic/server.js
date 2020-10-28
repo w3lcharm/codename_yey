@@ -44,7 +44,7 @@ module.exports = {
             `**${lang.serverMembersOnline}** - ${msg.guild.members.filter(m => m.status === "online").length}\n` +
             `**${lang.serverMembersIdle}** - ${msg.guild.members.filter(m => m.status === "idle").length}\n` +
             `**${lang.serverMembersDND}** - ${msg.guild.members.filter(m => m.status === "dnd").length}\n` +
-            `**${lang.serverMembersOffline}** - ${msg.guild.members.filter(m => m.status === "offline").length}`,
+            `**${lang.serverMembersOffline}** - ${msg.guild.members.filter(m => m.status === "offline" || !m.status).length}`,
           inline: true,
         },
         {
