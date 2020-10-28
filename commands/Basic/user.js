@@ -37,10 +37,6 @@ module.exports = {
       color: member.color,
       fields: [
         {
-          name: lang.userStatus,
-          value: lang.status[member.status] || lang.status.offline,
-        },
-        {
           name: "ID:",
           value: member.id,
         },

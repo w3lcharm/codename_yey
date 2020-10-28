@@ -40,11 +40,7 @@ module.exports = {
         {
           name: lang.serverMembers,
           value: `**${lang.serverMembersTotal}** - ${msg.guild.memberCount}\n` +
-            `**${lang.serverMembersBots}** - ${msg.guild.members.filter(m => m.bot).length}\n` +
-            `**${lang.serverMembersOnline}** - ${msg.guild.members.filter(m => m.status === "online").length}\n` +
-            `**${lang.serverMembersIdle}** - ${msg.guild.members.filter(m => m.status === "idle").length}\n` +
-            `**${lang.serverMembersDND}** - ${msg.guild.members.filter(m => m.status === "dnd").length}\n` +
-            `**${lang.serverMembersOffline}** - ${msg.guild.members.filter(m => m.status === "offline" || !m.status).length}`,
+            `**${lang.serverMembersBots}** - ${msg.guild.members.filter(m => m.bot).length}`,
           inline: true,
         },
         {
