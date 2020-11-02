@@ -1,4 +1,30 @@
 const moment = require("moment");
+const { Constants: { UserFlags }, Member } = require("eris");
+
+const badgeEmojis = {
+  DISCORD_EMPLOYEE: "<:discordEmployee:772878638114144296>",
+  DISCORD_PARTNER: "<:partneredServerOwner:772878678753411082>",
+  HYPESQUAD_EVENTS: "<:hypesquadEvents:772878658108522556>",
+  BUG_HUNTER_LEVEL_1: "<:bugHunterLvl1:772878567646167091>",
+  HOUSE_BRAVERY: "<:hypesquadBravery:772878523848589342>",
+  HOUSE_BRILLIANCE: "<:hypesquadBrilliance:772878504743665704>",
+  HOUSE_BALANCE: "<:hypesquadBalance:772878476704743466>",
+  EARLY_SUPPORTER: "<:earlySupporter:772878612789329992>",
+  BUG_HUNTER_LEVEL_2: "<:bugHunterLvl2:772878547521110038>",
+  VERIFIED_BOT_DEVELOPER: "<:earlyVerifiedBotDev:772878588931997727>",
+};
+
+function getUserBadges(user) {
+  const badges = [];
+
+  for (const flag in UserFlags) {
+    if (!!(user.publicFlags & UserFlags[flag])) {
+      badges.push(badgeEmojis[flag]);
+    }
+  }
+
+  return badges;
+}
 
 module.exports = {
   name: "user",
@@ -17,7 +43,7 @@ module.exports = {
       msg.guild.members.find(m =>
         m.tag.toLowerCase().startsWith(userID.toLowerCase()) ||
         (m.nick && m.nick.toLowerCase().startsWith(userID.toLowerCase()))
-      ) || client.users.find(u => u.id === userID);
+      ) || await client.fetchUser(userID);
 
     if (!member) {
       return msg.channel.createMessage(lang.cantFindUser);
@@ -28,12 +54,15 @@ module.exports = {
 
     const createdDaysAgo = Math.floor((Date.now() - member.createdAt) / (1000 * 86400));
     const joinedDaysAgo = Math.floor((Date.now() - member.joinedAt) / (1000 * 86400));
+    
+    const badges = getUserBadges(member instanceof Member ? member.user : member);
 
     const embed = {
       author: {
         name,
         icon_url: member.avatarURL,
       },
+      description: badges.join(" "),
       color: member.color,
       fields: [
         {
@@ -44,69 +73,19 @@ module.exports = {
           name: lang.userRegisteredAt,
           value: `${moment(member.createdAt).format("lll")} ${lang.daysAgo(createdDaysAgo)}`,
         },
-        {
-          name: lang.userJoinedAt,
-          value: member.joinedAt ? `${moment(member.joinedAt).format("lll")} ${lang.daysAgo(joinedDaysAgo)}` : "n/a",
-        },
-        {
-          name: lang.userRoles,
-          value: member.roles ? member.roleObjects.sort((a, b) => b.position - a.position).map(r => r.mention).join(", ") || "None" : "n/a",
-        },
-        {
-          name: lang.userBot,
-          value: lang.userBotDefine(member.bot),
-        },
       ],
     };
 
-    if (member.game) {
-      if (!member.game.name) {
-        return msg.channel.createMessage({ embed });
-      }
+    if (member.joinedAt) embed.fields.push({
+      name: lang.userJoinedAt,
+      value: `${moment(member.joinedAt).format("lll")} ${lang.daysAgo(joinedDaysAgo)}`,
+    });
 
-      let emoji;
-      if (member.game.emoji) {
-        let animated = member.game.emoji.animated ? "a" : "";
-        if (member.game.emoji.id) {
-          emoji = `<${animated}:${member.game.emoji.name}:${member.game.emoji.id}>`;
-        } else {
-          emoji = member.game.emoji.name;
-        }
-      }
-  
-      switch (member.game.type) {
-        case 4:
-          embed.fields.unshift({
-            name: lang.userCustomStatus,
-            value: emoji ? `${emoji} ${member.game.state || ""}` : member.game.state,
-          });
-          break;
-        case 3:
-          embed.fields.unshift({
-            name: lang.userWatching,
-            value: member.game.name,
-          });
-          break;
-        case 2:
-          embed.fields.unshift({
-            name: lang.userListening,
-            value: member.game.name,
-          });
-          break;
-        case 1:
-          embed.fields.unshift({
-            name: lang.userStreaming,
-            value: `[${member.game.name}](${member.game.url})`,
-          });
-          break;
-        case 0:
-          embed.fields.unshift({
-            name: lang.userPlaying,
-            value: member.game.name,
-          });
-          break;
-      }
-    }
+    if (member.roles && member.roles.length) embed.fields.push({
+      name: lang.userRoles,
+      value: member.roleObjects.sort((a, b) => b.position - a.position)
+        .map(r => r.mention).join(", "),
+    });
 
     await msg.channel.createMessage({ embed: embed });
   }
