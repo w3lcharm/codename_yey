@@ -11,4 +11,5 @@ module.exports = {
   },
   owners: [ "insert-your-id-here" ],
   supportChannelID: "id", // this is needed for support command
+  githubKey: "your github key", // needed for github command
 };
