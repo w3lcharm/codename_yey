@@ -404,4 +404,13 @@ module.exports = {
   antiinviteInvalidAction: "> :x: Вы указали неверное действие для анти-инвайта.",
   antiinviteEnableSuccess: action => `> :white_check_mark: Анти-инвайт был успешно включен с действием \`${action}\`.`,
   antiinviteFooter: prefix => `Вы можете управлять анти-инвайтом, используя ${prefix}antiinvite [действие: delete, warn, kick, ban или disable]`,
+
+  githubDescription: "Ищет и показывает информацию о репозитории на GitHub.",
+  githubUsage: "запрос",
+  githubRepoNotFound: "> :x: Репозиторий не найден.",
+  githubStars: "Звезды:",
+  githubForks: "Форки:",
+  githubLicense: "Лицензия:",
+  githubLanguage: "Язык:",
+  githubRepoCreatedAt: "Репозиторий создан:",
 };

@@ -414,4 +414,14 @@ module.exports = {
   antiinviteInvalidAction: "> :x: You've provided an invalid action. The valid actions are delete, warn, kick, ban.",
   antiinviteEnableSuccess: action => `> :white_check_mark: Anti-invite has been successfully enabled with \`${action}\` action.`,
   antiinviteFooter: prefix => `You can enable the anti-invite by typing ${prefix}antiinvite [action: delete, warn, kick, ban or disable].`,
+
+  githubDescription: "Searches and shows information about GitHub repository.",
+  githubUsage: "<query>",
+  githubRepoNotFound: "> :x: Repository not found.",
+  githubWatchers: "Watchers:",
+  githubStars: "Stars:",
+  githubForks: "Forks:",
+  githubLicense: "License:",
+  githubLanguage: "Language:",
+  githubRepoCreatedAt: "Created at:",
 };
