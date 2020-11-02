@@ -3,9 +3,8 @@ const path = require("path");
 
 const errorHandler = require("./extensions/errHandler");
 
-let config;
 try {
-  config = require("./config");
+  global.config = require("./config");
 } catch {
   console.error("No config file found. Exiting...");
   process.exit(1);
