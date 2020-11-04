@@ -1,6 +1,6 @@
 const { PermissionError } = require("../core/client");
 
-module.exports = async (client, cmdName, msg, err, showErr, lang) => {
+async function onCommandError(cmd, msg, err, showErr = false, lang) {
   if (!lang) lang = client.languages.get("en");
 
   if (err instanceof PermissionError) {
@@ -29,3 +29,6 @@ module.exports = async (client, cmdName, msg, err, showErr, lang) => {
     await msg.channel.createMessage({ embed });
   }
 }
+
+module.exports.load = client => client.on("commandError", onCommandError);
+module.exports.unload = client => client.off("commandError", onCommandError);

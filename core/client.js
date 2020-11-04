@@ -36,7 +36,7 @@ class CmdClient extends Eris.Client {
 
     this.debugMode = options.debugMode || false;
 
-    this.logger = new Logger(options.debugMode ? Logger.TRACE : Logger.INFO, "codename_yey");
+    this.logger = new Logger(options.debugMode ? Logger.TRACE : Logger.INFO, "main");
     this.logger.info("logger initialized.");
 
     this.languages = this._loadLanguages();

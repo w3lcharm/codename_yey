@@ -17,7 +17,7 @@ async function postStats(client) {
   }
 }
 
-module.exports.load = (client, key) => {
+module.exports.load = (client, key = config.dbotsApiKey) => {
   const logger = new Logger(Logger.INFO, "dbots");
 
   if (!key) return logger.warn("No API key provided.");

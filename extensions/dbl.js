@@ -17,7 +17,7 @@ async function postStats(client) {
   }
 }
 
-module.exports.load = (client, key) => {
+module.exports.load = (client, key = config.dblApiKey) => {
   const logger = new Logger(Logger.INFO, "dbl");
 
   if (!key) return logger.warn("No API key provided.");

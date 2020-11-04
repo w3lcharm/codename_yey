@@ -20,7 +20,7 @@ async function postStats(client) {
   }
 }
 
-module.exports.load = (client, key) => {
+module.exports.load = (client, key = config.sdcApiKey) => {
   const logger = new Logger(Logger.INFO, "sdc");
 
   if (!key) return logger.warn("No API key provided.");
