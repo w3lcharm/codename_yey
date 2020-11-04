@@ -130,7 +130,7 @@ class CmdClient extends Eris.Client {
         }
         this.logger.info(`${msg.author.username}#${msg.author.discriminator} used ${cmdName} command in ${msg.channel.guild ? msg.channel.guild.name : "bot DM"}`);
       } catch (err) {
-        this.emit("commandError", cmdName, msg, err, true, lang);
+        this.emit("commandError", command, msg, err, true, lang);
       } 
     });
     

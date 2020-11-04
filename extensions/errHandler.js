@@ -17,10 +17,10 @@ async function onCommandError(cmd, msg, err, showErr = false, lang) {
     return msg.channel.createMessage({ embed });
   }
   
-  client.logger.error(`Error in command ${cmdName}:\n${err.stack}`);
+  client.logger.error(`Error in command ${cmd.name}:\n${err.stack}`);
 
   let embed = {
-    title: lang.errorInCommand(cmdName),
+    title: lang.errorInCommand(cmd.name),
     description: `\`\`\`${err}\`\`\``,
     color: 15158332,
   };
