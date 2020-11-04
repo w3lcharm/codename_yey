@@ -96,6 +96,9 @@ module.exports = {
     "Высокий",
     "Очень высокий",
   ],
+  serverEmojis: "Эмодзи:",
+  serverEmojisStatic: "статичные",
+  serverEmojisAnimated: "анимированные",
 
   statsDescription: "Показывает статистику бота.",
   statsTitle: "Статистика бота",

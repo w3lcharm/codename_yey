@@ -25,7 +25,7 @@ global.client = new CmdClient(config.token, {
   defaultImageSize: 2048,
 });
 
-client.version = "2.5.3";
+client.version = "2.5.4";
 
 const cmdGroups = [ "Basic", "Utility", "Moderation", "Fun", "Misc", "Settings", "Dev" ];
 for (const group of cmdGroups) {

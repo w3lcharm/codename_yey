@@ -96,6 +96,9 @@ module.exports = {
     "High",
     "Very high",
   ],
+  serverEmojis: "Emojis:",
+  serverEmojisStatic: "static",
+  serverEmojisAnimated: "animated",
 
   statsDescription: "Shows the bot stats.",
   statsTitle: "Bot stats",
