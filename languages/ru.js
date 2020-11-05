@@ -341,6 +341,7 @@ module.exports = {
   infoBotInvite: "Добавить меня на свой сервер",
   infoSupportServer: "Сервер поддержки",
   infoDonate: "Пожертвовать",
+  infoGitHubRepo: "Репозиторий GitHub",
 
   inviteDescription: "Показывает информацию о приглашении.",
   inviteUsage: "<приглашение>",

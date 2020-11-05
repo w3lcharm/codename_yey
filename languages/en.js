@@ -343,6 +343,7 @@ module.exports = {
   infoBotInvite: "Invite me to your server",
   infoSupportServer: "Support server",
   infoDonate: "Donate",
+  infoGitHubRepo: "GitHub repository",
 
   inviteDescription: "Shows information about invite.",
   inviteUsage: "<invite>",
