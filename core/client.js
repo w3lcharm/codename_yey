@@ -126,30 +126,10 @@ class CmdClient extends Eris.Client {
           cmdCooldowns.set(msg.author.id, Date.now());
           setTimeout(() => cmdCooldowns.delete(msg.author.id), command.cooldown * 1000);
         }
+
+        this.emit("commandSuccess", command, msg);
+ 
         this.logger.info(`${msg.author.username}#${msg.author.discriminator} used ${cmdName} command in ${msg.channel.guild ? msg.channel.guild.name : "bot DM"}`);
-
-        if (this.cmdLogsChannelID) {
-          const embed = {
-            title: `Command \`${command.name}\` used.`,
-            description: msg.cleanContent,
-            fields: [
-              {
-                name: "User:",
-                value: `${msg.author.tag} (${msg.author.id})`,
-              },
-              {
-                name: "Channel:",
-                value: `${msg.channel.name} (${msg.channel.id})`,
-              },
-              {
-                name: "Server:",
-                value: `${msg.guild.name} (${msg.guild.id})`,
-              },
-            ],
-          };
-
-          await this.createMessage(this.cmdLogsChannelID, { embed });
-        }
       } catch (err) {
         this.emit("commandError", command, msg, err, true, lang);
       } 

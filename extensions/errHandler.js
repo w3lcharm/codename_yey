@@ -51,6 +51,7 @@ async function onCommandError(cmd, msg, err, showErr = false, lang) {
 
   if (showErr) {
     await msg.channel.createMessage({ embed });
+    await client.createMessage(client.cmdLogsChannelID, { embed: logsEmbed });
   }
 }
 
