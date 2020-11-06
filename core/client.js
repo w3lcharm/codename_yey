@@ -41,9 +41,7 @@ class CmdClient extends Eris.Client {
 
     this.languages = this._loadLanguages();
 
-    this.supportChannelID = options.supportChannelID;
-
-    this.cooldowns = new Eris.Collection()
+    this.cooldowns = new Eris.Collection();
 
     this.extensions = {};
 
@@ -129,6 +127,29 @@ class CmdClient extends Eris.Client {
           setTimeout(() => cmdCooldowns.delete(msg.author.id), command.cooldown * 1000);
         }
         this.logger.info(`${msg.author.username}#${msg.author.discriminator} used ${cmdName} command in ${msg.channel.guild ? msg.channel.guild.name : "bot DM"}`);
+
+        if (this.cmdLogsChannelID) {
+          const embed = {
+            title: `Command \`${command.name}\` used.`,
+            description: msg.cleanContent,
+            fields: [
+              {
+                name: "User:",
+                value: `${msg.author.tag} (${msg.author.id})`,
+              },
+              {
+                name: "Channel:",
+                value: `${msg.channel.name} (${msg.channel.id})`,
+              },
+              {
+                name: "Server:",
+                value: `${msg.guild.name} (${msg.guild.id})`,
+              },
+            ],
+          };
+
+          await this.createMessage(this.cmdLogsChannelID, { embed });
+        }
       } catch (err) {
         this.emit("commandError", command, msg, err, true, lang);
       } 

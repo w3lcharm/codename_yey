@@ -4,7 +4,7 @@ async function onCommandError(cmd, msg, err, showErr = false, lang) {
   if (!lang) lang = client.languages.get("en");
 
   if (err instanceof PermissionError) {
-    let embed = {
+    const embed = {
       title: lang.dontHavePerms,
       description: lang.missingPermission(lang.permissions[err.missingPermission]),
       color: 15158332,
@@ -19,11 +19,35 @@ async function onCommandError(cmd, msg, err, showErr = false, lang) {
   
   client.logger.error(`Error in command ${cmd.name}:\n${err.stack}`);
 
-  let embed = {
+  const embed = {
     title: lang.errorInCommand(cmd.name),
     description: `\`\`\`${err}\`\`\``,
     color: 15158332,
   };
+
+  const logsEmbed = {
+    title: `:x: An error occurred while executing command ${cmd.name}.`,
+    description: msg.cleanContent,
+    color: 15158332,
+    fields: [
+      {
+        name: "Error:",
+        value: `\`\`\`${err}\`\`\``,
+      },
+      {
+        name: "User:",
+        value: `${msg.author.tag} (${msg.author.id})`,
+      },
+      {
+        name: "Channel:",
+        value: `${msg.channel.name} (${msg.channel.id})`,
+      },
+      {
+        name: "Server",
+        value: `${msg.guild.name} (${msg.guild.id})`,
+      },
+    ],
+  }
 
   if (showErr) {
     await msg.channel.createMessage({ embed });

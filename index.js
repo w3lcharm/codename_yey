@@ -14,7 +14,6 @@ global.client = new CmdClient(config.token, {
   owners: config.owners,
   db: config.database,
   debugMode: config.debugMode,
-  supportChannelID: config.supportChannelID,
   guildSubscriptions: false,
   intents: [
     "guilds", "guildMembers", "guildBans",
@@ -25,6 +24,8 @@ global.client = new CmdClient(config.token, {
 });
 
 client.version = "2.5.4";
+client.supportChannelID = config.supportChannelID;
+client.cmdLogsChannelID = config.cmdLogsChannelID;
 
 const cmdGroups = [ "Basic", "Utility", "Moderation", "Fun", "Misc", "Settings", "Dev" ];
 for (const group of cmdGroups) {
