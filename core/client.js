@@ -62,7 +62,7 @@ class CmdClient extends Eris.Client {
 
     this.once("ready", () => {
       this.logger.info(`${this.user.username} online!`);
-      this.editStatus("online", { name: `${this.prefix}help`, type: 3 });
+      // this.editStatus("online", { name: `${this.prefix}help`, type: 3 });
 
       sequelize.sync()
         .then(() => this.logger.info("successfully connected to the database."));
