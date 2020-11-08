@@ -239,8 +239,10 @@ class CmdClient extends Eris.Client {
   }
 
   async fetchUser(userID) {
-    const user = await this.requestHandler.request("GET", `/users/${userID}`, true);
-    return new Eris.User(user, this);
+    try {
+      const user = await this.requestHandler.request("GET", `/users/${userID}`, true);
+      return new Eris.User(user, this);
+    } catch {}
   }
 
   async connect() {

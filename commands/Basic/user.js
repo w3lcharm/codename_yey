@@ -42,7 +42,8 @@ module.exports = {
     else member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") ||
       msg.guild.members.find(m =>
         m.tag.toLowerCase().startsWith(userID.toLowerCase()) ||
-        (m.nick && m.nick.toLowerCase().startsWith(userID.toLowerCase()))
+        (m.nick && m.nick.toLowerCase().startsWith(userID.toLowerCase())) ||
+        m.id == userID
       ) || await client.fetchUser(userID);
 
     if (!member) {
