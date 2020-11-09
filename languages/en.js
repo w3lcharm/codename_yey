@@ -138,7 +138,7 @@ module.exports = {
   updateSuccess: ":white_check_mark: Successfully updated.",
 
   banDescription: "Bans the provided user.\nThis command requires the \"Ban members\" permission.",
-  banUsage: "<user> [reason]",
+  banUsage: "<user: mention, tag or id> [reason]",
   banSuccess: user => `${user.tag} has been banned`,
   reason: reason => `Reason: ${reason || "none"}`,
   cantBanYourself: `> :x: You can't ban yourself.`,
@@ -151,19 +151,19 @@ module.exports = {
   hackbanFail: ":x: Hackban failed.",
   
   kickDescription: "Kicks the provided user.\nThis command requires the \"Kick members\" permission.",
-  kickUsage: "<user> [reason]",
+  kickUsage: "<user: mention, tag or id> [reason]",
   cantKickYourself: "> :x: You can't kick youself.",
   cantKickBot: "> :x: You can't kick a bot.",
   kickSuccess: user => `${user.tag} has been kicked`,
   kickFail: ":x: Kick failed.",
 
   muteDescription: "Mutes the provided user.\nAllowed time settings: Ns, Nm, Nh, Nd, where N is a number.\nThis command requires the \"Kick members\" permission.",
-  muteUsage: "<user> [time] [reason]",
+  muteUsage: "<user: mention, tag or id> [time] [reason]",
   cantMuteYourself: "> :x: You can't mute yourself.",
   cantMuteBot: "> :x: You can't mute a bot.",
   userAlreadyMuted: "> :x: This user is already muted.",
   muteSuccess: user => `${user.tag} has been muted`,
-  canUnmuteSuggestion: prefix => `You can unmute the user by typing ${prefix}unmute <user>.`,
+  canUnmuteSuggestion: prefix => `You can unmute the user by typing ${prefix}unmute <user: mention, tag or id>.`,
   muteFail: ":x: Mute failed.",
   muteTimeTooLong: "> :x: Mute time should not be more than 7 days.",
 
@@ -177,13 +177,13 @@ module.exports = {
   purgeFailed: ":x: Purge failed.",
 
   unmuteDescription: "Unmutes the provided user.\nThis command requires the \"Kick members\" permission.",
-  unmuteUsage: "<user>",
+  unmuteUsage: "<user: mention, tag or id>",
   userNotMuted: "> :x: This user is not muted.",
   unmuteSuccess: user => `${user.tag} has been unmuted`,
   unmuteFail: ":x: Unmute failed.",
 
   warnDescription: "Warns the provided user. Also lets you to show your or other user's warns or delete them (if you have \"Kick members\" permission).",
-  warnUsage: "[-l, --list [user]] [-d, --delete <warnID>] <user> [reason]",
+  warnUsage: "[-l, --list [user]] [-d, --delete <warnID>] <user: mention, tag or id> [reason]",
   totalWarns: number => `Total warns: ${number}`,
   invalidID: "> :x: Invalid warn ID.",
   warnOnAnotherServer: "> :x: This warn is located on another server.",
@@ -401,7 +401,7 @@ module.exports = {
   weatherWind: "Wind:",
 
   blacklistDescription: "Blacklists the user.",
-  blacklistUsage: "<user>",
+  blacklistUsage: "<user: mention, tag or id>",
   userNotBlacklisted: "> :x: This user isn't blacklisted.",
   userAlreadyBlacklisted: "> :x: This user is already blacklisted.",
   userNotFound: `> :x: User not found.`,
