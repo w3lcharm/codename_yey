@@ -9,58 +9,61 @@ module.exports = {
   aliases: [ "s", "serverinfo" ],
   async run(client, msg, args, prefix, lang) {
     moment.locale(lang.langName);
-    
-    let owner = msg.guild.members.get(msg.guild.ownerID)
-      || await client.fetchUser(msg.guild.ownerID);
 
-    const createdDaysAgo = Math.floor((Date.now() - msg.guild.createdAt) / (1000 * 86400));
+    const guild = client.owners.includes(msg.author.id) ?
+      client.guilds.get(args[0]) || msg.guild : msg.guild;
+    
+    let owner = guild.members.get(guild.ownerID)
+      || await client.fetchUser(guild.ownerID);
+
+    const createdDaysAgo = Math.floor((Date.now() - guild.createdAt) / (1000 * 86400));
 
     const embed = {
       author: {
-        name: msg.guild.name,
-        icon_url: msg.guild.iconURL,
+        name: guild.name,
+        icon_url: guild.iconURL,
       },
       color: Math.round(Math.random() * 16777216) + 1,
       fields: [
         {
           name: lang.serverOwner,
-          value: `${owner.tag} (<@${msg.guild.ownerID}>)`,
+          value: `${owner.tag} (<@${guild.ownerID}>)`,
         },
         {
           name: "ID:",
-          value: msg.guild.id,
+          value: guild.id,
         },
         {
           name: lang.serverRegion,
-          value: msg.guild.region,
+          value: guild.region,
         },
         {
           name: lang.serverMembers,
-          value: `**${lang.serverMembersTotal}** - ${msg.guild.memberCount}\n` +
-            `**${lang.serverMembersBots}** - ${msg.guild.members.filter(m => m.bot).length}`,
+          value: `**${lang.serverMembersTotal}** - ${guild.memberCount}\n` +
+            `**${lang.serverMembersBots}** - ${guild.members.filter(m => m.bot).length}`,
         },
         {
           name: lang.serverChannels,
-          value: `**${lang.serverChannelsCategories}** - ${msg.guild.channels.filter(c => c instanceof CategoryChannel).length}\n` +
-            `**${lang.serverChannelsText}** - ${msg.guild.channels.filter(c => c instanceof TextChannel).length}\n` +
-            `**${lang.serverChannelsVoice}** - ${msg.guild.channels.filter(c => c instanceof VoiceChannel).length}`,
+          value: `**${lang.serverChannelsCategories}** - ${guild.channels.filter(c => c instanceof CategoryChannel).length}\n` +
+            `**${lang.serverChannelsText}** - ${guild.channels.filter(c => c instanceof TextChannel).length}\n` +
+            `**${lang.serverChannelsVoice}** - ${guild.channels.filter(c => c instanceof VoiceChannel).length}`,
         },
         {
           name: lang.serverEmojis,
-          value: `**${lang.serverEmojisStatic}** - ${msg.guild.emojis.filter(e => !e.animated).length}\n` +
-            `**${lang.serverEmojisAnimated}** - ${msg.guild.emojis.filter(e => e.animated).length}`,
+          value: `**${lang.serverEmojisStatic}** - ${guild.emojis.filter(e => !e.animated).length}\n` +
+            `**${lang.serverEmojisAnimated}** - ${guild.emojis.filter(e => e.animated).length}`,
         },
         {
           name: lang.serverVerificationLevel,
-          value: lang.verificationLevel[msg.guild.verificationLevel],
+          value: lang.verificationLevel[guild.verificationLevel],
         },
         {
           name: lang.serverTotalRoles,
-          value: msg.guild.roles.size, 
+          value: guild.roles.size, 
         },
         {
           name: lang.serverCreatedAt,
-          value: `${moment(msg.guild.createdAt).format("lll")} ${lang.daysAgo(createdDaysAgo)}`,
+          value: `${moment(guild.createdAt).format("lll")} ${lang.daysAgo(createdDaysAgo)}`,
         },
       ]
     };
