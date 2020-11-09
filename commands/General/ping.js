@@ -1,6 +1,6 @@
 module.exports = {
   name: "ping",
-  group: "basicGroup",
+  group: "generalGroup",
   description: "pingDescription",
   async run(client, msg, args, prefix, lang) {
     let shard;

@@ -28,7 +28,7 @@ function getUserBadges(user) {
 
 module.exports = {
   name: "user",
-  group: "basicGroup",
+  group: "generalGroup",
   description: "userDescription",
   usage: "userUsage",
   guildOnly: true,

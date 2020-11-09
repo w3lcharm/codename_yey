@@ -12,7 +12,7 @@ function intToHex(num) {
 
 module.exports = {
   name: "role",
-  group: "basicGroup",
+  group: "generalGroup",
   description: "roleDescription",
   usage: "roleUsage",
   guildOnly: true,

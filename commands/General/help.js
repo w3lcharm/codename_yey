@@ -1,6 +1,6 @@
 module.exports = {
   name: "help",
-  group: "basicGroup",
+  group: "generalGroup",
   description: "helpDescription",
   usage: "helpUsage",
   aliases: [ "h" ],

@@ -43,7 +43,7 @@ module.exports = {
     offline: "<:offline:737262088904507402> Не в сети",
   },
 
-  basicGroup: "Основные",
+  generalGroup: "Основные",
   devGroup: "Команды разработчика",
   moderationGroup: "Модерация",
   settingsGroup: "Настройки",

@@ -3,7 +3,7 @@ const moment = require("moment");
 
 module.exports = {
   name: "stats",
-  group: "basicGroup",
+  group: "generalGroup",
   description: "statsDescription",
   async run(client, msg, args, prefix, lang) {
     const uptime = process.uptime();

@@ -4,7 +4,7 @@ const inviteLink = "https://discord.com/api/oauth2/authorize?client_id=641312878
 
 module.exports = {
   name: "info",
-  group: "basicGroup",
+  group: "generalGroup",
   description: "infoDescription",
   async run(client, msg, args, prefix, lang) {
     const embed = {

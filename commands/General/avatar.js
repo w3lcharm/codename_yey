@@ -2,7 +2,7 @@ const { Member } = require("eris");
 
 module.exports = {
   name: "avatar",
-  group: "basicGroup",
+  group: "generalGroup",
   description: "avatarDescription",
   usage: [ "avatarUsage", "avatarUsageServer" ],
   guildOnly: true,
