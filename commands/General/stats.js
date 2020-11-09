@@ -1,5 +1,6 @@
 const { VERSION } = require("eris");
 const moment = require("moment");
+const os = require("os");
 
 module.exports = {
   name: "stats",
@@ -11,6 +12,8 @@ module.exports = {
     const parsedUptime = uptimeDays + moment.utc(uptime * 1000).format(":HH:mm:ss");
 
     const ramUsed = process.memoryUsage().heapUsed / 1048576;
+
+    const cpu = os.cpus()[0];
 
     const embed = {
       title: lang.statsTitle,
@@ -41,6 +44,10 @@ module.exports = {
         {
           name: lang.statsRamUsed,
           value: `${ramUsed.toFixed(1)} MB`,
+        },
+        {
+          name: lang.statsCpu,
+          value: `\`${cpu ? cpu.model : lang.cantGetCpuInfo}\``,
         },
       ],
       footer: {

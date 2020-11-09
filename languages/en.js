@@ -109,6 +109,8 @@ module.exports = {
   statsVersions: "Versions:",
   statsRamUsed: "RAM usage:",
   statsBot: "bot",
+  statsCpu: "CPU:",
+  cantGetCpuInfo: "Unable to get CPU info",
 
   userDescription: "Shows info about you or about provided user.",
   userUsage: "[user: id, tag or mention]",
