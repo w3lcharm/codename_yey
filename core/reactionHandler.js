@@ -18,8 +18,8 @@ class ReactionHandler extends EventEmitter {
       .on("messageReactionRemove", this.listener);
   }
 
-  async check(msg, emoji, userID) {
-    if (this.filterFunc(userID)) {
+  async check(msg, emoji, member) {
+    if (this.filterFunc(member.id)) {
       this.emit("reaction", msg, emoji);
     }
   }

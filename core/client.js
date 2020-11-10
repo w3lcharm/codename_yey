@@ -14,12 +14,12 @@ const initDB = require("./initDB");
 function validatePermission(member, permissions) {
   if (permissions instanceof Array) {
     for (const permission of permissions) {
-      const hasPermission = member.permission.has(permission);
+      const hasPermission = member.permissions.has(permission);
       if (!hasPermission)
         throw new PermissionError("missing permission.", permission);
     }
   } else {
-    const hasPermission = member.permission.has(permissions);
+    const hasPermission = member.permissions.has(permissions);
     if (!hasPermission)
       throw new PermissionError("missing permission.", permissions);
   }
