@@ -60,7 +60,7 @@ class CmdClient extends Eris.Client {
       this.on("debug", msg => this._erisLogger.debug(msg));
     }
 
-    this.once("ready", () => {
+    this.once("ready", async () => {
       this.logger.info(`${this.user.username} online!`);
       this.editStatus("online", { name: `type @${client.user.username}` });
 
@@ -68,7 +68,7 @@ class CmdClient extends Eris.Client {
         .then(() => this.logger.info("successfully connected to the database."));
 
       for (const guild of this.guilds.values()) {
-        guild.fetchAllMembers();
+        await guild.fetchAllMembers();
       }
     });
 
