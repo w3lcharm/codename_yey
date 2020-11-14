@@ -43,8 +43,6 @@ async function onGuildMemberRemove(guild, member) {
       .then(entries => entries[0]);
   }
 
-  console.log(member);
-
   const tag = `${member.user.username}#${member.user.discriminator}`;
 
   const embed = {
