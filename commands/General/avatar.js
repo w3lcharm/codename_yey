@@ -1,5 +1,9 @@
 const { Member } = require("eris");
 
+Member.prototype.dynamicAvatarURL = function dynamicAvatarURL(format, size) {
+  return this.user.dynamicAvatarURL(format, size);
+}
+
 module.exports = {
   name: "avatar",
   group: "generalGroup",
@@ -27,9 +31,7 @@ module.exports = {
         msg.guild.members.find(m => 
           m.tag.toLowerCase().startsWith(userID.toLowerCase()) ||
           (m.nick && m.nick.toLowerCase().startsWith(userID.toLowerCase()))
-        ) || client.users.find(u => u.id === userID);
-
-      if (user instanceof Member) user = user.user;
+        ) || await client.fetchUser(userID);
 
       if (!user) {
         return msg.channel.createMessage(lang.cantFindUser);

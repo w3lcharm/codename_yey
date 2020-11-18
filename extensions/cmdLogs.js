@@ -24,7 +24,7 @@ async function onCommandSuccess(cmd, msg) {
 }
 
 async function onGuildCreate(guild) {
-  client.logger.info(`New server: ${guild.name} (${guild.id})`);
+  client.logger.info(`New server: ${guild.name} (${guild.id}) ${guild.members.size}`);
 
   if (!client.cmdLogsChannelID) return;
 
@@ -33,6 +33,7 @@ async function onGuildCreate(guild) {
       name: `New server: ${guild.name} (${guild.id})`,
       icon_url: guild.iconURL,
     },
+    footer: { text: `Total members: ${guild.members.size}` },
   };
 
   await client.createMessage(client.cmdLogsChannelID, { embed });
