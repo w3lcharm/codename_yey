@@ -219,6 +219,8 @@ async function onMessageUpdate(newMsg, oldMsg) {
 }
 
 async function onGuildMemberUpdate(guild, member, oldMember) {
+  if (!oldMember || !member) return;
+
   const channel = await getModlogChannel(guild);
   if (!channel) return;
 
