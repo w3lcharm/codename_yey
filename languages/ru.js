@@ -419,4 +419,10 @@ module.exports = {
   githubLicense: "Лицензия:",
   githubLanguage: "Язык:",
   githubRepoCreatedAt: "Репозиторий создан:",
+
+  unbanDescription: "Разбанивает указанного пользователя.\nТребует право `Банить участников`.",
+  unbanUsage: "<id пользователя>",
+  unbanSuccess: user => `${user} разбанен`,
+  unbanInvalidUser: "Такого пользователя не существует, или пользователь не забанен.",
+  unbanFail: ":x: Не удалось разбанить этого пользователя.",
 };

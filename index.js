@@ -23,7 +23,7 @@ global.client = new CmdClient(config.token, {
   defaultImageSize: 2048,
 });
 
-client.version = "2.5.4";
+client.version = "2.5.5";
 client.supportChannelID = config.supportChannelID;
 client.cmdLogsChannelID = config.cmdLogsChannelID;
 

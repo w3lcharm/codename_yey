@@ -430,4 +430,10 @@ module.exports = {
   githubLicense: "License:",
   githubLanguage: "Language:",
   githubRepoCreatedAt: "Created at:",
+
+  unbanDescription: "Unbans the specified user.\nRequires `Ban Members` permission.",
+  unbanUsage: "userID",
+  unbanSuccess: user => `${user} has been unbanned`,
+  unbanInvalidUser: `Invalid user ID or this user hasn't been banned.`,
+  unbanFail: ":x: Unban failed.",
 };
