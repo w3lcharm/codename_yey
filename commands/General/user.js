@@ -88,6 +88,11 @@ module.exports = {
         .map(r => r.mention).join(", "),
     });
 
+    if (member.voiceState && member.voiceState.channelID) embed.fields.push({
+      name: lang.userVoiceChannel,
+      value: `<#${member.voiceState.channelID}>`,
+    });
+
     await msg.channel.createMessage({ embed: embed });
   }
 };
