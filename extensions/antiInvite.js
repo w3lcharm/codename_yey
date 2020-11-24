@@ -61,6 +61,8 @@ async function onMessage(msg) {
           };
 
           await msg.channel.createMessage({ embed });
+
+          break;
         }
         case "ban": {
           await msg.delete();
@@ -77,6 +79,8 @@ async function onMessage(msg) {
           };
 
           await msg.channel.createMessage({ embed });
+
+          break;
         }
       }
     }
