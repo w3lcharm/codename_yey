@@ -21,6 +21,7 @@ global.client = new CmdClient(config.token, {
     "guildMessageReactions", "guildVoiceStates",
   ],
   defaultImageSize: 2048,
+  getAllUsers: true,
 });
 
 client.version = "2.5.5";

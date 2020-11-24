@@ -67,9 +67,9 @@ class CmdClient extends Eris.Client {
       sequelize.sync()
         .then(() => this.logger.info("successfully connected to the database."));
 
-      for (const guild of this.guilds.values()) {
+      /* for (const guild of this.guilds.values()) {
         await guild.fetchAllMembers();
-      }
+      } */
     });
 
     this.on("messageCreate", async msg => {
