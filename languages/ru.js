@@ -125,6 +125,7 @@ module.exports = {
   userListening: "Слушает:",
   userStreaming: "Стримит:",
   userPlaying: "Играет в:",
+  userVoiceChannel: "Голосовой канал:",
 
   evalDescription: "Выполняет JavaScript-код",
   evalUsage: "<код>",

@@ -125,6 +125,7 @@ module.exports = {
   userListening: "Listening to:",
   userStreaming: "Streaming:",
   userPlaying: "Playing:",
+  userVoiceChannel: "Voice channel:",
 
   evalDescription: "Evaluates the JavaScript code.",
   evalUsage: "<code>",
