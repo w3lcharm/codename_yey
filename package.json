@@ -15,6 +15,7 @@
     "dotenv": "^8.2.0",
     "eris": "0.14.0",
     "eris-additions": "^1.4.1",
+    "eris-lavalink": "^1.0.2",
     "erlpack": "github:abalabahaha/erlpack",
     "eventemitter3": "^4.0.4",
     "mariadb": "^2.4.0",
