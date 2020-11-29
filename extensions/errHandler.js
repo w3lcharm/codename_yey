@@ -20,9 +20,10 @@ async function onCommandError(cmd, msg, err, showErr = false, lang) {
   client.logger.error(`Error in command ${cmd.name}:\n${err.stack}`);
 
   const embed = {
-    title: lang.errorInCommand(cmd.name),
-    description: `\`\`\`${err}\`\`\``,
+    title: lang.errorInCommand,
+    description: lang.errorDesc,
     color: 15158332,
+    footer: { text: lang.errorFooter },
   };
 
   const logsEmbed = {
