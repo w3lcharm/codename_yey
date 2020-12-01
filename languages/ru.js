@@ -210,6 +210,7 @@ module.exports = {
   autoroleDisableSuccess: "> :white_check_mark: Автороль была выключена.",
   autoroleSuccess: role => `> :white_check_mark: Автороль была успешно включена для роли **"${role}"**.`,
   invalidRoleID: "> :x: Неправильное имя или ID роли.",
+  autoroleRoleHigher: "> :x: Эта роль находится выше моей роли или наравне с ней.",
 
   modlogsDescription: "Позволяет вам управлять каналом для логов модерации.\nТребует право \"Управлять сервером\".",
   modlogsUsage: "[канал: упоминание или id]",

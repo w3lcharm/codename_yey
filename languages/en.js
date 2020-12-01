@@ -210,6 +210,7 @@ module.exports = {
   autoroleDisableSuccess: "> :white_check_mark: Autorole has been disabled.",
   autoroleSuccess: role => `> :white_check_mark: Successfully set autorole to **"${role}"**.`,
   invalidRoleID: "> :x: Invalid role name or ID.",
+  autoroleRoleHigher: "> :x: This role's position is higher or equals with my role.",
 
   modlogsDescription: "Lets you to manage the modlogs channel.\nRequires \"Manage server\" permission.",
   modlogsUsage: "[channel: mention or id]",

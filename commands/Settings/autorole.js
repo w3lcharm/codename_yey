@@ -34,6 +34,9 @@ module.exports = {
       } else {
         const role = msg.channel.guild.roles.find(r => r.id == roleID || r.name == roleID);
         if (!role) return msg.channel.createMessage(lang.invalidRoleID);
+        if (msg.guild.me.highestRole.position <= role.position) {
+          return msg.channel.createMessage(lang.autoroleRoleHigher);
+        }
 
         await db.autorole.update({ autorole: role.id }, { where: { server: msg.channel.guild.id } });
         await msg.channel.createMessage(lang.autoroleSuccess(role.name));
