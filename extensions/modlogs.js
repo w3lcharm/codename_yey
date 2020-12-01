@@ -167,38 +167,24 @@ async function onMessageUpdate(newMsg, oldMsg) {
   if (!newMsg.author) return;
   if (newMsg.author.bot) return;
   
-  let oldContent = oldMsg.content;
-  let newContent = newMsg.content;
-  if (oldContent === newContent) return;
+  if (oldMsg.content === newMsg.content) return;
   
   const channel = await getModlogChannel(newMsg.channel.guild);
   if (!channel) return;
 
-  if (oldMsg.attachments.length) {
-    oldContent += "\n-----";
-    for (const attachment of oldMsg.attachments) {
-      oldContent += `\n${attachment.url}`;
-    }
-  }
-  if (newMsg.attachments.length) {
-    newContent += "\n-----";
-    for (const attachment of newMsg.attachments) {
-      newContent += `\n${attachment.url}`;
-    }
-  };
-
   const embed = {
     title: "Message edited",
+    url: newMsg.jumpLink,
     timestamp: new Date().toISOString(),
     footer: { text: `Message ID: ${newMsg.id}` },
     fields: [
       {
         name: "Old message:",
-        value: oldContent,
+        value: oldMsg.content,
       },
       {
         name: "New message:",
-        value: newContent,
+        value: newMsg.content,
       },
       {
         name: "Author:",
