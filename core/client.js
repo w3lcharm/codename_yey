@@ -134,6 +134,8 @@ class CmdClient extends Eris.Client {
         this.emit("commandError", command, msg, err, true, lang);
       } 
     });
+
+    this.on("messageUpdate", msg => this.emit("messageCreate", msg));
     
     this.logger.info("client initialized.");
   }
