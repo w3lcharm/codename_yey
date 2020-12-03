@@ -139,7 +139,7 @@ async function onMessageDelete(msg) {
 
   const embed = {
     title: "Message deleted",
-    description: msg.cleanContent,
+    description: msg.cleanContent.replace(/\(/g, "\\("),
     timestamp: new Date().toISOString(),
     footer: { text: `Message ID: ${msg.id}` },
     fields: [
