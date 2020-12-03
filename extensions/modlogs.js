@@ -174,7 +174,7 @@ async function onMessageUpdate(newMsg, oldMsg) {
 
   const embed = {
     title: "Message edited",
-    url: newMsg.jumpLink,
+    description: `[(link)](${newMsg.jumpLink})`,
     timestamp: new Date().toISOString(),
     footer: { text: `Message ID: ${newMsg.id}` },
     fields: [
