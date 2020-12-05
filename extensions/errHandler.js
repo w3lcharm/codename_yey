@@ -1,4 +1,4 @@
-const { PermissionError } = require("../core/client");
+const { PermissionError } = require("../core/CmdClient");
 
 async function onCommandError(cmd, msg, err, showErr = false, lang) {
   if (!lang) lang = client.languages.get("en");

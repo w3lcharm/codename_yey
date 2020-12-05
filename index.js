@@ -1,4 +1,4 @@
-const CmdClient = require("./core/client");
+const CmdClient = require("./core/CmdClient");
 const path = require("path");
 const fs = require("fs");
 

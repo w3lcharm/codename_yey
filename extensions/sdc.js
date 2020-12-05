@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-const Logger = require("../core/logger");
+const Logger = require("../core/Logger");
 const { stringify } = require("querystring");
 
 const apiURL = "https://api.server-discord.com/v2";

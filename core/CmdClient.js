@@ -4,10 +4,10 @@ const path = require("path");
 const Eris = require("eris-additions")(require("eris"));
 const Sequelize = require("sequelize");
 
-const PermissionError = require("./errors/permissionError");
+const PermissionError = require("./errors/PermissionError");
 
-const Group = require("./group");
-const Logger = require("./logger");
+const Group = require("./Group");
+const Logger = require("./Logger");
 
 const initDB = require("./initDB");
 
@@ -256,17 +256,18 @@ class CmdClient extends Eris.Client {
     const ext = require(extPath);
 
     if (!ext.load) throw new Error("extension should export a load() method.");
-    if (!ext.unload) throw new Error("extension should export a unload() method.");
 
     ext.load(this, ...args);
+    ext.path = extPath;
+    ext.name = path.parse(path.basename(extPath)).name;
 
-    this.extensions[extPath] = ext;
+    this.extensions[ext.name] = ext;
 
     this.logger.debug(`loaded extension ${extPath}.`);
   }
 
-  reloadExtension(extPath, ...args) {
-    this.unloadExtension(extPath);
+  reloadExtension(name, ...args) {
+    const extPath = this.unloadExtension(name);
     this.loadExtension(extPath, ...args);
   }
 
@@ -276,14 +277,15 @@ class CmdClient extends Eris.Client {
     }
 
     const ext = this.extensions[extPath];
-    ext.unload(this);
+    if (ext.unload) ext.unload(this);
 
-    const fullPath = require.resolve(extPath);
+    const fullPath = require.resolve(ext.path);
 
     delete require.cache[fullPath];
-    delete this.extensions[extPath];
+    delete this.extensions[ext];
 
     this.logger.debug(`unloaded extension ${extPath}.`);
+    return ext.path;
   }
 }
 

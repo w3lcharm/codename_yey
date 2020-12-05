@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-const Logger = require("../core/logger");
+const Logger = require("../core/Logger");
 
 const apiURL = "https://discord.bots.gg/api/v1";
 let apiKey;

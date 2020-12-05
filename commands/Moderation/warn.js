@@ -1,5 +1,5 @@
-const PermissionError = require("../../core/errors/permissionError");
-const ReactionHandler = require("../../core/reactionHandler");
+const PermissionError = require("../../core/errors/PermissionError");
+const ReactionHandler = require("../../core/ReactionHandler");
 
 module.exports = {
   name: "warn",
