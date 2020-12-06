@@ -299,8 +299,11 @@ module.exports = {
   roleNotFound: "> :x: Роль не найдена.",
   roleColor: "Цвет:",
   yesNo: what => what ? "Да" : "Нет",
-  roleMentionable: "Упоминаемая?",
+  roleMentionable: "Упоминаемая:",
   roleCreatedAt: "Создана:",
+  roleMembers: "Участники с этой ролью:",
+  roleHoisted: "Показывается отдельно:",
+  roleManaged: "Управляется интеграцией:",
 
   supportDescription: "Отправляет вопрос на сервер поддержки.\nОбратите внимание, что вам может быть запрещено использование этой команды за флуд/спам/т.п.",
   supportUsage: "<вопрос>",

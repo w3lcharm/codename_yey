@@ -16,18 +16,19 @@ module.exports = {
   description: "roleDescription",
   usage: "roleUsage",
   guildOnly: true,
+  aliases: [ "r", "roleinfo" ],
   async run(client, msg, args, prefix, lang) {
     if (!args.length) {
       return msg.channel.createMessage(lang.commandUsage(prefix, this));
     }
 
-    let roleID = msg.content.slice(prefix.length + this.name.length + 1);
+    let roleID = args.raw.join(" ");
 
     if (roleID && roleID.startsWith("<@&")) {
       roleID = roleID.replace("<@&", "").replace(">", "");
     }
 
-    let role = msg.guild.roles.find(r => r.name === roleID || r.id === roleID);
+    const role = msg.guild.roles.find(r => r.name === roleID || r.id === roleID);
 
     if (!role) {
       return msg.channel.createMessage(lang.roleNotFound);
@@ -35,16 +36,20 @@ module.exports = {
 
     moment.locale(lang.langName);
 
-    let createdDaysAgo = Math.floor((Date.now() - role.createdAt) / (86400 * 1000));
+    const createdDaysAgo = Math.floor((Date.now() - role.createdAt) / (86400 * 1000));
 
-    let embed = {
+    const embed = {
       title: role.name,
       color: role.color || null,
       fields: [
         {
           name: "ID:",
           value: role.id,
-        }, 
+        },
+        {
+          name: lang.roleMembers,
+          value: msg.guild.members.filter(m => m.roles.includes(role.id)).length,
+        },
         {
           name: lang.roleColor,
           value: role.color ? intToHex(role.color) : lang.roleDefaultColor,
@@ -52,6 +57,14 @@ module.exports = {
         {
           name: lang.roleMentionable,
           value: lang.yesNo(role.mentionable),
+        },
+        {
+          name: lang.roleHoisted,
+          value: lang.yesNo(role.hoist),
+        },
+        {
+          name: lang.roleManaged,
+          value: lang.yesNo(role.managed),
         },
         {
           name: lang.roleCreatedAt,
