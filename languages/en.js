@@ -52,6 +52,7 @@ module.exports = {
   utilityGroup: "Utility",
   funGroup: "Fun",
   miscGroup: "Misc",
+  musicGroup: "Music",
 
   avatarDescription: "Gets your or someone's avatar.",
   avatarUsage: "[user: id, tag or mention]",
@@ -443,4 +444,34 @@ module.exports = {
   unbanSuccess: user => `${user} has been unbanned`,
   unbanInvalidUser: `Invalid user ID or this user hasn't been banned.`,
   unbanFail: ":x: Unban failed.",
+
+  playDescription: "Plays a track in voice channel.",
+  playUsage: "<track: name or url>",
+  playNotInVoiceChannel: "> :x: You are not in voice channel.",
+  playAddedToQueue: track => `> Added to queue: \`${track}\``,
+  nowPlaying: ":arrow_forward: Now playing:",
+  playAuthor: author => `Uploaded by: ${author}`,
+  allTracksPlayed: "> :stop_button: All tracks have been played.",
+  playlistsNotSupported: "> :x: Playlists are not supported currently.",
+
+  pauseDescription: "Pauses the track.",
+  notPlaying: "> Nothing is playing now.",
+  alreadyPaused: "> :pause_button: Track is already paused.",
+  paused: prefix => `> :pause_button: Paused. Type \`${prefix}resume\` to resume.`,
+
+  resumeDescription: "Resumes the track.",
+  alreadyPlaying: "> :arrow_forward: Already playing the track.",
+  resumed: "> :arrow_forward: Resumed.",
+
+  stopDescription: "Stops the track and clears the queue.",
+
+  nowplayingDescription: "Shows the currently playing track.",
+
+  skipDescription: "Skips the track.",
+  skipping: "> :fast_forward: Skipping...",
+
+  queueDescription: "Shows the track queue.",
+  trackQueue: "Track queue:",
+  requestedBy: user => `Requested by ${user}`,
+  queueIsEmpty: "> Queue is empty.",
 };

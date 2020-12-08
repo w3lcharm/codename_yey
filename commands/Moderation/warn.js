@@ -71,7 +71,6 @@ module.exports = {
 
         const reactionHandler = new ReactionHandler(message, u => u === msg.author.id, 600000);
         reactionHandler.on("reaction", (msg, emoji) => {
-          console.log("k");
           switch (emoji.name) {
             case "◀️": 
               if (pageNumber === 0) return;

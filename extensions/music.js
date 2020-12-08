@@ -16,6 +16,22 @@ module.exports.load = client => {
   client.once("ready", () => client.lavalinkManager.init(client.user.id))
     .on("rawWS", data => client.lavalinkManager.updateVoiceState(data));
 
-  client.lavalinkManager.on("nodeError", (node, error) => logger.error(`An error occurred on node ${node.id}:\n${error.stack}`));
-  client.lavalinkManager.on("nodeConnect", node => logger.info(`Node ${node.options.identifier} connected.`));
+  client.lavalinkManager.on("nodeError", (node, error) => logger.error(`An error occurred on node ${node.id}:\n${error.stack}`))
+    .on("nodeConnect", node => logger.info(`Node ${node.options.identifier} connected.`))
+    .on("trackStart", async (player, track) => {
+      const lang = player.get("lang");
+
+      const embed = {
+        title: lang.nowPlaying,
+        description: `[${track.title}](${track.uri})`,
+        footer: { text: lang.playAuthor(track.author) },
+      };
+
+      await client.createMessage(player.textChannel, { embed });
+    }).on("queueEnd", async player => {
+      const lang = player.get("lang");
+
+      await client.createMessage(player.textChannel, lang.allTracksPlayed);
+      await player.destroy();
+    });
 }
