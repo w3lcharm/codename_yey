@@ -52,6 +52,7 @@ module.exports = {
   utilityGroup: "Утилиты",
   funGroup: "Развлекательные",
   miscGroup: "Разное",
+  musicGroup: "Музыка",
   
   avatarDescription: "Показывает ваш аватар, либо аватар указанного пользователя.",
   avatarUsage: "[пользователь: id, упоминание либо тег]",
@@ -432,4 +433,34 @@ module.exports = {
   unbanSuccess: user => `${user} разбанен`,
   unbanInvalidUser: "Такого пользователя не существует, или пользователь не забанен.",
   unbanFail: ":x: Не удалось разбанить этого пользователя.",
+
+  playDescription: "Проигрывает указанный трек в голосовом канале.",
+  playUsage: "<трек: имя или ссылка>",
+  playNotInVoiceChannel: "> :x: Вы не находитесь в голосовом канале.",
+  playAddedToQueue: track => `> Добавлено в очередь: \`${track}\``,
+  nowPlaying: ":arrow_forward: Сейчас играет:",
+  playAuthor: author => `Загружено пользователем: ${author}`,
+  allTracksPlayed: "> :stop_button: Все треки проиграны.",
+  playlistsNotSupported: "> :x: Плейлисты не поддерживаются.",
+
+  pauseDescription: "Ставит трек на паузу.",
+  notPlaying: "> Сейчас ничего не играет.",
+  alreadyPaused: "> :pause_button: Трек уже на паузе.",
+  paused: prefix => `> :pause_button: На паузе. Введите \`${prefix}resume\` для продолжения воспроизведения.`,
+
+  resumeDescription: "Продолжает воспроизведение трека.",
+  alreadyPlaying: "> :arrow_forward: Трек уже воспроизводится.",
+  resumed: "> :arrow_forward: Воспроизведение продолжено.",
+
+  stopDescription: "Останавливает проигрывание и чистит очередь.",
+
+  nowplayingDescription: "Показывает трек, который сейчас играет.",
+
+  skipDescription: "Пропускает трек.",
+  skipping: "> :fast_forward: Пропущено...",
+
+  queueDescription: "Показывает очередь треков.",
+  trackQueue: "Очередь треков:",
+  requestedBy: user => `Запросил ${user}`,
+  queueIsEmpty: "> Очередь пустая.",
 };
