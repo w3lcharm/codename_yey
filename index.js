@@ -28,7 +28,7 @@ client.version = "2.5.6";
 client.supportChannelID = config.supportChannelID;
 client.cmdLogsChannelID = config.cmdLogsChannelID;
 
-const cmdGroups = [ "General", "Utility", "Moderation", "Fun", "Misc", "Settings", "Dev" ];
+const cmdGroups = [ "General", "Utility", "Moderation", "Fun", "Misc", "Music", "Settings", "Dev" ];
 for (const group of cmdGroups) {
   client.loadCommandGroup(path.join(__dirname, "commands", group));
 }
