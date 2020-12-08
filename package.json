@@ -17,6 +17,7 @@
     "eris-additions": "^1.4.1",
     "erlpack": "github:abalabahaha/erlpack",
     "eventemitter3": "^4.0.4",
+    "lavacord": "^1.1.9",
     "mariadb": "^2.4.0",
     "moment": "^2.26.0",
     "node-fetch": "^2.6.1",
