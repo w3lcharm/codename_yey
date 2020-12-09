@@ -18,6 +18,9 @@ module.exports = {
     if (res.loadType == "LOAD_FAILED") throw res.exception;
     else if (res.loadType == "PLAYLIST_LOADED") return msg.channel.createMessage(lang.playlistsNotSupported);
 
+    const track = res.tracks[0];
+    if (!track) return msg.channel.createMessage(lang.trackNotFound);
+
     const player = client.lavalinkManager.create({
       guild: msg.guild.id,
       voiceChannel: msg.member.voiceState.channelID,
@@ -25,7 +28,7 @@ module.exports = {
     });
 
     player.connect();
-    player.queue.add(res.tracks[0]);
+    player.queue.add(track);
 
     if (!player.get("lang")) player.set("lang", lang);
 
@@ -33,6 +36,6 @@ module.exports = {
       player.play();
     }
 
-    await msg.channel.createMessage(lang.playAddedToQueue(res.tracks[0].title));
+    await msg.channel.createMessage(lang.playAddedToQueue(track.title));
   }
 }

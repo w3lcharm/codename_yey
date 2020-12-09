@@ -453,6 +453,7 @@ module.exports = {
   playAuthor: author => `Uploaded by: ${author}`,
   allTracksPlayed: "> :stop_button: All tracks have been played.",
   playlistsNotSupported: "> :x: Playlists are not supported currently.",
+  trackNotFound: "> :x: Track not found.",
 
   pauseDescription: "Pauses the track.",
   notPlaying: "> Nothing is playing now.",

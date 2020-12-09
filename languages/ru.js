@@ -442,6 +442,7 @@ module.exports = {
   playAuthor: author => `Загружено пользователем: ${author}`,
   allTracksPlayed: "> :stop_button: Все треки проиграны.",
   playlistsNotSupported: "> :x: Плейлисты не поддерживаются.",
+  trackNotFound: "> :x: Трек не найден.",
 
   pauseDescription: "Ставит трек на паузу.",
   notPlaying: "> Сейчас ничего не играет.",
