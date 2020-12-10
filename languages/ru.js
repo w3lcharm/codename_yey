@@ -443,6 +443,7 @@ module.exports = {
   allTracksPlayed: "> :stop_button: Все треки проиграны.",
   playlistsNotSupported: "> :x: Плейлисты не поддерживаются.",
   trackNotFound: "> :x: Трек не найден.",
+  playFailed: msg => `> :x: Не удалось загрузить трек. \`${msg}\``,
 
   pauseDescription: "Ставит трек на паузу.",
   notPlaying: "> Сейчас ничего не играет.",

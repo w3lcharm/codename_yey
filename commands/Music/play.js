@@ -15,8 +15,11 @@ module.exports = {
     const query = args.raw.join(" ");
 
     const res = await client.lavalinkManager.search(query, msg.author);
-    if (res.loadType == "LOAD_FAILED") throw res.exception;
-    else if (res.loadType == "PLAYLIST_LOADED") return msg.channel.createMessage(lang.playlistsNotSupported);
+    if (res.loadType == "LOAD_FAILED") {
+      return msg.channel.createMessage(lang.playFailed(res.exception.message));
+    } else if (res.loadType == "PLAYLIST_LOADED") {
+      return msg.channel.createMessage(lang.playlistsNotSupported);
+    }
 
     const track = res.tracks[0];
     if (!track) return msg.channel.createMessage(lang.trackNotFound);

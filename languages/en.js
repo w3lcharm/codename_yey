@@ -454,6 +454,7 @@ module.exports = {
   allTracksPlayed: "> :stop_button: All tracks have been played.",
   playlistsNotSupported: "> :x: Playlists are not supported currently.",
   trackNotFound: "> :x: Track not found.",
+  playFailed: msg => `> :x: Failed to load the track. \`${msg}\``,
 
   pauseDescription: "Pauses the track.",
   notPlaying: "> Nothing is playing now.",
