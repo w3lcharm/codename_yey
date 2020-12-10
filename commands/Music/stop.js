@@ -4,7 +4,7 @@ module.exports = {
   description: "stopDescription",
   async run(client, msg, args, prefix, lang) {
     if (!msg.member.voiceState.channelID) {
-      return msg.channel.createMessage(lang.notInVoiceChannel);
+      return msg.channel.createMessage(lang.playNotInVoiceChannel);
     }
 
     const player = client.lavalinkManager.players.get(msg.guild.id);
