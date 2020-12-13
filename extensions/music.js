@@ -1,6 +1,8 @@
 const { Manager } = require("erela.js");
 const Logger = require("../core/Logger");
 
+const parseTime = require("../utils/parseTime");
+
 module.exports.load = client => {
   if (!config.lavalinkNodes) return;
 
@@ -24,6 +26,13 @@ module.exports.load = client => {
       const embed = {
         title: lang.nowPlaying,
         description: `[${track.title}](${track.uri})`,
+        thumbnail: { url: track.thumbnail },
+        fields: [
+          {
+            name: lang.duration,
+            value: parseTime(Math.floor(track.duration / 1000)),
+          },
+        ],
         footer: { text: lang.playAuthor(track.author) },
       };
 

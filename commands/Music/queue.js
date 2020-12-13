@@ -1,4 +1,5 @@
 const ReactionHandler = require("../../core/ReactionHandler");
+const parseTime = require("../../utils/parseTime");
 
 module.exports = {
   name: "queue",
@@ -19,7 +20,7 @@ module.exports = {
     for (const track of player.queue) {
       fields.push({
         name: `${++index}: ${track.title}`,
-        value: lang.requestedBy(track.requester.tag),
+        value: lang.durationRequestedBy(parseTime(Math.floor(track.duration / 1000)), track.requester.tag),
       });
     }
 

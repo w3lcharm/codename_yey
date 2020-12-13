@@ -1,3 +1,5 @@
+const parseTime = require("../../utils/parseTime");
+
 module.exports = {
   name: "nowplaying",
   group: "musicGroup",
@@ -14,11 +16,20 @@ module.exports = {
     }
 
     const track = player.queue.current;
-    console.log(player.queue);
+
+    const trackDuration = parseTime(Math.floor(track.duration / 1000));
+    const playerPos = parseTime(Math.floor(player.position / 1000));
 
     const embed = {
       title: lang.nowPlaying,
       description: `[${track.title}](${track.uri})`,
+      thumbnail: { url: track.thumbnail },
+      fields: [
+        {
+          name: lang.duration,
+          value: `${playerPos} / ${trackDuration}`,
+        },
+      ],
       footer: { text: lang.playAuthor(track.author) },
     };
 

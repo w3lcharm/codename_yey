@@ -455,6 +455,7 @@ module.exports = {
   playlistsNotSupported: "> :x: Playlists are not supported currently.",
   trackNotFound: "> :x: Track not found.",
   playFailed: msg => `> :x: Failed to load the track. \`${msg}\``,
+  duration: "Duration:",
 
   pauseDescription: "Pauses the track.",
   notPlaying: "> Nothing is playing now.",
@@ -474,6 +475,6 @@ module.exports = {
 
   queueDescription: "Shows the track queue.",
   trackQueue: "Track queue:",
-  requestedBy: user => `Requested by ${user}`,
+  durationRequestedBy: (duration, user) => `Duration: ${duration} | Requested by ${user}`,
   queueIsEmpty: "> Queue is empty.",
 };

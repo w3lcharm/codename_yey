@@ -444,6 +444,7 @@ module.exports = {
   playlistsNotSupported: "> :x: Плейлисты не поддерживаются.",
   trackNotFound: "> :x: Трек не найден.",
   playFailed: msg => `> :x: Не удалось загрузить трек. \`${msg}\``,
+  duration: "Продолжительность:",
 
   pauseDescription: "Ставит трек на паузу.",
   notPlaying: "> Сейчас ничего не играет.",
@@ -463,6 +464,6 @@ module.exports = {
 
   queueDescription: "Показывает очередь треков.",
   trackQueue: "Очередь треков:",
-  requestedBy: user => `Запросил ${user}`,
+  durationRequestedBy: (duration, user) => `Продолжительность: ${duration} | Запросил ${user}`,
   queueIsEmpty: "> Очередь пустая.",
 };
