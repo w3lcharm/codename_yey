@@ -62,6 +62,14 @@ module.exports = {
           value: guild.roles.size, 
         },
         {
+          name: lang.serverBoostLevel,
+          value: guild.premiumTier,
+        },
+        {
+          name: lang.serverBoosts,
+          value: guild.premiumSubscriptionCount,
+        },
+        {
           name: lang.serverCreatedAt,
           value: `${moment(guild.createdAt).format("lll")} ${lang.daysAgo(createdDaysAgo)}`,
         },
