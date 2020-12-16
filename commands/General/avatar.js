@@ -31,7 +31,7 @@ module.exports = {
         msg.guild.members.find(m => 
           m.tag.toLowerCase().startsWith(userID.toLowerCase()) ||
           (m.nick && m.nick.toLowerCase().startsWith(userID.toLowerCase()))
-        ) || await client.fetchUser(userID);
+        ) || client.users.find(u => u.tag == userID) || await client.fetchUser(userID);
 
       if (!user) {
         return msg.channel.createMessage(lang.cantFindUser);
