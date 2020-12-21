@@ -1,6 +1,10 @@
 const moment = require("moment");
 const { Constants: { UserFlags }, Member } = require("eris");
 
+Object.defineProperty(Member.prototype, "publicFlags", {
+  get() { return this.user.publicFlags },
+});
+
 const badgeEmojis = {
   DISCORD_EMPLOYEE: "<:discordEmployee:772878638114144296>",
   DISCORD_PARTNER: "<:partneredServerOwner:772878678753411082>",
@@ -12,6 +16,8 @@ const badgeEmojis = {
   EARLY_SUPPORTER: "<:earlySupporter:772878612789329992>",
   BUG_HUNTER_LEVEL_2: "<:bugHunterLvl2:772878547521110038>",
   VERIFIED_BOT_DEVELOPER: "<:earlyVerifiedBotDev:772878588931997727>",
+  //  VERIFIED_BOT: "<:verifiedBot:789014772166819851>",
+  //  BOT: "<:bot:789016267138400266>",
 };
 
 function getUserBadges(user) {
@@ -56,7 +62,7 @@ module.exports = {
     const createdDaysAgo = Math.floor((Date.now() - member.createdAt) / (1000 * 86400));
     const joinedDaysAgo = Math.floor((Date.now() - member.joinedAt) / (1000 * 86400));
     
-    const badges = getUserBadges(member instanceof Member ? member.user : member);
+    const badges = getUserBadges(member);
 
     const embed = {
       author: {

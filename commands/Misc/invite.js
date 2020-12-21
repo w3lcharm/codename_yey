@@ -47,6 +47,8 @@ module.exports = {
       return msg.channel.createMessage(lang.inviteInvalid);
     }
 
+    if (!msg.member.permissions.has("manageMessages")) msg.delete().catch(() => {});
+
     const embed = {
       author: {
         name: inviteInfo.guild.name,

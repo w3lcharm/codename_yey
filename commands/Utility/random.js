@@ -13,23 +13,24 @@ module.exports = {
     }
 
     let [ min, max ] = args;
+    if (!max) {
+      max = min;
+      min = 1;
+    }
+
+    max = parseInt(max);
     min = parseInt(min);
-    if (isNaN(min)) {
+
+    if (isNaN(min) || isNaN(max)) {
       return msg.channel.createMessage(lang.notANumber);
     }
 
-    let randNumber;
-    if (!max) {
-      randNumber = randInt(min);
-    } else {
-      max = parseInt(max);
-      if (isNaN(max)) {
-        return msg.channel.createMessage(lang.notANumber);
-      }
+    const embed = {
+      title: lang.randomTitle(min, max),
+      description: randInt(max, min),
+      color: Math.round(Math.random() * 16777216),
+    };
 
-      randNumber = randInt(max, min);
-    }
-
-    await msg.channel.createMessage(randNumber);
+    await msg.channel.createMessage({ embed });
   }
 }

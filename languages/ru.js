@@ -294,6 +294,7 @@ module.exports = {
   randomUsageMax: "<макс>",
   randomUsageMinMax: "<мин> <макc>",
   notANumber: "> :x: Не число.",
+  randomTitle: (min, max) => `Случайное число в диапазоне ${min}-${max}:`,
   
   xkcdDescription: "Получает случайный комикс xkcd (на англ. языке).",
 
