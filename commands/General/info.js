@@ -1,12 +1,12 @@
 const { stripIndents } = require("common-tags");
 
-const inviteLink = "https://discord.com/api/oauth2/authorize?client_id=641312878804074497&permissions=8&scope=bot";
-
 module.exports = {
   name: "info",
   group: "generalGroup",
   description: "infoDescription",
   async run(client, msg, args, prefix, lang) {
+    const inviteLink = await client.getInviteLink(8);
+
     const embed = {
       author: {
         name: "codename_yey",
