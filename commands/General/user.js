@@ -1,10 +1,6 @@
 const moment = require("moment");
 const { Constants: { UserFlags }, Member } = require("eris");
 
-Object.defineProperty(Member.prototype, "publicFlags", {
-  get() { return this.user.publicFlags },
-});
-
 const badgeEmojis = {
   DISCORD_EMPLOYEE: "<:discordEmployee:772878638114144296>",
   DISCORD_PARTNER: "<:partneredServerOwner:772878678753411082>",

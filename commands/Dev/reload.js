@@ -11,11 +11,27 @@ module.exports = {
     }
 
     const cmd = args[0];
-    if (!client.commands.has(cmd)) {
-      return msg.channel.createMessage(lang.reloadCmdDoesntExist(cmd));
-    }
 
-    client.reloadCommand(cmd);
-    await msg.addReaction("✅");
+    switch (cmd) {
+      case "langs":
+        client.reloadLanguages();
+        await msg.addReaction("✅");
+        break;
+      case "all":
+        for (const cmd of Array.from(client.commands.values())) {
+          client.reloadCommand(cmd.name);
+        }
+
+        await msg.addReaction("✅");
+        break;
+      default:
+        if (!client.commands.has(cmd)) {
+          return msg.channel.createMessage(lang.reloadCmdDoesntExist(cmd));
+        }
+
+        client.reloadCommand(cmd);
+        await msg.addReaction("✅");
+        break;
+    }
   }
 };
