@@ -23,7 +23,10 @@ async function onCommandError(cmd, msg, err, showErr = false, lang) {
     title: lang.errorInCommand,
     description: lang.errorDesc,
     color: 15158332,
-    footer: { text: lang.errorFooter },
+    footer: {
+      text: "codename_yey",
+      icon_url: client.user.avatarURL,
+    },
   };
 
   const logsEmbed = {
