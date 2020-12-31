@@ -1,4 +1,5 @@
 const { VERSION } = require("eris");
+const { version: botVersion } = require("../../package.json");
 const moment = require("moment");
 const os = require("os");
 
@@ -37,7 +38,7 @@ module.exports = {
         },
         {
           name: lang.statsVersions,
-          value: `**${lang.statsBot}**: ${client.version}\n` +
+          value: `**${lang.statsBot}**: ${botVersion}\n` +
             `**Node.js**: ${process.version}\n` +
             `**Eris**: ${VERSION}`,
         },

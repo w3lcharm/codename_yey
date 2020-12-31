@@ -24,7 +24,6 @@ global.client = new CmdClient(config.token, {
   getAllUsers: true,
 });
 
-client.version = "2.6.1";
 client.supportChannelID = config.supportChannelID;
 client.cmdLogsChannelID = config.cmdLogsChannelID;
 
