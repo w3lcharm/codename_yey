@@ -28,7 +28,7 @@ module.exports = {
       roleID = roleID.replace("<@&", "").replace(">", "");
     }
 
-    const role = msg.guild.roles.find(r => r.name === roleID || r.id === roleID);
+    const role = msg.guild.roles.find(r => r.name.toLowerCase().startsWith(roleID) || r.id === roleID);
 
     if (!role) {
       return msg.channel.createMessage(lang.roleNotFound);
