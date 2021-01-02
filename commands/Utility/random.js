@@ -7,6 +7,7 @@ module.exports = {
   group: "utilityGroup",
   description: "randomDescription",
   usage: [ "randomUsageMax", "randomUsageMinMax" ],
+  argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length) {
       return msg.channel.createMessage(lang.commandUsage(prefix, this));

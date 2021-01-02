@@ -7,6 +7,7 @@ module.exports = {
   description: "udDescription",
   usage: "udUsage",
   cooldown: 10,
+  argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length)
       return msg.channel.createMessage(lang.commandUsage(prefix, this));

@@ -102,6 +102,10 @@ class CmdClient extends Eris.Client {
 
       if (command.ownerOnly && this.owners.indexOf(msg.author.id) === -1) return;
 
+      if (command.argsRequired && !args.length) {
+        return this.commands.get("help").run(this, msg, [ command.name ], prefix, lang);
+      }
+
       if (command.cooldown) {
         if (!this.cooldowns.has(command.name)) {
           this.cooldowns.set(command.name, new Eris.Collection());

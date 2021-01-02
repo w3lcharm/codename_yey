@@ -6,6 +6,7 @@ module.exports = {
   requiredPermissions: "manageMessages",
   usage: "purgeUsage",
   cooldown: 10,
+  argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length)
       return msg.channel.createMessage(lang.commandUsage(prefix, this));

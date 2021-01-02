@@ -4,6 +4,7 @@ module.exports = {
   description: "base64Description",
   usage: [ "base64Usage", "base64DecodeUsage" ],
   aliases: [ "b64" ],
+  argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.raw.length) {
       return msg.channel.createMessage(lang.commandUsage(prefix, this));

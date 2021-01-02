@@ -16,6 +16,7 @@ module.exports = {
   description: "roleDescription",
   usage: "roleUsage",
   guildOnly: true,
+  argsRequired: true,
   aliases: [ "r", "roleinfo" ],
   async run(client, msg, args, prefix, lang) {
     if (!args.length) {

@@ -5,6 +5,7 @@ module.exports = {
   requiredPermissions: "kickMembers",
   guildOnly: true,
   usage: "kickUsage",
+  argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length)
       return msg.channel.createMessage(lang.commandUsage(prefix, this));

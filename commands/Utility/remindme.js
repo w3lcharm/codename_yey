@@ -16,6 +16,7 @@ module.exports = {
   group: "utilityGroup",
   description: "remindmeDescription",
   usage: "remindmeUsage",
+  argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length) {
       return msg.channel.createMessage(lang.commandUsage(prefix, this));

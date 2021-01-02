@@ -1,5 +1,5 @@
 const moment = require("moment");
-const { Constants: { UserFlags }, Member } = require("eris");
+const { Constants: { UserFlags } } = require("eris");
 
 const badgeEmojis = {
   DISCORD_EMPLOYEE: "<:discordEmployee:772878638114144296>",

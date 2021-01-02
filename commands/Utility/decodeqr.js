@@ -8,6 +8,7 @@ module.exports = {
   description: "decodeqrDescription",
   usage: "decodeqrUsage",
   cooldown: 10,
+  argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length && !msg.attachments.length) {
       return msg.channel.createMessage(lang.commandUsage(prefix, this));

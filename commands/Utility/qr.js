@@ -5,6 +5,7 @@ module.exports = {
   group: "utilityGroup",
   description: "qrDescription",
   usage: "qrUsage",
+  argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     const text = msg.content.slice(prefix.length + this.name.length + 1);
 

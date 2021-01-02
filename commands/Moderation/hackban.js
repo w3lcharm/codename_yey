@@ -4,6 +4,7 @@ module.exports = {
   description: "hackbanDescription",
   usage: "hackbanUsage",
   requiredPermissions: "banMembers",
+  argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length)
       return msg.channel.createMessage(lang.commandUsage(prefix, this));

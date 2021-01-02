@@ -9,6 +9,7 @@ module.exports = {
   group: "utilityGroup",
   description: "supportDescription",
   usage: "supportUsage",
+  argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     let userBan = await db.supportBans.findOne({ where: { user: msg.author.id } });
     if (userBan && userBan.banned) {

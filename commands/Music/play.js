@@ -3,6 +3,7 @@ module.exports = {
   group: "musicGroup",
   description: "playDescription",
   usage: "playUsage",
+  argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.raw.length) {
       return msg.channel.createMessage(lang.commandUsage(prefix, this));

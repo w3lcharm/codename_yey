@@ -44,6 +44,7 @@ module.exports = {
   group: "funGroup",
   description: "_8ballDescription",
   usage: "_8ballUsage",
+  argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length)
       return msg.channel.createMessage(lang.commandUsage(prefix, this));

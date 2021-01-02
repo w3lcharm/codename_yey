@@ -4,6 +4,7 @@ module.exports = {
   description: "banDescription",
   requiredPermissions: "banMembers",
   guildOnly: true,
+  argsRequired: true,
   usage: "banUsage",
   async run(client, msg, args, prefix, lang) {
     if (!args.length)
