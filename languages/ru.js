@@ -469,4 +469,15 @@ module.exports = {
   trackQueue: "Очередь треков:",
   durationRequestedBy: (duration, user) => `Продолжительность: ${duration} | Запросил ${user}`,
   queueIsEmpty: "> Очередь пустая.",
+
+  embedcolorDescription: "Позволяет вам изменить цвет эмбедов.",
+  embedcolorUsage: "[#hex или число | random | default]",
+  embedcolorRandom: "Ваш цвет эмбедов - `random`.",
+  embedcolorDefault: "Ваш цвет эмбедов -  `default`.",
+  embedColor: color => `Ваш цвет эмбедов - \`${color}\`.`,
+  embedcolorFooter: prefix => `Используйте ${prefix}embedcolor [#hex или число | random | default] для изменения цвета эмбедов.`,
+  embedcolorDefaultSuccess: "> :white_check_mark: Ваш цвет эмбедов изменен на `default`.",
+  embedcolorRandomSuccess: "> :white_check_mark: Ваш цвет эмбедов изменен на `random`.",
+  invalidColor: "> :x: Неправильный цвет.",
+  embedcolorSuccess: color => `> :white_check_mark: Ваш цвет эмбедов изменен на \`${color}\``,
 };

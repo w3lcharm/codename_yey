@@ -13,4 +13,6 @@ module.exports = {
   supportChannelID: "id", // this is needed for support command
   cmdLogsChannelID: "id", // the bot will send command logs to this channel
   githubKey: "your github key", // needed for github command
+  lavalinkNodes: [ { host: "localhost", port: 2333, password: "youshallnotpass" } ], // list of lavalink nodes, needed for music
+  defaultColor: 0xb35511, // default embed color
 };

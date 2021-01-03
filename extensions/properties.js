@@ -10,7 +10,7 @@ module.exports.load = client => {
   if (!User.prototype.embColor) {
     User.prototype.embColor = function () {
       return db.embColors.findOne({ where: { user: this.id } })
-        .then(c => c ? c.isRandom ? Math.round(Math.random() * 16777216) : c.color : config.defaultColor);
+        .then(c => c ? c.isRandom ? Math.round(Math.random() * 16777216) : c.color || config.defaultColor : config.defaultColor);
     }
   }
 }

@@ -480,4 +480,15 @@ module.exports = {
   trackQueue: "Track queue:",
   durationRequestedBy: (duration, user) => `Duration: ${duration} | Requested by ${user}`,
   queueIsEmpty: "> Queue is empty.",
+
+  embedcolorDescription: "Lets you to change the embed color.",
+  embedcolorUsage: "[#hex or number | random | default]",
+  embedcolorRandom: "Your embed color is `random`.",
+  embedcolorDefault: "Your embed color is `default`.",
+  embedColor: color => `Your embed color is \`${color}\`.`,
+  embedcolorFooter: prefix => `Use ${prefix}embedcolor [#hex or number | random | default] if you want to change the embed color.`,
+  embedcolorDefaultSuccess: "> :white_check_mark: Your embed color is set to `default`.",
+  embedcolorRandomSuccess: "> :white_check_mark: Your embed color is set to `random`.",
+  invalidColor: "> :x: Invalid color number.",
+  embedcolorSuccess: color => `> :white_check_mark: Your embed color is set to \`${color}\``,
 };
