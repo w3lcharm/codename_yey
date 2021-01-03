@@ -23,7 +23,7 @@ module.exports = {
 
     let embed = {
       title: comic.safe_title,
-      color: Math.round(Math.random() * 16777216),
+      color: await msg.author.embColor(),
       image: { url: comic.img },
     };
     await msg.channel.createMessage({ embed });

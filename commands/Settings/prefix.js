@@ -9,7 +9,7 @@ module.exports = {
     if (!prefixArg) {
       const embed = {
         description: lang.prefixDesc(prefix),
-        color: Math.round(Math.random() * 16777216),
+        color: await msg.author.embColor(),
         footer: { text: lang.prefixFooter(prefix) },
       };
 

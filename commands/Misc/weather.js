@@ -32,7 +32,7 @@ module.exports = {
       title: lang.weatherEmbedTitle(data.location.name),
       description: data.current.skytext,
       thumbnail: { url: data.current.imageUrl },
-      color: Math.round(Math.random() * 16777216),
+      color: await msg.author.embColor(),
       fields: [
         {
           name: lang.weatherTemperature,

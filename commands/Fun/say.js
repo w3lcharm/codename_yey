@@ -12,7 +12,7 @@ module.exports = {
 
     const embed = {
       description: text,
-      color: Math.round(Math.random() * 16777216) + 1,
+      color: await msg.author.embColor(),
       footer: {
         text: `${msg.author.username}#${msg.author.discriminator}`,
         icon_url: msg.author.avatarURL,

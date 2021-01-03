@@ -16,7 +16,7 @@ module.exports = {
     let user;
 
     let embed = {
-      color: Math.round(Math.random() * 16777216) + 1,
+      color: await msg.author.embColor(),
     };
 
     if (userID === "server") {

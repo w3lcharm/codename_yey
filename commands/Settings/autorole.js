@@ -19,7 +19,7 @@ module.exports = {
       const embed = {
         title: lang.autorole,
         description: role ? lang.autoroleEnabled(role.name) : lang.autoroleDisabled,
-        color: Math.round(Math.random() * 16777216) + 1,
+        color: await msg.author.embColor(),
         footer: {
           text: lang.autoroleTip(prefix),
         },

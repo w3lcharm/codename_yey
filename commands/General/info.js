@@ -13,7 +13,7 @@ module.exports = {
         icon_url: client.user.avatarURL,
       },
       description: lang.infoDesc,
-      color: Math.round(Math.random() * 16777216),
+      color: await msg.author.embColor(),
       fields: [
         {
           name: lang.infoDeveloper,

@@ -29,7 +29,7 @@ module.exports = {
     const embed = {
       title: lang.randomTitle(min, max),
       description: randInt(max, min),
-      color: Math.round(Math.random() * 16777216),
+      color: await msg.author.embColor(),
     };
 
     await msg.channel.createMessage({ embed });

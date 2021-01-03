@@ -17,7 +17,7 @@ module.exports = {
         description: dbItem.action ?
           lang.antiinviteEnabled(dbItem.action) :
           lang.antiinviteDisabled,
-        color: Math.round(Math.random() * 16777216),
+        color: await msg.author.embColor(),
         footer: { text: lang.antiinviteFooter(prefix) },
       };
 

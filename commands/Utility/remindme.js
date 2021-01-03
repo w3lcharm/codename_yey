@@ -41,7 +41,7 @@ module.exports = {
       title: lang.reminder,
       description: text,
       timestamp: new Date().toISOString(),
-      color: Math.round(Math.random() * 16777216) + 1,
+      color: await msg.author.embColor(),
     };
 
     try {

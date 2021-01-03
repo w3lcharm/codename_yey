@@ -18,7 +18,7 @@ module.exports = {
     const finishTime = Date.now() - startTime;
 
     const embed = {
-      color: Math.round(Math.random() * 16777216) + 1,
+      color: await msg.author.embColor(),
       image: { url: "attachment://file.png" },
       footer: { text: lang.generationTime(finishTime)},
     };

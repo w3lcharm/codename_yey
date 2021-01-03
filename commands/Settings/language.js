@@ -14,7 +14,7 @@ module.exports = {
         title: lang.availableLanguages,
         description: Array.from(client.languages.keys()).map(l => `\`${l}\``)
           .join(", "),
-        color: Math.round(Math.random() * 16777216) + 1,
+        color: await msg.author.embColor(),
         footer: { text: lang.languagesTip(prefix) },
         fields: [
           {

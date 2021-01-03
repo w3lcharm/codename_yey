@@ -29,7 +29,7 @@ module.exports = {
         url: repo.html_url,
       },
       description: repo.description,
-      color: Math.round(Math.random() * 16777216),
+      color: await msg.author.embColor(),
       fields: [
         {
           name: lang.githubStars,

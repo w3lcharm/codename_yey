@@ -18,7 +18,7 @@ module.exports = {
 
     const embed = {
       title: lang.statsTitle,
-      color: Math.round(Math.random() * 16777216) + 1,
+      color: await msg.author.embColor(),
       fields: [
         {
           name: lang.statsUptime,

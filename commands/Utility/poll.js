@@ -29,7 +29,7 @@ module.exports = {
     const embed = {
       title: question,
       description: answers.map((a, i) => `${reactions[i]} - ${a}`).join("\n"),
-      color: Math.round(Math.random() * 16777216) + 1,
+      color: await msg.author.embColor(),
       footer: {
         text: lang.startedBy(msg.author),
         icon_url: msg.author.avatarURL,

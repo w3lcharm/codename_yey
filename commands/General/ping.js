@@ -12,7 +12,7 @@ module.exports = {
     const embed = {
       title: lang.pingBotLatency(Date.now() - startTime),
       description: lang.pingWebSocketLatency(shard.latency),
-      color: Math.floor(Math.random() * 16777214) + 1,
+      color: await msg.author.embColor(),
       footer: {
         text: "codename_yey",
         icon_url: client.user.avatarURL,

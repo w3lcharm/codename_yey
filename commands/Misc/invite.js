@@ -54,7 +54,7 @@ module.exports = {
         name: inviteInfo.guild.name,
         icon_url: getGuildIconURL(inviteInfo.guild),
       },
-      color: Math.round(Math.random() * 16777216),
+      color: await msg.author.embColor(),
       fields: [
         {
           name: "ID:",

@@ -35,7 +35,7 @@ module.exports = {
       embed = {
         title: lang.helpCommandEmbedTitle(command.name),
         description: lang[command.description],
-        color: Math.round(Math.random() * 16777216) + 1,
+        color: await msg.author.embColor(),
         fields: [
           {
             name: lang.helpCommandUsage,
@@ -70,7 +70,7 @@ module.exports = {
       
       embed = {
         title: lang.helpTitle,
-        color: Math.round(Math.random() * 16777216) + 1,
+        color: await msg.author.embColor(),
         fields,
         footer: {
           text: lang.helpTip(prefix),

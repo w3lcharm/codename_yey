@@ -23,7 +23,7 @@ module.exports = {
         name: guild.name,
         icon_url: guild.iconURL,
       },
-      color: Math.round(Math.random() * 16777216) + 1,
+      color: await msg.author.embColor(),
       fields: [
         {
           name: lang.serverOwner,

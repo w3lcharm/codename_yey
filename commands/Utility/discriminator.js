@@ -26,7 +26,7 @@ module.exports = {
     const embed = {
       title: lang.discriminatorEmbedTitle(discriminator),
       description: users || lang.discriminatorNoUsersFound,
-      color: Math.round(Math.random() * 16777216),
+      color: await msg.author.embColor(),
     };
 
     await msg.channel.createMessage({ embed });
