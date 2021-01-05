@@ -92,7 +92,11 @@ class CmdClient extends Eris.Client {
 
     const prefix = this.prefix instanceof Function ?
       await this.prefix(this, msg) : this.prefix;
-    
+
+    if (msg.content.replace("<@!", "<@") === this.user.mention) {
+      return msg.channel.createMessage(data[0].botPrefix(prefix, msg.author));
+    }
+  
     if (!msg.content.toLowerCase().startsWith(prefix)) return;
 
       /* const blacklistItem = await db.blacklist.findOne({ where: { user: msg.author.id } });
