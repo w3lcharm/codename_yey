@@ -10,7 +10,10 @@ try {
 }
 
 global.client = new CmdClient(config.token, {
-  prefix: config.prefix,
+  async prefix(client, msg) {
+    return await db.prefixes.findOne({ where: { server: msg.guild.id } })
+      .then(p => p && p.prefix) || config.prefix;  
+  },
   owners: config.owners,
   db: config.database,
   debugMode: config.debugMode,

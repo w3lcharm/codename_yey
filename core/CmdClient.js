@@ -90,7 +90,10 @@ class CmdClient extends Eris.Client {
       data.push(value); 
     }
 
-    if (!msg.content.toLowerCase().startsWith(data[0])) return;
+    const prefix = this.prefix instanceof Function ?
+      await this.prefix(this, msg) : this.prefix;
+    
+    if (!msg.content.toLowerCase().startsWith(prefix)) return;
 
       /* const blacklistItem = await db.blacklist.findOne({ where: { user: msg.author.id } });
       if (blacklistItem && blacklistItem.blacklisted) return; */
@@ -100,7 +103,7 @@ class CmdClient extends Eris.Client {
     args.raw = msg.content.split(/ +/g);
     args.raw.shift();
 
-    const cmdName = args.shift().toLowerCase().slice(data[0].length);
+    const cmdName = args.shift().toLowerCase().slice(prefix.length);
       
     const command = this.commands.find(cmd => cmd.name === cmdName || (cmd.aliases && cmd.aliases.includes(cmdName)));
     if (!command) return;
@@ -108,7 +111,7 @@ class CmdClient extends Eris.Client {
     if (command.ownerOnly && !this.owners.includes(msg.author.id)) return;
 
     if (command.argsRequired && !args.length) {
-      return this.commands.get("help").run(this, msg, [ command.name ], ...data);
+      return this.commands.get("help").run(this, msg, [ command.name ], prefix, ...data);
     }
 
     if (command.cooldown) {
@@ -129,7 +132,7 @@ class CmdClient extends Eris.Client {
 
     try {
       if (command.requiredPermissions) validatePermission(msg.member, command.requiredPermissions);
-      await command.run(this, msg, args, ...data);
+      await command.run(this, msg, args, prefix, ...data);
       if (command.cooldown) {
         let cmdCooldowns = this.cooldowns.get(command.name);
         cmdCooldowns.set(msg.author.id, Date.now());
