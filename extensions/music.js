@@ -42,5 +42,12 @@ module.exports.load = client => {
 
       await client.createMessage(player.textChannel, lang.allTracksPlayed);
       await player.destroy();
+    }).on("playerMove", async (player, oldChannel, newChannel) => {
+      const lang = player.get("lang");
+
+      if (!newChannel) {
+        await client.createMessage(player.textChannel, lang.allTracksPlayed);
+        await player.destroy();
+      }
     });
 }
