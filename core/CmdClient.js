@@ -45,7 +45,9 @@ class CmdClient extends Eris.Client {
 
     this.extensions = {};
 
-    this.sequelizeLogger = new Logger(this.debugMode ? Logger.TRACE : Logger.INFO, "sequelize");
+    this.middlewares = [];
+
+    /* this.sequelizeLogger = new Logger(this.debugMode ? Logger.TRACE : Logger.INFO, "sequelize");
     global.sequelize = new Sequelize(options.db.database, options.db.username, options.db.password, {
       host: options.db.localhost,
       dialect: options.db.dialect,
@@ -53,7 +55,7 @@ class CmdClient extends Eris.Client {
       dialectOptions: { timezone: "Etc/GMT0" },
       logging: (...msg) => this.sequelizeLogger.debug(msg),
     });
-    global.db = initDB(sequelize, Sequelize.DataTypes);
+    global.db = initDB(sequelize, Sequelize.DataTypes); */
 
     if (options.debugMode) {
       this._erisLogger = new Logger(Logger.TRACE, "eris");
@@ -64,9 +66,6 @@ class CmdClient extends Eris.Client {
       this.logger.info(`${this.user.username} online!`);
       this.editStatus("online", { name: `type @${client.user.username}` });
 
-      sequelize.sync()
-        .then(() => this.logger.info("successfully connected to the database."));
-
       /* for (const guild of this.guilds.values()) {
         await guild.fetchAllMembers();
       } */
@@ -76,72 +75,79 @@ class CmdClient extends Eris.Client {
       if (msg.author.bot || !msg.guild) return;
       if (!msg.channel.memberHasPermission(msg.guild.me, "sendMessages") ||
         !msg.channel.memberHasPermission(msg.guild.me, "embedLinks")) return;
-      
-      const lang = this.languages.get((await db.languages.findOrCreate({ where: { user: msg.author.id } }))[0].lang);
-      const prefix = await db.prefixes.findOne({ where: { server: msg.guild.id } })
-        .then(p => p && p.prefix) || this.prefix;
 
-      if (msg.content.replace("<@!", "<@") === this.user.mention) {
-        return msg.channel.createMessage(lang.botPrefix(prefix, msg.author));
-      }
-
-      if (!msg.content.toLowerCase().startsWith(prefix)) return;
-
-      const blacklistItem = await db.blacklist.findOne({ where: { user: msg.author.id } });
-      if (blacklistItem && blacklistItem.blacklisted) return;
-
-      const args = this._parseArgs(msg.content);
-
-      args.raw = msg.content.slice(prefix.length).split(/ +/g);
-      args.raw.shift();
-
-      const cmdName = args.shift().toLowerCase().slice(prefix.length);
-      
-      const command = this.commands.find(cmd => cmd.name === cmdName || (cmd.aliases && cmd.aliases.includes(cmdName)));
-      if (!command) return;
-
-      if (command.ownerOnly && this.owners.indexOf(msg.author.id) === -1) return;
-
-      if (command.argsRequired && !args.length) {
-        return this.commands.get("help").run(this, msg, [ command.name ], prefix, lang);
-      }
-
-      if (command.cooldown) {
-        if (!this.cooldowns.has(command.name)) {
-          this.cooldowns.set(command.name, new Eris.Collection());
-        }
-
-        let cmdCooldowns = this.cooldowns.get(command.name);
-        let now = Date.now();
-        if (cmdCooldowns.has(msg.author.id)) {
-          let expiration = cmdCooldowns.get(msg.author.id) + (command.cooldown * 1000);
-          if (now < expiration) {
-            let secsLeft = Math.floor((expiration - now) / 1000);
-            return msg.channel.createMessage(lang.cooldown(secsLeft));
-          }
-        }
-      }
-
-      try {
-        if (command.requiredPermissions) validatePermission(msg.member, command.requiredPermissions);
-        await command.run(this, msg, args, prefix, lang);
-        if (command.cooldown) {
-          let cmdCooldowns = this.cooldowns.get(command.name);
-          cmdCooldowns.set(msg.author.id, Date.now());
-          setTimeout(() => cmdCooldowns.delete(msg.author.id), command.cooldown * 1000);
-        }
-
-        this.emit("commandSuccess", command, msg);
- 
-        this.logger.info(`${msg.author.username}#${msg.author.discriminator} used ${cmdName} command in ${msg.channel.guild ? msg.channel.guild.name : "bot DM"}`);
-      } catch (err) {
-        this.emit("commandError", command, msg, err, true, lang);
-      } 
+      await this.handleCommand(msg);
     });
-
-    // this.on("messageUpdate", msg => this.emit("messageCreate", msg));
     
     this.logger.info("client initialized.");
+  }
+
+  async handleCommand(msg) {
+    let data = [];
+    for (const middleware of this.middlewares) {
+      const value = await middleware(msg);
+      if (!value) return;
+      data.push(value); 
+    }
+
+    if (!msg.content.toLowerCase().startsWith(data[0])) return;
+
+      /* const blacklistItem = await db.blacklist.findOne({ where: { user: msg.author.id } });
+      if (blacklistItem && blacklistItem.blacklisted) return; */
+
+    const args = this._parseArgs(msg.content);
+
+    args.raw = msg.content.split(/ +/g);
+    args.raw.shift();
+
+    const cmdName = args.shift().toLowerCase().slice(data[0].length);
+      
+    const command = this.commands.find(cmd => cmd.name === cmdName || (cmd.aliases && cmd.aliases.includes(cmdName)));
+    if (!command) return;
+
+    if (command.ownerOnly && !this.owners.includes(msg.author.id)) return;
+
+    if (command.argsRequired && !args.length) {
+      return this.commands.get("help").run(this, msg, [ command.name ], ...data);
+    }
+
+    if (command.cooldown) {
+      if (!this.cooldowns.has(command.name)) {
+        this.cooldowns.set(command.name, new Eris.Collection());
+      }
+
+      let cmdCooldowns = this.cooldowns.get(command.name);
+      let now = Date.now();
+      if (cmdCooldowns.has(msg.author.id)) {
+        let expiration = cmdCooldowns.get(msg.author.id) + (command.cooldown * 1000);
+        if (now < expiration) {
+          let secsLeft = Math.floor((expiration - now) / 1000);
+          return msg.channel.createMessage(lang.cooldown(secsLeft));
+        }
+      }
+    }
+
+    try {
+      if (command.requiredPermissions) validatePermission(msg.member, command.requiredPermissions);
+      await command.run(this, msg, args, ...data);
+      if (command.cooldown) {
+        let cmdCooldowns = this.cooldowns.get(command.name);
+        cmdCooldowns.set(msg.author.id, Date.now());
+        setTimeout(() => cmdCooldowns.delete(msg.author.id), command.cooldown * 1000);
+      }
+
+      this.emit("commandSuccess", command, msg);
+    } catch (err) {
+      this.emit("commandError", command, msg, err, true, ...data);
+    } 
+  }
+
+  addMiddleware(func) {
+    if (!(func instanceof Function)) {
+      throw new TypeError(`argument should be a function, received ${typeof func}`);
+    }
+
+    this.middlewares.push(func);
   }
 
   _parseArgs(str) {

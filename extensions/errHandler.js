@@ -1,6 +1,6 @@
 const { PermissionError } = require("../core/CmdClient");
 
-async function onCommandError(cmd, msg, err, showErr = false, lang) {
+async function onCommandError(cmd, msg, err, showErr = false, prefix, lang) {
   if (!lang) lang = client.languages.get("en");
 
   if (err instanceof PermissionError) {
