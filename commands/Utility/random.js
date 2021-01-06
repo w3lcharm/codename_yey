@@ -28,7 +28,7 @@ module.exports = {
 
     const embed = {
       title: lang.randomTitle(min, max),
-      description: randInt(max, min),
+      description: randInt(max, min).toString(),
       color: await msg.author.embColor(),
     };
 
