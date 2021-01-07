@@ -19,4 +19,14 @@ module.exports.load = async client => {
     await sequelize.sync()
       .then(() => databaseLogger.info("connected to the database"));
   });
+
+  client.on("guildDelete", async guild => {
+    await db.antiInvite.destroy({ where: { server: guild.id } });
+    await db.autorole.destroy({ where: { server: guild.id } });
+    await db.leaveMessages.destroy({ where: { server: guild.id } });
+    await db.warns.destroy({ where: { server: guild.id } });
+    await db.modlogs.destroy({ where: { server: guild.id } });
+    await db.prefixes.destroy({ where: { server: guild.id } });
+    await db.welcomeMessages.destroy({ where: { server: guild.id } });
+  });
 }
