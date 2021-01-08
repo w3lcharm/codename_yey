@@ -26,7 +26,9 @@ module.exports = {
     let [ userID, time, ...reason ] = args;
     const member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") ||
       msg.guild.members.find(m => m.id === userID || m.tag === userID);
-    if (!member) return;
+    if (!member) {
+      return msg.channel.createMessage(lang.cantFindUser);
+    };
 
     const parsedTime = parseTime(time);
     if (parsedTime > 604800000) {

@@ -15,7 +15,9 @@ module.exports = {
 
     const member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") || msg.guild.members.find(m => m.id === userID || m.tag === userID);
 
-    if (!member) return;
+    if (!member) {
+      return msg.channel.createMessage(lang.cantFindUser);
+    };
 
     if (member.bannable && member.highestRole.position < msg.member.highestRole.position) {
       if (member.id === msg.author.id)
