@@ -8,6 +8,7 @@ module.exports = {
   group: "miscGroup",
   description: "rextesterDescription",
   usage: "rextesterUsage",
+  argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length) {
       return msg.channel.createMessage(lang.commandUsage(prefix, this));

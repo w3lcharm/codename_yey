@@ -5,6 +5,7 @@ module.exports = {
   group: "miscGroup",
   description: "githubDescription",
   usage: "githubUsage",
+  argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length) {
       return msg.channel.createMessage(lang.commandUsage(prefix, this));

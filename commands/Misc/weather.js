@@ -14,6 +14,7 @@ module.exports = {
   group: "miscGroup",
   description: "weatherDescription",
   usage: "weatherUsage",
+  argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length) {
       return msg.channel.createMessage(lang.commandUsage(prefix, this));
