@@ -10,9 +10,7 @@ module.exports = {
       return msg.channel.createMessage(lang.commandUsage(prefix, this));
     }
 
-    const cmd = args[0];
-
-    switch (cmd) {
+    switch (args[0]) {
       case "langs":
         client.reloadLanguages();
         await msg.addReaction("✅");
@@ -25,11 +23,13 @@ module.exports = {
         await msg.addReaction("✅");
         break;
       default:
-        if (!client.commands.has(cmd)) {
-          return msg.channel.createMessage(lang.reloadCmdDoesntExist(cmd));
-        }
+        for (const cmd of args) {
+          if (!client.commands.has(cmd)) {
+            return msg.channel.createMessage(lang.reloadCmdDoesntExist(cmd));
+          }
 
-        client.reloadCommand(cmd);
+          client.reloadCommand(cmd);
+        }
         await msg.addReaction("✅");
         break;
     }
