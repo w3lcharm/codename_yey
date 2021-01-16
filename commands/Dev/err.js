@@ -4,6 +4,6 @@ module.exports = {
   hidden: true,
   ownerOnly: true,
   async run(client, msg) {
-    throw new Error("test");
+    throw new Error(args.join(" "));
   }
 };

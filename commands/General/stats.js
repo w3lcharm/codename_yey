@@ -33,6 +33,10 @@ module.exports = {
           value: client.users.size,
         },
         {
+          name: lang.statsVoiceConnections,
+          value: client.lavalinkManager ? client.lavalinkManager.players.size : "N/A",
+        },
+        {
           name: lang.statsPlatform,
           value: process.platform,
         },

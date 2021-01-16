@@ -116,6 +116,7 @@ module.exports = {
   statsBot: "bot",
   statsCpu: "CPU:",
   cantGetCpuInfo: "Unable to get CPU info",
+  statsVoiceConnections: "Voice connections:",
 
   userDescription: "Shows info about you or about provided user.",
   userUsage: "[user: id, tag or mention]",
