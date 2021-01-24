@@ -28,28 +28,44 @@ module.exports = {
         {
           name: lang.statsServers,
           value: client.guilds.size,
+          inline: true,
         },
         {
           name: lang.statsUsers,
           value: client.users.size,
+          inline: true,
+        },
+        {
+          name: lang.statsChannels,
+          value: Object.keys(client.channelGuildMap).length,
+          inline: true,
         },
         {
           name: lang.statsVoiceConnections,
           value: client.lavalinkManager ? client.lavalinkManager.players.size : "N/A",
+          inline: true,
+        },
+        {
+          name: lang.statsCommandsUsed,
+          value: client.usageCount,
+          inline: true,
         },
         {
           name: lang.statsPlatform,
           value: process.platform,
+          inline: true,
         },
         {
           name: lang.statsVersions,
           value: `**Node.js**: ${process.version}\n` +
             `**Eris**: ${Eris.VERSION}\n` +
             `**Sequelize**: ${Sequelize.version}`,
+          inline: true,
         },
         {
           name: lang.statsRamUsed,
           value: `${ramUsed.toFixed(1)} MB`,
+          inline: true,
         },
         {
           name: lang.statsCpu,

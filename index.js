@@ -29,6 +29,7 @@ global.client = new CmdClient(config.token, {
 
 client.supportChannelID = config.supportChannelID;
 client.cmdLogsChannelID = config.cmdLogsChannelID;
+client.usageCount = 0;
 
 const cmdGroups = [ "General", "Utility", "Moderation", "Fun", "Misc", "Music", "Settings", "Dev" ];
 for (const group of cmdGroups) {

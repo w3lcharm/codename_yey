@@ -1,4 +1,5 @@
 async function onCommandSuccess(cmd, msg) {
+  client.usageCount++;
   if (!client.cmdLogsChannelID) return;
 
   const embed = {
