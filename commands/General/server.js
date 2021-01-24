@@ -41,17 +41,20 @@ module.exports = {
           name: lang.serverMembers,
           value: `**${lang.serverMembersTotal}** - ${guild.memberCount}\n` +
             `**${lang.serverMembersBots}** - ${guild.members.filter(m => m.bot).length}`,
+          inline: true,
         },
         {
           name: lang.serverChannels,
           value: `**${lang.serverChannelsCategories}** - ${guild.channels.filter(c => c instanceof CategoryChannel).length}\n` +
             `**${lang.serverChannelsText}** - ${guild.channels.filter(c => c instanceof TextChannel).length}\n` +
             `**${lang.serverChannelsVoice}** - ${guild.channels.filter(c => c instanceof VoiceChannel).length}`,
+          inline: true,
         },
         {
           name: lang.serverEmojis,
           value: `**${lang.serverEmojisStatic}** - ${guild.emojis.filter(e => !e.animated).length}\n` +
             `**${lang.serverEmojisAnimated}** - ${guild.emojis.filter(e => e.animated).length}`,
+          inline: true,
         },
         {
           name: lang.serverVerificationLevel,
@@ -64,10 +67,12 @@ module.exports = {
         {
           name: lang.serverBoostLevel,
           value: guild.premiumTier,
+          inline: true,
         },
         {
           name: lang.serverBoosts,
           value: guild.premiumSubscriptionCount,
+          inline: true,
         },
         {
           name: lang.serverCreatedAt,
