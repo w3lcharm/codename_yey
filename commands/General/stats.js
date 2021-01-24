@@ -1,4 +1,5 @@
-const { VERSION } = require("eris");
+const Eris = require("eris");
+const Sequelize = require("sequelize");
 const package = require("../../package");
 const moment = require("moment");
 const os = require("os");
@@ -42,9 +43,9 @@ module.exports = {
         },
         {
           name: lang.statsVersions,
-          value: `**${lang.statsBot}**: ${package.version}\n` +
-            `**Node.js**: ${process.version}\n` +
-            `**Eris**: ${VERSION}`,
+          value: `**Node.js**: ${process.version}\n` +
+            `**Eris**: ${Eris.VERSION}\n` +
+            `**Sequelize**: ${Sequelize.version}`,
         },
         {
           name: lang.statsRamUsed,
@@ -56,7 +57,7 @@ module.exports = {
         },
       ],
       footer: {
-        text: "codename_yey © 1z3ngero",
+        text: `codename_yey v${package.version}`,
         icon_url: client.user.avatarURL,
       },
     };
