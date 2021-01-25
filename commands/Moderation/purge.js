@@ -30,7 +30,7 @@ module.exports = {
         color: 3066993,
       };
 
-      const message = await msg.reply({ embed: embed });
+      const message = await msg.channel.createMessage({ embed: embed });
       setTimeout(() => {
         message.delete().catch(() => {});
       }, 5000);
@@ -48,7 +48,7 @@ module.exports = {
         color: 15158332,
         description,
       };
-      await msg.reply({ embed });
+      await msg.channel.createMe({ embed });
     }
   }
 };
