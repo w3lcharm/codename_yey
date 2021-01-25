@@ -14,7 +14,7 @@ async function onCommandError(cmd, msg, err, showErr = false, lang) {
       },
     };
 
-    return msg.channel.createMessage({ embed });
+    return msg.reply({ embed });
   }
   
   client.logger.error(`Error in command ${cmd.name}:\n${err.stack}`);
@@ -54,7 +54,7 @@ async function onCommandError(cmd, msg, err, showErr = false, lang) {
   }
 
   if (showErr) {
-    await msg.channel.createMessage({ embed });
+    await msg.reply({ embed });
   }
   
   await client.createMessage(client.cmdLogsChannelID, { embed: logsEmbed });

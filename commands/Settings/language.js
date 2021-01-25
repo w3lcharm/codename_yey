@@ -23,10 +23,10 @@ module.exports = {
           },
         ],
       };
-      await msg.channel.createMessage({ embed });
+      await msg.reply({ embed });
     } else {
       if (!client.languages.has(langName)) {
-        return msg.channel.createMessage(lang.langDoesntExist);
+        return msg.reply(lang.langDoesntExist);
       }
 
       await db.languages.update(
@@ -35,7 +35,7 @@ module.exports = {
       );
 
       let newLang = client.languages.get(langName);
-      await msg.channel.createMessage(newLang.langSuccess(langName));
+      await msg.reply(newLang.langSuccess(langName));
     }
   }
 };

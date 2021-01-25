@@ -34,7 +34,7 @@ module.exports = {
         ) || client.users.find(u => u.tag == userID) || await client.fetchUser(userID);
 
       if (!user) {
-        return msg.channel.createMessage(lang.cantFindUser);
+        return msg.reply(lang.cantFindUser);
       }
 
       const format = user.avatar && user.avatar.startsWith("a_") ? "gif" : "png";
@@ -47,6 +47,6 @@ module.exports = {
       embed.image = { url };
     }
   
-    await msg.channel.createMessage({ embed });
+    await msg.reply({ embed });
   }
 };

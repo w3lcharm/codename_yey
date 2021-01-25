@@ -7,7 +7,7 @@ module.exports = {
   hidden: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length)
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
     
     let type = 0;
     if (args[0] === "-w" || args[0] === "--watching") {

@@ -11,7 +11,7 @@ module.exports = {
   aliases: [ "r", "roleinfo" ],
   async run(client, msg, args, prefix, lang) {
     if (!args.length) {
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
     }
 
     let roleID = args.raw.join(" ");
@@ -23,7 +23,7 @@ module.exports = {
     const role = msg.guild.roles.find(r => r.name.toLowerCase().startsWith(roleID) || r.id === roleID);
 
     if (!role) {
-      return msg.channel.createMessage(lang.roleNotFound);
+      return msg.reply(lang.roleNotFound);
     }
 
     moment.locale(lang.langName);
@@ -65,6 +65,6 @@ module.exports = {
       ],
     };
 
-    await msg.channel.createMessage({ embed });
+    await msg.reply({ embed });
   }
 }

@@ -7,16 +7,16 @@ module.exports = {
   argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length)
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
     
     const userID = args.shift();
     const reason = args.join(" ");
 
     try {
       if (userID === msg.author.id)
-        return msg.channel.createMessage(lang.cantBanYourself);
+        return msg.reply(lang.cantBanYourself);
       if (userID === client.user.id)
-        return msg.channel.createMessage(lang.cantBanBot);
+        return msg.reply(lang.cantBanBot);
       
       await msg.channel.guild.banMember(userID, 0, encodeURI(reason));
 
@@ -26,7 +26,7 @@ module.exports = {
         color: 3066993,
         timestamp: new Date().toISOString(),
       };
-      await msg.channel.createMessage({ embed });
+      await msg.reply({ embed });
     } catch (err) {
       let description;
       if (!msg.channel.guild.members.get(client.user.id).permission.has("banMembers"))
@@ -38,7 +38,7 @@ module.exports = {
         description,
         color: 15158332,
       };
-      await msg.channel.createMessage({ embed });
+      await msg.reply({ embed });
     }
   }
 }

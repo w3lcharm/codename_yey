@@ -8,14 +8,14 @@ module.exports = {
   hidden: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.raw.length) {
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
     }
 
     const expr = args.raw.join(" ");
 
     exec(expr, (err, stdout, stderr) => {
-      if (err) return msg.channel.createMessage(`\`\`\`${err}\`\`\``);
-      msg.channel.createMessage(`\`\`\`${stdout}\`\`\``);
+      if (err) return msg.reply(`\`\`\`${err}\`\`\``);
+      msg.reply(`\`\`\`${stdout}\`\`\``);
     });
   }
 }

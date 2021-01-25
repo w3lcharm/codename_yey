@@ -9,17 +9,17 @@ module.exports = {
   argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length)
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
 
     const amount = parseInt(args[0]);
 
     if (isNaN(amount))
-      return msg.channel.createMessage(lang.amountIsNaN);
+      return msg.reply(lang.amountIsNaN);
 
     if (amount < 1)
-      return msg.channel.createMessage(lang.notLessThan1Msg);
+      return msg.reply(lang.notLessThan1Msg);
     if (amount > 100)
-      return msg.channel.createMessage(lang.notMoreThan100Msgs);
+      return msg.reply(lang.notMoreThan100Msgs);
     try {
       await msg.channel.purge(amount + 1);
 
@@ -30,7 +30,7 @@ module.exports = {
         color: 3066993,
       };
 
-      const message = await msg.channel.createMessage({ embed: embed });
+      const message = await msg.reply({ embed: embed });
       setTimeout(() => {
         message.delete().catch(() => {});
       }, 5000);
@@ -48,7 +48,7 @@ module.exports = {
         color: 15158332,
         description,
       };
-      await msg.channel.createMessage({ embed });
+      await msg.reply({ embed });
     }
   }
 };

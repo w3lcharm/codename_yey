@@ -9,7 +9,7 @@ module.exports = {
 
     const discrimNumber = parseInt(discriminator);
     if (isNaN(discrimNumber) || discrimNumber > 9999 || discrimNumber < 1) {
-      return msg.channel.createMessage(lang.invalidDiscriminator);
+      return msg.reply(lang.invalidDiscriminator);
     }
 
     while (discriminator.length < 4) {
@@ -29,6 +29,6 @@ module.exports = {
       color: await msg.author.embColor(),
     };
 
-    await msg.channel.createMessage({ embed });
+    await msg.reply({ embed });
   }
 }

@@ -7,7 +7,7 @@ module.exports = {
   argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length) {
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
     }
 
     const jsonData = args.raw.join(' ');
@@ -30,7 +30,7 @@ module.exports = {
     if (embed instanceof Object) {
       await msg.channel.createMessage({ embed });
     } else {
-      await msg.channel.createMessage(lang.embedInvalid);
+      await msg.reply(lang.embedInvalid);
     }
   }
 };

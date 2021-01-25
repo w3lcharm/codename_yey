@@ -33,19 +33,19 @@ module.exports = {
   argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length) {
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
     }
 
     const invite = parseInvite(args[0]);
     if (!invite) {
-      return msg.channel.createMessage(lang.inviteInvalid); 
+      return msg.reply(lang.inviteInvalid); 
     }
 
     let inviteInfo;
     try {
       inviteInfo = await client.getInvite(invite, true);
     } catch {
-      return msg.channel.createMessage(lang.inviteInvalid);
+      return msg.reply(lang.inviteInvalid);
     }
 
     if (!msg.member.permissions.has("manageMessages")) msg.delete().catch(() => {});
@@ -87,6 +87,6 @@ module.exports = {
       });
     }
 
-    await msg.channel.createMessage({ embed });
+    await msg.reply({ embed });
   }
 }

@@ -8,7 +8,7 @@ module.exports = {
   usage: "banUsage",
   async run(client, msg, args, prefix, lang) {
     if (!args.length)
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
 
     const userID = args.shift();
     const reason = args.join(" ");
@@ -16,14 +16,14 @@ module.exports = {
     const member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") || msg.guild.members.find(m => m.id === userID || m.tag === userID);
 
     if (!member) {
-      return msg.channel.createMessage(lang.cantFindUser);
+      return msg.reply(lang.cantFindUser);
     };
 
     if (member.bannable && member.highestRole.position < msg.member.highestRole.position) {
       if (member.id === msg.author.id)
-        return msg.channel.createMessage(lang.cantBanYourself);
+        return msg.reply(lang.cantBanYourself);
       if (member.id === client.user.id)
-        return msg.channel.createMessage(lang.cantBanBot);
+        return msg.reply(lang.cantBanBot);
 
       await member.ban(0, encodeURI(`${reason} (banned by ${msg.author.username}#${msg.author.discriminator})`));
 
@@ -37,7 +37,7 @@ module.exports = {
         timestamp: new Date().toISOString(),
       };
         
-      await msg.channel.createMessage({ embed });
+      await msg.reply({ embed });
     } else {
       let description;
       if (!msg.guild.me.permission.has("banMembers")) {
@@ -55,7 +55,7 @@ module.exports = {
         description,
         color: 15158332,
       };
-      await msg.channel.createMessage({ embed });
+      await msg.reply({ embed });
     }
   }
 };

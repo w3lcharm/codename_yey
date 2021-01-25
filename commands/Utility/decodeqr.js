@@ -11,7 +11,7 @@ module.exports = {
   argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length && !msg.attachments.length) {
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
     }
 
     let url = args[0];
@@ -20,14 +20,14 @@ module.exports = {
 
     let res = await fetch(`${apiUrl}?fileurl=${encodeURI(url)}`);
     if (res.status == 400) {
-      return msg.channel.createMessage(lang.decodeqrInvalidURL);
+      return msg.reply(lang.decodeqrInvalidURL);
     }
 
     let code = await res.json();
     if (!code[0].symbol[0].error) {
-      await msg.channel.createMessage(`\`\`\`${code[0].symbol[0].data}\`\`\``);
+      await msg.reply(`\`\`\`${code[0].symbol[0].data}\`\`\``);
     } else {
-      await msg.channel.createMessage(lang.decodeqrFail);
+      await msg.reply(lang.decodeqrFail);
     }
   }
 }

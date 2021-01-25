@@ -4,16 +4,16 @@ module.exports = {
   description: "skipDescription",
   async run(client, msg, args, prefix, lang) {
     if (!msg.member.voiceState.channelID) {
-      return msg.channel.createMessage(lang.playNotInVoiceChannel);
+      return msg.reply(lang.playNotInVoiceChannel);
     }
 
     const player = client.lavalinkManager.players.get(msg.guild.id);
     if (!player) {
-      return msg.channel.createMessage(lang.notPlaying);
+      return msg.reply(lang.notPlaying);
     }
 
     player.stop();
 
-    await msg.channel.createMessage(lang.skipping);
+    await msg.reply(lang.skipping);
   }
 }

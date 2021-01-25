@@ -9,7 +9,7 @@ module.exports = {
   argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length) {
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
     }
 
     const userID = args[0];
@@ -28,7 +28,7 @@ module.exports = {
         timestamp: new Date().toISOString(),
       };
 
-      await msg.channel.createMessage({ embed });
+      await msg.reply({ embed });
     } catch (error) {
       let description;
 
@@ -46,7 +46,7 @@ module.exports = {
         color: 15158332,
       };
 
-      await msg.channel.createMessage({ embed });
+      await msg.reply({ embed });
     }
   }
 }

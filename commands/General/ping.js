@@ -8,7 +8,7 @@ module.exports = {
     else shard = client.shards.get(0);
 
     const startTime = Date.now();
-    const message = await msg.channel.createMessage(lang.pingMeasuring);
+    const message = await msg.reply(lang.pingMeasuring);
     const embed = {
       title: lang.pingBotLatency(Date.now() - startTime),
       description: lang.pingWebSocketLatency(shard.latency),

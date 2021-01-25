@@ -10,7 +10,7 @@ module.exports = {
     const text = msg.content.slice(prefix.length + this.name.length + 1);
 
     if (!text.length)
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
 
     const startTime = Date.now();
     let qr = await QRCode.toDataURL(text);
@@ -23,7 +23,7 @@ module.exports = {
       footer: { text: lang.generationTime(finishTime)},
     };
 
-    await msg.channel.createMessage({ embed: embed }, {
+    await msg.reply({ embed: embed }, {
       file: Buffer.from(qr, "base64"),
       name: "file.png",
     });

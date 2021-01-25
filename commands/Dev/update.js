@@ -15,7 +15,7 @@ module.exports = {
         color: 3066993,
       };
 
-      msg.channel.createMessage({ embed: embed });
+      msg.reply({ embed: embed });
     });
   }
 };

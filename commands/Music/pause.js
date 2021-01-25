@@ -4,20 +4,20 @@ module.exports = {
   description: "pauseDescription",
   async run(client, msg, args, prefix, lang) {
     if (!msg.member.voiceState.channelID) {
-      return msg.channel.createMessage(lang.playNotInVoiceChannel);
+      return msg.reply(lang.playNotInVoiceChannel);
     }
 
     const player = client.lavalinkManager.players.get(msg.guild.id);
     if (!player) {
-      return msg.channel.createMessage(lang.notPlaying);
+      return msg.reply(lang.notPlaying);
     }
 
     if (player.paused) {
-      return msg.channel.createMessage(lang.alreadyPaused);
+      return msg.reply(lang.alreadyPaused);
     }
 
     player.pause(true);
 
-    await msg.channel.createMessage(lang.paused(prefix));
+    await msg.reply(lang.paused(prefix));
   }
 }

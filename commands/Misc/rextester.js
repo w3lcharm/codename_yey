@@ -11,7 +11,7 @@ module.exports = {
   argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length) {
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
     }
 
     const code = msg.content.slice(prefix.length + this.name.length + 1);
@@ -29,7 +29,7 @@ module.exports = {
         // footer: { text: lang.rextesterErrorFooter },
       };
 
-      return msg.channel.createMessage({ embed });
+      return msg.reply({ embed });
     }
 
     if (response.Result && response.Result.length > 2000) {
@@ -43,7 +43,7 @@ module.exports = {
         color: 15158332,
       }
 
-      return msg.channel.createMessage({ embed });
+      return msg.reply({ embed });
     }
 
     const embed = {
@@ -52,6 +52,6 @@ module.exports = {
       color: 3066993,
     };
 
-    await msg.channel.createMessage(response.Result ? { embed } : lang.rextesterEmptyResult);
+    await msg.reply(response.Result ? { embed } : lang.rextesterEmptyResult);
   }
 }

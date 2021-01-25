@@ -8,7 +8,7 @@ module.exports = {
   async run(client, msg, args, prefix, lang) {
     const player = client.lavalinkManager.players.get(msg.guild.id);
     if (!player) {
-      return msg.channel.createMessage(lang.notPlaying);
+      return msg.reply(lang.notPlaying);
     }
 
     const embed = {
@@ -25,7 +25,7 @@ module.exports = {
     }
 
     if (!fields.length) {
-      return msg.channel.createMessage(lang.queueIsEmpty);
+      return msg.reply(lang.queueIsEmpty);
     }
 
     if (fields.length > 10) {
@@ -42,7 +42,7 @@ module.exports = {
       let pageNumber = 0;
       embed.fields = pages[pageNumber];
 
-      const message = await msg.channel.createMessage({ embed });
+      const message = await msg.reply({ embed });
       message.addReaction("◀️");
       message.addReaction("▶️");
 
@@ -62,7 +62,7 @@ module.exports = {
       });
     } else {
       embed.fields = fields;
-      await msg.channel.createMessage({ embed });
+      await msg.reply({ embed });
     }
   }
 }

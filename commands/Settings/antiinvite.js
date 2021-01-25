@@ -21,18 +21,18 @@ module.exports = {
         footer: { text: lang.antiinviteFooter(prefix) },
       };
 
-      await msg.channel.createMessage({ embed });
+      await msg.reply({ embed });
     } else {
       if (action == "disable") {
         await dbItem.update({ action: null });
-        return msg.channel.createMessage(lang.antiinviteDisableSuccess);
+        return msg.reply(lang.antiinviteDisableSuccess);
       }
       if (!allowedActions.includes(action)) {
-        return msg.channel.createMessage(lang.antiinviteInvalidAction);
+        return msg.reply(lang.antiinviteInvalidAction);
       }
 
       await dbItem.update({ action });
-      await msg.channel.createMessage(lang.antiinviteEnableSuccess(action));
+      await msg.reply(lang.antiinviteEnableSuccess(action));
     }
   }
 };

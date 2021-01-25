@@ -31,6 +31,8 @@ client.supportChannelID = config.supportChannelID;
 client.cmdLogsChannelID = config.cmdLogsChannelID;
 client.usageCount = 0;
 
+client.options.allowedMentions.replied_user = true;
+
 const cmdGroups = [ "General", "Utility", "Moderation", "Fun", "Misc", "Music", "Settings", "Dev" ];
 for (const group of cmdGroups) {
   client.loadCommandGroup(path.join(__dirname, "commands", group));

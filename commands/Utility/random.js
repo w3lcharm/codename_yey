@@ -10,7 +10,7 @@ module.exports = {
   argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length) {
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
     }
 
     let [ min, max ] = args;
@@ -23,7 +23,7 @@ module.exports = {
     min = parseInt(min);
 
     if (isNaN(min) || isNaN(max)) {
-      return msg.channel.createMessage(lang.notANumber);
+      return msg.reply(lang.notANumber);
     }
 
     const embed = {
@@ -32,6 +32,6 @@ module.exports = {
       color: await msg.author.embColor(),
     };
 
-    await msg.channel.createMessage({ embed });
+    await msg.reply({ embed });
   }
 }

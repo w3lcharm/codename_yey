@@ -10,7 +10,7 @@ module.exports = {
   argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length)
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
 
     if (args[0] == "--list" || args[0] == "-l") {
       let member;
@@ -19,7 +19,7 @@ module.exports = {
         msg.guild.members.get(msg.mentions[0].id) :
         msg.guild.members.find(m => m.id === args[1] || m.tag === args[1]);
         
-      if (!member) return msg.channel.createMessage(lang.cantFindUser);
+      if (!member) return msg.reply(lang.cantFindUser);
 
       let embed = {
         author: {
@@ -63,7 +63,7 @@ module.exports = {
         }
         embed.footer = { text: lang.totalWarns(warnList.length) };
       }
-      const message = await msg.channel.createMessage({ embed });
+      const message = await msg.reply({ embed });
       if (warnsLength > 10) {
         await message.addReaction("◀️");
         await message.addReaction("▶️");
@@ -103,12 +103,12 @@ module.exports = {
             id: id,
           },
         });
-        if (!warn) msg.channel.createMessage(lang.invalidID);
+        if (!warn) msg.reply(lang.invalidID);
         else if (warn.server != msg.guild.id)
-          msg.channel.createMessage(lang.warnOnAnotherServer);
+          msg.reply(lang.warnOnAnotherServer);
         else {
           await db.warns.destroy({ where: { id: id } });
-          msg.channel.createMessage(lang.warnDeleteSuccess(warn.id));
+          msg.reply(lang.warnDeleteSuccess(warn.id));
         }
         return;
       }
@@ -119,11 +119,11 @@ module.exports = {
 
       if (!member) return;
       if (member.id == msg.author.id)
-        return msg.channel.createMessage(lang.cantWarnYourself);
+        return msg.reply(lang.cantWarnYourself);
       if (member.id == client.user.id)
-        return msg.channel.createMessage(lang.cantWarnBot);
+        return msg.reply(lang.cantWarnBot);
       if (msg.member.highestRole.position <= member.highestRole.position)
-        return msg.channel.createMessage(lang.cantWarnAdmin);
+        return msg.reply(lang.cantWarnAdmin);
 
       const warnObj = await db.warns.create({
         server: msg.guild.id,
@@ -142,7 +142,7 @@ module.exports = {
         timestamp: new Date().toISOString(),
         footer: { text: lang.warnID(warnObj.id) },
       };
-      await msg.channel.createMessage({ embed });
+      await msg.reply({ embed });
 
       const { channel: modlogChannel } = await db.modlogs.findOrCreate({ where: { server: msg.guild.id } })
         .then(i => i[0]);

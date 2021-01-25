@@ -7,7 +7,7 @@ module.exports = {
   argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.raw.length) {
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
     }
     
     let decodeFlag = false;
@@ -25,9 +25,9 @@ module.exports = {
 
     if (result.length > 2000) {
       const file = Buffer.from(result);
-      await msg.channel.createMessage("", { name: "result.txt", file });
+      await msg.reply("", { name: "result.txt", file });
     } else {
-      await msg.channel.createMessage(`\`\`\`${result}\`\`\``);
+      await msg.reply(`\`\`\`${result}\`\`\``);
     }
   }
 };

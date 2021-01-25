@@ -20,7 +20,7 @@ module.exports = {
             icon_url: client.user.avatarURL,
           },
         };
-        return msg.channel.createMessage({ embed: embed });
+        return msg.reply({ embed: embed });
       }
 
       let usage = `${prefix}${command.name}`;
@@ -55,7 +55,7 @@ module.exports = {
         });
       }
 
-      await msg.channel.createMessage({ embed: embed });
+      await msg.reply({ embed: embed });
     } else {
       let fields = [];
       for (let group of Array.from(client.groups.values())) {
@@ -78,7 +78,7 @@ module.exports = {
         },
       };
 
-      await msg.channel.createMessage({ embed: embed });
+      await msg.reply({ embed: embed });
     }
   }
 };

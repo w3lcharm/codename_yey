@@ -8,7 +8,7 @@ module.exports = {
   argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length) {
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
     }
 
     const query = args.raw.join(" ");
@@ -18,7 +18,7 @@ module.exports = {
     }).then(r => r.json());
     
     if (!data.total_count) {
-      return msg.channel.createMessage(lang.githubRepoNotFound);
+      return msg.reply(lang.githubRepoNotFound);
     }
 
     const repo = data.items[0];
@@ -57,6 +57,6 @@ module.exports = {
       value: repo.language,
     });
 
-    await msg.channel.createMessage({ embed });
+    await msg.reply({ embed });
   }
 };

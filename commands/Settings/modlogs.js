@@ -29,7 +29,7 @@ module.exports = {
         },
       };
 
-      return msg.channel.createMessage({ embed });
+      return msg.reply({ embed });
     } else {
       if (channel === "disable") {
         await db.modlogs.update(
@@ -37,7 +37,7 @@ module.exports = {
           { where: { server: msg.guild.id } }
         );
 
-        return msg.channel.createMessage(lang.modlogsDisableSuccess);
+        return msg.reply(lang.modlogsDisableSuccess);
       } else {
         if (channel.startsWith("<#")) {
           channel = channel.replace("<#", "").replace(">", "");
@@ -45,7 +45,7 @@ module.exports = {
 
         const ch = msg.guild.channels.find(c => c.id === channel || c.name === channel);
         if (!ch || (ch && ch.type > 0)) {
-          return msg.channel.createMessage(lang.invalidChannel);
+          return msg.reply(lang.invalidChannel);
         }
         if (!ch.memberHasPermission(msg.guild.me, "sendMessages") || !ch.memberHasPermission(msg.guild.me, "embedLinks")) {
           const embed = {
@@ -53,7 +53,7 @@ module.exports = {
             description: lang.modlogsDontHavePermsDesc,
             color: 3066993,
           };
-          return msg.channel.createMessage({ embed });
+          return msg.reply({ embed });
         }
 
         await db.modlogs.update(
@@ -61,7 +61,7 @@ module.exports = {
           { where: { server: msg.guild.id } },
         );
 
-        return msg.channel.createMessage(lang.modlogsSuccess(ch.name));
+        return msg.reply(lang.modlogsSuccess(ch.name));
       }
     }
   }

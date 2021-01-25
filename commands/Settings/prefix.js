@@ -13,17 +13,17 @@ module.exports = {
         footer: { text: lang.prefixFooter(prefix) },
       };
 
-      await msg.channel.createMessage({ embed });
+      await msg.reply({ embed });
     } else {
       if (prefixArg.length > 10) {
-        return msg.channel.createMessage(lang.prefixCantBeLong);
+        return msg.reply(lang.prefixCantBeLong);
       }
 
       const guildPrefix = await db.prefixes.findOrCreate({ where: { server: msg.guild.id } })
         .then(i => i[0]);
       await guildPrefix.update({ prefix: prefixArg.toLowerCase() });
 
-      await msg.channel.createMessage(lang.prefixSuccess(prefixArg));
+      await msg.reply(lang.prefixSuccess(prefixArg));
     }
   }
 }

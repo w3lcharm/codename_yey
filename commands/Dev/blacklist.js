@@ -19,18 +19,18 @@ module.exports = {
       client.users.find(u => u.tag == userID || u.id == userID);
 
     if (!user) {
-      return msg.channel.createMessage(lang.userNotFound);
+      return msg.reply(lang.userNotFound);
     }
 
     const blacklistItem = await db.blacklist.findOrCreate({ where: { user: user.id } })
       .then(i => i[0]);
 
     if (removeFlag && !blacklistItem.blacklisted) {
-      return msg.channel.createMessage(lang.userNotBlacklisted);
+      return msg.reply(lang.userNotBlacklisted);
     }
 
     if (!removeFlag && blacklistItem.blacklisted) {
-      return msg.channel.createMessage(lang.userAlreadyBlacklisted);
+      return msg.reply(lang.userAlreadyBlacklisted);
     }
 
     await blacklistItem.update({ blacklisted: !removeFlag });

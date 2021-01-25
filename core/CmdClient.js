@@ -94,7 +94,7 @@ class CmdClient extends Eris.Client {
       await this.prefix(this, msg) : this.prefix;
 
     if (msg.content.replace("<@!", "<@") === this.user.mention) {
-      return msg.channel.createMessage(data[0].botPrefix(prefix, msg.author));
+      return msg.reply(data[0].botPrefix(prefix, msg.author));
     }
   
     if (!msg.content.toLowerCase().startsWith(prefix)) return;
@@ -129,7 +129,7 @@ class CmdClient extends Eris.Client {
         let expiration = cmdCooldowns.get(msg.author.id) + (command.cooldown * 1000);
         if (now < expiration) {
           let secsLeft = Math.floor((expiration - now) / 1000);
-          return msg.channel.createMessage(lang.cooldown(secsLeft));
+          return msg.reply(lang.cooldown(secsLeft));
         }
       }
     }

@@ -47,7 +47,7 @@ module.exports = {
   argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length)
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
 
     const question = msg.content.slice(prefix.length + this.name.length + 1);
 
@@ -63,6 +63,6 @@ module.exports = {
       ],
     };
 
-    await msg.channel.createMessage({ embed: embed });
+    await msg.reply({ embed: embed });
   }
 };

@@ -6,7 +6,7 @@ module.exports = {
   argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length) {
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
     }
 
     let [ question, ...answers ] = args;
@@ -19,11 +19,11 @@ module.exports = {
     }
 
     if (!answers.length) {
-      return msg.channel.createMessage(lang.noAnswers);
+      return msg.reply(lang.noAnswers);
     }
 
     if (answers.length > 10) {
-      return msg.channel.createMessage(lang.pollNotMoreThan10Answers);
+      return msg.reply(lang.pollNotMoreThan10Answers);
     }
 
     const embed = {
@@ -40,7 +40,7 @@ module.exports = {
       try {
         await msg.delete();
       } catch {
-        await msg.channel.createMessage(lang.pollCantDeleteMessage);
+        await msg.reply(lang.pollCantDeleteMessage);
       }
     }
 

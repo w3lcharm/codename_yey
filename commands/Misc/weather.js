@@ -17,7 +17,7 @@ module.exports = {
   argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length) {
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
     }
 
     const location = args.raw.join(" ");
@@ -26,7 +26,7 @@ module.exports = {
       .then(r => r[0]);
 
     if (!data) {
-      return msg.channel.createMessage(lang.locationNotFound);
+      return msg.reply(lang.locationNotFound);
     }
 
     const embed = {
@@ -56,6 +56,6 @@ module.exports = {
       ],
     };
 
-    await msg.channel.createMessage({ embed });
+    await msg.reply({ embed });
   }
 };

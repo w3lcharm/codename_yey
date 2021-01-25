@@ -21,27 +21,27 @@ module.exports = {
   argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length)
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
 
     let [ userID, time, ...reason ] = args;
     const member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") ||
       msg.guild.members.find(m => m.id === userID || m.tag === userID);
     if (!member) {
-      return msg.channel.createMessage(lang.cantFindUser);
+      return msg.reply(lang.cantFindUser);
     };
 
     const parsedTime = parseTime(time);
     if (parsedTime > 604800000) {
-      return msg.channel.createMessage(lang.muteTimeTooLong);
+      return msg.reply(lang.muteTimeTooLong);
     }
     
     if (!parsedTime) reason.unshift(time);
     
     try {
       if (member.id === msg.author.id)
-        return msg.channel.createMessage(lang.cantMuteYourself);
+        return msg.reply(lang.cantMuteYourself);
       if (member.id === client.user.id)
-        return msg.channel.createMessage(lang.cantMuteBot);
+        return msg.reply(lang.cantMuteBot);
 
       let mutedRole = msg.guild.roles.find(r => r.name === "Muted");
       if (!mutedRole) {
@@ -58,7 +58,7 @@ module.exports = {
       }
       
       if (member.roles.includes(mutedRole.id))
-        return msg.channel.createMessage(lang.userAlreadyMuted);
+        return msg.reply(lang.userAlreadyMuted);
 
       await member.addRole(mutedRole.id);
       const embed = {
@@ -72,7 +72,7 @@ module.exports = {
         footer: { text: lang.canUnmuteSuggestion(prefix) },
       };
 
-      await msg.channel.createMessage({ embed });
+      await msg.reply({ embed });
       if (parsedTime) {
         if (!muteTimers.has(msg.guild.id)) {
           muteTimers.set(msg.guild.id, new Map());
@@ -102,7 +102,7 @@ module.exports = {
         description,
         color: 15158332,
       };
-      await msg.channel.createMessage({ embed });
+      await msg.reply({ embed });
     }
   }	
 };

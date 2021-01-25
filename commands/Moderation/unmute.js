@@ -7,14 +7,14 @@ module.exports = {
   argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length)
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
 
     const userID = args[0];
     const member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") ||
       msg.guild.members.find(m => m.id == userID || m.tag == userID);
 
     if (!member) {
-      return msg.channel.createMessage(lang.cantFindUser);
+      return msg.reply(lang.cantFindUser);
     };
 
     try {
@@ -33,7 +33,7 @@ module.exports = {
       }
 
       if (!member.roles.includes(mutedRole.id))
-        return msg.channel.createMessage(lang.userNotMuted);
+        return msg.reply(lang.userNotMuted);
 
       await member.removeRole(mutedRole.id, "unmute");
 
@@ -46,7 +46,7 @@ module.exports = {
         timestamp: new Date().toISOString(),
       };
 
-      await msg.channel.createMessage({ embed });
+      await msg.reply({ embed });
       if (muteTimers.has(msg.guild.id)) {
         if (!muteTimers.get(msg.guild.id).has(member.id)) return;
         clearTimeout(muteTimers.get(msg.guild.id).get(member.id));
@@ -70,7 +70,7 @@ module.exports = {
         description,
         color: 15158332,
       };
-      await msg.channel.createMessage({ embed });
+      await msg.reply({ embed });
     }
   }
 };

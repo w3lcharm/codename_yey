@@ -21,7 +21,7 @@ module.exports = {
   ownerOnly: true,
   usage: "evalUsage",
   async run(client, msg, args, prefix) {
-    if (!args.raw.length) return msg.channel.createMessage("eval)");
+    if (!args.raw.length) return msg.reply("eval)");
     let code = msg.content.slice(prefix.length + this.name.length + 1);
     // code = insertReturn(code);
     let asyncifiedCode = `(async () => {\n${code}\n})()`;
@@ -32,9 +32,9 @@ module.exports = {
       if (typeof evaled !== "string")
         evaled = require("util").inspect(evaled);
 
-      await msg.channel.createMessage(`\`\`\`js\n${evaled}\n\`\`\``);
+      await msg.reply(`\`\`\`js\n${evaled}\n\`\`\``);
     } catch (err) {
-      await msg.channel.createMessage(`\`\`\`js\n${err}\n\`\`\``);
+      await msg.reply(`\`\`\`js\n${err}\n\`\`\``);
     }
   }
 };

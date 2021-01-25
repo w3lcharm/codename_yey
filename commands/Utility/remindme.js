@@ -19,22 +19,22 @@ module.exports = {
   argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length) {
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
     }
 
     let time = args[0];
 
     let parsedTime = parseTime(args[0]); 
     if (!parsedTime) {
-      return msg.channel.createMessage(lang.remindmeInvalidTime);
+      return msg.reply(lang.remindmeInvalidTime);
     }
     if (parsedTime > parseTime("7d")) {
-      return msg.channel.createMessage(lang.notMoreThan7Days);
+      return msg.reply(lang.notMoreThan7Days);
     }
 
     let text = msg.content.slice(prefix.length + this.name.length + time.length + 2);
     if (!text) {
-      return msg.channel.createMessage(lang.textCantBeEmpty);
+      return msg.reply(lang.textCantBeEmpty);
     }
 
     let embed = {
@@ -46,10 +46,10 @@ module.exports = {
 
     try {
       setTimeout(async () => {
-        await msg.channel.createMessage({ content: msg.author.mention, embed })
+        await msg.reply({ embed })
       }, parsedTime);
 
-      await msg.channel.createMessage(lang.remindmeSuccess);
+      await msg.reply(lang.remindmeSuccess);
     } catch {}
   }
 }

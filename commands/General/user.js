@@ -49,7 +49,7 @@ module.exports = {
       ) || client.users.find(u => u.tag == userID) || await client.fetchUser(userID);
 
     if (!member) {
-      return msg.channel.createMessage(lang.cantFindUser);
+      return msg.reply(lang.cantFindUser);
     }
 
     let name = `${member.username}#${member.discriminator}`;
@@ -95,6 +95,6 @@ module.exports = {
       value: `<#${member.voiceState.channelID}>`,
     });
 
-    await msg.channel.createMessage({ embed: embed });
+    await msg.reply({ embed: embed });
   }
 };

@@ -25,21 +25,21 @@ module.exports = {
         },
       };
 
-      await msg.channel.createMessage({ embed });
+      await msg.reply({ embed });
     } else {
       await db.autorole.findOrCreate({ where: { server: msg.channel.guild.id } });
       if (roleID == "disable") {
         await db.autorole.update({ autorole: null }, { where: { server: msg.channel.guild.id } });
-        await msg.channel.createMessage(lang.autoroleDisableSuccess);
+        await msg.reply(lang.autoroleDisableSuccess);
       } else {
         const role = msg.channel.guild.roles.find(r => r.id == roleID || r.name == roleID);
-        if (!role) return msg.channel.createMessage(lang.invalidRoleID);
+        if (!role) return msg.reply(lang.invalidRoleID);
         if (msg.guild.me.highestRole.position <= role.position) {
-          return msg.channel.createMessage(lang.autoroleRoleHigher);
+          return msg.reply(lang.autoroleRoleHigher);
         }
 
         await db.autorole.update({ autorole: role.id }, { where: { server: msg.channel.guild.id } });
-        await msg.channel.createMessage(lang.autoroleSuccess(role.name));
+        await msg.reply(lang.autoroleSuccess(role.name));
       }
     }
   }

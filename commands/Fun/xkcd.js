@@ -26,6 +26,6 @@ module.exports = {
       color: await msg.author.embColor(),
       image: { url: comic.img },
     };
-    await msg.channel.createMessage({ embed });
+    await msg.reply({ embed });
   }
 }

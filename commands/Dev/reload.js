@@ -7,7 +7,7 @@ module.exports = {
   hidden: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length) {
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
     }
 
     switch (args[0]) {
@@ -25,7 +25,7 @@ module.exports = {
       default:
         for (const cmd of args) {
           if (!client.commands.has(cmd)) {
-            return msg.channel.createMessage(lang.reloadCmdDoesntExist(cmd));
+            return msg.reply(lang.reloadCmdDoesntExist(cmd));
           }
 
           client.reloadCommand(cmd);

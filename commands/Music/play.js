@@ -6,24 +6,24 @@ module.exports = {
   argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.raw.length) {
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
     }
 
     if (!msg.member.voiceState.channelID) {
-      return msg.channel.createMessage(lang.playNotInVoiceChannel);
+      return msg.reply(lang.playNotInVoiceChannel);
     }
 
     const query = args.raw.join(" ");
 
     const res = await client.lavalinkManager.search(query, msg.author);
     if (res.loadType == "LOAD_FAILED") {
-      return msg.channel.createMessage(lang.playFailed(res.exception.message));
+      return msg.reply(lang.playFailed(res.exception.message));
     } else if (res.loadType == "PLAYLIST_LOADED") {
-      return msg.channel.createMessage(lang.playlistsNotSupported);
+      return msg.reply(lang.playlistsNotSupported);
     }
 
     const track = res.tracks[0];
-    if (!track) return msg.channel.createMessage(lang.trackNotFound);
+    if (!track) return msg.reply(lang.trackNotFound);
 
     const player = client.lavalinkManager.create({
       guild: msg.guild.id,
@@ -40,6 +40,6 @@ module.exports = {
       player.play();
     }
 
-    await msg.channel.createMessage(lang.playAddedToQueue(track.title));
+    await msg.reply(lang.playAddedToQueue(track.title));
   }
 }

@@ -10,7 +10,7 @@ module.exports = {
   argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length)
-      return msg.channel.createMessage(lang.commandUsage(prefix, this));
+      return msg.reply(lang.commandUsage(prefix, this));
 
     const word = msg.content.slice(prefix.length + this.name.length + 1);
 
@@ -21,7 +21,7 @@ module.exports = {
     const data = (await resp.json()).list[0];
 
     if (!data) {
-      return msg.channel.createMessage({
+      return msg.reply({
         embed: {
           title: lang.wordNotFound,
           color: 15158332,
@@ -31,7 +31,7 @@ module.exports = {
 
     if ((!data.definition.length || data.definition.length > 1980) ||
       data.example.length > 1000) {
-      return msg.channel.createMessage({
+      return msg.reply({
         embed: {
           title: lang.cantShowDefinition,
           description: lang.linkToDefinition(data.permalink),
@@ -60,6 +60,6 @@ module.exports = {
       ];
     }
 
-    await msg.channel.createMessage({ embed: embed });
+    await msg.reply({ embed: embed });
   }
 };

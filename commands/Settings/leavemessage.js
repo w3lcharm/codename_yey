@@ -29,11 +29,11 @@ module.exports = {
         ];
       }
 
-      await msg.channel.createMessage({ embed });
+      await msg.reply({ embed });
     } else {
       if (channelID === "disable") {
         await dbItem.update({ channel: null, message: null });
-        return msg.channel.createMessage(lang.leavemessageDisableSuccess);
+        return msg.reply(lang.leavemessageDisableSuccess);
       }
 
       const channel = msg.guild.channels.find(c => c.mention === channelID ||
@@ -41,7 +41,7 @@ module.exports = {
         c.name === channelID);
 
       if (!channel || channel.type > 0) {
-        return msg.channel.createMessage(lang.joinmessageInvalidChannel);
+        return msg.reply(lang.joinmessageInvalidChannel);
       }
 
       if (!channel.memberHasPermission(msg.guild.me, "sendMessages") ||
@@ -56,22 +56,22 @@ module.exports = {
             },
           };
 
-          return msg.channel.createMessage({ embed });
+          return msg.reply({ embed });
       }
       
       const messageStr = message.join(" ");
 
       if (!messageStr) {
-        return msg.channel.createMessage(lang.joinmessageEmpty);
+        return msg.reply(lang.joinmessageEmpty);
       }
 
       if (messageStr.length > 1536) {
-        return msg.channel.createMessage(lang.joinMessageTooLong);
+        return msg.reply(lang.joinMessageTooLong);
       }
 
       await dbItem.update({ channel: channel.id, message: messageStr });
 
-      await msg.channel.createMessage(lang.leavemessageSuccess(channel.mention));
+      await msg.reply(lang.leavemessageSuccess(channel.mention));
     }
   }
 }

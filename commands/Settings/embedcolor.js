@@ -18,26 +18,26 @@ module.exports = {
         footer: { text: lang.embedcolorFooter(prefix) },
       };
 
-      await msg.channel.createMessage({ embed });
+      await msg.reply({ embed });
     } else {
       switch (color) {
         case "default":
           await userColor.update({ color: null, isRandom: false });
-          return msg.channel.createMessage(lang.embedcolorDefaultSuccess);
+          return msg.reply(lang.embedcolorDefaultSuccess);
         case "random":
           await userColor.update({ color: null, isRandom: true });
-          return msg.channel.createMessage(lang.embedcolorRandomSuccess);
+          return msg.reply(lang.embedcolorRandomSuccess);
         default: {
           const colorNum = color.startsWith("#") ?
             parseInt(color.replace("#", ""), 16) :
             parseInt(color);
           
           if (isNaN(colorNum) || colorNum > 16777216) {
-            return msg.channel.createMessage(lang.invalidColor);
+            return msg.reply(lang.invalidColor);
           }
 
           await userColor.update({ color: colorNum, isRandom: false });
-          return msg.channel.createMessage(lang.embedcolorSuccess(intToHex(colorNum)));
+          return msg.reply(lang.embedcolorSuccess(intToHex(colorNum)));
         }
       }
     }
