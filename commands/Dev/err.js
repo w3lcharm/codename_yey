@@ -3,7 +3,7 @@ module.exports = {
   group: "devGroup",
   hidden: true,
   ownerOnly: true,
-  async run(client, msg) {
+  async run(client, msg, args) {
     throw new Error(args.join(" "));
   }
 };

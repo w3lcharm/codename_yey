@@ -59,7 +59,8 @@ module.exports = {
           name: lang.statsVersions,
           value: `**Node.js**: ${process.version}\n` +
             `**Eris**: ${Eris.VERSION}\n` +
-            `**Sequelize**: ${Sequelize.version}`,
+            `**Sequelize**: ${Sequelize.version}\n` +
+            `**Moment.js**: ${moment.version}`,
           inline: true,
         },
         {
