@@ -114,7 +114,7 @@ class CmdClient extends Eris.Client {
 
     if (command.ownerOnly && !this.owners.includes(msg.author.id)) return;
 
-    if (command.argsRequired && !args.length) {
+    if (command.argsRequired && !args.length && !msg.attachments.length) {
       return this.commands.get("help").run(this, msg, [ command.name ], prefix, ...data);
     }
 

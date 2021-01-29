@@ -8,7 +8,7 @@ module.exports = {
   description: "decodeqrDescription",
   usage: "decodeqrUsage",
   cooldown: 10,
-  argsRequired: true,
+  argsRequired: "attachment",
   async run(client, msg, args, prefix, lang) {
     if (!args.length && !msg.attachments.length) {
       return msg.reply(lang.commandUsage(prefix, this));
