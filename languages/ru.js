@@ -134,6 +134,8 @@ module.exports = {
   userStreaming: "Стримит:",
   userPlaying: "Играет в:",
   userVoiceChannel: "Голосовой канал:",
+  userJoinPosition: pos => `${pos} участник на этом сервере.`,
+  userNotInServer: "Пользователь не является участником сервера.",
 
   evalDescription: "Выполняет JavaScript-код",
   evalUsage: "<код>",

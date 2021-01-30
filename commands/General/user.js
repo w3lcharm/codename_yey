@@ -60,6 +60,9 @@ module.exports = {
     
     const badges = getUserBadges(member);
 
+    const joinPos = member.joinedAt ? msg.guild.members.map(m => m.joinedAt)
+      .sort((a, b) => a - b).indexOf(member.joinedAt) + 1 : 0;
+
     const embed = {
       author: {
         name,
@@ -77,6 +80,7 @@ module.exports = {
           value: `${moment(member.createdAt).format("lll")} ${lang.daysAgo(createdDaysAgo)}`,
         },
       ],
+      footer: { text: joinPos ? lang.userJoinPosition(joinPos) : lang.userNotInServer },
     };
 
     if (member.joinedAt) embed.fields.push({

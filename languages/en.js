@@ -134,6 +134,8 @@ module.exports = {
   userStreaming: "Streaming:",
   userPlaying: "Playing:",
   userVoiceChannel: "Voice channel:",
+  userJoinPosition: pos => `${pos}${pos % 10 == 1 ? "st" : pos % 10 == 2 ? "nd" : pos % 10 == 3 ? "rd" : "th"} member of this server.`,
+  userNotInServer: "This user is not present on this server.",
 
   evalDescription: "Evaluates the JavaScript code.",
   evalUsage: "<code>",
