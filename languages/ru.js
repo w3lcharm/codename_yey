@@ -210,11 +210,11 @@ module.exports = {
   warnListFieldName: (id, user) => `ID: ${id} | выдал ${user.tag}`,
 
   autoroleDescription: "Позволяет вам включить или выключить автороль.\nТребует право \"Управлять сервером\".",
-  autoroleUsage: "[роль: id, имя либо \"disable\" для выключения]",
+  autoroleUsage: "[роль: id, имя, упоминание | disable]",
   autorole: "Автороль",
   autoroleEnabled: role => `Автороль включена для роли **${role}**.`,
   autoroleDisabled: "Автороль выключена.",
-  autoroleTip: prefix => `Вы можете включить или сменить автороль, введя ${prefix}autorole [роль], либо ${prefix}autorole для выключения.`,
+  autoroleTip: prefix => `Используйте ${prefix}autorole [роль: id, имя, упоминание | disable] для изменения автороли.`,
   autoroleDisableSuccess: "> :white_check_mark: Автороль была выключена.",
   autoroleSuccess: role => `> :white_check_mark: Автороль была успешно включена для роли **"${role}"**.`,
   invalidRoleID: "> :x: Неправильное имя или ID роли.",

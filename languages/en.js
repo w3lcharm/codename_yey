@@ -210,11 +210,11 @@ module.exports = {
   warnListFieldName: (id, user) => `ID: ${id} | warned by ${user.tag}`,
 
   autoroleDescription: "Lets you to enable or disable the autorole.\nRequires \"Manage server\" permission.",
-  autoroleUsage: "[role: id, name or mention or \"disable\" to disable]",
+  autoroleUsage: "[role: id, name or mention | disable]",
   autorole: "Autorole",
   autoroleEnabled: role => `Autorole is enabled for role **${role}**.`,
   autoroleDisabled: "Autorole is disabled.",
-  autoroleTip: prefix => `You can enable or change the autorole by typing ${prefix}autorole [role], or type ${prefix}autorole disable to disable.`,
+  autoroleTip: prefix => `Use ${prefix}autorole [role: id, name or mention | disable] to change the autorole.`,
   autoroleDisableSuccess: "> :white_check_mark: Autorole has been disabled.",
   autoroleSuccess: role => `> :white_check_mark: Successfully set autorole to **"${role}"**.`,
   invalidRoleID: "> :x: Invalid role name or ID.",

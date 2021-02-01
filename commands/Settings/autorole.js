@@ -17,7 +17,6 @@ module.exports = {
       if (dbItem) role = msg.channel.guild.roles.get(dbItem.autorole);
 
       const embed = {
-        title: lang.autorole,
         description: role ? lang.autoroleEnabled(role.name) : lang.autoroleDisabled,
         color: await msg.author.embColor(),
         footer: {
