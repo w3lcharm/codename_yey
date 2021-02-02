@@ -1,7 +1,7 @@
 const { Member, User, Message } = require("eris");
 
 module.exports.load = client => {
-  if (!Member.prototype.publicFlags) {
+  if (!Object.getOwnPropertyDescriptor(Member.prototype, "publicFlags")) {
     Object.defineProperty(Member.prototype, "publicFlags", {
       get() { return this.user.publicFlags },
     });
