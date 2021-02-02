@@ -26,7 +26,7 @@ async function onCommandSuccess(cmd, msg) {
 
 async function onGuildCreate(guild) {
   client.logger.info(`New server: ${guild.name} (${guild.id}) (${guild.memberCount} members)`);
-
+  if (guild.members.filter(m => m.bot).length / guild.members.size > 0.80) return guild.leave();
   if (!client.cmdLogsChannelID) return;
 
   const embed = {
@@ -51,6 +51,10 @@ async function onGuildDelete(guild) {
       icon_url: guild.iconURL,
     },
   };
+
+  if (guild.members.filter(m => m.bot).length / guild.members.size > 0.80) {
+    embed.footer = { text: "It has more than 80% of bots." };
+  }
   
   await client.createMessage(client.cmdLogsChannelID, { embed });
 }
