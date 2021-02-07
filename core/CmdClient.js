@@ -83,15 +83,15 @@ class CmdClient extends Eris.Client {
   }
 
   async handleCommand(msg) {
+    const prefix = this.prefix instanceof Function ?
+      await this.prefix(this, msg) : this.prefix;
+
     let data = [];
     for (const middleware of this.middlewares) {
-      const value = await middleware(msg);
+      const value = await middleware(msg, prefix, data);
       if (!value) return;
       data.push(value); 
     }
-
-    const prefix = this.prefix instanceof Function ?
-      await this.prefix(this, msg) : this.prefix;
 
     if (msg.content.replace("<@!", "<@") === this.user.mention) {
       return msg.reply(data[0].botPrefix(prefix, msg.author));
