@@ -8,43 +8,83 @@ module.exports = {
   name: "avatar",
   group: "generalGroup",
   description: "avatarDescription",
-  usage: [ "avatarUsage", "avatarUsageServer" ],
+  usage: [ "avatarUsage", "avatarUsageServer", "avatarUsageBanner", "avatarUsageSplash" ],
   guildOnly: true,
   aliases: [ "av", "pfp" ],
   async run(client, msg, args, prefix, lang) {
     let userID = args.join(" ");
     let user;
 
+    const guild = client.owners.includes(msg.author.id) ?
+      client.guilds.get(args[1]) || msg.guild : msg.guild;
+
     let embed = {
       color: await msg.author.embColor(),
     };
 
-    if (userID === "server") {
-      embed.author = {
-        name: lang.serverIcon,
-        url: msg.guild.iconURL,
-      };
-      embed.image = { url: msg.guild.iconURL };
-    } else {
-      if (!userID) user = msg.author;
-      else user = msg.mentions[0] ||
-        msg.guild.members.find(m => 
-          m.tag.toLowerCase().startsWith(userID.toLowerCase()) ||
-          (m.nick && m.nick.toLowerCase().startsWith(userID.toLowerCase()))
-        ) || client.users.find(u => u.tag == userID) || await client.fetchUser(userID);
+    switch (args[0]) {
+      case "server": {
+        if (!guild.iconURL) {
+          return msg.reply(lang.avatarNoIcon);
+        }
+      
+        embed.author = {
+          name: lang.serverIcon,
+          url: guild.iconURL,
+        };
+        embed.image = { url: guild.iconURL };
 
-      if (!user) {
-        return msg.reply(lang.cantFindUser);
+        break;
       }
+      case "banner": {
+        if (!guild.bannerURL) {
+          return msg.reply(lang.avatarNoBanner);
+        }
 
-      const format = user.avatar && user.avatar.startsWith("a_") ? "gif" : "png";
-      const url = user.dynamicAvatarURL(format, 2048);
+        embed.author = {
+          name: lang.serverBanner,
+          url: guild.bannerURL,
+        };
+        embed.image = { url: guild.bannerURL };
 
-      embed.author = {
-        name: lang.avatarUser(user),
-        url,
-      };
-      embed.image = { url };
+        break;
+      }
+      case "splash": {
+        if (!guild.splashURL) {
+          return msg.reply(lang.avatarNoSplash);
+        }
+
+        embed.author = {
+          name: lang.serverSplash,
+          url: guild.splashURL,
+        };
+        embed.image = { url: guild.splashURL };
+
+        break;
+      }
+      default: {
+        if (!userID) user = msg.author;
+        else user = msg.mentions[0] ||
+          msg.guild.members.find(m => 
+            m.tag.toLowerCase().startsWith(userID.toLowerCase()) ||
+            (m.nick && m.nick.toLowerCase().startsWith(userID.toLowerCase()))
+          ) || client.users.find(u => u.tag == userID) || await client.fetchUser(userID);
+
+        if (!user) {
+          return msg.reply(lang.cantFindUser);
+        }
+
+        const format = user.avatar && user.avatar.startsWith("a_") ? "gif" : "png";
+        const url = user.dynamicAvatarURL(format, 2048);
+
+        embed.author = {
+          name: lang.avatarUser(user),
+          url,
+        };
+        embed.image = { url };
+
+        break;
+      }
     }
   
     await msg.reply({ embed });
