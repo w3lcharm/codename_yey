@@ -1,5 +1,9 @@
 const { Message } = require("eris");
 
+const red = 15158332;
+const gold = 15844367;
+const green = 3066993;
+
 function getModlogChannel(guild) {
   return db.modlogs.findOrCreate({ where: { server: guild.id } })
     .then(c => c[0].channel);
@@ -17,6 +21,7 @@ async function onGuildMemberAdd(guild, member) {
       name: `${member.tag} joined the server`,
       icon_url: member.avatarURL,
     },
+    color: green,
     timestamp: new Date().toISOString(),
     footer: { text: `ID: ${member.id}` },
     fields: [
@@ -37,7 +42,7 @@ async function onGuildMemberRemove(guild, member) {
   if (!channel) return;
   
   let entry;
-  if (guild.me.permission.has("viewAuditLogs")) {
+  if (guild.me.permissions.has("viewAuditLogs")) {
     entry = await guild.getAuditLogs()
       .then(audit => audit.entries.filter(e => e.targetID === member.id))
       .then(entries => entries[0]);
@@ -50,6 +55,7 @@ async function onGuildMemberRemove(guild, member) {
       name: `${tag} left the server`,
       icon_url: member.user.avatarURL,
     },
+    color: red,
     timestamp: new Date().toISOString(),
     footer: { text: `ID: ${member.id}` },
   };
@@ -98,7 +104,7 @@ async function onGuildBanRemove(guild, user) {
   if (!channel) return;
   
   let entry;
-  if (guild.me.permission.has("viewAuditLogs")) {
+  if (guild.me.permissions.has("viewAuditLogs")) {
     entry = await guild.getAuditLogs()
       .then(audit => audit.entries.filter(e => e.actionType === 23)[0]);
   }
@@ -108,6 +114,7 @@ async function onGuildBanRemove(guild, user) {
       name: `${user.tag} was unbanned`,
       icon_url: user.avatarURL,
     },
+    color: green,
     timestamp: new Date().toISOString(),
     footer: { text: `ID: ${user.id}` },
   };
@@ -140,6 +147,7 @@ async function onMessageDelete(msg) {
   const embed = {
     title: "Message deleted",
     description: msg.cleanContent.replace(/\(/g, "\\("),
+    color: red,
     timestamp: new Date().toISOString(),
     footer: { text: `Message ID: ${msg.id}` },
     fields: [
@@ -175,6 +183,7 @@ async function onMessageUpdate(newMsg, oldMsg) {
   const embed = {
     title: "Message edited",
     description: `[(link)](${newMsg.jumpLink})`,
+    color: gold,
     timestamp: new Date().toISOString(),
     footer: { text: `Message ID: ${newMsg.id}` },
     fields: [
@@ -218,6 +227,7 @@ async function onGuildMemberUpdate(guild, member, oldMember) {
         name: `${member.tag}'s nickname was changed`,
         icon_url: member.avatarURL,
       },
+      color: gold,
       fields: [
         {
           name: "Old nickname:",
@@ -234,14 +244,16 @@ async function onGuildMemberUpdate(guild, member, oldMember) {
       footer: { text: `ID: ${member.id}` },
     };
 
-    const auditEntry = await guild.getAuditLogs()
-      .then(audit => audit.entries.filter(e => e.actionType == 24)[0]);
+    if (guild.me.permissions.has("viewAuditLogs")) {
+      const auditEntry = await guild.getAuditLogs()
+        .then(audit => audit.entries.filter(e => e.actionType == 24)[0]);
 
-    if (auditEntry.targetID == member.id) {
-      embed.fields.push({
-        name: "Changed by:",
-        value: auditEntry.user.tag,
-      });
+      if (auditEntry.targetID == member.id) {
+        embed.fields.push({
+          name: "Changed by:",
+          value: auditEntry.user.tag,
+        });
+      }
     }
   } else {
     const addedRoles = member.roles.filter(r => !oldMember.roles.includes(r));
@@ -255,6 +267,7 @@ async function onGuildMemberUpdate(guild, member, oldMember) {
         name: `${member.tag}'s roles were changed`,
         icon_url: member.avatarURL,
       },
+      color: gold,
       fields: [
         {
           name: addedRoles.length ? "Role added:": "Role removed:",
@@ -280,6 +293,7 @@ async function onVoiceChannelJoin(member, voiceChannel) {
       name: `${member.tag} joined the voice channel ${voiceChannel.name}`,
       icon_url: member.avatarURL,
     },
+    color: green,
     timestamp: new Date().toISOString(),
     footer: { text: `Channel ID: ${voiceChannel.id}` },
   };
@@ -298,8 +312,51 @@ async function onVoiceChannelLeave(member, voiceChannel) {
       name: `${member.tag} left the voice channel ${voiceChannel.name}`,
       icon_url: member.avatarURL,
     },
+    color: red,
     timestamp: new Date().toISOString(),
     footer: { text: `Channel ID: ${voiceChannel.id}` },
+  };
+
+  try {
+    await client.createMessage(channel, { embed });
+  } catch {}
+}
+
+async function onInviteCreate(guild, invite) {
+  const channel = await getModlogChannel(guild);
+  if (!channel) return;
+
+  const embed = {
+    author: {
+      name: `${invite.inviter.tag} created an invite ${invite.code}`,
+      icon_url: invite.inviter.avatarURL,
+    },
+    timestamp: new Date().toISOString(),
+    color: green,
+    footer: { text: `Channel: #${invite.channel.name}` },
+  };
+
+  try {
+    await client.createMessage(channel, { embed });
+  } catch {}
+}
+
+async function onInviteDelete(guild, invite) {
+  const channel = await getModlogChannel(guild);
+  if (!channel) return;
+
+  if (!guild.me.permissions.has("viewAuditLogs")) return;
+
+  const auditEntry = await guild.getAuditLogs()
+    .then(audit => audit.entries.filter(e => e.actionType == 42)[0]);
+  
+  const embed = {
+    author: {
+      name: `${auditEntry.user.tag} removed an invite ${invite.code}`,
+      icon_url: auditEntry.user.avatarURL,
+    },
+    timestamp: new Date().toISOString(),
+    color: red,
   };
 
   try {
@@ -315,7 +372,9 @@ module.exports.load = client => {
     .on("messageUpdate", onMessageUpdate)
     .on("guildMemberUpdate", onGuildMemberUpdate)
     .on("voiceChannelJoin", onVoiceChannelJoin)
-    .on("voiceChannelLeave", onVoiceChannelLeave);
+    .on("voiceChannelLeave", onVoiceChannelLeave)
+    .on("inviteCreate", onInviteCreate)
+    .on("inviteDelete", onInviteDelete);
 }
 
 module.exports.unload = client => {
@@ -326,5 +385,7 @@ module.exports.unload = client => {
     .off("messageUpdate", onMessageUpdate)
     .off("guildMemberUpdate", onGuildMemberUpdate)
     .off("voiceChannelJoin", onVoiceChannelJoin)
-    .off("voiceChannelLeave", onVoiceChannelLeave);
+    .off("voiceChannelLeave", onVoiceChannelLeave)
+    .off("inviteCreate", onInviteCreate)
+    .off("inviteDelete", onInviteDelete);
 }

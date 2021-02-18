@@ -92,10 +92,6 @@ class CmdClient extends Eris.Client {
       if (!value) return;
       data.push(value); 
     }
-
-    if (msg.content.replace("<@!", "<@") === this.user.mention) {
-      return msg.reply(data[0].botPrefix(prefix, msg.author));
-    }
   
     if (!msg.content.toLowerCase().startsWith(prefix)) return;
 

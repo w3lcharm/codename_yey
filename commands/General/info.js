@@ -22,7 +22,7 @@ module.exports = {
         {
           name: lang.infoLinks,
           value: stripIndents`[${lang.infoBotInvite}](${inviteLink})
-            [${lang.infoSupportServer}](https://discord.gg/bFqtTER)
+            [${lang.infoSupportServer}](https://discord.gg/dHamqUhPpA)
             [${lang.infoDonate}](https://www.donationalerts.com/r/codename_yey)
             [${lang.infoGitHubRepo}](https://github.com/1z3ngero/codename_yey)
             [top.gg](https://top.gg/bot/641312878804074497)
