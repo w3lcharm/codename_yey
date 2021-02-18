@@ -31,12 +31,12 @@ module.exports = {
       textChannel: msg.channel.id,
     });
 
-    player.connect();
     player.queue.add(track);
 
     if (!player.get("lang")) player.set("lang", lang);
 
     if (!player.playing && !player.paused && !player.queue.size) {
+      player.connect();
       player.play();
     }
 
