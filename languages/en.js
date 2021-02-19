@@ -492,6 +492,7 @@ module.exports = {
   trackQueue: "Track queue:",
   durationRequestedBy: (duration, user) => `Duration: ${duration} | Requested by ${user}`,
   queueIsEmpty: "> Queue is empty.",
+  queueFooter: (page, max) => `Page ${page} of ${max}`,
 
   embedcolorDescription: "Lets you to change the embed color.",
   embedcolorUsage: "[#hex or number | random | default]",

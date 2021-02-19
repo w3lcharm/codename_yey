@@ -481,6 +481,7 @@ module.exports = {
   trackQueue: "Очередь треков:",
   durationRequestedBy: (duration, user) => `Продолжительность: ${duration} | Запросил ${user}`,
   queueIsEmpty: "> Очередь пустая.",
+  queueFooter: (page, max) => `Страница ${page} из ${max}`,
 
   embedcolorDescription: "Позволяет вам изменить цвет эмбедов.",
   embedcolorUsage: "[#hex или число | random | default]",

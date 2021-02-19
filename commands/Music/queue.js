@@ -13,6 +13,7 @@ module.exports = {
 
     const embed = {
       title: lang.trackQueue,
+      color: await msg.author.embColor(),
     };
 
     const fields = [];
@@ -41,6 +42,7 @@ module.exports = {
 
       let pageNumber = 0;
       embed.fields = pages[pageNumber];
+      embed.footer = { text: lang.queueFooter(pageNumber + 1, pages.length) };
 
       const message = await msg.reply({ embed });
       message.addReaction("◀️");
@@ -59,6 +61,10 @@ module.exports = {
             break;
           default: return;
         }
+
+        embed.fields = pages[pageNumber];
+        embed.footer = { text: lang.queueFooter(pageNumber + 1, pages.length) };
+        message.edit({ embed });
       });
     } else {
       embed.fields = fields;
