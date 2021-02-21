@@ -1,7 +1,7 @@
 const { Message } = require("eris");
 
 const red = 15158332;
-const gold = 15844367;
+const gold = 16426522;
 const green = 3066993;
 
 function getModlogChannel(guild) {
