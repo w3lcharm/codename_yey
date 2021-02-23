@@ -5,6 +5,7 @@ module.exports = {
   name: "queue",
   group: "musicGroup",
   description: "queueDescription",
+  aliases: [ "q" ],
   async run(client, msg, args, prefix, lang) {
     const player = client.lavalinkManager.players.get(msg.guild.id);
     if (!player) {

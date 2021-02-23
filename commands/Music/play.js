@@ -4,6 +4,7 @@ module.exports = {
   description: "playDescription",
   usage: "playUsage",
   argsRequired: true,
+  aliases: [ "p" ],
   async run(client, msg, args, prefix, lang) {
     if (!args.raw.length) {
       return msg.reply(lang.commandUsage(prefix, this));

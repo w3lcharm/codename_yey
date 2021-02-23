@@ -493,4 +493,8 @@ module.exports = {
   embedcolorRandomSuccess: "> :white_check_mark: Ваш цвет эмбедов изменен на `random`.",
   invalidColor: "> :x: Неправильный цвет.",
   embedcolorSuccess: color => `> :white_check_mark: Ваш цвет эмбедов изменен на \`${color}\``,
+
+  loopDescription: "Повторяет играющий в данный момент трек.",
+  loopEnabled: "> Повторение включено.",
+  loopDisabled: "> Повторение выключено.",
 };
