@@ -5,6 +5,7 @@ module.exports = {
   usage: "playUsage",
   argsRequired: true,
   aliases: [ "p" ],
+  disabled: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.raw.length) {
       return msg.reply(lang.commandUsage(prefix, this));
@@ -16,7 +17,7 @@ module.exports = {
 
     const query = args.raw.join(" ");
 
-    const res = await client.lavalinkManager.search(query, msg.author);
+    const res = await client.lavalinkManager.search({ query, source: "soundcloud" }, msg.author);
     if (res.loadType == "LOAD_FAILED") {
       return msg.reply(lang.playFailed(res.exception.message));
     } else if (res.loadType == "PLAYLIST_LOADED") {
