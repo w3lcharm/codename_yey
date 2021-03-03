@@ -1,6 +1,6 @@
 {
   "name": "codename_yey",
-  "version": "2.7.2",
+  "version": "2.7.2-p1",
   "description": "Discord bot",
   "main": "index.js",
   "scripts": {
