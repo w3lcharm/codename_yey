@@ -31,6 +31,21 @@ async function onGuildMemberAdd(guild, member) {
       },
     ],
   };
+
+  if (member.bot) {
+    embed.author.name = `${member.tag} has been added to this server`;
+
+    if (guild.me.permissions.has("viewAuditLogs")) {
+      const entry = await guild.getAuditLogs()
+        .then(audit => audit.entries.filter(e => e.targetID === member.id))
+        .then(entries => entries[0]);
+
+      embed.fields.push({
+        name: "Added by:",
+        value: `${entry.user.tag} (${entry.user.mention})`,
+      });
+    }
+  }
   try {
     await client.createMessage(channel, { embed });
   } catch {}
@@ -201,7 +216,7 @@ async function onMessageUpdate(newMsg, oldMsg) {
         inline: true,
       },
       {
-        name: "Channel",
+        name: "Channel:",
         value: newMsg.channel.mention,
         inline: true,
       },
