@@ -5,7 +5,10 @@ module.exports = {
   group: "musicGroup",
   description: "loopDescription",
   async run(client, msg, args, prefix, lang) {
-    if (!msg.member.voiceState.channelID) {
+    if (
+      !msg.member.voiceState.channelID || 
+      (msg.guild.me.voiceState.channelID && msg.member.voiceState.channelID != msg.guild.me.voiceState.channelID)
+    ) {
       return msg.reply(lang.playNotInVoiceChannel);
     }
 

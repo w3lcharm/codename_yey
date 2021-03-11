@@ -462,7 +462,7 @@ module.exports = {
 
   playDescription: "Plays a track in voice channel.",
   playUsage: "<track: name or url>",
-  playNotInVoiceChannel: "> :x: You are not in voice channel.",
+  playNotInVoiceChannel: "> :x: You are not in voice channel or not in the same channel with me.",
   playAddedToQueue: track => `> Added to queue: \`${track}\``,
   nowPlaying: ":arrow_forward: Now playing:",
   playAuthor: author => `Uploaded by: ${author}`,

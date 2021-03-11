@@ -451,7 +451,7 @@ module.exports = {
 
   playDescription: "Проигрывает указанный трек в голосовом канале.",
   playUsage: "<трек: имя или ссылка>",
-  playNotInVoiceChannel: "> :x: Вы не находитесь в голосовом канале.",
+  playNotInVoiceChannel: "> :x: Вы не находитесь в голосовом канале, либо не находитесь в таком же голосовом канале со мной.",
   playAddedToQueue: track => `> Добавлено в очередь: \`${track}\``,
   nowPlaying: ":arrow_forward: Сейчас играет:",
   playAuthor: author => `Загружено пользователем: ${author}`,

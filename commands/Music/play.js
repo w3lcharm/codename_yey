@@ -11,7 +11,10 @@ module.exports = {
       return msg.reply(lang.commandUsage(prefix, this));
     }
 
-    if (!msg.member.voiceState.channelID) {
+    if (
+      !msg.member.voiceState.channelID || 
+      (msg.guild.me.voiceState.channelID && msg.member.voiceState.channelID != msg.guild.me.voiceState.channelID)
+    ) {
       return msg.reply(lang.playNotInVoiceChannel);
     }
 
