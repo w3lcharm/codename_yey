@@ -25,7 +25,7 @@ module.exports = {
   errorInCommand: `:x: An unexpected error occurred while executing this command.`,
   errorDesc: "This error was sent to support server and will be fixed as soon as possible.",
   errorFooter: "You can also report this error to support server.",
-  cooldown: left => `> :warning: You need to wait ${left} seconds before using this command again.`,
+  cooldown: left => `> :warning: You need to wait ${left} second(s) before using this command again.`,
   cantFindUser: "> :x: User not found.",
   botPrefix: (prefix, user) => `>>> My prefix in this server is \`${prefix}\`.\nType \`${prefix}help\` to get a list of commands.`,
   antiInviteReason: "sent an invite link",
@@ -74,7 +74,7 @@ module.exports = {
   helpCommandEmbedTitle: cmd => `Help for command \`${cmd}\`:`,
   helpCommandUsage: "Usage:",
   helpTitle: "Bot commands:",
-  helpTip: prefix => `Want to get info about some command? Use ${prefix}help [command]`,
+  helpTip: prefix => `Use ${prefix}help [command] to get more info about a command.`,
   helpAliases: "Aliases:",
 
   pingDescription: "Shows the bot latency.",

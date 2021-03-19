@@ -74,7 +74,7 @@ module.exports = {
   helpCommandEmbedTitle: cmd => `Справка по команде \`${cmd}\`:`,
   helpCommandUsage: "Как использовать:",
   helpTitle: "Команды бота:",
-  helpTip: prefix => `Хотите получить информацию о какой-либо команде? Используйте ${prefix}help [команда]`,
+  helpTip: prefix => `Используйте ${prefix}help [команда] для получения информации о какой-либо команде.`,
   helpAliases: "Псевдонимы:",
 
   pingDescription: "Показывает задержку бота до серверов Discord'а.",
