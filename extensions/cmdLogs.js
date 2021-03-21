@@ -1,5 +1,6 @@
 async function onCommandSuccess(cmd, msg) {
   client.usageCount++;
+  client.logger.info(`${msg.author.tag} used command ${cmd.name} in ${msg.guild.name}`);
   if (!client.cmdLogsChannelID) return;
 
   const embed = {

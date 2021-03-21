@@ -339,20 +339,19 @@ eris-additions@^1.4.1:
   dependencies:
     eris "^0.12.0"
 
-eris@0.14.0:
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/eris/-/eris-0.14.0.tgz#0d13391c0fc1a7b678b2f8d1fc3ec6aef05700d3"
-  integrity sha512-/W6X0SFR2swtA9oc4ga5Wh1TQcZtPgbUaDDdwYc67fvFUAtwC+V1xzWUZq2yDeJnTfB8Uot9SJWA8Lthe2sDtQ==
+eris@^0.12.0:
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/eris/-/eris-0.12.1.tgz#2d99ba07dabcfce3a2645e9561e6ea3f39bec61c"
+  integrity sha512-6TNeDct84dk8JGMaYRf4Q+27Suf+g/3bWPyqyKTdaR6nlDKYuo/IcfVHAyaGAgCmA2QcpuSNxynRRfhdhKsHUA==
   dependencies:
     ws "^7.2.1"
   optionalDependencies:
     opusscript "^0.0.7"
     tweetnacl "^1.0.1"
 
-eris@^0.12.0:
-  version "0.12.1"
-  resolved "https://registry.yarnpkg.com/eris/-/eris-0.12.1.tgz#2d99ba07dabcfce3a2645e9561e6ea3f39bec61c"
-  integrity sha512-6TNeDct84dk8JGMaYRf4Q+27Suf+g/3bWPyqyKTdaR6nlDKYuo/IcfVHAyaGAgCmA2QcpuSNxynRRfhdhKsHUA==
+eris@abalabahaha/eris#dev:
+  version "0.14.0"
+  resolved "https://codeload.github.com/abalabahaha/eris/tar.gz/db7da3891a89748e3f7b46efc8fc224df0a17c9a"
   dependencies:
     ws "^7.2.1"
   optionalDependencies:

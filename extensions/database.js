@@ -17,7 +17,8 @@ module.exports.load = async client => {
 
   client.once("ready", async () => {
     await sequelize.sync()
-      .then(() => databaseLogger.info("connected to the database"));
+      .then(() => databaseLogger.info("connected to the database."))
+      .catch(err => databaseLogger.error(`Failed to connect to the database:\n${err.stack}`));
   });
 
   client.on("guildDelete", async guild => {
