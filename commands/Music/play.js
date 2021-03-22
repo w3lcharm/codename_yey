@@ -22,7 +22,7 @@ module.exports = {
 
     const res = await client.lavalinkManager.search(query, msg.author);
     if (res.loadType == "LOAD_FAILED") {
-      return msg.reply(lang.playFailed(res.exception.message));
+      return msg.reply(lang.trackLoadFailed(res.exception.message));
     } else if (res.loadType == "PLAYLIST_LOADED") {
       return msg.reply(lang.playlistsNotSupported);
     }

@@ -49,5 +49,20 @@ module.exports.load = client => {
         await client.createMessage(player.textChannel, lang.allTracksPlayed);
         await player.destroy();
       }
+    }).on("trackError", async (player, track, payload) => {
+      const lang = player.get("lang");
+
+      if (payload.error == "Track information is unavailable.") {
+        const embed = {
+          title: lang.playFailed,
+          description: lang.playFailedDesc,
+          color: 15158332,
+        };
+
+        await client.createMessage(player.textChannel, { embed });
+      } else {
+        logger.error("Failed to play the track:");
+        console.log(payload);
+      }
     });
 }

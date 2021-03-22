@@ -435,7 +435,7 @@ module.exports = {
   antiinviteFooter: prefix => `Вы можете управлять анти-инвайтом, используя ${prefix}antiinvite [действие: delete, warn, kick, ban или disable]`,
 
   githubDescription: "Ищет и показывает информацию о репозитории на GitHub.",
-  githubUsage: "запрос",
+  githubUsage: "<репозиторий>",
   githubRepoNotFound: "> :x: Репозиторий не найден.",
   githubStars: "Звезды:",
   githubForks: "Форки:",
@@ -458,8 +458,10 @@ module.exports = {
   allTracksPlayed: "> :stop_button: Все треки проиграны.",
   playlistsNotSupported: "> :x: Плейлисты не поддерживаются.",
   trackNotFound: "> :x: Трек не найден.",
-  playFailed: msg => `> :x: Не удалось загрузить трек. \`${msg}\``,
+  trackLoadFailed: msg => `> :x: Не удалось загрузить трек. \`${msg}\``,
   duration: "Продолжительность:",
+  playFailed: ":x: Не удалось воспроизвести трек.",
+  playFailedDesc: "Трек имеет ограничение по возрасту, заблокирован или находится в ограниченном доступе.",
 
   pauseDescription: "Ставит трек на паузу.",
   notPlaying: "> Сейчас ничего не играет.",
@@ -506,4 +508,11 @@ module.exports = {
   npmLicense: "Лицензия:",
   npmKeywords: "Ключевые слова:",
   npmModifiedAt: "Изменено:",
+
+  volumeDescription: "Задает громкость музыки.",
+  volumeUsage: "[громкость]",
+  currentVol: vol => `Текущая громкость ${vol}%.`,
+  volumeTip: prefix => `Используйте ${prefix}volume [громкость] для задания новой громкости.`,
+  volumeInvalid: "> :x: Громкость должна быть в диапазоне от 1 до 100.",
+  volumeChanged: vol => `> :speaker: Новая громкость ${vol}%.`,
 };

@@ -445,7 +445,7 @@ module.exports = {
   antiinviteFooter: prefix => `You can enable the anti-invite by typing ${prefix}antiinvite [action: delete, warn, kick, ban or disable].`,
 
   githubDescription: "Searches and shows information about GitHub repository.",
-  githubUsage: "<query>",
+  githubUsage: "<repo>",
   githubRepoNotFound: "> :x: Repository not found.",
   githubWatchers: "Watchers:",
   githubStars: "Stars:",
@@ -469,8 +469,10 @@ module.exports = {
   allTracksPlayed: "> :stop_button: All tracks have been played.",
   playlistsNotSupported: "> :x: Playlists are not supported currently.",
   trackNotFound: "> :x: Track not found.",
-  playFailed: msg => `> :x: Failed to load the track. \`${msg}\``,
+  trackLoadFailed: msg => `> :x: Failed to load the track. \`${msg}\``,
   duration: "Duration:",
+  playFailed: ":x: Failed to play the track.",
+  playFailedDesc: "This track is age-restricted, blocked or has limited access.",
 
   pauseDescription: "Pauses the track.",
   notPlaying: "> Nothing is playing now.",
@@ -517,4 +519,11 @@ module.exports = {
   npmLicense: "License:",
   npmKeywords: "Keywords:",
   npmModifiedAt: "Modified at:",
+
+  volumeDescription: "Sets the music volume.",
+  volumeUsage: "[newVolume]",
+  currentVol: vol => `Current volume is ${vol}%.`,
+  volumeTip: prefix => `Use ${prefix}volume [newVolume] to set the new volume.`,
+  volumeInvalid: "> :x: Volume should be in range 1-100.",
+  volumeChanged: vol => `> :speaker: Volume has been set to ${vol}%.`,
 };
