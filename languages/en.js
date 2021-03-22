@@ -505,7 +505,16 @@ module.exports = {
   invalidColor: "> :x: Invalid color number.",
   embedcolorSuccess: color => `> :white_check_mark: Your embed color is set to \`${color}\``,
 
-  loopDescription: "Loops the currently playing track.",
+  loopDescription: "Toggles looping for the currently playing track.",
   loopEnabled: "> Loop enabled.",
   loopDisabled: "> Loop disabled.",
+
+  npmDescription: "Searches the package in NPM.",
+  npmUsage: "<package>",
+  npmNoPkg: "> :x: No query provided.",
+  npmPkgNotFound: "> :x: Package not found.",
+  npmVersion: "Version:",
+  npmLicense: "License:",
+  npmKeywords: "Keywords:",
+  npmModifiedAt: "Modified at:",
 };

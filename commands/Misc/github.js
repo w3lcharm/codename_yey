@@ -5,6 +5,7 @@ module.exports = {
   group: "miscGroup",
   description: "githubDescription",
   usage: "githubUsage",
+  aliases: [ "gh" ],
   argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length) {

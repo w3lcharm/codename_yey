@@ -494,7 +494,16 @@ module.exports = {
   invalidColor: "> :x: Неправильный цвет.",
   embedcolorSuccess: color => `> :white_check_mark: Ваш цвет эмбедов изменен на \`${color}\``,
 
-  loopDescription: "Повторяет играющий в данный момент трек.",
+  loopDescription: "Включает или выключает повторение играющего в данный момент трека.",
   loopEnabled: "> Повторение включено.",
   loopDisabled: "> Повторение выключено.",
+
+  npmDescription: "Ищет информацию о пакете NPM.",
+  npmUsage: "<пакет>",
+  npmNoPkg: "> :x: Укажите имя пакета.",
+  npmPkgNotFound: "> :x: Пакет не найден.",
+  npmVersion: "Версия:",
+  npmLicense: "Лицензия:",
+  npmKeywords: "Ключевые слова:",
+  npmModifiedAt: "Изменено:",
 };
