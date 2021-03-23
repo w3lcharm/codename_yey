@@ -15,8 +15,6 @@ module.exports = {
     const response = await fetch(`https://registry.npmjs.org/${query}`)
       .then(r => r.json());
 
-    console.log(Object.keys(response));
-
     if (!response || response.error) {
       return msg.reply(lang.npmPkgNotFound);
     }

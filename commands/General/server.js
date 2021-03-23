@@ -74,12 +74,15 @@ module.exports = {
           value: guild.premiumSubscriptionCount,
           inline: true,
         },
-        {
-          name: lang.serverCreatedAt,
-          value: `${moment(guild.createdAt).format("lll")} ${lang.daysAgo(createdDaysAgo)}`,
-        },
-      ]
+      ],
+      footer: { text: lang.serverCreatedAt },
+      timestamp: new Date(guild.createdAt).toISOString(),
     };
+
+    if (guild.features.length) embed.fields.push({
+      name: lang.serverFeatures,
+      value: guild.features.map(f => `\`${lang.features[f]}\``).join(", "),
+    });
 
     await msg.reply({ embed });
   }
