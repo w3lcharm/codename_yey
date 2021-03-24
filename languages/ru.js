@@ -301,9 +301,6 @@ module.exports = {
   qrUsage: "<текст>",
   generationTime: time => `Заняло ${time} мс.`,
 
-  sayDescription: "Говорит ваш текст в эмбеде.",
-  sayUsage: "<text>",
-
   udDescription: "Ищет определение слова в Urban Dictionary (на английском языке).",
   udUsage: "<слово>",
   wordNotFound: ":x: Слово не найдено.",
