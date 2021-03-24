@@ -541,4 +541,10 @@ module.exports = {
   volumeTip: prefix => `Use ${prefix}volume [newVolume] to set the new volume.`,
   volumeInvalid: "> :x: Volume should be in range 1-100.",
   volumeChanged: vol => `> :speaker: Volume has been set to ${vol}%.`,
+
+  wikipediaDescription: "Searches the page in Wikipedia.",
+  wikipediaUsage: "<query>",
+  wikipediaNoQuery: "> :x: No query provided.",
+  wikipediaNotFound: "> :x: Page not found.",
+  wikipediaDisambiguation: "> :x: The page you are looking for is disambiguation page.",
 };

@@ -530,4 +530,10 @@ module.exports = {
   volumeTip: prefix => `Используйте ${prefix}volume [громкость] для задания новой громкости.`,
   volumeInvalid: "> :x: Громкость должна быть в диапазоне от 1 до 100.",
   volumeChanged: vol => `> :speaker: Новая громкость ${vol}%.`,
+
+  wikipediaDescription: "Ищет страницу в Википедии.",
+  wikipediaUsage: "<запрос>",
+  wikipediaNoQuery: "> :x: Запрос не предоставлен.",
+  wikipediaNotFound: "> :x: Страница не найдена.",
+  wikipediaDisambiguation: "> :x: Страница, которую вы ищете, является неоднозначной страницей.",
 };

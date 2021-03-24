@@ -7,7 +7,7 @@ module.exports = {
   usage: "npmUsage",
   argsRequired: true,
   async run(client, msg, args, prefix, lang) {
-    const query = args.raw.join(" ");
+    const query = encodeURIComponent(args.raw.join(" "));
     if (!query) {
       return msg.reply(lang.npmNoPkg);
     }
