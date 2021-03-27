@@ -6,29 +6,29 @@ module.exports = {
   argsRequired: true,
   aliases: [ "p" ],
   disabled: true,
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (!args.raw.length) {
-      return msg.reply(lang.commandUsage(prefix, this));
+      return msg.reply(msg.t("commandUsage", prefix, this));
     }
 
     if (
       !msg.member.voiceState.channelID || 
       (msg.guild.me.voiceState.channelID && msg.member.voiceState.channelID != msg.guild.me.voiceState.channelID)
     ) {
-      return msg.reply(lang.playNotInVoiceChannel);
+      return msg.reply(msg.t("playNotInVoiceChannel"));
     }
 
     const query = args.raw.join(" ");
 
     const res = await client.lavalinkManager.search(query, msg.author);
     if (res.loadType == "LOAD_FAILED") {
-      return msg.reply(lang.trackLoadFailed(res.exception.message));
+      return msg.reply(msg.t("trackLoadFailed", res.exception.message));
     } else if (res.loadType == "PLAYLIST_LOADED") {
-      return msg.reply(lang.playlistsNotSupported);
+      return msg.reply(msg.t("playlistsNotSupported"));
     }
 
     const track = res.tracks[0];
-    if (!track) return msg.reply(lang.trackNotFound);
+    if (!track) return msg.reply(msg.t("trackNotFound"));
 
     const player = client.lavalinkManager.create({
       guild: msg.guild.id,
@@ -38,13 +38,13 @@ module.exports = {
 
     player.queue.add(track);
 
-    if (!player.get("lang")) player.set("lang", lang);
+    if (!player.get("lang")) player.set("lang", client.languages.get(msg.author.lang));
 
     if (!player.playing && !player.paused && !player.queue.size) {
       player.connect();
       player.play();
     }
 
-    await msg.reply(lang.playAddedToQueue(track.title));
+    await msg.reply(msg.t("playAddedToQueue", track.title));
   }
 }

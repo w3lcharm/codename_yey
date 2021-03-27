@@ -2,25 +2,25 @@ module.exports = {
   name: "resume",
   group: "musicGroup",
   description: "musicDescription",
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (
       !msg.member.voiceState.channelID || 
       (msg.guild.me.voiceState.channelID && msg.member.voiceState.channelID != msg.guild.me.voiceState.channelID)
     ) {
-      return msg.reply(lang.playNotInVoiceChannel);
+      return msg.reply(msg.t("playNotInVoiceChannel"));
     }
 
     const player = client.lavalinkManager.players.get(msg.guild.id);
     if (!player) {
-      return msg.reply(lang.notPlaying);
+      return msg.reply(msg.t("notPlaying"));
     }
 
     if (player.playing) {
-      return msg.reply(lang.alreadyPlaying);
+      return msg.reply(msg.t("alreadyPlaying"));
     }
 
     player.pause(false);
 
-    await msg.reply(lang.resumed);
+    await msg.reply(msg.t("resumed"));
   }
 }

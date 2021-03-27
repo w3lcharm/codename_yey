@@ -5,16 +5,16 @@ module.exports = {
   usage: "unmuteUsage",
   requiredPermissions: "kickMembers",
   argsRequired: true,
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (!args.length)
-      return msg.reply(lang.commandUsage(prefix, this));
+      return msg.reply(msg.t("commandUsage", prefix, this));
 
     const userID = args[0];
     const member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") ||
       msg.guild.members.find(m => m.id == userID || m.tag == userID);
 
     if (!member) {
-      return msg.reply(lang.cantFindUser);
+      return msg.reply(msg.t("cantFindUser"));
     };
 
     try {
@@ -33,13 +33,13 @@ module.exports = {
       }
 
       if (!member.roles.includes(mutedRole.id))
-        return msg.reply(lang.userNotMuted);
+        return msg.reply(msg.t("userNotMuted"));
 
       await member.removeRole(mutedRole.id, "unmute");
 
       const embed = {
         author: {
-          name: lang.unmuteSuccess(member),
+          name: msg.t("unmuteSuccess", member),
           icon_url: member.avatarURL,
         },
         color: 3066993,
@@ -55,13 +55,13 @@ module.exports = {
     } catch (err) {
       let description;
       if (!msg.guild.members.get(client.user.id).permission.has("manageRoles"))
-        description = lang.botDontHavePerms(lang.permissions.manageRoles);
+        description = msg.t("botDontHavePerms", msg.t("permissions").banMembers);
       else if (member.id === msg.guild.ownerID)
-        description = lang.userIsOwner;
+        description = msg.t("userIsOwner");
       else if (member.highestRole.position >= msg.guild.members.get(client.user.id).highestRole.position)
-        description = lang.roleHigher;
+        description = msg.t("roleHigher");
       else {
-        description = lang.somethingWentWrong;
+        description = msg.t("somethingWentWrong");
         client.emit("commandError", this.name, msg, err, false);
       }
 

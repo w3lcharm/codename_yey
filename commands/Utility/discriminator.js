@@ -4,12 +4,12 @@ module.exports = {
   description: "discriminatorDescription",
   usage: "discriminatorUsage",
   aliases: [ "discrim" ],
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     let discriminator = args[0] || msg.author.discriminator;
 
     const discrimNumber = parseInt(discriminator);
     if (isNaN(discrimNumber) || discrimNumber > 9999 || discrimNumber < 1) {
-      return msg.reply(lang.invalidDiscriminator);
+      return msg.reply(msg.t("invalidDiscriminator"));
     }
 
     while (discriminator.length < 4) {
@@ -24,8 +24,8 @@ module.exports = {
       .replace(/[_~*\|]/g, "\\$&");
 
     const embed = {
-      title: lang.discriminatorEmbedTitle(discriminator),
-      description: users || lang.discriminatorNoUsersFound,
+      title: msg.t("discriminatorEmbedTitle", discriminator),
+      description: users || msg.t("discriminatorNoUsersFound"),
       color: await msg.author.embColor(),
     };
 

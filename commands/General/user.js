@@ -35,8 +35,8 @@ module.exports = {
   usage: "userUsage",
   guildOnly: true,
   aliases: [ "u", "userinfo" ],
-  async run(client, msg, args, prefix, lang) {
-    moment.locale(lang.langName);
+  async run(client, msg, args, prefix) {
+    moment.locale(msg.t("langName"));
 
     let member;
     let userID = args.raw.join(" ");
@@ -49,7 +49,7 @@ module.exports = {
       ) || client.users.find(u => u.tag == userID) || await client.fetchUser(userID);
 
     if (!member) {
-      return msg.reply(lang.cantFindUser);
+      return msg.reply(msg.t("cantFindUser"));
     }
 
     let name = `${member.username}#${member.discriminator}`;
@@ -76,26 +76,26 @@ module.exports = {
           value: member.id,
         },
         {
-          name: lang.userRegisteredAt,
-          value: `${moment(member.createdAt).format("lll")} ${lang.daysAgo(createdDaysAgo)}`,
+          name: msg.t("userRegisteredAt"),
+          value: `${moment(member.createdAt).format("lll")} ${msg.t("daysAgo", createdDaysAgo)}`,
         },
       ],
-      footer: { text: joinPos ? lang.userJoinPosition(joinPos) : lang.userNotInServer },
+      footer: { text: joinPos ? msg.t("userJoinPosition", joinPos) : msg.t("userNotInServer") },
     };
 
     if (member.joinedAt) embed.fields.push({
-      name: lang.userJoinedAt,
-      value: `${moment(member.joinedAt).format("lll")} ${lang.daysAgo(joinedDaysAgo)}`,
+      name: msg.t("userJoinedAt"),
+      value: `${moment(member.joinedAt).format("lll")} ${msg.t("daysAgo", joinedDaysAgo)}`,
     });
 
     if (member.roles && member.roles.length) embed.fields.push({
-      name: lang.userRoles,
+      name: msg.t("userRoles"),
       value: member.roleObjects.sort((a, b) => b.position - a.position)
         .map(r => r.mention).join(", "),
     });
 
     if (member.voiceState && member.voiceState.channelID) embed.fields.push({
-      name: lang.userVoiceChannel,
+      name: msg.t("userVoiceChannel"),
       value: `<#${member.voiceState.channelID}>`,
     });
 

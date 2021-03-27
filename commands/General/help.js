@@ -4,7 +4,7 @@ module.exports = {
   description: "helpDescription",
   usage: "helpUsage",
   aliases: [ "h" ],
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     const cmdName = args[0];
     let embed;
     
@@ -12,33 +12,33 @@ module.exports = {
       const command = client.commands.find(cmd => cmd.name === cmdName || (cmd.aliases && cmd.aliases.includes(cmdName)));
       if (!command || command.hidden) {
         embed = {
-          title: lang.helpCommandDoesntExist(cmdName),
-          description: lang.helpCommandDoesntExistDesc(prefix),
+          title: msg.t("helpCommandDoesntExist", cmdName),
+          description: msg.t("helpCommandDoesntExistDesc", prefix),
           color: 15158332,
           footer: {
             text: "codename_yey",
             icon_url: client.user.avatarURL,
           },
         };
-        return msg.reply({ embed: embed });
+        return msg.reply({ embed });
       }
 
       let usage = `${prefix}${command.name}`;
       if (command.usage) {
         if (command.usage instanceof Array) {
-          usage = command.usage.map(u => `${prefix}${command.name} ${lang[u]}`).join("\n");
+          usage = command.usage.map(u => `${prefix}${command.name} ${msg.t(u)}`).join("\n");
         } else {
-          usage += ` ${lang[command.usage]}`;
+          usage += ` ${msg.t(command.usage)}`;
         }
       }
 
       embed = {
-        title: lang.helpCommandEmbedTitle(command.name),
-        description: lang[command.description],
+        title: msg.t("helpCommandEmbedTitle", command.name),
+        description: msg.t(command.description),
         color: await msg.author.embColor(),
         fields: [
           {
-            name: lang.helpCommandUsage,
+            name: msg.t("helpCommandUsage"),
             value: `\`\`\`\n${usage}\n\`\`\``,
           },
         ],
@@ -50,12 +50,12 @@ module.exports = {
 
       if (command.aliases) {
         embed.fields.push({
-          name: lang.helpAliases,
+          name: msg.t("helpAliases"),
           value: command.aliases.map(a => `\`${a}\``).join(", "),
         });
       }
 
-      await msg.reply({ embed: embed });
+      await msg.reply({ embed });
     } else {
       let fields = [];
       for (let group of Array.from(client.groups.values())) {
@@ -63,22 +63,22 @@ module.exports = {
         if (!cmdNames.length) continue;
 
         fields.push({
-          name: lang[group.name],
+          name: msg.t(group.name),
           value: cmdNames.join(", "),
         });
       }
       
       embed = {
-        title: lang.helpTitle,
+        title: msg.t("helpTitle"),
         color: await msg.author.embColor(),
         fields,
         footer: {
-          text: lang.helpTip(prefix),
+          text: msg.t("helpTip", prefix),
           icon_url: client.user.avatarURL,
         },
       };
 
-      await msg.reply({ embed: embed });
+      await msg.reply({ embed });
     }
   }
 };

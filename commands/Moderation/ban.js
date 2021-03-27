@@ -6,9 +6,9 @@ module.exports = {
   guildOnly: true,
   argsRequired: true,
   usage: "banUsage",
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (!args.length)
-      return msg.reply(lang.commandUsage(prefix, this));
+      return msg.reply(msg.t("commandUsage", prefix, this));
 
     const userID = args.shift();
     const reason = args.join(" ");
@@ -16,23 +16,23 @@ module.exports = {
     const member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") || msg.guild.members.find(m => m.id === userID || m.tag === userID);
 
     if (!member) {
-      return msg.reply(lang.cantFindUser);
+      return msg.reply(msg.t("cantFindUser"));
     };
 
     if (member.bannable && member.highestRole.position < msg.member.highestRole.position) {
       if (member.id === msg.author.id)
-        return msg.reply(lang.cantBanYourself);
+        return msg.reply(msg.t("cantBanYourself"));
       if (member.id === client.user.id)
-        return msg.reply(lang.cantBanBot);
+        return msg.reply(msg.t("cantBanBot"));
 
       await member.ban(0, encodeURI(`${reason} (banned by ${msg.author.username}#${msg.author.discriminator})`));
 
       const embed = {
         author: {
-          name: lang.banSuccess(member),
+          name: msg.t("banSuccess", member),
           icon_url: member.avatarURL,
         },
-        description: lang.reason(reason),
+        description: msg.t("reason", reason),
         color: 3066993,
         timestamp: new Date().toISOString(),
       };
@@ -41,17 +41,17 @@ module.exports = {
     } else {
       let description;
       if (!msg.guild.me.permission.has("banMembers")) {
-        description = lang.botDontHavePerms(lang.permissions.banMembers);
+        description = msg.t("botDontHavePerms", msg.t("permissions").banMembers);
       } else if (member.id === msg.guild.ownerID) {
-        description = lang.userIsOwner;
+        description = msg.t("userIsOwner");
       } else if (member.highestRole.position >= msg.guild.me.highestRole.position) {
-        description = lang.roleHigher;
+        description = msg.t("roleHigher");
       } else if (member.highestRole.position >= msg.member.highestRole.position) {
-        description = lang.memberRoleHigher;
+        description = msg.t("memberRoleHigher");
       }
 
       const embed = {
-        title: lang.banFail,
+        title: msg.t("banFail"),
         description,
         color: 15158332,
       };

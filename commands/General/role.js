@@ -9,9 +9,9 @@ module.exports = {
   guildOnly: true,
   argsRequired: true,
   aliases: [ "r", "roleinfo" ],
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (!args.length) {
-      return msg.reply(lang.commandUsage(prefix, this));
+      return msg.reply(msg.t("commandUsage", prefix, this));
     }
 
     let roleID = args.raw.join(" ");
@@ -23,10 +23,10 @@ module.exports = {
     const role = msg.guild.roles.find(r => r.name.toLowerCase().startsWith(roleID) || r.id === roleID);
 
     if (!role) {
-      return msg.reply(lang.roleNotFound);
+      return msg.reply(msg.t("roleNotFound"));
     }
 
-    moment.locale(lang.langName);
+    moment.locale(msg.t("langName"));
 
     const createdDaysAgo = Math.floor((Date.now() - role.createdAt) / (86400 * 1000));
 
@@ -39,28 +39,28 @@ module.exports = {
           value: role.id,
         },
         {
-          name: lang.roleMembers,
+          name: msg.t("roleMembers"),
           value: msg.guild.members.filter(m => m.roles.includes(role.id)).length,
         },
         {
-          name: lang.roleColor,
+          name: msg.t("roleColor"),
           value: role.color ? intToHex(role.color) : lang.roleDefaultColor,
         },
         {
-          name: lang.roleMentionable,
-          value: lang.yesNo(role.mentionable),
+          name: msg.t("roleMentionable"),
+          value: msg.t("yesNo", role.mentionable),
         },
         {
-          name: lang.roleHoisted,
-          value: lang.yesNo(role.hoist),
+          name: msg.t("roleHoisted"),
+          value: msg.t("yesNo", role.hoist),
         },
         {
-          name: lang.roleManaged,
-          value: lang.yesNo(role.managed),
+          name: msg.t("roleManaged"),
+          value: msg.t("yesNo", role.managed),
         },
         {
-          name: lang.roleCreatedAt,
-          value: `${moment(role.createdAt).format("lll")} ${lang.daysAgo(createdDaysAgo)}`,
+          name: msg.t("roleCreatedAt"),
+          value: `${moment(role.createdAt).format("lll")} ${msg.t("daysAgo", createdDaysAgo)}`,
         },
       ],
     };

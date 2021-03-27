@@ -7,9 +7,9 @@ module.exports = {
   usage: "unbanUsage",
   requiredPermissions: "banMembers",
   argsRequired: true,
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (!args.length) {
-      return msg.reply(lang.commandUsage(prefix, this));
+      return msg.reply(msg.t("commandUsage", prefix, this));
     }
 
     const userID = args[0];
@@ -21,7 +21,7 @@ module.exports = {
 
       const embed = {
         author: {
-          name: lang.unbanSuccess(user.tag),
+          name: msg.t("unbanSuccess", user.tag),
           icon_url: user.avatarURL,
         },
         color: 3066993,
@@ -33,15 +33,15 @@ module.exports = {
       let description;
 
       if (!msg.guild.me.permissions.has("banMembers")) {
-        description = lang.botDontHavePerms(lang.permissions.banMembers);
+        description = msg.t("botDontHavePerms", msg.t("permissions").banMembers);
       } else if (error instanceof DiscordRESTError) {
-        description = lang.unbanInvalidUser;
+        description = msg.t("unbanInvalidUser");
       } else {
         throw error;
       }
 
       const embed = {
-        title: lang.unbanFail,
+        title: msg.t("unbanFail"),
         description,
         color: 15158332,
       };

@@ -5,17 +5,17 @@ module.exports = {
   group: "musicGroup",
   description: "nowplayingDescription",
   aliases: [ "np" ],
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (
       !msg.member.voiceState.channelID || 
       (msg.guild.me.voiceState.channelID && msg.member.voiceState.channelID != msg.guild.me.voiceState.channelID)
     ) {
-      return msg.reply(lang.playNotInVoiceChannel);
+      return msg.reply(msg.t("playNotInVoiceChannel"));
     }
 
     const player = client.lavalinkManager.players.get(msg.guild.id);
     if (!player) {
-      return msg.reply(lang.notPlaying);
+      return msg.reply(msg.t("notPlaying"));
     }
 
     const track = player.queue.current;
@@ -24,16 +24,16 @@ module.exports = {
     const playerPos = parseTime(Math.floor(player.position / 1000));
 
     const embed = {
-      title: lang.nowPlaying,
+      title: msg.t("nowPlaying"),
       description: `[${track.title}](${track.uri})`,
       thumbnail: { url: track.thumbnail },
       fields: [
         {
-          name: lang.duration,
+          name: msg.t("duration"),
           value: `${playerPos} / ${trackDuration}`,
         },
       ],
-      footer: { text: lang.playAuthor(track.author) },
+      footer: { text: msg.t("playAuthor", track.author) },
     };
 
     await msg.reply({ embed });

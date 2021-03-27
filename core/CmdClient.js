@@ -11,20 +11,6 @@ const Logger = require("./Logger");
 
 const initDB = require("./initDB");
 
-function validatePermission(member, permissions) {
-  if (permissions instanceof Array) {
-    for (const permission of permissions) {
-      const hasPermission = member.permissions.has(permission);
-      if (!hasPermission)
-        throw new PermissionError("missing permission.", permission);
-    }
-  } else {
-    const hasPermission = member.permissions.has(permissions);
-    if (!hasPermission)
-      throw new PermissionError("missing permission.", permissions);
-  }
-}
-
 class CmdClient extends Eris.Client {
   constructor(token, options = {}) {
     super(token, options);
@@ -131,7 +117,7 @@ class CmdClient extends Eris.Client {
     }
 
     try {
-      if (command.requiredPermissions) validatePermission(msg.member, command.requiredPermissions);
+      if (command.requiredPermissions) this._validatePermission(msg.member, command.requiredPermissions);
       await command.run(this, msg, args, prefix, ...data);
       if (command.cooldown) {
         let cmdCooldowns = this.cooldowns.get(command.name);
@@ -143,6 +129,20 @@ class CmdClient extends Eris.Client {
     } catch (err) {
       this.emit("commandError", command, msg, err, true, ...data);
     } 
+  }
+
+  _validatePermission(member, permissions) {
+    if (permissions instanceof Array) {
+      for (const permission of permissions) {
+        const hasPermission = member.permissions.has(permission);
+        if (!hasPermission)
+          throw new PermissionError("missing permission.", permission);
+      }
+    } else {
+      const hasPermission = member.permissions.has(permissions);
+      if (!hasPermission)
+        throw new PermissionError("missing permission.", permissions);
+    }
   }
 
   addMiddleware(func) {
@@ -183,11 +183,6 @@ class CmdClient extends Eris.Client {
     for (let file of files) {
       let langName = file.replace(".js", "");
       let lang = require(`../languages/${file}`);
-
-      for (let key in englishLang) {
-        if (lang[key]) continue;
-        lang[key] = englishLang[key];
-      }
     
       languages.set(langName, lang);
       this.logger.debug(`loaded ${langName} language.`);

@@ -6,7 +6,7 @@ module.exports = {
   description: "antiinviteDescription",
   usage: "antiinviteUsage",
   requiredPermissions: "manageGuild",
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     const action = args[0];
 
     const dbItem = await db.antiInvite.findOrCreate({ where: { server: msg.guild.id } })
@@ -15,24 +15,24 @@ module.exports = {
     if (!action) {
       const embed = {
         description: dbItem.action ?
-          lang.antiinviteEnabled(dbItem.action) :
-          lang.antiinviteDisabled,
+          msg.t("antiinviteEnabled", dbItem.action) :
+          msg.t("antiinviteDisabled"),
         color: await msg.author.embColor(),
-        footer: { text: lang.antiinviteFooter(prefix) },
+        footer: { text: msg.t("antiinviteFooter", prefix) },
       };
 
       await msg.reply({ embed });
     } else {
       if (action == "disable") {
         await dbItem.update({ action: null });
-        return msg.reply(lang.antiinviteDisableSuccess);
+        return msg.reply(msg.t("antiinviteDisableSuccess"));
       }
       if (!allowedActions.includes(action)) {
-        return msg.reply(lang.antiinviteInvalidAction);
+        return msg.reply(msg.t("antiinviteInvalidAction"));
       }
 
       await dbItem.update({ action });
-      await msg.reply(lang.antiinviteEnableSuccess(action));
+      await msg.reply(msg.t("antiinviteEnableSuccess", action));
     }
   }
 };

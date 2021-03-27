@@ -6,14 +6,14 @@ module.exports = {
   group: "musicGroup",
   description: "queueDescription",
   aliases: [ "q" ],
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     const player = client.lavalinkManager.players.get(msg.guild.id);
     if (!player) {
-      return msg.reply(lang.notPlaying);
+      return msg.reply(msg.t("notPlaying"));
     }
 
     const embed = {
-      title: lang.trackQueue,
+      title: msg.t("trackQueue"),
       color: await msg.author.embColor(),
     };
 
@@ -22,12 +22,12 @@ module.exports = {
     for (const track of player.queue) {
       fields.push({
         name: `${++index}: ${track.title}`,
-        value: lang.durationRequestedBy(parseTime(Math.floor(track.duration / 1000)), track.requester.tag),
+        value: msg.t("durationRequestedBy", parseTime(Math.floor(track.duration / 1000)), track.requester.tag),
       });
     }
 
     if (!fields.length) {
-      return msg.reply(lang.queueIsEmpty);
+      return msg.reply(msg.t("queueIsEmpty"));
     }
 
     if (fields.length > 10) {
@@ -43,7 +43,7 @@ module.exports = {
 
       let pageNumber = 0;
       embed.fields = pages[pageNumber];
-      embed.footer = { text: lang.queueFooter(pageNumber + 1, pages.length) };
+      embed.footer = { text: msg.t("queueFooter", pageNumber + 1, pages.length) };
 
       const message = await msg.reply({ embed });
       message.addReaction("◀️");
@@ -64,7 +64,7 @@ module.exports = {
         }
 
         embed.fields = pages[pageNumber];
-        embed.footer = { text: lang.queueFooter(pageNumber + 1, pages.length) };
+        embed.footer = { text: msg.t("queueFooter", pageNumber + 1, pages.length) };
         message.edit({ embed });
       });
     } else {

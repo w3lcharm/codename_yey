@@ -6,9 +6,9 @@ module.exports = {
   guildOnly: true,
   usage: "kickUsage",
   argsRequired: true,
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (!args.length)
-      return msg.reply(lang.commandUsage(prefix, this));
+      return msg.reply(msg.t("commandUsage", prefix, this));
 
     const userID = args.shift();
     const reason = args.join(" ");
@@ -16,23 +16,23 @@ module.exports = {
     const member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") || msg.guild.members.find(m => m.id === userID || m.tag == userID);
 
     if (!member) {
-      return msg.reply(lang.cantFindUser);
+      return msg.reply(msg.t("cantFindUser"));
     };
 
     if (member.kickable && member.highestRole.position < msg.member.highestRole.position) {
       if (member.id === msg.author.id)
-        return msg.reply(lang.cantKickYourself);
+        return msg.reply(msg.t("cantKickYourself"));
       if (member.id === client.user.id)
-        return msg.reply(lang.cantKickBot);
+        return msg.reply(msg.t("cantKickBot"));
       
       await member.kick(encodeURI(`${reason} (kicked by ${msg.author.username}#${msg.author.discriminator})`));
 
       const embed = {
         author: {
-          name: lang.kickSuccess(member),
+          name: msg.t("kickSuccess", member),
           icon_url: member.avatarURL,
         },
-        description: lang.reason(reason),
+        description: msg.t("reason", reason),
         color: 3066993,
         timestamp: new Date().toISOString(),
       };
@@ -43,15 +43,15 @@ module.exports = {
       if (!msg.guild.me.permission.has("kickMembers")) {
         description = lang.botDontHavePerms(lang.permissions.kickMembers);
       } else if (member.id === msg.guild.ownerID) {
-        description = lang.userIsOwner;
+        description = msg.t("userIsOwner");
       } else if (member.highestRole.position >= msg.guild.me.highestRole.position) {
-        description = lang.roleHigher;
+        description = msg.t("roleHigher");
       } else if (member.highestRole.position >= msg.member.highestRole.position) {
-        description = lang.memberRoleHigher;
+        description = msg.t("memberRoleHigher");
       }
 
       const embed = {
-        title: lang.kickFail,
+        title: msg.t("kickFail"),
         description,
         color: 15158332,
       };

@@ -7,7 +7,7 @@ module.exports = {
   usage: "modlogsUsage",
   requiredPermissions: "manageGuild",
   guildOnly: true,
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     let channel = args[0];
     const modlogChannel = await db.modlogs.findOrCreate({ where: { server: msg.guild.id } })
       .then(i => i[0].channel ? client.getChannel(i[0].channel) : undefined);
@@ -15,17 +15,17 @@ module.exports = {
     if (!channel) {
       let description;
       if (modlogChannel) {
-        description = lang.modlogsEnabled(modlogChannel.mention);
+        description = msg.t("modlogsEnabled", modlogChannel.mention);
       } else {
-        description = lang.modlogsDisabled;
+        description = msg.t("modlogsDisabled");
       }
 
       const embed = {
-        title: lang.modlogs,
+        title: msg.t("modlogs"),
         description,
         color: await msg.author.embColor(),
         footer: {
-          text: lang.modlogsTip(prefix),
+          text: msg.t("modlogsTip", prefix),
         },
       };
 
@@ -37,7 +37,7 @@ module.exports = {
           { where: { server: msg.guild.id } }
         );
 
-        return msg.reply(lang.modlogsDisableSuccess);
+        return msg.reply(msg.t("modlogsDisableSuccess"));
       } else {
         if (channel.startsWith("<#")) {
           channel = channel.replace("<#", "").replace(">", "");
@@ -45,12 +45,12 @@ module.exports = {
 
         const ch = msg.guild.channels.find(c => c.id === channel || c.name === channel);
         if (!ch || (ch && ch.type > 0)) {
-          return msg.reply(lang.invalidChannel);
+          return msg.reply(msg.t("invalidChannel"));
         }
         if (!ch.memberHasPermission(msg.guild.me, "sendMessages") || !ch.memberHasPermission(msg.guild.me, "embedLinks")) {
           const embed = {
-            title: lang.modlogsDontHavePerms,
-            description: lang.modlogsDontHavePermsDesc,
+            title: msg.t("modlogsDontHavePerms"),
+            description: msg.t("modlogsDontHavePermsDesc"),
             color: 3066993,
           };
           return msg.reply({ embed });
@@ -61,7 +61,7 @@ module.exports = {
           { where: { server: msg.guild.id } },
         );
 
-        return msg.reply(lang.modlogsSuccess(ch.name));
+        return msg.reply(msg.t("modlogsSuccess", ch.name));
       }
     }
   }

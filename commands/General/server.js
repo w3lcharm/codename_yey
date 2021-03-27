@@ -7,8 +7,8 @@ module.exports = {
   description: "serverDescription",
   guildOnly: true,
   aliases: [ "s", "serverinfo" ],
-  async run(client, msg, args, prefix, lang) {
-    moment.locale(lang.langName);
+  async run(client, msg, args, prefix) {
+    moment.locale(msg.t("langName"));
 
     const guild = client.owners.includes(msg.author.id) ?
       client.guilds.get(args[0]) || msg.guild : msg.guild;
@@ -26,7 +26,7 @@ module.exports = {
       color: await msg.author.embColor(),
       fields: [
         {
-          name: lang.serverOwner,
+          name: msg.t("serverOwner"),
           value: `${owner.tag} (<@${guild.ownerID}>)`,
         },
         {
@@ -34,54 +34,54 @@ module.exports = {
           value: guild.id,
         },
         {
-          name: lang.serverRegion,
+          name: msg.t("serverRegion"),
           value: guild.region,
         },
         {
-          name: lang.serverMembers,
-          value: `**${lang.serverMembersTotal}** - ${guild.memberCount}\n` +
-            `**${lang.serverMembersBots}** - ${guild.members.filter(m => m.bot).length}`,
+          name: msg.t("serverMembers"),
+          value: `**${msg.t("serverMembersTotal")}** - ${guild.memberCount}\n` +
+            `**${msg.t("serverMembersBots")}** - ${guild.members.filter(m => m.bot).length}`,
           inline: true,
         },
         {
-          name: lang.serverChannels,
-          value: `**${lang.serverChannelsCategories}** - ${guild.channels.filter(c => c instanceof CategoryChannel).length}\n` +
-            `**${lang.serverChannelsText}** - ${guild.channels.filter(c => c instanceof TextChannel).length}\n` +
-            `**${lang.serverChannelsVoice}** - ${guild.channels.filter(c => c instanceof VoiceChannel).length}`,
+          name: msg.t("serverChannels"),
+          value: `**${msg.t("serverChannelsCategories")}** - ${guild.channels.filter(c => c instanceof CategoryChannel).length}\n` +
+            `**${msg.t("serverChannelsText")}** - ${guild.channels.filter(c => c instanceof TextChannel).length}\n` +
+            `**${msg.t("serverChannelsVoice")}** - ${guild.channels.filter(c => c instanceof VoiceChannel).length}`,
           inline: true,
         },
         {
-          name: lang.serverEmojis,
-          value: `**${lang.serverEmojisStatic}** - ${guild.emojis.filter(e => !e.animated).length}\n` +
-            `**${lang.serverEmojisAnimated}** - ${guild.emojis.filter(e => e.animated).length}`,
+          name: msg.t("serverEmojis"),
+          value: `**${msg.t("serverEmojisStatic")}** - ${guild.emojis.filter(e => !e.animated).length}\n` +
+            `**${msg.t("serverEmojisAnimated")}** - ${guild.emojis.filter(e => e.animated).length}`,
           inline: true,
         },
         {
-          name: lang.serverVerificationLevel,
-          value: lang.verificationLevel[guild.verificationLevel],
+          name: msg.t("serverVerificationLevel"),
+          value: msg.t("verificationLevel")[guild.verificationLevel],
         },
         {
-          name: lang.serverTotalRoles,
+          name: msg.t("serverTotalRoles"),
           value: guild.roles.size, 
         },
         {
-          name: lang.serverBoostLevel,
+          name: msg.t("serverBoostLevel"),
           value: guild.premiumTier,
           inline: true,
         },
         {
-          name: lang.serverBoosts,
+          name: msg.t("serverBoosts"),
           value: guild.premiumSubscriptionCount,
           inline: true,
         },
       ],
-      footer: { text: lang.serverCreatedAt },
+      footer: { text: msg.t("serverCreatedAt") },
       timestamp: new Date(guild.createdAt).toISOString(),
     };
 
     if (guild.features.length) embed.fields.push({
-      name: lang.serverFeatures,
-      value: guild.features.map(f => `\`${lang.features[f]}\``).join(", "),
+      name: msg.t("serverFeatures"),
+      value: guild.features.map(f => `\`${msg.t("features")[f]}\``).join(", "),
     });
 
     await msg.reply({ embed });

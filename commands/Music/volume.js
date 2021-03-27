@@ -4,36 +4,36 @@ module.exports = {
   description: "volumeDescription",
   usage: "volumeUsage",
   aliases: [ "vol" ],
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (
       !msg.member.voiceState.channelID || 
       (msg.guild.me.voiceState.channelID && msg.member.voiceState.channelID != msg.guild.me.voiceState.channelID)
     ) {
-      return msg.reply(lang.playNotInVoiceChannel);
+      return msg.reply(msg.t("playNotInVoiceChannel"));
     }
 
     const player = client.lavalinkManager.players.get(msg.guild.id);
     if (!player) {
-      return msg.reply(lang.notPlaying);
+      return msg.reply(msg.t("notPlaying"));
     }
 
     const volumeNum = parseInt(args[0]);
     if (!volumeNum) {
       const embed = {
-        description: lang.currentVol(player.volume),
+        description: msg.t("currentVol", player.volume),
         color: await msg.author.embColor(),
-        footer: { text: lang.volumeTip(prefix) },
+        footer: { text: msg.t("volumeTip", prefix) },
       };
 
       await msg.reply({ embed });
     } else {
       if (volumeNum < 1 || volumeNum > 100) {
-        return msg.reply(lang.volumeInvalid);
+        return msg.reply(msg.t("volumeInvalid"));
       }
 
       player.setVolume(volumeNum);
 
-      await msg.reply(lang.volumeChanged(volumeNum));
+      await msg.reply(msg.t("volumeChanged", volumeNum));
     }
   }
 }

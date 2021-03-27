@@ -6,7 +6,7 @@ module.exports = {
   description: "devsayDescription",
   ownerOnly: true,
   hidden: true,
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (!args.length && !msg.attachments.length) return;
 
     const text = msg.content.slice(prefix.length + this.name.length + 1);

@@ -8,9 +8,9 @@ module.exports = {
   description: "randomDescription",
   usage: [ "randomUsageMax", "randomUsageMinMax" ],
   argsRequired: true,
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (!args.length) {
-      return msg.reply(lang.commandUsage(prefix, this));
+      return msg.reply(msg.t("commandUsage", prefix, this));
     }
 
     let [ min, max ] = args;
@@ -23,11 +23,11 @@ module.exports = {
     min = parseInt(min);
 
     if (isNaN(min) || isNaN(max)) {
-      return msg.reply(lang.notANumber);
+      return msg.reply(msg.t("notANumber"));
     }
 
     const embed = {
-      title: lang.randomTitle(min, max),
+      title: msg.t("randomTitle", min, max),
       description: randInt(max, min).toString(),
       color: await msg.author.embColor(),
     };

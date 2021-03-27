@@ -18,7 +18,7 @@ module.exports = {
   name: "xkcd",
   group: "funGroup",
   description: "xkcdDescription",
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     let comic = await getComic();
 
     let embed = {

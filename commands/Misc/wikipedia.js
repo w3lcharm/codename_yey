@@ -6,21 +6,21 @@ module.exports = {
   description: "wikipediaDescription",
   usage: "wikipediaUsage",
   aliases: [ "wiki" ],
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     const query = encodeURIComponent(args.raw.join(" "));
     if (!query) {
-      return msg.reply(lang.wikipediaNoQuery);
+      return msg.reply(msg.t("wikipediaNoQuery"));
     }
 
     const response = await fetch(`https://${lang.langName}.wikipedia.org/api/rest_v1/page/summary/${query}`)
       .then(r => r.json());
 
     if (!response) {
-      return msg.reply(lang.wikipediaNotFound);
+      return msg.reply(msg.t("wikipediaNotFound"));
     }
 
     if (response.type == "disambiguation") {
-      return msg.reply(lang.wikipediaDisambiguation);
+      return msg.reply(msg.t("wikipediaDisambiguation"));
     }
 
     const embed = {

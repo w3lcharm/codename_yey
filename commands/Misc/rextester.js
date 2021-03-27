@@ -1,7 +1,6 @@
 const fetch = require("node-fetch");
 
 const url = "https://rextester.com/rundotnet/api/";
-const hastebinURL = "https://hastebin.com/"
 
 module.exports = {
   name: "rextester",
@@ -11,7 +10,7 @@ module.exports = {
   argsRequired: true,
   async run(client, msg, args, prefix, lang) {
     if (!args.length) {
-      return msg.reply(lang.commandUsage(prefix, this));
+      return msg.reply(msg.t("commandUsage", prefix, this));
     }
 
     const code = msg.content.slice(prefix.length + this.name.length + 1);
@@ -23,7 +22,7 @@ module.exports = {
 
     if (response.Errors) {
       const embed = {
-        title: lang.rextesterError,
+        title: msg.t("rextesterError"),
         description: `\`\`\`${response.Errors}\`\`\``,
         color: 15158332,
         // footer: { text: lang.rextesterErrorFooter },
@@ -33,25 +32,17 @@ module.exports = {
     }
 
     if (response.Result && response.Result.length > 2000) {
-      const doc = await fetch(hastebinURL + "documents", { method: "POST", body: response.Result })
-        .then(r => r.json())
-        .then(({ key }) => `${hastebinURL}${key}`);
+      const file = Buffer.from(response.Result);
 
-      const embed = {
-        title: lang.rextesterCantShowResult,
-        description: doc,
-        color: 15158332,
-      }
-
-      return msg.reply({ embed });
+      return msg.reply("", { name: "result.txt", file });
     }
 
     const embed = {
-      title: lang.rextesterSuccess,
+      title: msg.t("rextesterSuccess"),
       description: `\`\`\`${response.Result}\`\`\``,
       color: 3066993,
     };
 
-    await msg.reply(response.Result ? { embed } : lang.rextesterEmptyResult);
+    await msg.reply(response.Result ? { embed } : msg.t("rextesterEmptyResult"));
   }
 }

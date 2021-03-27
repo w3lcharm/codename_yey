@@ -6,17 +6,17 @@ module.exports = {
   description: "npmDescription",
   usage: "npmUsage",
   argsRequired: true,
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     const query = encodeURIComponent(args.raw.join(" "));
     if (!query) {
-      return msg.reply(lang.npmNoPkg);
+      return msg.reply(msg.t("npmNoPkg"));
     }
 
     const response = await fetch(`https://registry.npmjs.org/${query}`)
       .then(r => r.json());
 
     if (!response || response.error) {
-      return msg.reply(lang.npmPkgNotFound);
+      return msg.reply(msg.t("npmPkgNotFound"));
     }
 
     const package = response.versions[response["dist-tags"].latest];
@@ -28,21 +28,21 @@ module.exports = {
       color: await msg.author.embColor(),
       fields: [
         {
-          name: lang.npmVersion,
+          name: msg.t("npmVersion"),
           value: package.version,
         },
       ],
-      footer: { text: lang.npmModifiedAt },
+      footer: { text: msg.t("npmModifiedAt") },
       timestamp: response.time?.modified,
     };
 
     if (package.license) embed.fields.push({
-      name: lang.npmLicense,
+      name: msg.t("npmLicense"),
       value: package.license,
     });
 
     if (package.keywords?.length) embed.fields.push({
-      name: lang.npmKeywords,
+      name: msg.t("npmKeywords"),
       value: package.keywords.map(k => `\`${k}\``).join(", "),
     });
 

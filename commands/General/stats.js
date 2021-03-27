@@ -8,7 +8,7 @@ module.exports = {
   name: "stats",
   group: "generalGroup",
   description: "statsDescription",
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     const uptime = process.uptime();
     const uptimeDays = Math.floor(uptime / 86400);
     const parsedUptime = uptimeDays + moment.utc(uptime * 1000).format(":HH:mm:ss");
@@ -18,45 +18,45 @@ module.exports = {
     const cpu = os.cpus()[0];
 
     const embed = {
-      title: lang.statsTitle,
+      title: msg.t("statsTitle"),
       color: await msg.author.embColor(),
       fields: [
         {
-          name: lang.statsUptime,
+          name: msg.t("statsUptime"),
           value: parsedUptime,
         },
         {
-          name: lang.statsServers,
+          name: msg.t("statsServers"),
           value: client.guilds.size,
           inline: true,
         },
         {
-          name: lang.statsUsers,
+          name: msg.t("statsUsers"),
           value: client.users.size,
           inline: true,
         },
         {
-          name: lang.statsChannels,
+          name: msg.t("statsChannels"),
           value: Object.keys(client.channelGuildMap).length,
           inline: true,
         },
         {
-          name: lang.statsVoiceConnections,
+          name: msg.t("statsVoiceConnections"),
           value: client.lavalinkManager ? client.lavalinkManager.players.size : "N/A",
           inline: true,
         },
         {
-          name: lang.statsCommandsUsed,
+          name: msg.t("statsCommandsUsed"),
           value: client.usageCount,
           inline: true,
         },
         {
-          name: lang.statsPlatform,
+          name: msg.t("statsPlatform"),
           value: process.platform,
           inline: true,
         },
         {
-          name: lang.statsVersions,
+          name: msg.t("statsVersions"),
           value: `**Node.js**: ${process.version}\n` +
             `**Eris**: ${Eris.VERSION}\n` +
             `**Sequelize**: ${Sequelize.version}\n` +
@@ -64,12 +64,12 @@ module.exports = {
           inline: true,
         },
         {
-          name: lang.statsRamUsed,
+          name: msg.t("statsRamUsed"),
           value: `${ramUsed.toFixed(1)} MB`,
           inline: true,
         },
         {
-          name: lang.statsCpu,
+          name: msg.t("statsCpu"),
           value: `\`${cpu ? cpu.model : lang.cantGetCpuInfo}\``,
         },
       ],
