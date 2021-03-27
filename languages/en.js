@@ -27,7 +27,8 @@ module.exports = {
   errorFooter: "You can also report this error to support server.",
   cooldown: left => `> :warning: You need to wait ${left} second(s) before using this command again.`,
   cantFindUser: "> :x: User not found.",
-  botPrefix: (prefix, user) => `>>> My prefix in this server is \`${prefix}\`.\nType \`${prefix}help\` to get a list of commands.`,
+  botPrefix: prefix => `My prefix on this server is \`${prefix}\`.`,
+  botPrefixFooter: prefix => `Use ${prefix}help to get a list of commands.`,
   antiInviteReason: "sent an invite link",
 
   permissions: {

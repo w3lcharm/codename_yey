@@ -27,7 +27,8 @@ module.exports = {
   errorFooter: "Вы можете дополнительно сообщить об этой ошибке на сервер поддержки.",
   cooldown: left => `> :warning: Вам нужно подождать ${left} секунд, чтобы использовать эту команду снова.`,
   cantFindUser: "> :x: Пользователь не найден.",
-  botPrefix: (prefix, user) => `>>> Мой префикс на этом сервере \`${prefix}\`.\nВведите \`${prefix}help\` для получения команд бота.`,
+  botPrefix: prefix => `Мой префикс на этом сервере -  \`${prefix}\`.`,
+  botPrefixFooter: prefix => `Используйте ${prefix}help для получения списка команд.`,
   antiInviteReason: "отправил ссылку-приглашение",
 
   permissions: {
