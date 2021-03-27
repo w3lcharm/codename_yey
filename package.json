@@ -13,6 +13,7 @@
     "common-tags": "^1.8.0",
     "dotenv": "^8.2.0",
     "erela.js": "^2.2.0",
+    "erela.js-spotify": "^1.2.0",
     "eris": "abalabahaha/eris#dev",
     "eris-additions": "^1.4.1",
     "erlpack": "github:abalabahaha/erlpack",

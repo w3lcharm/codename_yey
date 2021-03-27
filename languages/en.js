@@ -365,7 +365,7 @@ module.exports = {
   discriminatorDescription: "Shows up to 20 users who have provided discriminator.\nIf discriminator not provided, shows users who have the same discriminator with you.",
   discriminatorUsage: "[discriminator]",
   invalidDiscriminator: "> :x: You've provided invalid discriminator. Valid discriminators are in range from 0001 to 9999.",
-  discriminatorEmbedTitle: discrim => `Users who have the #${discrim} discriminator:`,
+  discriminatorEmbedTitle: discrim => `Users with #${discrim} discriminator:`,
   discriminatorNoUsersFound: "Currently I didn't seen any user who have this discriminator.",
 
   rextesterDescription: "Runs your Node.js code on Rextester.",

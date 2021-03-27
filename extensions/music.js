@@ -1,5 +1,6 @@
 const { Manager } = require("erela.js");
 const Logger = require("../core/Logger");
+const SpotifyPlugin = require("erela.js-spotify");
 
 const parseTime = require("../utils/parseTime");
 
@@ -13,6 +14,12 @@ module.exports.load = client => {
     send(id, packet) {
       client.guilds.get(id)?.shard.sendWS(packet.op, packet.d, false);
     },
+    plugins: [
+      new SpotifyPlugin({
+        clientID: config.spotifyClientID,
+        clientSecret: config.spotifyClientSecret,
+      }),
+    ],
   });
 
   client.once("ready", () => client.lavalinkManager.init(client.user.id))
