@@ -1,13 +1,13 @@
 {
   "name": "codename_yey",
-  "version": "3.0alpha",
+  "version": "3.0",
   "description": "Discord bot",
   "main": "index.js",
   "scripts": {
     "start": "node index"
   },
   "author": "1z3ngero",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bufferutil": "^4.0.1",
     "common-tags": "^1.8.0",
