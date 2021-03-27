@@ -15,4 +15,6 @@ module.exports = {
   githubKey: "your github key", // needed for github command
   lavalinkNodes: [ { host: "localhost", port: 2333, password: "youshallnotpass" } ], // list of lavalink nodes, needed for music
   defaultColor: 0xb35511, // default embed color
+  spotifyClientID: "your spotify app's client id",
+  spotifyClientSecret: "your spotify app's client secret",
 };

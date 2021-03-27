@@ -1,12 +1,10 @@
 const { PermissionError } = require("../core/CmdClient");
 
-async function onCommandError(cmd, msg, err, showErr = false, lang) {
-  if (!lang) lang = client.languages.get("en");
-
+async function onCommandError(cmd, msg, err, showErr = false) {
   if (err instanceof PermissionError) {
     const embed = {
-      title: lang.dontHavePerms,
-      description: lang.missingPermission(lang.permissions[err.missingPermission]),
+      title: msg.t("dontHavePerms"),
+      description: msg.t("missingPermission", msg.t(err.missingPermission)),
       color: 15158332,
       footer: {
         text: "codename_yey",
@@ -20,8 +18,8 @@ async function onCommandError(cmd, msg, err, showErr = false, lang) {
   client.logger.error(`Error in command ${cmd.name}:\n${err.stack}`);
 
   const embed = {
-    title: lang.errorInCommand,
-    description: lang.errorDesc,
+    title: msg.t("errorInCommand"),
+    description: msg.t("errorDesc"),
     color: 15158332,
     footer: {
       text: "codename_yey",

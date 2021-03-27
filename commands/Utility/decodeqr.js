@@ -9,9 +9,9 @@ module.exports = {
   usage: "decodeqrUsage",
   cooldown: 10,
   argsRequired: "attachment",
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (!args.length && !msg.attachments.length) {
-      return msg.reply(lang.commandUsage(prefix, this));
+      return msg.reply(msg.t("commandUsage", prefix, this));
     }
 
     let url = args[0];
@@ -20,14 +20,14 @@ module.exports = {
 
     let res = await fetch(`${apiUrl}?fileurl=${encodeURI(url)}`);
     if (res.status == 400) {
-      return msg.reply(lang.decodeqrInvalidURL);
+      return msg.reply(msg.t("decodeqrInvalidURL"));
     }
 
     let code = await res.json();
     if (!code[0].symbol[0].error) {
       await msg.reply(`\`\`\`${code[0].symbol[0].data}\`\`\``);
     } else {
-      await msg.reply(lang.decodeqrFail);
+      await msg.reply(msg.t("decodeqrFail"));
     }
   }
 }

@@ -5,7 +5,7 @@ module.exports = {
   requiredPermissions: "manageGuild",
   usage: "autoroleUsage",
   guildOnly: true,
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     let roleID = args[0];
     if (roleID && roleID.startsWith("<@&")) {
       roleID = roleID.replace("<@&", "").replace(">", "");
@@ -17,10 +17,10 @@ module.exports = {
       if (dbItem) role = msg.channel.guild.roles.get(dbItem.autorole);
 
       const embed = {
-        description: role ? lang.autoroleEnabled(role.name) : lang.autoroleDisabled,
+        description: role ? msg.t("autoroleEnabled", role.name) : msg.t("autoroleDisabled"),
         color: await msg.author.embColor(),
         footer: {
-          text: lang.autoroleTip(prefix),
+          text: msg.t("autoroleTip", prefix),
         },
       };
 
@@ -29,16 +29,16 @@ module.exports = {
       await db.autorole.findOrCreate({ where: { server: msg.channel.guild.id } });
       if (roleID == "disable") {
         await db.autorole.update({ autorole: null }, { where: { server: msg.channel.guild.id } });
-        await msg.reply(lang.autoroleDisableSuccess);
+        await msg.reply(msg.t("autoroleDisableSuccess"));
       } else {
         const role = msg.channel.guild.roles.find(r => r.id == roleID || r.name == roleID);
-        if (!role) return msg.reply(lang.invalidRoleID);
+        if (!role) return msg.reply(msg.t("invalidRoleID"));
         if (msg.guild.me.highestRole.position <= role.position) {
-          return msg.reply(lang.autoroleRoleHigher);
+          return msg.reply(msgt("autoroleRoleHigher"));
         }
 
         await db.autorole.update({ autorole: role.id }, { where: { server: msg.channel.guild.id } });
-        await msg.reply(lang.autoroleSuccess(role.name));
+        await msg.reply(msg.t("autoroleSuccess", role.name));
       }
     }
   }

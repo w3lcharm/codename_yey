@@ -15,18 +15,18 @@ module.exports = {
   description: "weatherDescription",
   usage: "weatherUsage",
   argsRequired: true,
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (!args.length) {
-      return msg.reply(lang.commandUsage(prefix, this));
+      return msg.reply(msg.t("commandUsage", prefix, this));
     }
 
     const location = args.raw.join(" ");
 
-    const data = await findWeather({ search: location, degreeType: "C", lang: lang.langName })
+    const data = await findWeather({ search: location, degreeType: "C", lang: msg.t("langName") })
       .then(r => r[0]);
 
     if (!data) {
-      return msg.reply(lang.locationNotFound);
+      return msg.reply(msg.t("locationNotFound"));
     }
 
     const embed = {
@@ -36,21 +36,21 @@ module.exports = {
       color: await msg.author.embColor(),
       fields: [
         {
-          name: lang.weatherTemperature,
+          name: msg.t("weatherTemperature"),
           value: `${data.current.temperature} °C`,
           inline: true,
         },
         {
-          name: lang.weatherFeelsLike,
+          name: msg.t("weatherFeelsLike"),
           value: `${data.current.feelslike} °C`,
           inline: true,
         },
         {
-          name: lang.weatherHumidity,
+          name: msg.t("weatherHumidity"),
           value: `${data.current.humidity}%`,
         },
         {
-          name: lang.weatherWind,
+          name: msg.t("weatherWind"),
           value: data.current.winddisplay,
         },
       ],

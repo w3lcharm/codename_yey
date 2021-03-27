@@ -6,11 +6,11 @@ module.exports = {
   description: "qrDescription",
   usage: "qrUsage",
   argsRequired: true,
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     const text = msg.content.slice(prefix.length + this.name.length + 1);
 
     if (!text.length)
-      return msg.reply(lang.commandUsage(prefix, this));
+      return msg.reply(msg.t("commandUsage", prefix, this));
 
     const startTime = Date.now();
     let qr = await QRCode.toDataURL(text);
@@ -20,7 +20,7 @@ module.exports = {
     const embed = {
       color: await msg.author.embColor(),
       image: { url: "attachment://file.png" },
-      footer: { text: lang.generationTime(finishTime)},
+      footer: { text: msg.t("generationTime", finishTime)},
     };
 
     await msg.reply({ embed: embed }, {

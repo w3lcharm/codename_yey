@@ -1,11 +1,17 @@
 module.exports.load = client => {
   client.addMiddleware(async msg => {
-    return client.languages.get((await db.languages.findOrCreate({ where: { user: msg.author.id } }))[0].lang)
+    return msg.author.lang = (await db.languages.findOrCreate({ where: { user: msg.author.id } }))[0].lang
   });
 
   client.addMiddleware(async (msg, prefix, data) => {
     if (msg.content.replace("<@!", "<@") === client.user.mention) {
-      await msg.reply(data[0].botPrefix(prefix, msg.author));
+      await msg.reply({
+        embed: {
+          description: msg.t("botPrefix", prefix),
+          footer: { text: msg.t("botPrefixFooter", prefix) },
+          color: await msg.author.embColor(),
+        },
+      });
       return false;
     }
 

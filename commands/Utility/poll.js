@@ -4,9 +4,9 @@ module.exports = {
   description: "pollDescription",
   usage: "pollUsage",
   argsRequired: true,
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (!args.length) {
-      return msg.reply(lang.commandUsage(prefix, this));
+      return msg.reply(msg.t("commandUsage", prefix, this));
     }
 
     let [ question, ...answers ] = args;
@@ -19,11 +19,11 @@ module.exports = {
     }
 
     if (!answers.length) {
-      return msg.reply(lang.noAnswers);
+      return msg.reply(msg.t("noAnswers"));
     }
 
     if (answers.length > 10) {
-      return msg.reply(lang.pollNotMoreThan10Answers);
+      return msg.reply(mag.t("pollNotMoreThan10Answers"));
     }
 
     const embed = {
@@ -31,7 +31,7 @@ module.exports = {
       description: answers.map((a, i) => `${reactions[i]} - ${a}`).join("\n"),
       color: await msg.author.embColor(),
       footer: {
-        text: lang.startedBy(msg.author),
+        text: msg.t("startedBy", msg.author),
         icon_url: msg.author.avatarURL,
       },
     };
@@ -40,7 +40,7 @@ module.exports = {
       try {
         await msg.delete();
       } catch {
-        await msg.reply(lang.pollCantDeleteMessage);
+        await msg.reply(msg.t("pollCantDeleteMessage"));
       }
     }
 

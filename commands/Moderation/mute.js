@@ -19,29 +19,29 @@ module.exports = {
   usage: "muteUsage",
   requiredPermissions: "kickMembers",
   argsRequired: true,
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (!args.length)
-      return msg.reply(lang.commandUsage(prefix, this));
+      return msg.reply(msg.t("commandUsage", prefix, this));
 
     let [ userID, time, ...reason ] = args;
     const member = msg.guild.members.get(msg.mentions.length ? msg.mentions[0].id : "") ||
       msg.guild.members.find(m => m.id === userID || m.tag === userID);
     if (!member) {
-      return msg.reply(lang.cantFindUser);
+      return msg.reply(msg.t("cantFindUser"));
     };
 
     const parsedTime = parseTime(time);
     if (parsedTime > 604800000) {
-      return msg.reply(lang.muteTimeTooLong);
+      return msg.reply(msg.t("muteTimeTooLong"));
     }
     
     if (!parsedTime) reason.unshift(time);
     
     try {
       if (member.id === msg.author.id)
-        return msg.reply(lang.cantMuteYourself);
+        return msg.reply(msg.t("cantMuteYourself"));
       if (member.id === client.user.id)
-        return msg.reply(lang.cantMuteBot);
+        return msg.reply(msg.t("cantMuteBot"));
 
       let mutedRole = msg.guild.roles.find(r => r.name === "Muted");
       if (!mutedRole) {
@@ -58,18 +58,18 @@ module.exports = {
       }
       
       if (member.roles.includes(mutedRole.id))
-        return msg.reply(lang.userAlreadyMuted);
+        return msg.reply(msg.t("userAlreadyMuted"));
 
       await member.addRole(mutedRole.id);
       const embed = {
         author: {
-          name: lang.muteSuccess(member),
+          name: msg.t("muteSuccess", member),
           icon_url: member.avatarURL,
         },
-        description: lang.reason(reason.join(" ")),
+        description: msg.t("reason", reason.join(" ")),
         color: 3066993,
         timestamp: new Date().toISOString(),
-        footer: { text: lang.canUnmuteSuggestion(prefix) },
+        footer: { text: msg.t("canUnmuteSuggestion", prefix) },
       };
 
       await msg.reply({ embed });
@@ -87,18 +87,18 @@ module.exports = {
     } catch (err) {
       let description;
       if (!msg.guild.members.get(client.user.id).permission.has("manageRoles"))
-        description = lang.botDontHavePerms(lang.permissions.manageRoles);
+        description = msg.t("botDontHavePerms", msg.t("permissions").banMembers);
       else if (member.id === msg.guild.ownerID)
-        description = lang.userIsOwner;
+        description = msg.t("userIsOwner");
       else if (member.highestRole.position >= msg.guild.members.get(client.user.id).highestRole.position)
-        description = lang.roleHigher;
+        description = msg.t("roleHigher");
       else {
-        description = lang.somethingWentWrong;
+        description = msg.t("somethingWentWrong");
         client.emit("commandError", this.name, msg, err, false);
       }
 
       const embed = {
-        title: lang.muteFail,
+        title: msg.t("muteFail"),
         description,
         color: 15158332,
       };

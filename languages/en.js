@@ -27,7 +27,8 @@ module.exports = {
   errorFooter: "You can also report this error to support server.",
   cooldown: left => `> :warning: You need to wait ${left} second(s) before using this command again.`,
   cantFindUser: "> :x: User not found.",
-  botPrefix: (prefix, user) => `>>> My prefix in this server is \`${prefix}\`.\nType \`${prefix}help\` to get a list of commands.`,
+  botPrefix: prefix => `My prefix on this server is \`${prefix}\`.`,
+  botPrefixFooter: prefix => `Use ${prefix}help to get a list of commands.`,
   antiInviteReason: "sent an invite link",
 
   permissions: {
@@ -111,6 +112,24 @@ module.exports = {
   serverEmojisAnimated: "animated",
   serverBoostLevel: "Boost level:",
   serverBoosts: "Boosts:",
+  serverFeatures: "Features:",
+  features: {
+    INVITE_SPLASH: "Invite splash",
+    VIP_REGIONS: "384 kbps bitrate",
+    VANITY_URL: "Vanity URL",
+    VERIFIED: "Verified",
+    PARTNERED: "Discord Partner",
+    COMMUNITY: "Community Server",
+    COMMERCE: "Store Channels",
+    NEWS: "News Channels",
+    DISCOVERABLE: "In Server Discovery",
+    FEATURABLE: "Featured in Server Discovery",
+    ANIMATED_ICON: "Animated icon",
+    BANNER: "Server banner",
+    WELCOME_SCREEN_ENABLED: "Welcome Screen",
+    MEMBER_VERIFICATION_GATE_ENABLED: "Membership Screening",
+    PREVIEW_ENABLED: "Server preview",
+  },
 
   statsDescription: "Shows the bot stats.",
   statsTitle: "Bot stats",
@@ -283,9 +302,6 @@ module.exports = {
   qrUsage: "<text>",
   generationTime: time => `Took ${time} ms.`,
 
-  sayDescription: "Says your text in embed.",
-  sayUsage: "<text>",
-
   udDescription: "Searches the word definition in Urban Dictionary.",
   udUsage: "<word>",
   wordNotFound: ":x: Word not found.",
@@ -350,7 +366,7 @@ module.exports = {
   discriminatorDescription: "Shows up to 20 users who have provided discriminator.\nIf discriminator not provided, shows users who have the same discriminator with you.",
   discriminatorUsage: "[discriminator]",
   invalidDiscriminator: "> :x: You've provided invalid discriminator. Valid discriminators are in range from 0001 to 9999.",
-  discriminatorEmbedTitle: discrim => `Users who have the #${discrim} discriminator:`,
+  discriminatorEmbedTitle: discrim => `Users with #${discrim} discriminator:`,
   discriminatorNoUsersFound: "Currently I didn't seen any user who have this discriminator.",
 
   rextesterDescription: "Runs your Node.js code on Rextester.",
@@ -445,7 +461,7 @@ module.exports = {
   antiinviteFooter: prefix => `You can enable the anti-invite by typing ${prefix}antiinvite [action: delete, warn, kick, ban or disable].`,
 
   githubDescription: "Searches and shows information about GitHub repository.",
-  githubUsage: "<query>",
+  githubUsage: "<repo>",
   githubRepoNotFound: "> :x: Repository not found.",
   githubWatchers: "Watchers:",
   githubStars: "Stars:",
@@ -469,8 +485,10 @@ module.exports = {
   allTracksPlayed: "> :stop_button: All tracks have been played.",
   playlistsNotSupported: "> :x: Playlists are not supported currently.",
   trackNotFound: "> :x: Track not found.",
-  playFailed: msg => `> :x: Failed to load the track. \`${msg}\``,
+  trackLoadFailed: msg => `> :x: Failed to load the track. \`${msg}\``,
   duration: "Duration:",
+  playFailed: ":x: Failed to play the track.",
+  playFailedDesc: "This track is age-restricted, blocked or has limited access.",
 
   pauseDescription: "Pauses the track.",
   notPlaying: "> Nothing is playing now.",
@@ -505,7 +523,29 @@ module.exports = {
   invalidColor: "> :x: Invalid color number.",
   embedcolorSuccess: color => `> :white_check_mark: Your embed color is set to \`${color}\``,
 
-  loopDescription: "Loops the currently playing track.",
+  loopDescription: "Toggles looping for the currently playing track.",
   loopEnabled: "> Loop enabled.",
   loopDisabled: "> Loop disabled.",
+
+  npmDescription: "Searches the package in NPM.",
+  npmUsage: "<package>",
+  npmNoPkg: "> :x: No query provided.",
+  npmPkgNotFound: "> :x: Package not found.",
+  npmVersion: "Version:",
+  npmLicense: "License:",
+  npmKeywords: "Keywords:",
+  npmModifiedAt: "Modified at:",
+
+  volumeDescription: "Sets the music volume.",
+  volumeUsage: "[newVolume]",
+  currentVol: vol => `Current volume is ${vol}%.`,
+  volumeTip: prefix => `Use ${prefix}volume [newVolume] to set the new volume.`,
+  volumeInvalid: "> :x: Volume should be in range 1-100.",
+  volumeChanged: vol => `> :speaker: Volume has been set to ${vol}%.`,
+
+  wikipediaDescription: "Searches the page in Wikipedia.",
+  wikipediaUsage: "<query>",
+  wikipediaNoQuery: "> :x: No query provided.",
+  wikipediaNotFound: "> :x: Page not found.",
+  wikipediaDisambiguation: "> :x: The page you are looking for is disambiguation page.",
 };

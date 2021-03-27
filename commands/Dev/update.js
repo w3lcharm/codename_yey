@@ -6,11 +6,11 @@ module.exports = {
   description: "updateDescription",
   ownerOnly: true,
   hidden: true,
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     exec("git pull", (err, stdout, stderr) => {
       if (err) throw err;
       const embed = {
-        title: lang.updateSuccess,
+        title: msg.t("updateSuccess"),
         description: "```\n" + stdout + "\n```",
         color: 3066993,
       };

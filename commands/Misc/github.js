@@ -5,10 +5,11 @@ module.exports = {
   group: "miscGroup",
   description: "githubDescription",
   usage: "githubUsage",
+  aliases: [ "gh" ],
   argsRequired: true,
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (!args.length) {
-      return msg.reply(lang.commandUsage(prefix, this));
+      return msg.reply(msg.t("commandUsage", prefix, this));
     }
 
     const query = args.raw.join(" ");
@@ -18,7 +19,7 @@ module.exports = {
     }).then(r => r.json());
     
     if (!data.total_count) {
-      return msg.reply(lang.githubRepoNotFound);
+      return msg.reply(msg.t("githubRepoNotFound"));
     }
 
     const repo = data.items[0];
@@ -33,17 +34,17 @@ module.exports = {
       color: await msg.author.embColor(),
       fields: [
         {
-          name: lang.githubStars,
+          name: msg.t("githubStars"),
           value: repo.stargazers_count,
           inline: true,
         },
         {
-          name: lang.githubForks,
+          name: msg.t("githubForks"),
           value: repo.forks_count,
           inline: true,
         },
       ],
-      footer: { text: lang.githubRepoCreatedAt },
+      footer: { text: msg.t("githubRepoCreatedAt") },
       timestamp: repo.created_at,
     };
 

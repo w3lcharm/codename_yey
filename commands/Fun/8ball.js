@@ -26,17 +26,17 @@ function hashCode(s) {
   return h;
 }
 
-function predict(question, failChance, seed, lang) {
+function predict(question, failChance, seed, msg) {
   const clQuestion = question.toLowerCase()
     .replace(/[.,:;!?\s@#$%^&*()_+\-=]/g, "");
 
   if (Math.random() <= failChance) {
-    return getRandom(lang._8ballFailAnswers);
+    return getRandom(msg.t("_8ballFailAnswers"));
   }
 
   const isPos = getNth(ansMapping, hashCode(clQuestion) + (seed *
     Math.round(life / getNth(vals, seed))));
-  return getRandom(lang._8ballAnswers[isPos]);
+  return getRandom(msg.t("_8ballAnswers[isPos]"));
 }
 
 module.exports = {
@@ -45,19 +45,19 @@ module.exports = {
   description: "_8ballDescription",
   usage: "_8ballUsage",
   argsRequired: true,
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (!args.length)
-      return msg.reply(lang.commandUsage(prefix, this));
+      return msg.reply(msg.t("commandUsage", prefix, this));
 
-    const question = msg.content.slice(prefix.length + this.name.length + 1);
+    const question = args.raw.join(" ");
 
     const embed = {
-      title: lang.magicballAnswer,
-      description: predict(question, 0.25, msg.author.id, lang),
+      title: msg.t("magicballAnswer"),
+      description: predict(question, 0.25, msg.author.id, msg),
       color: 9807270,
       fields: [
         {
-          name: lang.yourQuestion,
+          name: msg.t("yourQuestion"),
           value: question,
         },
       ],

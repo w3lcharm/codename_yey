@@ -11,7 +11,7 @@ module.exports = {
   usage: [ "avatarUsage", "avatarUsageServer", "avatarUsageBanner", "avatarUsageSplash" ],
   guildOnly: true,
   aliases: [ "av", "pfp" ],
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     let userID = args.join(" ");
     let user;
 
@@ -25,11 +25,11 @@ module.exports = {
     switch (args[0]) {
       case "server": {
         if (!guild.iconURL) {
-          return msg.reply(lang.avatarNoIcon);
+          return msg.reply(msg.t("avatarNoIcon"));
         }
       
         embed.author = {
-          name: lang.serverIcon,
+          name: msg.t("serverIcon"),
           url: guild.iconURL,
         };
         embed.image = { url: guild.iconURL };
@@ -38,11 +38,11 @@ module.exports = {
       }
       case "banner": {
         if (!guild.bannerURL) {
-          return msg.reply(lang.avatarNoBanner);
+          return msg.reply(msg.t("avatarNoBanner"));
         }
 
         embed.author = {
-          name: lang.serverBanner,
+          name: msg.t("serverBanner"),
           url: guild.bannerURL,
         };
         embed.image = { url: guild.bannerURL };
@@ -51,11 +51,11 @@ module.exports = {
       }
       case "splash": {
         if (!guild.splashURL) {
-          return msg.reply(lang.avatarNoSplash);
+          return msg.reply(msg.t("avatarNoSplash"));
         }
 
         embed.author = {
-          name: lang.serverSplash,
+          name: msg.t("serverSplash"),
           url: guild.splashURL,
         };
         embed.image = { url: guild.splashURL };
@@ -71,14 +71,14 @@ module.exports = {
           ) || client.users.find(u => u.tag == userID) || await client.fetchUser(userID);
 
         if (!user) {
-          return msg.reply(lang.cantFindUser);
+          return msg.reply(msg.t("cantFindUser"));
         }
 
         const format = user.avatar && user.avatar.startsWith("a_") ? "gif" : "png";
         const url = user.dynamicAvatarURL(format, 2048);
 
         embed.author = {
-          name: lang.avatarUser(user),
+          name: msg.t("avatarUser", user),
           url,
         };
         embed.image = { url };

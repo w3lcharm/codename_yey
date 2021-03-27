@@ -8,11 +8,11 @@ module.exports = {
   usage: "udUsage",
   cooldown: 10,
   argsRequired: true,
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (!args.length)
-      return msg.reply(lang.commandUsage(prefix, this));
+      return msg.reply(msg.t("commandUsage", prefix, this));
 
-    const word = msg.content.slice(prefix.length + this.name.length + 1);
+    const word = args.raw.join(" ");
 
     const params = new URLSearchParams();
     params.append("term", word);
@@ -23,7 +23,7 @@ module.exports = {
     if (!data) {
       return msg.reply({
         embed: {
-          title: lang.wordNotFound,
+          title: msg.t("wordNotFound"),
           color: 15158332,
         },
       });
@@ -33,8 +33,8 @@ module.exports = {
       data.example.length > 1000) {
       return msg.reply({
         embed: {
-          title: lang.cantShowDefinition,
-          description: lang.linkToDefinition(data.permalink),
+          title: msg.t("cantShowDefinition"),
+          description: msg.t("linkToDefinition", data.permalink),
           color: 15158332,
         },
       });
@@ -54,7 +54,7 @@ module.exports = {
     if (data.example) {
       embed.fields = [
         {
-          name: lang.example,
+          name: msg.t("example"),
           value: data.example,
         },
       ];

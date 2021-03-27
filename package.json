@@ -1,18 +1,19 @@
 {
   "name": "codename_yey",
-  "version": "2.7.2-p1",
+  "version": "3.0",
   "description": "Discord bot",
   "main": "index.js",
   "scripts": {
     "start": "node index"
   },
   "author": "1z3ngero",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bufferutil": "^4.0.1",
     "common-tags": "^1.8.0",
     "dotenv": "^8.2.0",
     "erela.js": "^2.2.0",
+    "erela.js-spotify": "^1.2.0",
     "eris": "abalabahaha/eris#dev",
     "eris-additions": "^1.4.1",
     "erlpack": "github:abalabahaha/erlpack",

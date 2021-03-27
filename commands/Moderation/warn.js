@@ -8,9 +8,9 @@ module.exports = {
   guildOnly: true,
   usage: "warnUsage",
   argsRequired: true,
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (!args.length)
-      return msg.reply(lang.commandUsage(prefix, this));
+      return msg.reply(msg.t("commandUsage", prefix, this));
 
     if (args[0] == "--list" || args[0] == "-l") {
       let member;
@@ -19,7 +19,7 @@ module.exports = {
         msg.guild.members.get(msg.mentions[0].id) :
         msg.guild.members.find(m => m.id === args[1] || m.tag === args[1]);
         
-      if (!member) return msg.reply(lang.cantFindUser);
+      if (!member) return msg.reply(msg.t("cantFindUser"));
 
       let embed = {
         author: {
@@ -44,8 +44,8 @@ module.exports = {
 
           for (let item of warnList.splice(0, 10)) {
             arr.push({
-              name: lang.warnListFieldName(item.id, await client.fetchUser(item.warnedBy)),
-              value: lang.reason(item.reason),
+              name: msg.t("warnListFieldName", item.id, await client.fetchUser(item.warnedBy)),
+              value: msg.t("reason", item.reason),
             });
           }
 
@@ -53,15 +53,15 @@ module.exports = {
         }
 
         embed.fields = pages[0];
-        embed.footer = { text: lang.warnsFooter(warnsLength, pages.length, 1) };
+        embed.footer = { text: msg.t("warnsFooter", warnsLength, pages.length, 1) };
       } else {
         for (let item of warnList) {
           embed.fields.push({
-            name: lang.warnListFieldName(item.id, await client.fetchUser(item.warnedBy)),
-            value: lang.reason(item.reason),
+            name: msg.t("warnListFieldName", item.id, await client.fetchUser(item.warnedBy)),
+            value: msg.t("reason", item.reason),
           });
         }
-        embed.footer = { text: lang.totalWarns(warnList.length) };
+        embed.footer = { text: msg.t("totalWarns", warnList.length) };
       }
       const message = await msg.reply({ embed });
       if (warnsLength > 10) {
@@ -87,7 +87,7 @@ module.exports = {
           const page = pages[pageNumber];
           const embed = msg.embeds[0];
           embed.fields = page;
-          embed.footer.text = lang.warnsFooter(warnsLength, pages.length, pageNumber + 1);
+          embed.footer.text = msg.t("warnsFooter", warnsLength, pages.length, pageNumber + 1);
           message.edit({ embed });
         });
       }
@@ -103,12 +103,12 @@ module.exports = {
             id: id,
           },
         });
-        if (!warn) msg.reply(lang.invalidID);
+        if (!warn) msg.reply(msg.t("invalidID"));
         else if (warn.server != msg.guild.id)
-          msg.reply(lang.warnOnAnotherServer);
+          msg.reply(msg.t("warnOnAnotherServer"));
         else {
           await db.warns.destroy({ where: { id: id } });
-          msg.reply(lang.warnDeleteSuccess(warn.id));
+          msg.reply(msg.t("warnDeleteSuccess", warn.id));
         }
         return;
       }
@@ -119,11 +119,11 @@ module.exports = {
 
       if (!member) return;
       if (member.id == msg.author.id)
-        return msg.reply(lang.cantWarnYourself);
+        return msg.reply(msg.t("cantWarnYourself"));
       if (member.id == client.user.id)
-        return msg.reply(lang.cantWarnBot);
+        return msg.reply(msg.t("cantWarnBot"));
       if (msg.member.highestRole.position <= member.highestRole.position)
-        return msg.reply(lang.cantWarnAdmin);
+        return msg.reply(msg.t("cantWarnAdmin"));
 
       const warnObj = await db.warns.create({
         server: msg.guild.id,
@@ -134,13 +134,13 @@ module.exports = {
 
       const embed = {
         author: {
-          name: lang.warnSuccess(member),
+          name: msg.t("warnSuccess", member),
           icon_url: member.avatarURL,
         },
-        description: lang.reason(reason),
+        description: msg.t("reason", reason),
         color: 3066993,
         timestamp: new Date().toISOString(),
-        footer: { text: lang.warnID(warnObj.id) },
+        footer: { text: msg.t("warnID", warnObj.id) },
       };
       await msg.reply({ embed });
 

@@ -27,7 +27,8 @@ module.exports = {
   errorFooter: "Вы можете дополнительно сообщить об этой ошибке на сервер поддержки.",
   cooldown: left => `> :warning: Вам нужно подождать ${left} секунд, чтобы использовать эту команду снова.`,
   cantFindUser: "> :x: Пользователь не найден.",
-  botPrefix: (prefix, user) => `>>> Мой префикс на этом сервере \`${prefix}\`.\nВведите \`${prefix}help\` для получения команд бота.`,
+  botPrefix: prefix => `Мой префикс на этом сервере -  \`${prefix}\`.`,
+  botPrefixFooter: prefix => `Используйте ${prefix}help для получения списка команд.`,
   antiInviteReason: "отправил ссылку-приглашение",
 
   permissions: {
@@ -111,6 +112,24 @@ module.exports = {
   serverEmojisAnimated: "анимированные",
   serverBoostLevel: "Уровень буста:",
   serverBoosts: "Кол-во бустов:",
+  serverFeatures: "Функции:",
+  features: {
+    INVITE_SPLASH: "Фон приглашения",
+    VIP_REGIONS: "Битрейт 384 кб/c",
+    VANITY_URL: "Постоянная ссылка",
+    VERIFIED: "Верифицированный сервер",
+    PARTNERED: "Партнер Discord",
+    COMMUNITY: "Сервер сообщества",
+    COMMERCE: "Магазинные каналы",
+    NEWS: "Каналы с объявлениями",
+    DISCOVERABLE: "В поиске серверов",
+    FEATURABLE: "Избранный сервер",
+    ANIMATED_ICON: "Анимированная иконка",
+    BANNER: "Баннер сервера",
+    WELCOME_SCREEN_ENABLED: "Экран с приветствием",
+    MEMBER_VERIFICATION_GATE_ENABLED: "Отбор участников",
+    PREVIEW_ENABLED: "Предпросмотр сервера",
+  },
 
   statsDescription: "Показывает статистику бота.",
   statsTitle: "Статистика бота",
@@ -283,9 +302,6 @@ module.exports = {
   qrUsage: "<текст>",
   generationTime: time => `Заняло ${time} мс.`,
 
-  sayDescription: "Говорит ваш текст в эмбеде.",
-  sayUsage: "<text>",
-
   udDescription: "Ищет определение слова в Urban Dictionary (на английском языке).",
   udUsage: "<слово>",
   wordNotFound: ":x: Слово не найдено.",
@@ -435,7 +451,7 @@ module.exports = {
   antiinviteFooter: prefix => `Вы можете управлять анти-инвайтом, используя ${prefix}antiinvite [действие: delete, warn, kick, ban или disable]`,
 
   githubDescription: "Ищет и показывает информацию о репозитории на GitHub.",
-  githubUsage: "запрос",
+  githubUsage: "<репозиторий>",
   githubRepoNotFound: "> :x: Репозиторий не найден.",
   githubStars: "Звезды:",
   githubForks: "Форки:",
@@ -458,8 +474,10 @@ module.exports = {
   allTracksPlayed: "> :stop_button: Все треки проиграны.",
   playlistsNotSupported: "> :x: Плейлисты не поддерживаются.",
   trackNotFound: "> :x: Трек не найден.",
-  playFailed: msg => `> :x: Не удалось загрузить трек. \`${msg}\``,
+  trackLoadFailed: msg => `> :x: Не удалось загрузить трек. \`${msg}\``,
   duration: "Продолжительность:",
+  playFailed: ":x: Не удалось воспроизвести трек.",
+  playFailedDesc: "Трек имеет ограничение по возрасту, заблокирован или находится в ограниченном доступе.",
 
   pauseDescription: "Ставит трек на паузу.",
   notPlaying: "> Сейчас ничего не играет.",
@@ -494,7 +512,29 @@ module.exports = {
   invalidColor: "> :x: Неправильный цвет.",
   embedcolorSuccess: color => `> :white_check_mark: Ваш цвет эмбедов изменен на \`${color}\``,
 
-  loopDescription: "Повторяет играющий в данный момент трек.",
+  loopDescription: "Включает или выключает повторение играющего в данный момент трека.",
   loopEnabled: "> Повторение включено.",
   loopDisabled: "> Повторение выключено.",
+
+  npmDescription: "Ищет информацию о пакете NPM.",
+  npmUsage: "<пакет>",
+  npmNoPkg: "> :x: Укажите имя пакета.",
+  npmPkgNotFound: "> :x: Пакет не найден.",
+  npmVersion: "Версия:",
+  npmLicense: "Лицензия:",
+  npmKeywords: "Ключевые слова:",
+  npmModifiedAt: "Изменено:",
+
+  volumeDescription: "Задает громкость музыки.",
+  volumeUsage: "[громкость]",
+  currentVol: vol => `Текущая громкость ${vol}%.`,
+  volumeTip: prefix => `Используйте ${prefix}volume [громкость] для задания новой громкости.`,
+  volumeInvalid: "> :x: Громкость должна быть в диапазоне от 1 до 100.",
+  volumeChanged: vol => `> :speaker: Новая громкость ${vol}%.`,
+
+  wikipediaDescription: "Ищет страницу в Википедии.",
+  wikipediaUsage: "<запрос>",
+  wikipediaNoQuery: "> :x: Запрос не предоставлен.",
+  wikipediaNotFound: "> :x: Страница не найдена.",
+  wikipediaDisambiguation: "> :x: Страница, которую вы ищете, является неоднозначной страницей.",
 };

@@ -1,5 +1,6 @@
 const { Manager } = require("erela.js");
 const Logger = require("../core/Logger");
+const SpotifyPlugin = require("erela.js-spotify");
 
 const parseTime = require("../utils/parseTime");
 
@@ -13,6 +14,12 @@ module.exports.load = client => {
     send(id, packet) {
       client.guilds.get(id)?.shard.sendWS(packet.op, packet.d, false);
     },
+    plugins: [
+      new SpotifyPlugin({
+        clientID: config.spotifyClientID,
+        clientSecret: config.spotifyClientSecret,
+      }),
+    ],
   });
 
   client.once("ready", () => client.lavalinkManager.init(client.user.id))
@@ -48,6 +55,21 @@ module.exports.load = client => {
       if (!newChannel) {
         await client.createMessage(player.textChannel, lang.allTracksPlayed);
         await player.destroy();
+      }
+    }).on("trackError", async (player, track, payload) => {
+      const lang = player.get("lang");
+
+      if (payload.error == "Track information is unavailable.") {
+        const embed = {
+          title: lang.playFailed,
+          description: lang.playFailedDesc,
+          color: 15158332,
+        };
+
+        await client.createMessage(player.textChannel, { embed });
+      } else {
+        logger.error("Failed to play the track:");
+        console.log(payload);
       }
     });
 }

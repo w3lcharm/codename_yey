@@ -5,9 +5,9 @@ module.exports = {
   usage: "reloadUsage",
   ownerOnly: true,
   hidden: true,
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (!args.length) {
-      return msg.reply(lang.commandUsage(prefix, this));
+      return msg.reply(msg.t("commandUsage", prefix, this));
     }
 
     switch (args[0]) {
@@ -25,7 +25,7 @@ module.exports = {
       default:
         for (const cmd of args) {
           if (!client.commands.has(cmd)) {
-            return msg.reply(lang.reloadCmdDoesntExist(cmd));
+            return msg.reply(msg.t("reloadCmdDoesntExist", cmd));
           }
 
           client.reloadCommand(cmd);

@@ -5,9 +5,9 @@ module.exports = {
   usage: [ "base64Usage", "base64DecodeUsage" ],
   aliases: [ "b64" ],
   argsRequired: true,
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (!args.raw.length) {
-      return msg.reply(lang.commandUsage(prefix, this));
+      return msg.reply(msg.t("commandUsage", prefix, this));
     }
     
     let decodeFlag = false;

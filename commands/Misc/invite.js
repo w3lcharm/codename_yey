@@ -31,21 +31,21 @@ module.exports = {
   usage: "inviteUsage",
   aliases: [ "inv" ],
   argsRequired: true,
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (!args.length) {
-      return msg.reply(lang.commandUsage(prefix, this));
+      return msg.reply(msg.t("commandUsage", prefix, this));
     }
 
     const invite = parseInvite(args[0]);
     if (!invite) {
-      return msg.reply(lang.inviteInvalid); 
+      return msg.reply(msg.t("inviteInvalid")); 
     }
 
     let inviteInfo;
     try {
       inviteInfo = await client.getInvite(invite, true);
     } catch {
-      return msg.reply(lang.inviteInvalid);
+      return msg.reply(msg.t("inviteInvalid"));
     }
 
     if (!msg.member.permissions.has("manageMessages")) msg.delete().catch(() => {});
@@ -62,16 +62,16 @@ module.exports = {
           value: inviteInfo.guild.id,
         },
         {
-          name: lang.inviteVerificationLevel,
-          value: lang.verificationLevel[inviteInfo.guild.verificationLevel],
+          name: msg.t("inviteVerificationLevel"),
+          value: msg.t("verificationLevel")[inviteInfo.guild.verificationLevel],
         },
         {
-          name: lang.inviteChannel,
+          name: msg.t("inviteChannel"),
           value: `#${inviteInfo.channel.name}`,
         },
         {
-          name: lang.inviteMemberCount,
-          value: lang.inviteMemberCountDesc(inviteInfo.memberCount, inviteInfo.presenceCount),
+          name: msg.t("inviteMemberCount"),
+          value: msg.t("inviteMemberCountDesc", inviteInfo.memberCount, inviteInfo.presenceCount),
         },
       ],
     };
@@ -82,7 +82,7 @@ module.exports = {
 
     if (inviteInfo.inviter) {
       embed.fields.push({
-        name: lang.inviteInviter,
+        name: msg.t("inviteInviter"),
         value: inviteInfo.inviter.tag,
       });
     }

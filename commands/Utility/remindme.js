@@ -17,28 +17,28 @@ module.exports = {
   description: "remindmeDescription",
   usage: "remindmeUsage",
   argsRequired: true,
-  async run(client, msg, args, prefix, lang) {
+  async run(client, msg, args, prefix) {
     if (!args.length) {
-      return msg.reply(lang.commandUsage(prefix, this));
+      return msg.reply(msg.t("commandUsage", prefix, this));
     }
 
     let time = args[0];
 
     let parsedTime = parseTime(args[0]); 
     if (!parsedTime) {
-      return msg.reply(lang.remindmeInvalidTime);
+      return msg.reply(msg.t("remindmeInvalidTime"));
     }
     if (parsedTime > parseTime("7d")) {
-      return msg.reply(lang.notMoreThan7Days);
+      return msg.reply(msg.t("notMoreThan7Days"));
     }
 
     let text = msg.content.slice(prefix.length + this.name.length + time.length + 2);
     if (!text) {
-      return msg.reply(lang.textCantBeEmpty);
+      return msg.reply(msg.t("textCantBeEmpty"));
     }
 
     let embed = {
-      title: lang.reminder,
+      title: msg.t("reminder"),
       description: text,
       timestamp: new Date().toISOString(),
       color: await msg.author.embColor(),
@@ -49,7 +49,7 @@ module.exports = {
         await msg.reply({ embed })
       }, parsedTime);
 
-      await msg.reply(lang.remindmeSuccess);
+      await msg.reply(msg.t("remindmeSuccess"));
     } catch {}
   }
 }
