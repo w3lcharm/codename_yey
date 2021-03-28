@@ -12,7 +12,7 @@ module.exports = {
       return msg.reply(msg.t("wikipediaNoQuery"));
     }
 
-    const response = await fetch(`https://${lang.langName}.wikipedia.org/api/rest_v1/page/summary/${query}`)
+    const response = await fetch(`https://${msg.t("langName")}.wikipedia.org/api/rest_v1/page/summary/${query}`)
       .then(r => r.json());
 
     if (!response) {
