@@ -36,7 +36,7 @@ function predict(question, failChance, seed, msg) {
 
   const isPos = getNth(ansMapping, hashCode(clQuestion) + (seed *
     Math.round(life / getNth(vals, seed))));
-  return getRandom(msg.t("_8ballAnswers[isPos]"));
+  return getRandom(msg.t("_8ballAnswers")[isPos]);
 }
 
 module.exports = {
