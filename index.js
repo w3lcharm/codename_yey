@@ -15,7 +15,6 @@ global.client = new CmdClient(config.token, {
       .then(p => p && p.prefix) || config.prefix;  
   },
   owners: config.owners,
-  db: config.database,
   debugMode: config.debugMode,
   guildSubscriptions: false,
   intents: [
@@ -28,7 +27,6 @@ global.client = new CmdClient(config.token, {
   getAllUsers: true,
 });
 
-client.supportChannelID = config.supportChannelID;
 client.cmdLogsChannelID = config.cmdLogsChannelID;
 client.usageCount = 0;
 
