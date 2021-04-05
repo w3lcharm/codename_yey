@@ -548,4 +548,9 @@ module.exports = {
   wikipediaNoQuery: "> :x: No query provided.",
   wikipediaNotFound: "> :x: Page not found.",
   wikipediaDisambiguation: "> :x: The page you are looking for is disambiguation page.",
+
+  emojiDescription: "Enlarges the provided emoji.\nStandard Discord emojis are not supported.",
+  emojiUsage: "<emoji>",
+  noEmoji: "> :x: Please provide the correct emoji.",
+  invalidEmoji: "> :x: Invalid emoji provided.",
 };
