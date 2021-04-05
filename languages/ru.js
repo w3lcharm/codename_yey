@@ -542,4 +542,8 @@ module.exports = {
   emojiUsage: "<эмодзи>",
   noEmoji: "> :x: Предоставьте корректный эмодзи.",
   invalidEmoji: "> :x: Указан неправильный эмодзи.",
+
+  queueloopDescription: "Включает или выключает повторение очереди музыки.",
+  queueloopEnabled: "> Повторение очереди включено.",
+  queueloopDisabled: "> Повторение очереди выключено.",
 };

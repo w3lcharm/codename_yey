@@ -1,7 +1,8 @@
 module.exports = {
-  name: "loop",
+  name: "queueloop",
   group: "musicGroup",
-  description: "loopDescription",
+  description: "queueloopDescription",
+  aliases: [ "qloop" ],
   async run(client, msg, args, prefix) {
     if (
       !msg.member.voiceState.channelID || 
@@ -15,8 +16,8 @@ module.exports = {
       return msg.reply(msg.t("notPlaying"));
     }
 
-    player.setTrackRepeat(!player.trackRepeat);
+    player.setQueueRepeat(!player.queueRepeat);
 
-    await msg.reply(player.trackRepeat ? msg.t("loopEnabled") : msg.t("loopDisabled"));
+    await msg.reply(player.queueRepeat ? msg.t("queueloopEnabled") : msg.t("queueloopDisabled"));
   }
 }

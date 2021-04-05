@@ -553,4 +553,8 @@ module.exports = {
   emojiUsage: "<emoji>",
   noEmoji: "> :x: Please provide the correct emoji.",
   invalidEmoji: "> :x: Invalid emoji provided.",
+
+  queueloopDescription: "Toggles looping for the music queue.",
+  queueloopEnabled: "> Queue loop enabled.",
+  queueloopDisabled: "> Queue loop disabled.",
 };
