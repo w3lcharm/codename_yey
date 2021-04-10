@@ -14,7 +14,7 @@
     "dotenv": "^8.2.0",
     "erela.js": "^2.2.0",
     "erela.js-spotify": "^1.2.0",
-    "eris": "abalabahaha/eris#dev",
+    "eris": "0.15.0",
     "eris-additions": "^1.4.1",
     "erlpack": "github:abalabahaha/erlpack",
     "eventemitter3": "^4.0.4",

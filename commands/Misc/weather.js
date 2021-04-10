@@ -30,7 +30,7 @@ module.exports = {
     }
 
     const embed = {
-      title: lang.weatherEmbedTitle(data.location.name),
+      title: msg.t("weatherEmbedTitle", data.location.name),
       description: data.current.skytext,
       thumbnail: { url: data.current.imageUrl },
       color: await msg.author.embColor(),

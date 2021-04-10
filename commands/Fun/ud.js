@@ -47,7 +47,7 @@ module.exports = {
       url: data.permalink,
       color: await msg.author.embColor(),
       footer: {
-        text: lang.author(data.author),
+        text: msg.t("author", data.author),
       },
     };
 

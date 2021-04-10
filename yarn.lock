@@ -354,19 +354,20 @@ eris-additions@^1.4.1:
   dependencies:
     eris "^0.12.0"
 
+eris@0.15.0:
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/eris/-/eris-0.15.0.tgz#d0744d993d508b2951bc6d0ab380ae39b63c0666"
+  integrity sha512-muBdi5XyMXdxFQ8xUG6yofq40/Z02CHlqJP7zIdHhpdDiHvFM/mybGiFAHuoSYcsVTTvEfbUaAJ+SDEmMjARYw==
+  dependencies:
+    ws "^7.2.1"
+  optionalDependencies:
+    opusscript "^0.0.8"
+    tweetnacl "^1.0.1"
+
 eris@^0.12.0:
   version "0.12.1"
   resolved "https://registry.yarnpkg.com/eris/-/eris-0.12.1.tgz#2d99ba07dabcfce3a2645e9561e6ea3f39bec61c"
   integrity sha512-6TNeDct84dk8JGMaYRf4Q+27Suf+g/3bWPyqyKTdaR6nlDKYuo/IcfVHAyaGAgCmA2QcpuSNxynRRfhdhKsHUA==
-  dependencies:
-    ws "^7.2.1"
-  optionalDependencies:
-    opusscript "^0.0.7"
-    tweetnacl "^1.0.1"
-
-eris@abalabahaha/eris#dev:
-  version "0.14.0"
-  resolved "https://codeload.github.com/abalabahaha/eris/tar.gz/db7da3891a89748e3f7b46efc8fc224df0a17c9a"
   dependencies:
     ws "^7.2.1"
   optionalDependencies:
@@ -828,6 +829,11 @@ opusscript@^0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/opusscript/-/opusscript-0.0.7.tgz#7dd7ec55b302d26bf588e6fc3feb090b8c7da856"
   integrity sha512-DcBadTdYTUuH9zQtepsLjQn4Ll6rs3dmeFvN+SD0ThPnxRBRm/WC1zXWPg+wgAJimB784gdZvUMA57gDP7FdVg==
+
+opusscript@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/opusscript/-/opusscript-0.0.8.tgz#00b49e81281b4d99092d013b1812af8654bd0a87"
+  integrity sha512-VSTi1aWFuCkRCVq+tx/BQ5q9fMnQ9pVZ3JU4UHKqTkf0ED3fKEPdr+gKAAl3IA2hj9rrP6iyq3hlcJq3HELtNQ==
 
 os-homedir@^1.0.0:
   version "1.0.2"
