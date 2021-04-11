@@ -44,7 +44,7 @@ module.exports = {
         },
         {
           name: msg.t("roleColor"),
-          value: role.color ? intToHex(role.color) : lang.roleDefaultColor,
+          value: role.color ? intToHex(role.color) : msg.t("roleDefaultColor"),
         },
         {
           name: msg.t("roleMentionable"),
