@@ -17,8 +17,14 @@ module.exports = {
     const params = new URLSearchParams();
     params.append("term", word);
 
-    const resp = await fetch(`http://api.urbandictionary.com/v0/define?${params}`);
-    const data = (await resp.json()).list[0];
+    const resp = await fetch(`http://api.urbandictionary.com/v0/define?${params}`)
+      .then(r => r.json());
+
+    if (resp.error) {
+      return msg.reply(msg.t("apiError"));
+    }
+
+    const data = resp.list[0];
 
     if (!data) {
       return msg.reply({

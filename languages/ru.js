@@ -309,6 +309,7 @@ module.exports = {
   linkToDefinition: link => `Ссылка на определение: [(нажмите сюда)](${link})`,
   example: "Example:",
   author: author => `Author: ${author}`,
+  apiError: "> :x: API вернуло неизвестную ошибку.",
 
   languageDescription: "Меняет ваш язык.",
   languageUsage: "[язык]",

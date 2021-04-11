@@ -309,6 +309,7 @@ module.exports = {
   linkToDefinition: link => `But there is a link to this definition: [(click here)](${link})`,
   example: "Example:",
   author: author => `Author: ${author}`,
+  apiError: "> :x: API returned an unknown error.",
 
   languageDescription: "Changes the language.",
   languageUsage: "[language]",
