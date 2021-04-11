@@ -49,12 +49,12 @@ module.exports = {
     };
 
     if (repo.license) embed.fields.push({
-      name: lang.githubLicense,
+      name: msg.t("githubLicense"),
       value: repo.license.name,
     });
 
     if (repo.language) embed.fields.push({
-      name: lang.githubLanguage,
+      name: msg.t("githubLanguage"),
       value: repo.language,
     });
 

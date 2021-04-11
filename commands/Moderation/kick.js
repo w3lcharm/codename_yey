@@ -41,7 +41,7 @@ module.exports = {
     } else {
       let description;
       if (!msg.guild.me.permission.has("kickMembers")) {
-        description = lang.botDontHavePerms(lang.permissions.kickMembers);
+        description = msg.t("botDontHavePerms", msg.t("permissions").kickMembers);
       } else if (member.id === msg.guild.ownerID) {
         description = msg.t("userIsOwner");
       } else if (member.highestRole.position >= msg.guild.me.highestRole.position) {

@@ -70,7 +70,7 @@ module.exports = {
         },
         {
           name: msg.t("statsCpu"),
-          value: `\`${cpu ? cpu.model : lang.cantGetCpuInfo}\``,
+          value: `\`${cpu ? cpu.model : msg.t("cantGetCpuInfo")}\``,
         },
       ],
       footer: {
