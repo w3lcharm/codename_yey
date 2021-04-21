@@ -7,9 +7,10 @@ module.exports.load = client => {
     });
   }
   
-  User.prototype.embColor = function () {
-    return db.embColors.findOne({ where: { user: this.id } })
-      .then(c => c ? c.isRandom ? Math.round(Math.random() * 16777216) : c.color || config.defaultColor : config.defaultColor);
+  User.prototype.embColor = async function () {
+    const color = await db.embColors.findOne({ where: { user: this.id } });
+
+    return color ? color.isRandom ? Math.round(Math.random() * 16777216) : color.color || config.defaultColor : config.defaultColor;
   }
 
   Message.prototype.reply = async function (content, file) {
