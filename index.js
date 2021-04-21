@@ -1,7 +1,7 @@
 const CmdClient = require("./core/CmdClient");
 const path = require("path");
 const fs = require("fs");
-const { config } = require("dotenv/types");
+const { version } = require("./package");
 
 try {
   global.config = require("./config");
@@ -10,7 +10,7 @@ try {
   process.exit(1);
 }
 
-global.client = new CmdClient(config.token, {
+global.client = new CmdClient(`Bot ${config.token}`, {
   async prefix(client, msg) {
     let prefix = client.prefixCache[msg.guild.id];
 
@@ -64,6 +64,10 @@ process.on("uncaughtException", e => console.warn(`Uncaught exception:\n${e.stac
 
 client.on("error", (error, id) => {
   client.logger.error(`Error in shard ${id}:\n${error.stack}`);
+});
+
+client.once("ready", async () => {
+  await client.editStatus({ name: `v${version} | type @${client.user.username}`});
 });
 
 client.connect();
