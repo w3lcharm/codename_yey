@@ -24,7 +24,6 @@ module.exports = {
           value: stripIndents`[${msg.t("infoBotInvite")}](${inviteLink})
             [${msg.t("infoSupportServer")}](https://discord.gg/dHamqUhPpA)
             [${msg.t("infoDonate")}](https://www.donationalerts.com/r/codename_yey)
-            [${msg.t("infoGitHubRepo")}](https://github.com/1z3ngero/codename_yey)
             [top.gg](https://top.gg/bot/641312878804074497)
             [discord.bots.gg](https://discord.bots.gg/bots/641312878804074497)
             [bots.server-discord.com](https://bots.server-discord.com/641312878804074497)
