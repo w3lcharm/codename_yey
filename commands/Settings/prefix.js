@@ -23,6 +23,8 @@ module.exports = {
         .then(i => i[0]);
       await guildPrefix.update({ prefix: prefixArg.toLowerCase() });
 
+      client.prefixCache[msg.guild.id] = guildPrefix;
+
       await msg.reply(msg.t("prefixSuccess", prefixArg));
     }
   }
