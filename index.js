@@ -46,7 +46,7 @@ client.prefixCache = {};
 
 client.options.allowedMentions.replied_user = true;
 
-const cmdGroups = [ "General", "Utility", "Moderation", "Fun", "Misc", "Music", "Settings", "Dev" ];
+const cmdGroups = [ "General", "Utility", "Moderation", "Fun", "Misc", "Music", "Settings", "Dev", "NSFW" ];
 for (const group of cmdGroups) {
   client.loadCommandGroup(path.join(__dirname, "commands", group));
 }

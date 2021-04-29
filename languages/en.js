@@ -558,4 +558,13 @@ module.exports = {
   queueloopDescription: "Toggles looping for the music queue.",
   queueloopEnabled: "> Queue loop enabled.",
   queueloopDisabled: "> Queue loop disabled.",
+
+  rule34Description: "Gets random post from rule34.xxx by provided tag.\nThis command can only be used in channels marked as NSFW.",
+  rule34Usage: "<tag>",
+  notNsfwChannel: "> :x: You can use this command only in channels marked as NSFW.",
+  noPostsFound: tag => `> :x: No posts found by tag \`${tag}\`.`,
+  rule34Video: (url, score, tags) => `> Link to video: ${url}`,
+  linkToPost: "Link to post",
+  score: "Score:",
+  tags: "Tags:",
 };

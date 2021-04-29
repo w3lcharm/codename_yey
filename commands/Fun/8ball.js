@@ -1,6 +1,4 @@
-function getRandom(arr) {
-  return arr[Math.round(Math.random() * (arr.length - 1))];
-}
+const randomArrayItem = require("../../utils/randomArrayItem");
 
 function getNth(arr, n) {
   return arr[Math.abs(n) % arr.length];
@@ -31,12 +29,12 @@ function predict(question, failChance, seed, msg) {
     .replace(/[.,:;!?\s@#$%^&*()_+\-=]/g, "");
 
   if (Math.random() <= failChance) {
-    return getRandom(msg.t("_8ballFailAnswers"));
+    return randomArrayItem(msg.t("_8ballFailAnswers"));
   }
 
   const isPos = getNth(ansMapping, hashCode(clQuestion) + (seed *
     Math.round(life / getNth(vals, seed))));
-  return getRandom(msg.t("_8ballAnswers")[isPos]);
+  return randomArrayItem(msg.t("_8ballAnswers")[isPos]);
 }
 
 module.exports = {
