@@ -54,6 +54,7 @@ module.exports = {
   funGroup: "Развлекательные",
   miscGroup: "Разное",
   musicGroup: "Музыка",
+  nsfwGroup: "NSFW",
   
   avatarDescription: "Показывает ваш аватар, либо аватар указанного пользователя.",
   avatarUsage: "[пользователь: id, упоминание либо тег]",

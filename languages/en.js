@@ -54,6 +54,7 @@ module.exports = {
   funGroup: "Fun",
   miscGroup: "Misc",
   musicGroup: "Music",
+  nsfwGroup: "NSFW",
 
   avatarDescription: "Gets your or someone's avatar.",
   avatarUsage: "[user: id, tag or mention]",
