@@ -553,7 +553,7 @@ module.exports = {
   rule34Usage: "<тег>",
   notNsfwChannel: "> :x: Вы можете использовать эту команду только в каналах, помеченных как NSFW.",
   noPostsFound: tag => `> :x: Не найдено постов по тегу \`${tag}\`.`,
-  rule34Video: link => `> Ссылка на видео: ${link}`,
+  rule34Video: (link, tags) => `> Ссылка на видео: ${link}\n> Теги: ${tags}`,
   linkToPost: `Ссылка на пост`,
   score: "Баллы:",
   tags: "Теги:",

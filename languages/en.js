@@ -564,7 +564,7 @@ module.exports = {
   rule34Usage: "<tag>",
   notNsfwChannel: "> :x: You can use this command only in channels marked as NSFW.",
   noPostsFound: tag => `> :x: No posts found by tag \`${tag}\`.`,
-  rule34Video: (url, score, tags) => `> Link to video: ${url}`,
+  rule34Video: (url, tags) => `> Link to video: ${url}\n> Tags: ${tags}`,
   linkToPost: "Link to post",
   score: "Score:",
   tags: "Tags:",

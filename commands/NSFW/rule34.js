@@ -14,11 +14,10 @@ module.exports = {
       return msg.reply(msg.t("notNsfwChannel"));
     }
 
-    const tag = args[0];
+    const tags = args.join(" ");
 
-    const response = await fetch(`https://rule34.xxx/index.php?page=dapi&s=post&q=index&tags=${encodeURIComponent(tag)}`, {
-      headers: { "Content-Type": "application/json" },
-    }).then(r => r.text())
+    const response = await fetch(`https://rule34.xxx/index.php?page=dapi&s=post&q=index&tags=${encodeURIComponent(tags)}`)
+      .then(r => r.text());
 
     // fuck rule34 api
     const data = await parseStringPromise(response);
@@ -29,9 +28,10 @@ module.exports = {
     }
 
     const post = randomArrayItem(data.posts.post).$;
+    const postTags = post.tags.trim().split(" ").map(t => `\`${t}\``).join(", ").substring(0, 1024);
 
     if (post.tags.includes("video")) {
-      return msg.reply(msg.t("rule34Video", post.file_url));
+      return msg.reply(msg.t("rule34Video", post.file_url, postTags));
     }
 
     const embed = {
@@ -45,7 +45,7 @@ module.exports = {
         },
         {
           name: msg.t("tags"),
-          value: post.tags.trim().split(" ").map(t => `\`${t}\``).join(", ").substring(0, 1024),
+          value: postTags,
         },
       ],
       image: { url: post.file_url },
