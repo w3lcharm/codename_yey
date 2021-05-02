@@ -24,7 +24,7 @@ module.exports = {
     // also futanari is shit
 
     if (data.posts.$.count == 0) {
-      return msg.reply(msg.t("noPostsFound", tag));
+      return msg.reply(msg.t("noPostsFound", tags));
     }
 
     const post = randomArrayItem(data.posts.post).$;
