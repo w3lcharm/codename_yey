@@ -568,4 +568,16 @@ module.exports = {
   linkToPost: "Link to post",
   score: "Score:",
   tags: "Tags:",
+
+  reactionroleDescription: "Lets you to manage reaction roles.\nRequires \"Manage Guild\" permission.\nAlso keep in mind that you should use this command in the same channel where you want to setup the reaction role.",
+  reactionroleUsage: "<messageID> <emoji> <role | disable to disable this reaction role>",
+  reactionRoles: "Reaction roles on this message:",
+  tooMoreReactionRoles: "> :x: There is more than 20 reaction roles on this message.",
+  noRoleProvided: "> :x: No role provided.",
+  reactionRoleDoesNotExist: "> :x: This reaction role does not exist.",
+  reactionRoleDeleteSuccess: "> :white_check_mark: Reaction role successfully removed.",
+  invalidRoleProvided: "> :x: This role does not exist.",
+  providedRoleHigher: "> :x: This role is higher than my role.",
+  reactionRoleDontHavePerms: "> :x: I don't have the `Manage Roles` permission to do this.",
+  reactionRoleSuccess: "> :white_check_mark: Reaction role successfully created.",
 };

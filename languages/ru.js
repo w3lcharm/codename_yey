@@ -557,4 +557,16 @@ module.exports = {
   linkToPost: `Ссылка на пост`,
   score: "Баллы:",
   tags: "Теги:",
+
+  reactionroleDescription: "Позволяет вам управлять ролями по реакциям.\nТребует право `Управлять сервером`.\nТакже имейте ввиду, что вы должны использовать эту команду в том же канале, в котором вы хотите установить роль по реакциям.",
+  reactionroleUsage: "<ID сообщения> <эмодзи> <роль | disable для выключения роли по реакциям>",
+  reactionRoles: "Роли по реакциям на этом сообщении:",
+  tooMoreReactionRoles: "> :x: На этом сообщении более чем 20 ролей по реакциям.",
+  noRoleProvided: "> :x: Роль не указана.",
+  reactionRoleDoesNotExist: "> :x: Эта роль по реакциям не существует.",
+  reactionRoleDeleteSuccess: "> :white_check_mark: Роль по реакциям успешно удалена.",
+  invalidRoleProvided: "> :x: Эта роль не существует.",
+  providedRoleHigher: "> :x: Эта роль выше моей роли.",
+  reactionRoleDontHavePerms: "> :x: У меня нету права `Управлять ролями` для создания роли по реакциям.",
+  reactionRoleSuccess: "> :white_check_mark: Роль по реакциям успешно создана.",
 };

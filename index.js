@@ -43,6 +43,11 @@ client.cmdLogsChannelID = config.cmdLogsChannelID;
 client.usageCount = 0;
 
 client.prefixCache = {};
+setInterval(() => {
+  for (const key in client.prefixCache) {
+    delete client.prefixCache[key];
+  }
+}, 3600000);
 
 client.options.allowedMentions.replied_user = true;
 

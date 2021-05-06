@@ -4,7 +4,7 @@ async function onCommandError(cmd, msg, err, showErr = false) {
   if (err instanceof PermissionError) {
     const embed = {
       title: msg.t("dontHavePerms"),
-      description: msg.t("missingPermission", msg.t(err.missingPermission)),
+      description: msg.t("missingPermission", msg.t("permissions")[err.missingPermission]),
       color: 15158332,
       footer: {
         text: "codename_yey",

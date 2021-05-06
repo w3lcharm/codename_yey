@@ -12,6 +12,7 @@
     "bufferutil": "^4.0.1",
     "common-tags": "^1.8.0",
     "dotenv": "^8.2.0",
+    "emoji-regex": "^9.2.2",
     "erela.js": "^2.2.0",
     "erela.js-spotify": "^1.2.0",
     "eris": "0.15.0",
