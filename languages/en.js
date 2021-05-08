@@ -580,4 +580,8 @@ module.exports = {
   providedRoleHigher: "> :x: This role is higher than my role.",
   reactionRoleDontHavePerms: "> :x: I don't have the `Manage Roles` permission to do this.",
   reactionRoleSuccess: "> :white_check_mark: Reaction role successfully created.",
+
+  hentaiDescription: "Gets random hentai image or gif.\nThis command can only be used in channels marked as NSFW.",
+
+  
 };
