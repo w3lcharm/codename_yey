@@ -3,7 +3,7 @@ const Sequelize = require("sequelize");
 const initDB = require("../core/initDB");
 
 module.exports.load = async client => {
-  const databaseLogger = new Logger(Logger.DEBUG, "database");
+  const databaseLogger = new Logger(Logger.INFO, "database");
 
   global.sequelize = new Sequelize(config.database.database, config.database.username, config.database.password, {
     host: config.database.host,
@@ -27,5 +27,7 @@ module.exports.load = async client => {
     await db.warns.destroy({ where: { server: guild.id } });
     await db.modlogs.destroy({ where: { server: guild.id } });
     await db.prefixes.destroy({ where: { server: guild.id } });
+
+    delete client.prefixCache[guild.id];
   });
 }

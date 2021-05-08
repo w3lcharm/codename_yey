@@ -30,7 +30,7 @@ module.exports = {
     const post = randomArrayItem(data.posts.post).$;
     const postTags = post.tags.trim().split(" ").map(t => `\`${t}\``).join(", ").substring(0, 1024);
 
-    if (post.tags.includes("video")) {
+    if (post.tags.trim().split(" ").includes("video")) {
       return msg.reply(msg.t("rule34Video", post.file_url, postTags));
     }
 
