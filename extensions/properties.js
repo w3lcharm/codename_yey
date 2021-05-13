@@ -14,13 +14,15 @@ module.exports.load = client => {
   }
 
   Message.prototype.reply = async function (content, file) {
-    const obj = {
-      message_reference: {
+    const obj = {};
+
+    if (this.guild.me.permissions.has("readMessageHistory") && this.channel.permissionsOf(client.user.id).has("readMessageHistory")) {
+      obj.message_reference = {
         message_id: this.id,
         channel_id: this.channel.id,
         guild_id: this.guildID,
-      },
-    };
+      };
+    }
 
     if (typeof content == "string") {
       obj.content = content;
