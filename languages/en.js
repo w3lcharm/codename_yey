@@ -582,6 +582,5 @@ module.exports = {
   reactionRoleSuccess: "> :white_check_mark: Reaction role successfully created.",
 
   hentaiDescription: "Gets random hentai image or gif.\nThis command can only be used in channels marked as NSFW.",
-
-  
+  hentaiRatelimit: "> :x: Too many requests are made in short period of time. Try again later.",
 };

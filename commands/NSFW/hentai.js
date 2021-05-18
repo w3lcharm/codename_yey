@@ -9,13 +9,17 @@ module.exports = {
       return msg.reply(msg.t("notNsfwChannel"));
     }
 
-    const image = await new NSFW().hentai();
+    try {
+      const image = await new NSFW().hentai();
 
-    const embed = {
-      color: await msg.author.embColor(),
-      image: { url: image },
-    };
+      const embed = {
+        color: await msg.author.embColor(),
+        image: { url: image },
+      };
 
-    await msg.reply({ embed });
+      await msg.reply({ embed });
+    } catch {
+      return msg.reply(msg.t("hentaiRatelimit"));
+    }
   }
 }
