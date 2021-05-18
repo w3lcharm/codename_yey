@@ -34,10 +34,6 @@ module.exports = {
           value: guild.id,
         },
         {
-          name: msg.t("serverRegion"),
-          value: guild.region,
-        },
-        {
           name: msg.t("serverMembers"),
           value: `**${msg.t("serverMembersTotal")}** - ${guild.memberCount}\n` +
             `**${msg.t("serverMembersBots")}** - ${guild.members.filter(m => m.bot).length}`,
