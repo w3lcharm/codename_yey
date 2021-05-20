@@ -23,6 +23,7 @@ module.exports = {
         name: guild.name,
         icon_url: guild.iconURL,
       },
+      description: guild.description,
       color: await msg.author.embColor(),
       fields: [
         {
