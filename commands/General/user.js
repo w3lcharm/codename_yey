@@ -48,7 +48,7 @@ module.exports = {
         m.id == userID
       ) || client.users.find(u => u.tag == userID) || await client.fetchUser(userID);
 
-    if (!member) {
+    if (!member || userID == "@me") {
       return msg.reply(msg.t("cantFindUser"));
     }
 
