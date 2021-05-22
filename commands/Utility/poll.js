@@ -23,7 +23,7 @@ module.exports = {
     }
 
     if (answers.length > 10) {
-      return msg.reply(mag.t("pollNotMoreThan10Answers"));
+      return msg.reply(msg.t("pollNotMoreThan10Answers"));
     }
 
     const embed = {
