@@ -235,6 +235,7 @@ module.exports = {
   warnID: id => `ID предупреждения: ${id}`,
   warnsFooter: (total, maxPages, page) => `Всего предупреждений: ${total} | Страница ${page} из ${maxPages}`,
   warnListFieldName: (id, user) => `ID: ${id} | выдал ${user.tag}`,
+  warnIDNotProvided: "> :x: ID предупреждения не предоставлен.",
 
   autoroleDescription: "Позволяет вам включить или выключить автороль.\nТребует право \"Управлять сервером\".",
   autoroleUsage: "[роль: id, имя, упоминание | disable]",

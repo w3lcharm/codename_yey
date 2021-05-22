@@ -97,6 +97,9 @@ module.exports = {
     if (msg.member.permission.has("kickMembers")) {
       if (args[0] == "--delete" || args[0] == "-d") {
         let id = args[1];
+        if (!id) {
+          return msg.reply(msg.t("warnIDNotProvided"));
+        }
         const warn = await db.warns.findOne({
           where: {
             server: msg.guild.id,

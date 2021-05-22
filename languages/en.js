@@ -235,6 +235,7 @@ module.exports = {
   warnID: id => `Warn ID: ${id}`,
   warnsFooter: (total, maxPages, page) => `Total warns: ${total} | Page ${page} of ${maxPages}`,
   warnListFieldName: (id, user) => `ID: ${id} | warned by ${user.tag}`,
+  warnIDNotProvided: "> :x: Warn ID not provided.",
 
   autoroleDescription: "Lets you to enable or disable the autorole.\nRequires \"Manage server\" permission.",
   autoroleUsage: "[role: id, name or mention | disable]",
