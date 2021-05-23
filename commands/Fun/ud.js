@@ -30,7 +30,7 @@ module.exports = {
       return msg.reply({
         embed: {
           title: msg.t("wordNotFound"),
-          color: 15158332,
+          color: 0xed4245,
         },
       });
     }
@@ -41,7 +41,7 @@ module.exports = {
         embed: {
           title: msg.t("cantShowDefinition"),
           description: msg.t("linkToDefinition", data.permalink),
-          color: 15158332,
+          color: 0xed4245,
         },
       });
     }

@@ -23,7 +23,7 @@ module.exports = {
       embed = {
         title: msg.t("embedParseError"),
         description: `\`\`\`${err}\`\`\``,
-        color: 15158332,
+        color: 0xed4245,
       };
     }
     

@@ -33,7 +33,7 @@ module.exports = {
           icon_url: member.avatarURL,
         },
         description: msg.t("reason", reason),
-        color: 3066993,
+        color: 0x57f287,
         timestamp: new Date().toISOString(),
       };
         
@@ -53,7 +53,7 @@ module.exports = {
       const embed = {
         title: msg.t("kickFail"),
         description,
-        color: 15158332,
+        color: 0xed4245,
       };
       await msg.reply({ embed });
     }

@@ -27,7 +27,7 @@ module.exports = {
         title: msg.t("purgeSuccess", amount),
         description: msg.t("msgWillBeDeleted"),
         timestamp: new Date().toISOString(),
-        color: 3066993,
+        color: 0x57f287,
       };
 
       const message = await msg.channel.createMessage({ embed });
@@ -45,7 +45,7 @@ module.exports = {
 
       let embed = {
         title: msg.t("purgeFailed"),
-        color: 15158332,
+        color: 0xed4245,
         description,
       };
       await msg.channel.createMessage({ embed });

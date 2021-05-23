@@ -42,7 +42,7 @@ module.exports = {
           name: msg.t("unmuteSuccess", member),
           icon_url: member.avatarURL,
         },
-        color: 3066993,
+        color: 0x57f287,
         timestamp: new Date().toISOString(),
       };
 
@@ -68,7 +68,7 @@ module.exports = {
       const embed = {
         title: lang.unmuteFail,
         description,
-        color: 15158332,
+        color: 0xed4245,
       };
       await msg.reply({ embed });
     }

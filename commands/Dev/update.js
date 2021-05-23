@@ -12,7 +12,7 @@ module.exports = {
       const embed = {
         title: msg.t("updateSuccess"),
         description: "```\n" + stdout + "\n```",
-        color: 3066993,
+        color: 0x57f287,
       };
 
       msg.reply({ embed: embed });

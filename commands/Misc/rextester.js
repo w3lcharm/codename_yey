@@ -24,7 +24,7 @@ module.exports = {
       const embed = {
         title: msg.t("rextesterError"),
         description: `\`\`\`${response.Errors}\`\`\``,
-        color: 15158332,
+        color: 0xed4245,
         // footer: { text: lang.rextesterErrorFooter },
       };
 
@@ -40,7 +40,7 @@ module.exports = {
     const embed = {
       title: msg.t("rextesterSuccess"),
       description: `\`\`\`${response.Result}\`\`\``,
-      color: 3066993,
+      color: 0x57f287,
     };
 
     await msg.reply(response.Result ? { embed } : msg.t("rextesterEmptyResult"));

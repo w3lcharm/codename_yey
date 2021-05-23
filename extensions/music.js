@@ -63,7 +63,7 @@ module.exports.load = client => {
         const embed = {
           title: lang.playFailed,
           description: lang.playFailedDesc,
-          color: 15158332,
+          color: 0xed4245,
         };
 
         await client.createMessage(player.textChannel, { embed });

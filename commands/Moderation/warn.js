@@ -141,7 +141,7 @@ module.exports = {
           icon_url: member.avatarURL,
         },
         description: msg.t("reason", reason),
-        color: 3066993,
+        color: 0x57f287,
         timestamp: new Date().toISOString(),
         footer: { text: msg.t("warnID", warnObj.id) },
       };

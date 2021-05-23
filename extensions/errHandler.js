@@ -5,7 +5,7 @@ async function onCommandError(cmd, msg, err, showErr = false) {
     const embed = {
       title: msg.t("dontHavePerms"),
       description: msg.t("missingPermission", msg.t("permissions")[err.missingPermission]),
-      color: 15158332,
+      color: 0xed4245,
       footer: {
         text: "codename_yey",
         icon_url: client.user.avatarURL,
@@ -20,7 +20,7 @@ async function onCommandError(cmd, msg, err, showErr = false) {
   const embed = {
     title: msg.t("errorInCommand"),
     description: msg.t("errorDesc"),
-    color: 15158332,
+    color: 0xed4245,
     footer: {
       text: "codename_yey",
       icon_url: client.user.avatarURL,
@@ -30,7 +30,7 @@ async function onCommandError(cmd, msg, err, showErr = false) {
   const logsEmbed = {
     title: `:x: An error occurred while executing command ${cmd.name}.`,
     description: msg.cleanContent,
-    color: 15158332,
+    color: 0xed4245,
     fields: [
       {
         name: "Error:",

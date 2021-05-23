@@ -51,7 +51,7 @@ module.exports = {
           const embed = {
             title: msg.t("modlogsDontHavePerms"),
             description: msg.t("modlogsDontHavePermsDesc"),
-            color: 3066993,
+            color: 0x57f287,
           };
           return msg.reply({ embed });
         }

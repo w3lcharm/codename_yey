@@ -14,7 +14,7 @@ module.exports = {
         embed = {
           title: msg.t("helpCommandDoesntExist", cmdName),
           description: msg.t("helpCommandDoesntExistDesc", prefix),
-          color: 15158332,
+          color: 0xed4245,
           footer: {
             text: "codename_yey",
             icon_url: client.user.avatarURL,

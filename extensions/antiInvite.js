@@ -38,7 +38,7 @@ async function onMessage(msg) {
               icon_url: msg.member.avatarURL,
             },
             description: userLang.reason(userLang.antiInviteReason),
-            color: 3066993,
+            color: 0x57f287,
             timestamp: new Date().toISOString(),
             footer: { text: userLang.warnID(warnObj.id) },
           };
@@ -56,7 +56,7 @@ async function onMessage(msg) {
               icon_url: msg.member.avatarURL,
             },
             description: userLang.reason(userLang.antiInviteReason),
-            color: 3066993,
+            color: 0x57f287,
             timestamp: new Date().toISOString(),
           };
 
@@ -74,7 +74,7 @@ async function onMessage(msg) {
               icon_url: msg.member.avatarURL,
             },
             description: userLang.reason(userLang.antiInviteReason),
-            color: 3066993,
+            color: 0x57f287,
             timestamp: new Date().toISOString(),
           };
 

@@ -1,8 +1,8 @@
 const { Message } = require("eris");
 
-const red = 15158332;
-const gold = 16426522;
-const green = 3066993;
+const red = 0xed4245;
+const gold = 0xfee75c;
+const green = 0x57f287;
 
 function getModlogChannel(guild) {
   return db.modlogs.findOrCreate({ where: { server: guild.id } })

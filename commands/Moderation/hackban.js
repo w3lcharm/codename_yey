@@ -23,7 +23,7 @@ module.exports = {
       const embed = {
         title: msg.t("hackbanSuccess", userID),
         description: msg.t("reason", reason),
-        color: 3066993,
+        color: 0x57f287,
         timestamp: new Date().toISOString(),
       };
       await msg.reply({ embed });
@@ -36,7 +36,7 @@ module.exports = {
       const embed = {
         title: msg.t("hackbanFail"),
         description,
-        color: 15158332,
+        color: 0xed4245,
       };
       await msg.reply({ embed });
     }
