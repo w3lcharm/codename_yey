@@ -30,7 +30,6 @@ module.exports = {
       
         embed.author = {
           name: msg.t("serverIcon"),
-          url: guild.iconURL,
         };
         embed.image = { url: guild.iconURL };
 
@@ -43,7 +42,6 @@ module.exports = {
 
         embed.author = {
           name: msg.t("serverBanner"),
-          url: guild.bannerURL,
         };
         embed.image = { url: guild.bannerURL };
 
@@ -56,7 +54,6 @@ module.exports = {
 
         embed.author = {
           name: msg.t("serverSplash"),
-          url: guild.splashURL,
         };
         embed.image = { url: guild.splashURL };
 
@@ -79,7 +76,6 @@ module.exports = {
 
         embed.author = {
           name: msg.t("avatarUser", user),
-          url,
         };
         embed.image = { url };
 
@@ -87,6 +83,18 @@ module.exports = {
       }
     }
   
-    await msg.reply({ embed });
+    await msg.reply({ embed, components: [
+      {
+        type: 1,
+        components: [
+          {
+            type: 2,
+            label: msg.t("avatarURL"),
+            style: 5,
+            url: embed.image.url,
+          },
+        ],
+      },
+    ]});
   }
 };

@@ -19,13 +19,26 @@ module.exports = {
     const isAnimated = /<a/.test(emoji);
 
     const url = `https://cdn.discordapp.com/emojis/${emojiID}.${isAnimated ? "gif" : "png"}?v=1`;
-    console.log(url);
+
     const embed = {
       title: emojiName,
       color: await msg.author.embColor(),
       image: { url },
+      footer: { text: msg.t("emojiID", emojiID) },
     };
 
-    await msg.reply({ embed });
+    await msg.reply({ embed, components: [
+      {
+        type: 1,
+        components: [
+          {
+            type: 2,
+            label: msg.t("emojiURL", url),
+            style: 5,
+            url,
+          },
+        ],
+      },
+    ]});
   }
 }

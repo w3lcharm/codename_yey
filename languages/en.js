@@ -68,6 +68,7 @@ module.exports = {
   avatarNoBanner: "> :x: This server does not have a banner.",
   serverSplash: "Invite splash:",
   avatarNoSplash: "> :x: This server does not have an invite splash.",
+  avatarURL: "Image URL",
 
   helpDescription: "Shows information about bot commands.",
   helpUsage: "[command]",
@@ -556,6 +557,8 @@ module.exports = {
   emojiUsage: "<emoji>",
   noEmoji: "> :x: Please provide the correct emoji.",
   invalidEmoji: "> :x: Invalid emoji provided.",
+  emojiID: id => `ID: ${id}`,
+  emojiURL: "Emoji URL",
 
   queueloopDescription: "Toggles looping for the music queue.",
   queueloopEnabled: "> Queue loop enabled.",

@@ -68,6 +68,7 @@ module.exports = {
   avatarNoBanner: "> :x: На сервере отсутствует баннер.",
   serverSplash: "Фон приглашения:",
   avatarNoSplash: "> :x: На сервере отсутствует фон приглашения.",
+  avatarURL: "Ссылка на изображение",
 
   helpDescription: "Показывает информацию о командах бота.",
   helpUsage: "[команда]",
@@ -545,6 +546,8 @@ module.exports = {
   emojiUsage: "<эмодзи>",
   noEmoji: "> :x: Предоставьте корректный эмодзи.",
   invalidEmoji: "> :x: Указан неправильный эмодзи.",
+  emojiID: id => `ID: ${id}`,
+  emojiURL: "Ссылка на эмодзи",
 
   queueloopDescription: "Включает или выключает повторение очереди музыки.",
   queueloopEnabled: "> Повторение очереди включено.",
