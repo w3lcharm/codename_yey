@@ -16,7 +16,7 @@
     "emoji-regex": "^9.2.2",
     "erela.js": "^2.2.0",
     "erela.js-spotify": "^1.2.0",
-    "eris": "0.15.0",
+    "eris": "0.15.1",
     "eris-additions": "^1.4.1",
     "erlpack": "github:abalabahaha/erlpack",
     "eventemitter3": "^4.0.4",
