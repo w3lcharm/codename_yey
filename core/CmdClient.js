@@ -22,8 +22,10 @@ class CmdClient extends Eris.Client {
 
     this.debugMode = options.debugMode || false;
 
-    this.logger = new Logger(options.debugMode ? Logger.TRACE : Logger.INFO, "main");
-    this.logger.info("logger initialized.");
+    this.logger = new Logger(options.debugMode ? Logger.TRACE : Logger.INFO, "Main");
+    this.commandLogger = new Logger(Logger.INFO, "CommandHandler");
+    this.extensionLogger = new Logger(Logger.INFO, "ExtensionsHandler");
+    this.logger.info("Loggers are initialized.");
 
     this.languages = this._loadLanguages();
 
@@ -49,7 +51,7 @@ class CmdClient extends Eris.Client {
     }
 
     this.once("ready", async () => {
-      this.logger.info(`${this.user.username} online!`);
+      this.logger.info(`Connected successfully as ${this.user.username}.`);
       this.editStatus("online", { name: `type @${client.user.username}` });
 
       /* for (const guild of this.guilds.values()) {
@@ -65,7 +67,7 @@ class CmdClient extends Eris.Client {
       await this.handleCommand(msg);
     });
     
-    this.logger.info("client initialized.");
+    this.logger.info("Client initialized.");
   }
 
   async handleCommand(msg) {
@@ -188,7 +190,7 @@ class CmdClient extends Eris.Client {
       this.logger.debug(`loaded ${langName} language.`);
     }
     
-    this.logger.info("successfully loaded all language files.");
+    this.logger.info("Successfully loaded all language files.");
     return languages;
   }
 
@@ -203,7 +205,7 @@ class CmdClient extends Eris.Client {
     command.path = path;
 
     this.commands.set(command.name, command);
-    this.logger.debug(`successfully loaded ${command.name} command.`);
+    this.commandLogger.info(`Successfully loaded command ${command.name}.`);
   }
 
   loadCommandGroup(groupPath) {
@@ -235,6 +237,8 @@ class CmdClient extends Eris.Client {
 
     delete require.cache[cmdPath];
     this.commands.delete(name);
+
+    this.commandLogger.info(`Unloaded command ${name}`);
   }
 
   reloadLanguages() {
@@ -256,7 +260,7 @@ class CmdClient extends Eris.Client {
   }
 
   async connect() {
-    this.logger.info("trying to login now...");
+    this.logger.info("Connecting...");
     return super.connect();
   }
 
@@ -271,7 +275,7 @@ class CmdClient extends Eris.Client {
 
     this.extensions[ext.name] = ext;
 
-    this.logger.debug(`loaded extension ${extPath}.`);
+    this.extensionLogger.info(`Loaded extension ${extPath}.`);
   }
 
   reloadExtension(name, ...args) {
@@ -292,7 +296,7 @@ class CmdClient extends Eris.Client {
     delete require.cache[fullPath];
     delete this.extensions[ext];
 
-    this.logger.debug(`unloaded extension ${extPath}.`);
+    this.extensionLogger.info(`Unloaded extension ${extPath}.`);
     return ext.path;
   }
 

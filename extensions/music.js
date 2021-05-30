@@ -7,7 +7,7 @@ const parseTime = require("../utils/parseTime");
 module.exports.load = client => {
   if (!config.lavalinkNodes) return;
 
-  const logger = new Logger(Logger.INFO, "lavalink");
+  const logger = new Logger(Logger.INFO, "Lavalink");
 
   client.lavalinkManager = new Manager({
     nodes: config.lavalinkNodes,
