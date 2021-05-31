@@ -15,6 +15,10 @@ module.exports = {
       const embed = {
         color: await msg.author.embColor(),
         image: { url: image },
+        footer: {
+          text: msg.t("usedBy", msg.author.tag),
+          icon_url: msg.author.avatarURL, 
+        },
       };
 
       await msg.reply({ embed });

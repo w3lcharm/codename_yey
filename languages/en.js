@@ -573,6 +573,7 @@ module.exports = {
   score: "Score:",
   tags: "Tags:",
   postURL: "Post URL",
+  usedBy: tag => `Used by ${tag}`,
 
   reactionroleDescription: "Lets you to manage reaction roles.\nRequires \"Manage Guild\" permission.\nAlso keep in mind that you should use this command in the same channel where you want to setup the reaction role.",
   reactionroleUsage: "<messageID> <emoji> <role | disable to disable this reaction role>",

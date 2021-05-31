@@ -48,6 +48,10 @@ module.exports = {
         },
       ],
       image: { url: post.file_url },
+      footer: {
+        text: msg.t("usedBy", msg.author.tag),
+        icon_url: msg.author.avatarURL, 
+      },
     };
 
     await msg.reply({ embed, components: [
