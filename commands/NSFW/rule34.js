@@ -35,8 +35,7 @@ module.exports = {
     }
 
     const embed = {
-      title: msg.t("linkToPost"),
-      url: `http://rule34.xxx/index.php?page=post&s=view&id=${post.id}`,
+      title: msg.t("rule34Post"),
       color: await msg.author.embColor(),
       fields: [
         {
@@ -51,6 +50,18 @@ module.exports = {
       image: { url: post.file_url },
     };
 
-    await msg.reply({ embed });
+    await msg.reply({ embed, components: [
+      {
+        type: 1,
+        components: [
+          {
+            type: 2,
+            label: msg.t("postURL"),
+            style: 5,
+            url: `http://rule34.xxx/index.php?page=post&s=view&id=${post.id}`,
+          },
+        ],
+      },
+    ]});
   }
 }

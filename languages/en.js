@@ -569,9 +569,10 @@ module.exports = {
   notNsfwChannel: "> :x: You can use this command only in channels marked as NSFW.",
   noPostsFound: tag => `> :x: No posts found by tag \`${tag}\`.`,
   rule34Video: (url, tags) => `> Link to video: ${url}\n> Tags: ${tags}`,
-  linkToPost: "Link to post",
+  rule34Post: "Post",
   score: "Score:",
   tags: "Tags:",
+  postURL: "Post URL",
 
   reactionroleDescription: "Lets you to manage reaction roles.\nRequires \"Manage Guild\" permission.\nAlso keep in mind that you should use this command in the same channel where you want to setup the reaction role.",
   reactionroleUsage: "<messageID> <emoji> <role | disable to disable this reaction role>",
@@ -587,4 +588,8 @@ module.exports = {
 
   hentaiDescription: "Gets random hentai image or gif.\nThis command can only be used in channels marked as NSFW.",
   hentaiRatelimit: "> :x: Too many requests are made in short period of time. Try again later.",
+
+  pussyDescription: `Gets a random pussy image.\nThis command can only be used in channels marked as NSFW.`,
+
+  soloDescription: `Gets a random solo porn image.\nThis command can only be used in channels marked as NSFW.`,
 };
