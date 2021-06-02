@@ -10,7 +10,13 @@ module.exports = {
   requiredPermissions: "manageGuild",
   async run(client, msg, args, prefix) {
     const [ msgID, emoji, roleID ] = args;
-    console.log(emoji);
+    
+    let message;
+    try {
+      message = await msg.channel.getMessage(msgID);
+    } catch {
+      return msg.reply(msg.t("invalidMessage"));
+    }
 
     const reactionRoles = await db.reactionRoles.findAll({
       where: {
@@ -86,6 +92,8 @@ module.exports = {
       }).then(r => r[0]);
 
       await reactionRole.update({ role: role.id });
+
+      await message.addReaction(emojiID ? `${emojiName}:${emojiID}` : emojiName);
 
       await msg.reply(msg.t("reactionRoleSuccess", emoji, role.name));
     }
