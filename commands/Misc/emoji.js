@@ -4,6 +4,7 @@ module.exports = {
   description: "emojiDescription",
   usage: "emojiUsage",
   argsRequired: true,
+  aliases: [ "e" ],
   async run(client, msg, args, prefix) {
     const emoji = args[0];
     if (!emoji) {
