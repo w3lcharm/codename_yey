@@ -12,16 +12,30 @@ module.exports = {
     const userID = args.shift();
     const reason = args.join(" ");
 
+    const user = await client.fetchUser(userID);
+    if (!user) {
+      return msg.reply(msg.t("hackbanUserNotFound"));
+    }
+
     try {
-      if (userID === msg.author.id)
+      if (userID === msg.author.id) {
         return msg.reply(msg.t("cantBanYourself"));
-      if (userID === client.user.id)
+      }
+      if (userID === client.user.id) {
         return msg.reply(msg.t("cantBanBot"));
-      
+      }
+
+      if (msg.guild.members.has(userID)) {
+        return msg.reply(msg.t("hackbanUserAlreadyInServer"));
+      }
+
       await msg.channel.guild.banMember(userID, 0, encodeURI(reason));
 
       const embed = {
-        title: msg.t("hackbanSuccess", userID),
+        author: {
+          name: msg.t("hackbanSuccess", user.tag),
+          icon_url: user.avatarURL,
+        },
         description: msg.t("reason", reason),
         color: 0x57f287,
         timestamp: new Date().toISOString(),

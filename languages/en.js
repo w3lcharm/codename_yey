@@ -188,8 +188,10 @@ module.exports = {
 
   hackbanDescription: "Hackbans the provided user.\nThis command requires the \"Ban members\" permission.",
   hackbanUsage: "<userID> [reason]",
-  hackbanSuccess: id => `:white_check_mark: User with ID \`${id}\` has been successfully hackbanned.`,
+  hackbanSuccess: user => `${user} has been hackbanned`,
   hackbanFail: ":x: Hackban failed.",
+  hackbanUserNotFound: "> :x: This user ID does not exist.",
+  hackbanUserAlreadyInServer: "> :x: This user is already a member of this server, use `ban` command instead.",
   
   kickDescription: "Kicks the provided user.\nThis command requires the \"Kick members\" permission.",
   kickUsage: "<user: mention, tag or id> [reason]",
