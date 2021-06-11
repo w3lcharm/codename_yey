@@ -596,4 +596,6 @@ module.exports = {
   pussyDescription: `Gets a random pussy image.\nThis command can only be used in channels marked as NSFW.`,
 
   soloDescription: `Gets a random solo porn image.\nThis command can only be used in channels marked as NSFW.`,
+
+  boobsDescription: `Gets a random boobs image.\nThis command can only be used in channels marked as NSFW.`,
 };
