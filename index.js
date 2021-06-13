@@ -75,4 +75,8 @@ client.once("ready", async () => {
   await client.editStatus({ name: `v${version} | type @${client.user.username}`});
 });
 
+client.on("commandCooldown", async (cmd, msg, secsLeft) => {
+  return msg.reply(msg.t("cooldown", secsLeft));
+});
+
 client.connect();
