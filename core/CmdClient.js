@@ -113,7 +113,7 @@ class CmdClient extends Eris.Client {
         let expiration = cmdCooldowns.get(msg.author.id) + (command.cooldown * 1000);
         if (now < expiration) {
           let secsLeft = Math.floor((expiration - now) / 1000);
-          return msg.reply(msg.t("cooldown", secsLeft));
+          return this.emit("commandCooldown", command, msg, secsLeft);
         }
       }
     }
