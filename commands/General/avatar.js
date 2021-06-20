@@ -71,8 +71,13 @@ module.exports = {
           return msg.reply(msg.t("cantFindUser"));
         }
 
+        const guildAvatarHash = await client.requestHandler.request("GET", `/guilds/${msg.guild.id}/members/${user.id}`, true)
+          .then(r => r.avatar);
+
         const format = user.avatar && user.avatar.startsWith("a_") ? "gif" : "png";
-        const url = user.dynamicAvatarURL(format, 2048);
+        const url = guildAvatarHash ?
+          `https://cdn.discordapp.com/guilds/${msg.guild.id}/users/${user.id}/avatars/${guildAvatarHash}.${guildAvatarHash.startsWith("a_") ? "gif" : "png"}?size=2048` :
+          user.dynamicAvatarURL(format, 2048);
 
         embed.author = {
           name: msg.t("avatarUser", user),
