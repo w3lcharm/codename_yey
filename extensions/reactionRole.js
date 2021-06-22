@@ -1,4 +1,6 @@
 async function onMessageReactionAdd(msg, emoji, user) {
+  if (user.bot) return;
+
   const dbItem = await db.reactionRoles.findOne({
     where: {
       channel: msg.channel.id,

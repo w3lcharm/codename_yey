@@ -1,4 +1,5 @@
 const { Message } = require("eris");
+const formatDays = require("../utils/formatDays");
 
 const red = 0xed4245;
 const gold = 0xfee75c;
@@ -27,7 +28,7 @@ async function onGuildMemberAdd(guild, member) {
     fields: [
       {
         name: "Registered at:",
-        value: `${new Date(member.createdAt).toLocaleString()} (${createdDaysAgo} days ago)`,
+        value: `${new Date(member.createdAt).toLocaleString()} (${formatDays(createdDaysAgo, "en")})`,
       },
     ],
   };

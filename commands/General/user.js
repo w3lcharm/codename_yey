@@ -1,5 +1,6 @@
 const moment = require("moment");
 const { Constants: { UserFlags } } = require("eris");
+const formatDays = require("../../utils/formatDays");
 
 const badgeEmojis = {
   DISCORD_EMPLOYEE: "<:discordEmployee:772878638114144296>",
@@ -77,7 +78,7 @@ module.exports = {
         },
         {
           name: msg.t("userRegisteredAt"),
-          value: `${moment(member.createdAt).format("lll")} ${msg.t("daysAgo", createdDaysAgo)}`,
+          value: `${moment(member.createdAt).format("lll")} (${formatDays(createdDaysAgo, msg.t("langName"))})`,
         },
       ],
       footer: { text: joinPos ? msg.t("userJoinPosition", joinPos) : msg.t("userNotInServer") },
@@ -85,7 +86,7 @@ module.exports = {
 
     if (member.joinedAt) embed.fields.push({
       name: msg.t("userJoinedAt"),
-      value: `${moment(member.joinedAt).format("lll")} ${msg.t("daysAgo", joinedDaysAgo)}`,
+      value: `${moment(member.joinedAt).format("lll")} (${formatDays(joinedDaysAgo, msg.t("langName"))})`,
     });
 
     if (member.roles && member.roles.length) embed.fields.push({
