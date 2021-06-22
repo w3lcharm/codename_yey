@@ -72,7 +72,8 @@ module.exports = {
         }
 
         const guildAvatarHash = await client.requestHandler.request("GET", `/guilds/${msg.guild.id}/members/${user.id}`, true)
-          .then(r => r.avatar);
+          .then(r => r.avatar)
+          .catch(() => {});
 
         const format = user.avatar && user.avatar.startsWith("a_") ? "gif" : "png";
         const url = guildAvatarHash ?
