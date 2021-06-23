@@ -1,4 +1,5 @@
 const moment = require("moment");
+const formatDays = require("../../utils/formatDays");
 const intToHex = require("../../utils/intToHex");
 
 module.exports = {
@@ -60,7 +61,7 @@ module.exports = {
         },
         {
           name: msg.t("roleCreatedAt"),
-          value: `${moment(role.createdAt).format("lll")} ${msg.t("daysAgo", createdDaysAgo)}`,
+          value: `${moment(role.createdAt).format("lll")} (${formatDays(createdDaysAgo, msg.t("langName"))})`,
         },
       ],
     };
