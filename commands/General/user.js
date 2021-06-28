@@ -70,7 +70,7 @@ module.exports = {
         icon_url: member.avatarURL,
       },
       description: badges.join(" "),
-      color: member.color,
+      color: member.color || await msg.author.embColor(),
       fields: [
         {
           name: "ID:",
