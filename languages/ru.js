@@ -76,9 +76,10 @@ module.exports = {
   helpCommandDoesntExistDesc: prefix => `Введите \`${prefix}help\` для получения списка всех команд.`,
   helpCommandEmbedTitle: cmd => `Справка по команде \`${cmd}\`:`,
   helpCommandUsage: "Как использовать:",
-  helpTitle: "Команды бота:",
-  helpTip: prefix => `Используйте ${prefix}help [команда] для получения информации о какой-либо команде.`,
+  helpTitle: "Команды",
+  helpTip: prefix => `Здесь представлены все команды, которые вы можете использовать.\nИспользуйте \`${prefix}help [команда]\` для получения более подробной информации о команде.\nИмеются проблемы? Заходите на наш сервер поддержки.`,
   helpAliases: "Псевдонимы:",
+  helpLinkToSupportServer: "Ссылка на сервер поддержки",
 
   pingDescription: "Показывает задержку бота до серверов Discord'а.",
   pingMeasuring: "Измеряется...",

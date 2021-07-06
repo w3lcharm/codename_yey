@@ -70,15 +70,28 @@ module.exports = {
       
       embed = {
         title: msg.t("helpTitle"),
+        description: msg.t("helpTip", prefix),
         color: await msg.author.embColor(),
         fields,
         footer: {
-          text: msg.t("helpTip", prefix),
+          text: "codename_yey",
           icon_url: client.user.avatarURL,
         },
       };
 
-      await msg.reply({ embed });
+      await msg.reply({ embed, components: [
+        {
+          type: 1,
+          components: [
+            {
+              type: 2,
+              label: msg.t("helpLinkToSupportServer"),
+              style: 5,
+              url: "https://discord.gg/dHamqUhPpA",
+            },
+          ],
+        },
+      ]});
     }
   }
 };

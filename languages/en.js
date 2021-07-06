@@ -76,9 +76,10 @@ module.exports = {
   helpCommandDoesntExistDesc: prefix => `Type \`${prefix}help\` to get a list of commands.`,
   helpCommandEmbedTitle: cmd => `Help for command \`${cmd}\`:`,
   helpCommandUsage: "Usage:",
-  helpTitle: "Bot commands",
-  helpTip: prefix => `Use ${prefix}help [command] to get more info about a command.`,
+  helpTitle: "Commands",
+  helpTip: prefix => `There are all commands you can use.\nUse \`${prefix}help [command]\` to get a more info about an command.\nAny troubles? Feel free to join our support server.`,
   helpAliases: "Aliases:",
+  helpLinkToSupportServer: "Link to support server",
 
   pingDescription: "Shows the bot latency.",
   pingMeasuring: "Measuring...",
