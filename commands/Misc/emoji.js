@@ -11,7 +11,7 @@ module.exports = {
       return msg.reply(msg.t("noEmoji"));
     }
 
-    if (!/<a:.+?:\d+>|<:.+?:\d+>/g.test(emoji)) {
+    if (!/<(a:|:).+?:\d+>/g.test(emoji)) {
       return msg.reply(msg.t("invalidEmoji"));
     }
 
