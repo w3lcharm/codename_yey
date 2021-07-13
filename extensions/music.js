@@ -73,3 +73,10 @@ module.exports.load = client => {
       }
     });
 }
+
+module.exports.unload = async client => {
+  for (const player of client.lavalinkManager.players.values()) {
+    player.queue.clear();
+    player.stop();
+  }
+}

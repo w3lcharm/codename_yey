@@ -51,7 +51,7 @@ setInterval(() => {
 
 client.options.allowedMentions.replied_user = true;
 
-const cmdGroups = [ "General", "Utility", "Moderation", "Fun", "Misc", "Music", "Settings", "Dev" ];
+const cmdGroups = [ "General", "Moderation", "Music", "Fun", "Utility", "Misc", "Settings", "Dev" ];
 for (const group of cmdGroups) {
   client.loadCommandGroup(path.join(__dirname, "commands", group));
 }

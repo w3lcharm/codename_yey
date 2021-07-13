@@ -9,6 +9,7 @@ module.exports = {
   usage: "decodeqrUsage",
   cooldown: 10,
   argsRequired: "attachment",
+  aliases: [ "dqr" ],
   async run(client, msg, args, prefix) {
     if (!args.length && !msg.attachments.length) {
       return msg.reply(msg.t("commandUsage", prefix, this));
