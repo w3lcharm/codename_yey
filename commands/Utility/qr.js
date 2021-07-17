@@ -2,7 +2,7 @@ const QRCode = require("qrcode");
 
 module.exports = {
   name: "qr",
-  group: "utilityGroup",
+  group: "utility",
   description: "qrDescription",
   usage: "qrUsage",
   argsRequired: true,

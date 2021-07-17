@@ -6,7 +6,7 @@ Member.prototype.dynamicAvatarURL = function dynamicAvatarURL(format, size) {
 
 module.exports = {
   name: "avatar",
-  group: "generalGroup",
+  group: "general",
   description: "avatarDescription",
   usage: [ "avatarUsage", "avatarUsageServer", "avatarUsageBanner", "avatarUsageSplash" ],
   guildOnly: true,

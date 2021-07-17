@@ -2,7 +2,7 @@ const parseTime = require("../../utils/parseTime");
 
 module.exports = {
   name: "nowplaying",
-  group: "musicGroup",
+  group: "music",
   description: "nowplayingDescription",
   aliases: [ "np" ],
   async run(client, msg, args, prefix) {

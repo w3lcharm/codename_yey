@@ -1,6 +1,6 @@
 module.exports = {
   name: "embed",
-  group: "utilityGroup",
+  group: "utility",
   description: "embedDescription",
   usage: "embedUsage",
   aliases: [ "emb" ],

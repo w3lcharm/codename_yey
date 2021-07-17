@@ -1,6 +1,6 @@
 module.exports = {
   name: "volume",
-  group: "musicGroup",
+  group: "music",
   description: "volumeDescription",
   usage: "volumeUsage",
   aliases: [ "vol" ],

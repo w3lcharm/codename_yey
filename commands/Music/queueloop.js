@@ -1,6 +1,6 @@
 module.exports = {
   name: "queueloop",
-  group: "musicGroup",
+  group: "music",
   description: "queueloopDescription",
   aliases: [ "qloop" ],
   async run(client, msg, args, prefix) {

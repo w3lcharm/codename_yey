@@ -11,7 +11,7 @@ function findWeather(opts) {
 
 module.exports = {
   name: "weather",
-  group: "miscGroup",
+  group: "misc",
   description: "weatherDescription",
   usage: "weatherUsage",
   argsRequired: true,

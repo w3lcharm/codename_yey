@@ -2,7 +2,7 @@ const allowedActions = [ "delete", "warn", "kick", "ban" ];
 
 module.exports = {
   name: "antiinvite",
-  group: "settingsGroup",
+  group: "settings",
   description: "antiinviteDescription",
   usage: "antiinviteUsage",
   requiredPermissions: "manageGuild",

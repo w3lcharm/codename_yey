@@ -26,7 +26,7 @@ function getGuildIconURL(guild) {
 
 module.exports = {
   name: "invite",
-  group: "miscGroup",
+  group: "misc",
   description: "inviteDescription",
   usage: "inviteUsage",
   aliases: [ "inv" ],

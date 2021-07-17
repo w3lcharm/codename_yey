@@ -31,7 +31,7 @@ function getUserBadges(user) {
 
 module.exports = {
   name: "user",
-  group: "generalGroup",
+  group: "general",
   description: "userDescription",
   usage: "userUsage",
   guildOnly: true,
@@ -78,7 +78,7 @@ module.exports = {
         },
         {
           name: msg.t("userRegisteredAt"),
-          value: `${moment(member.createdAt).format("lll")} (${formatDays(createdDaysAgo, msg.t("langName"))})`,
+          value: `<t:${Math.floor(member.createdAt / 1000)}> (${formatDays(createdDaysAgo, msg.t("langName"))})`,
         },
       ],
       footer: { text: joinPos ? msg.t("userJoinPosition", joinPos) : msg.t("userNotInServer") },
@@ -86,7 +86,7 @@ module.exports = {
 
     if (member.joinedAt) embed.fields.push({
       name: msg.t("userJoinedAt"),
-      value: `${moment(member.joinedAt).format("lll")} (${formatDays(joinedDaysAgo, msg.t("langName"))})`,
+      value: `<t:${Math.floor(member.joinedAt / 1000)}> (${formatDays(joinedDaysAgo, msg.t("langName"))})`,
     });
 
     if (member.roles && member.roles.length) embed.fields.push({

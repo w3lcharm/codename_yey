@@ -3,7 +3,7 @@ const ReactionHandler = require("../../core/ReactionHandler");
 
 module.exports = {
   name: "warn",
-  group: "moderationGroup",
+  group: "moderation",
   description: "warnDescription",
   guildOnly: true,
   usage: "warnUsage",

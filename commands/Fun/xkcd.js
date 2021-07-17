@@ -16,7 +16,7 @@ async function getComic() {
 
 module.exports = {
   name: "xkcd",
-  group: "funGroup",
+  group: "fun",
   description: "xkcdDescription",
   async run(client, msg, args, prefix) {
     let comic = await getComic();

@@ -2,7 +2,7 @@ const { stripIndents } = require("common-tags");
 
 module.exports = {
   name: "info",
-  group: "generalGroup",
+  group: "general",
   description: "infoDescription",
   async run(client, msg, args, prefix) {
     const inviteLink = await client.getInviteLink(8);

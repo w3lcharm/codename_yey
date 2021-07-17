@@ -4,7 +4,7 @@ const apiUrl = "http://api.qrserver.com/v1/read-qr-code/";
 
 module.exports = {
   name: "decodeqr",
-  group: "utilityGroup",
+  group: "utility",
   description: "decodeqrDescription",
   usage: "decodeqrUsage",
   cooldown: 10,

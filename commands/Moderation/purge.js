@@ -1,6 +1,6 @@
 module.exports = {
   name: "purge",
-  group: "moderationGroup",
+  group: "moderation",
   description: "purgeDescription",
   guildOnly: true,
   requiredPermissions: "manageMessages",

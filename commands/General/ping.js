@@ -1,6 +1,6 @@
 module.exports = {
   name: "ping",
-  group: "generalGroup",
+  group: "general",
   description: "pingDescription",
   async run(client, msg, args, prefix) {
     const startTime = Date.now();

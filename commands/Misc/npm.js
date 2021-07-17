@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 
 module.exports = {
   name: "npm",
-  group: "miscGroup",
+  group: "misc",
   description: "npmDescription",
   usage: "npmUsage",
   argsRequired: true,

@@ -1,6 +1,6 @@
 module.exports = {
   name: "reload",
-  group: "devGroup",
+  group: "dev",
   description: "reloadDescription",
   usage: "reloadUsage",
   ownerOnly: true,

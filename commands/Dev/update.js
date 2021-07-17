@@ -2,7 +2,7 @@ const { exec } = require("child_process");
 
 module.exports = {
   name: "update",
-  group: "devGroup,",
+  group: "dev,",
   description: "updateDescription",
   ownerOnly: true,
   hidden: true,

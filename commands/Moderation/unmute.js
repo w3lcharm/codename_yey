@@ -1,6 +1,6 @@
 module.exports = {
   name: "unmute",
-  group: "moderationGroup",
+  group: "moderation",
   description: "unmuteDescription",
   usage: "unmuteUsage",
   requiredPermissions: "kickMembers",

@@ -1,6 +1,6 @@
 module.exports = {
   name: "emoji",
-  group: "utilityGroup",
+  group: "utility",
   description: "emojiDescription",
   usage: "emojiUsage",
   argsRequired: true,

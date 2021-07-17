@@ -15,7 +15,7 @@ const Eris = require("eris");
 
 module.exports = {
   name: "eval",
-  group: "devGroup",
+  group: "dev",
   description: "evalDescription",
   hidden: true,
   ownerOnly: true,

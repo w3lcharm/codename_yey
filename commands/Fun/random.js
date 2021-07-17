@@ -4,7 +4,7 @@ function randInt(max, min = 1) {
 
 module.exports = {
   name: "random",
-  group: "funGroup",
+  group: "fun",
   description: "randomDescription",
   usage: [ "randomUsageMax", "randomUsageMinMax" ],
   argsRequired: true,

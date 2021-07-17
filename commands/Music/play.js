@@ -1,6 +1,6 @@
 module.exports = {
   name: "play",
-  group: "musicGroup",
+  group: "music",
   description: "playDescription",
   usage: "playUsage",
   argsRequired: true,

@@ -14,7 +14,7 @@ function parseTime(time) {
 
 module.exports = {
   name: "mute",
-  group: "moderationGroup",
+  group: "moderation",
   description: "muteDescription",
   usage: "muteUsage",
   requiredPermissions: "kickMembers",

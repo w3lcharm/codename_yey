@@ -1,6 +1,6 @@
 module.exports = {
   name: "kick",
-  group: "moderationGroup",
+  group: "moderation",
   description: "kickDescription",
   requiredPermissions: "kickMembers",
   guildOnly: true,

@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 
 module.exports = {
   name: "wikipedia",
-  group: "miscGroup",
+  group: "misc",
   description: "wikipediaDescription",
   usage: "wikipediaUsage",
   aliases: [ "wiki" ],

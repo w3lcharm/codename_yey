@@ -2,7 +2,7 @@ const { VoiceChannel } = require("eris");
 
 module.exports = {
   name: "modlogs",
-  group: "settingsGroup",
+  group: "settings",
   description: "modlogsDescription",
   usage: "modlogsUsage",
   requiredPermissions: "manageGuild",

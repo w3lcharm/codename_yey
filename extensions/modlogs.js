@@ -28,7 +28,7 @@ async function onGuildMemberAdd(guild, member) {
     fields: [
       {
         name: "Registered at:",
-        value: `${new Date(member.createdAt).toLocaleString()} (${formatDays(createdDaysAgo, "en")})`,
+        value: `<t:${Math.floor(member.createdAt / 1000)}> (${formatDays(createdDaysAgo, "en")})`,
       },
     ],
   };

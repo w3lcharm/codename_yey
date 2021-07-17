@@ -2,7 +2,7 @@ const { DiscordRESTError } = require("eris");
 
 module.exports = {
   name: "unban",
-  group: "moderationGroup",
+  group: "moderation",
   description: "unbanDescription",
   usage: "unbanUsage",
   requiredPermissions: "banMembers",

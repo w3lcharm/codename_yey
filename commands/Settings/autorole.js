@@ -1,6 +1,6 @@
 module.exports = {
   name: "autorole",
-  group: "settingsGroup",
+  group: "settings",
   description: "autoroleDescription",
   requiredPermissions: "manageGuild",
   usage: "autoroleUsage",

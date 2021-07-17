@@ -39,7 +39,7 @@ function predict(question, failChance, seed, msg) {
 
 module.exports = {
   name: "8ball",
-  group: "funGroup",
+  group: "fun",
   description: "_8ballDescription",
   usage: "_8ballUsage",
   argsRequired: true,

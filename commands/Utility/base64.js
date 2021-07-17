@@ -1,6 +1,6 @@
 module.exports = {
   name: "base64",
-  group: "utilityGroup",
+  group: "utility",
   description: "base64Description",
   usage: [ "base64Usage", "base64DecodeUsage" ],
   aliases: [ "b64" ],

@@ -3,7 +3,7 @@ const moment = require("moment");
 
 module.exports = {
   name: "server",
-  group: "generalGroup",
+  group: "general",
   description: "serverDescription",
   guildOnly: true,
   aliases: [ "s", "serverinfo" ],

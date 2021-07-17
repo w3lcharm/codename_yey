@@ -4,7 +4,7 @@ const intToHex = require("../../utils/intToHex");
 
 module.exports = {
   name: "role",
-  group: "generalGroup",
+  group: "general",
   description: "roleDescription",
   usage: "roleUsage",
   guildOnly: true,

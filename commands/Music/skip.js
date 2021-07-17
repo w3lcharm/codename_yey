@@ -1,6 +1,6 @@
 module.exports = {
   name: "skip",
-  group: "musicGroup",
+  group: "music",
   description: "skipDescription",
   async run(client, msg, args, prefix) {
     if (

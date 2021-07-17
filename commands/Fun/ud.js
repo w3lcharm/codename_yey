@@ -3,7 +3,7 @@ const { URLSearchParams } = require("url");
 
 module.exports = {
   name: "ud",
-  group: "funGroup",
+  group: "fun",
   description: "udDescription",
   usage: "udUsage",
   cooldown: 10,

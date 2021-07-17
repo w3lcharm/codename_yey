@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 
 module.exports = {
   name: "github",
-  group: "miscGroup",
+  group: "misc",
   description: "githubDescription",
   usage: "githubUsage",
   aliases: [ "gh" ],

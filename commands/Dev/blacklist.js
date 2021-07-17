@@ -1,6 +1,6 @@
 module.exports = {
   name: "blacklist",
-  group: "devGroup",
+  group: "dev",
   description: "blacklistDescription",
   usage: "blacklistUsage",
   ownerOnly: true,

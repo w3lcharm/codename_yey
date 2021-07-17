@@ -1,6 +1,6 @@
 module.exports = {
   name: "err",
-  group: "devGroup",
+  group: "dev",
   hidden: true,
   ownerOnly: true,
   async run(client, msg, args) {

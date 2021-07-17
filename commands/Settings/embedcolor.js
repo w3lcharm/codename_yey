@@ -2,7 +2,7 @@ const intToHex = require("../../utils/intToHex");
 
 module.exports = {
   name: "embedcolor",
-  group: "settingsGroup",
+  group: "settings",
   description: "embedcolorDescription",
   usage: "embedcolorUsage",
   aliases: [ "embcolor" ],

@@ -6,7 +6,7 @@ const os = require("os");
 
 module.exports = {
   name: "stats",
-  group: "generalGroup",
+  group: "general",
   description: "statsDescription",
   async run(client, msg, args, prefix) {
     const uptime = process.uptime();

@@ -1,6 +1,6 @@
 module.exports = {
   name: "poll",
-  group: "utilityGroup",
+  group: "utility",
   description: "pollDescription",
   usage: "pollUsage",
   argsRequired: true,

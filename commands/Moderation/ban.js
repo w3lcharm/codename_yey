@@ -1,6 +1,6 @@
 module.exports = {
   name: "ban",
-  group: "moderationGroup",
+  group: "moderation",
   description: "banDescription",
   requiredPermissions: "banMembers",
   guildOnly: true,

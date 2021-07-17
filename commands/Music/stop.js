@@ -1,6 +1,6 @@
 module.exports = {
   name: "stop",
-  group: "musicGroup",
+  group: "music",
   description: "stopDescription",
   async run(client, msg, args, prefix) {
     if (

@@ -2,7 +2,7 @@ const emojiRegex = require("emoji-regex");
 
 module.exports = {
   name: "reactionrole",
-  group: "settingsGroup",
+  group: "settings",
   description: "reactionroleDescription",
   usage: "reactionroleUsage",
   aliases: [ "rr" ],

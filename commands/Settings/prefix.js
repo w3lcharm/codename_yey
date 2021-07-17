@@ -1,6 +1,6 @@
 module.exports = {
   name: "prefix",
-  group: "settingsGroup",
+  group: "settings",
   description: "prefixDescription",
   usage: "prefixUsage",
   requiredPermissions: "manageGuild",

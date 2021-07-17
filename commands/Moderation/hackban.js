@@ -1,6 +1,6 @@
 module.exports = {
   name: "hackban",
-  group: "moderationGroup",
+  group: "moderation",
   description: "hackbanDescription",
   usage: "hackbanUsage",
   requiredPermissions: "banMembers",

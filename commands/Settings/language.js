@@ -1,6 +1,6 @@
 module.exports = {
   name: "language",
-  group: "settingsGroup",
+  group: "settings",
   description: "languageDescription",
   usage: "languageUsage",
   aliases: [ "lang" ],

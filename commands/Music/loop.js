@@ -1,6 +1,6 @@
 module.exports = {
   name: "loop",
-  group: "musicGroup",
+  group: "music",
   description: "loopDescription",
   async run(client, msg, args, prefix) {
     if (

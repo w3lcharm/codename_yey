@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 
 module.exports = {
   name: "devsay",
-  group: "devGroup",
+  group: "dev",
   description: "devsayDescription",
   ownerOnly: true,
   hidden: true,

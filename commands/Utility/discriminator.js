@@ -1,6 +1,6 @@
 module.exports = {
   name: "discriminator",
-  group: "utilityGroup",
+  group: "utility",
   description: "discriminatorDescription",
   usage: "discriminatorUsage",
   aliases: [ "discrim" ],
