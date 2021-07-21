@@ -544,6 +544,7 @@ module.exports = {
   wikipediaNoQuery: "> :x: Запрос не предоставлен.",
   wikipediaNotFound: "> :x: Страница не найдена.",
   wikipediaDisambiguation: "> :x: Страница, которую вы ищете, является неоднозначной страницей.",
+  wikipediaLinkToPage: "Ссылка на страницу",
 
   emojiDescription: "Увеличивает указанный эмодзи.\nСтандартные эмодзи Discord не поддерживаются.",
   emojiUsage: "<эмодзи>",

@@ -15,12 +15,24 @@ module.exports = {
     const response = await fetch(`https://${msg.t("langName")}.wikipedia.org/api/rest_v1/page/summary/${query}`)
       .then(r => r.json());
 
-    if (!response) {
+    if (!response || response.title == "Not found.") {
       return msg.reply(msg.t("wikipediaNotFound"));
     }
 
     if (response.type == "disambiguation") {
-      return msg.reply(msg.t("wikipediaDisambiguation"));
+      return msg.reply({ content: msg.t("wikipediaDisambiguation"), components: [
+        {
+          type: 1,
+          components: [
+            {
+              type: 2,
+              label: msg.t("wikipediaLinkToPage"),
+              style: 5,
+              url: response.content_urls.desktop.page,
+            },
+          ],
+        },
+      ]});
     }
 
     const embed = {

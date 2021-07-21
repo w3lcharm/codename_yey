@@ -555,6 +555,7 @@ module.exports = {
   wikipediaNoQuery: "> :x: No query provided.",
   wikipediaNotFound: "> :x: Page not found.",
   wikipediaDisambiguation: "> :x: The page you are looking for is disambiguation page.",
+  wikipediaLinkToPage: "Link to page",
 
   emojiDescription: "Enlarges the provided emoji.\nStandard Discord emojis are not supported.",
   emojiUsage: "<emoji>",
