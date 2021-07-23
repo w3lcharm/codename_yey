@@ -25,6 +25,10 @@ module.exports = {
     if (answers.length > 10) {
       return msg.reply(msg.t("pollNotMoreThan10Answers"));
     }
+    
+    if (question.length > 256) {
+      return msg.reply(msg.t("pollQuestionTooLong"));
+    } 
 
     const embed = {
       title: question,

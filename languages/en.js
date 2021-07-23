@@ -303,6 +303,7 @@ module.exports = {
   pollNotMoreThan10Answers: "> :x: Not more than 10 answers.",
   startedBy: user => `Started by ${user.tag}`,
   pollCantDeleteMessage: "> :warning: Couldn't delete message, please check bot permissions.",
+  pollQuestionTooLong: "> :x: Question shouldn't be longer than 256 characters.",
 
   qrDescription: "Generates a QR code from your text.",
   qrUsage: "<text>",
