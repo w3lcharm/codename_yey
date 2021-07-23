@@ -13,13 +13,13 @@ module.exports = {
     }
 
     const response = await fetch(`https://${msg.t("langName")}.wikipedia.org/api/rest_v1/page/summary/${query}`)
-      .then(r => r.json());
-
-    if (!response || response.title == "Not found.") {
+    const data = await response.json();
+    
+    if (!data || data.title == "Not found." || response.status == 400) {
       return msg.reply(msg.t("wikipediaNotFound"));
     }
 
-    if (response.type == "disambiguation") {
+    if (data.type == "disambiguation") {
       return msg.reply({ content: msg.t("wikipediaDisambiguation"), components: [
         {
           type: 1,
@@ -28,7 +28,7 @@ module.exports = {
               type: 2,
               label: msg.t("wikipediaLinkToPage"),
               style: 5,
-              url: response.content_urls.desktop.page,
+              url: data.content_urls.desktop.page,
             },
           ],
         },
@@ -36,10 +36,10 @@ module.exports = {
     }
 
     const embed = {
-      title: response.title,
-      url: response.content_urls.desktop.page,
-      description: response.extract,
-      thumbnail: { url: response.thumbnail?.source },
+      title: data.title,
+      url: data.content_urls.desktop.page,
+      description: data.extract,
+      thumbnail: { url: data.thumbnail?.source },
       color: await msg.author.embColor(),
     };
 
