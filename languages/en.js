@@ -132,6 +132,12 @@ module.exports = {
     WELCOME_SCREEN_ENABLED: "Welcome Screen",
     MEMBER_VERIFICATION_GATE_ENABLED: "Membership Screening",
     PREVIEW_ENABLED: "Server preview",
+    TICKETED_EVENTS_ENABLED: "Ticketed events",
+    MONETIZATION_ENABLED: "Monetization",
+    MORE_STICKERS: "Stickers slots",
+    THREE_DAY_THREAD_ARCHIVE: "3 day threads archive",
+    SEVEN_DAY_THREAD_ARCHIVE: "7 day threads archive",
+    PRIVATE_THREADS: "Threads",
   },
 
   statsDescription: "Shows the bot stats.",

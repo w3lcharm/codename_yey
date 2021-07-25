@@ -132,6 +132,12 @@ module.exports = {
     WELCOME_SCREEN_ENABLED: "Экран с приветствием",
     MEMBER_VERIFICATION_GATE_ENABLED: "Отбор участников",
     PREVIEW_ENABLED: "Предпросмотр сервера",
+    TICKETED_EVENTS_ENABLED: "Ticketed events",
+    MONETIZATION_ENABLED: "Монетизация",
+    MORE_STICKERS: "Слоты для стикеров",
+    THREE_DAY_THREAD_ARCHIVE: "3-хдневный архив веток",
+    SEVEN_DAY_THREAD_ARCHIVE: "7-идневный архив веток",
+    PRIVATE_THREADS: "Ветки",
   },
 
   statsDescription: "Показывает статистику бота.",
